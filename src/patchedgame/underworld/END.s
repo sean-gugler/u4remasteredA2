@@ -671,8 +671,8 @@ return_to_world:
 	.byte 0
 	lda #disk_ultima
 	jsr insert_disk
-	jsr j_primm_cout ;b'\x04BLOADU\x81LT4,A$4000\n\x00'
-	.byte $84, "BLOADU",$81,"LT4,A$4000", $8d
+	jsr j_primm_cout ;b'\x04BLOAD ULT4,A$4000\n\x00'
+	.byte $84, "BLOAD ULT4,A$4000", $8d
 	.byte 0
 	lda #disk_britannia
 	jsr j_request_disk
@@ -743,8 +743,8 @@ insert_disk:
 	clc
 	adc #char_0
 	sta @drive_number
-	jsr j_primm_cout ;b'\x04BLOADD\x81ISK,D1\n\x00'
-	.byte $84, "BLOADD",$81,"ISK,D"
+	jsr j_primm_cout ;b'\x04BLOAD DISK,D1\n\x00'
+	.byte $84, "BLOAD DISK,D"
 @drive_number:
 	.byte "1", $8d
 	.byte 0

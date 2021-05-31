@@ -69,21 +69,21 @@ play_tune:
 
 load_music:
 	sta file_char_music
-	lda diskid
-	cmp #$01
-	bne @normal_filename
-@cryptic_filename:
-	lda #char_M
-	sta file_char_first
-	lda #$81     ;magic hidden file char on Disk 1
-	sta file_char_second
-	bne @load_file
-@normal_filename:
-	lda #char_space
-	sta file_char_first
-	lda #char_M
-	sta file_char_second
-@load_file:
+;	lda diskid
+;	cmp #$01
+;	bne @normal_filename
+;@cryptic_filename:
+;	lda #char_M
+;	sta file_char_first
+;	lda #$81     ;magic hidden file char on Disk 1
+;	sta file_char_second
+;	bne @load_file
+;@normal_filename:
+;	lda #char_space
+;	sta file_char_first
+;	lda #char_M
+;	sta file_char_second
+;@load_file:
 	lda #$00
 	jsr music_ctl
 	jsr j_primm_cout ;b'\x04BLOAD MUSA,A$F000\n\x00'

@@ -288,9 +288,9 @@ rom_zidbyte = $fbc0
 	.segment "MAIN"
 
 boot:
-	jsr j_primm_cout ;b'\x04BLOAD A\x81NIM,A$4000\n\x04BLOAD B\x81GND,A$7A00\n\x00'
-	.byte $84,"BLOAD A", $81, "NIM,A$4000", $8d
-	.byte $84,"BLOAD B", $81, "GND,A$7A00", $8d
+	jsr j_primm_cout ;b'\x04BLOAD ANIM,A$4000\n\x04BLOAD BGND,A$7A00\n\x00'
+	.byte $84,"BLOAD ANIM,A$4000", $8d
+	.byte $84,"BLOAD BGND,A$7A00", $8d
 	.byte 0
 	jsr clear_screen
 	bit io_page1
@@ -1233,9 +1233,9 @@ menu_which_slot:
 	jmp menu_kind_mocking
 
 load_sound_drivers:
-	jsr j_primm_cout ;b'\x04BLOAD M\x81BSM,A$F000\n\x04BLOAD M\x81BSI,A$8000\n\x00'
-	.byte $84,"BLOAD M", $81, "BSM,A$F000", $8d
-	.byte $84,"BLOAD M", $81, "BSI,A$8000", $8d
+	jsr j_primm_cout ;b'\x04BLOAD MBSM,A$F000\n\x04BLOAD MBSI,A$8000\n\x00'
+	.byte $84,"BLOAD MBSM,A$F000", $8d
+	.byte $84,"BLOAD MBSI,A$8000", $8d
 	.byte 0
 	jsr j_mbsi
 	bcc @skip
@@ -1370,8 +1370,8 @@ journey_onward:
 	sta key_buf_len
 	lda #$00
 	jsr load_music
-	jsr j_primm_cout ;b'\x04BRUN U\x81LT4,A$4000\n\x00'
-	.byte $84,"BRUN U", $81, "LT4,A$4000", $8d
+	jsr j_primm_cout ;b'\x04BRUN ULT4,A$4000\n\x00'
+	.byte $84,"BRUN ULT4,A$4000", $8d
 	.byte 0
 
 init_new_game:
@@ -1423,8 +1423,8 @@ init_new_game:
 	jsr clear_window
 	lda #$00
 	jsr load_music
-	jsr j_primm_cout ;b'\x04BRUN N\x81EWGAME,A$6400,D1\n\x00'
-	.byte $84,"BRUN N", $81, "EWGAME,A$6400,D1", $8d
+	jsr j_primm_cout ;b'\x04BRUN NEWGAME,A$6400,D1\n\x00'
+	.byte $84,"BRUN NEWGAME,A$6400,D1", $8d
 	.byte 0
 return:
 	rts

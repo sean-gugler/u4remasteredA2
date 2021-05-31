@@ -88,8 +88,8 @@ htxt = $e400
 	.byte "  COPYRIGHT 1985, ORIGIN SYSTEMS, INC.", $8d
 	.byte 0
 	jsr print_cout
-	.byte $84, "BLOAD S", $81, "EL,A$320", $8d
-	.byte $84, "BLOAD S", $81, "UBS", $8d
+	.byte $84, "BLOAD SEL,A$320", $8d
+	.byte $84, "BLOAD SUBS", $8d
 	.byte 0
 	lda #$01
 	sta disk_id
@@ -135,16 +135,15 @@ htxt = $e400
 	bit hw_lcbank2 ;read-enable LC RAM bank2
 	bit hw_lcbank1 ;read twice to
 	bit hw_lcbank1 ;RW-enable LC RAM bank1
-	jsr j_primm_cout ;b'\x04BLOAD S\x81HP0\n\x00'
-	.byte $84,"BLOAD S", $81, "HP0", $8d
+	jsr j_primm_cout ;b'\x04BLOAD SHP0\n\x00'
+	.byte $84,"BLOAD SHP0", $8d
 	.byte 0
 	bit hw_lcbank2 ;read twice to RW-enable LC RAM bank2
-	jsr j_primm_cout ;b'\x04BLOAD S\x81HP1\n\x04BLOAD T\x81BLS,A$E000\n\x04BLOAD H\x81TXT,A$E400\n\x04BRUN B\x81OOT,A$6000\n\x00'
-	.byte $84,"BLOAD S", $81, "HP1", $8d
-	.byte $84,"BLOAD T", $81, "BLS,A$E000", $8d
-	.byte $84,"BLOAD H", $81, "TXT,A$E400", $8d
-	.byte $84,"BRUN B", $81, "OOT,A$6000", $8d
-	.byte 0
+	jsr j_primm_cout ;b'\x04BLOAD SHP1\n\x04BLOAD TBLS,A$E000\n\x04BLOAD HTXT,A$E400\n\x04BRUN BOOT,A$6000\n\x00'
+	.byte $84,"BLOAD SHP1", $8d
+	.byte $84,"BLOAD TBLS,A$E000", $8d
+	.byte $84,"BLOAD HTXT,A$E400", $8d
+	.byte $84,"BRUN BOOT,A$6000", $8d
 	.byte 0
 
 print_cout:

@@ -298,8 +298,8 @@ start_game:
 	sta key_buf_len
 	lda #$00
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x04BRUN U\x81LT4,A$4000\n\x00'
-	.byte $84,"BRUN U", $81, "LT4,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BRUN ULT4,A$4000\n\x00'
+	.byte $84,"BRUN ULT4,A$4000",$8d, 0
 
 wait_key:
 	jsr j_waitkey
@@ -314,8 +314,8 @@ init_scene:
 	sta question_number
 	lda #$10
 	sta console_ypos
-	jsr j_primm_cout ;b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD T", $81, "REE.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD TREE.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD TREE.SPK,A$4000",$8d, 0
 	jsr clear_text_area
 @s1d_show_tree:
 	jsr spk_unpack
@@ -340,24 +340,24 @@ start_scene:
 	cmp #$23
 	bne @s24_show_clearing
 	jsr portal_vanish
-	jsr j_primm_cout ;b'\x04BLOAD P\x81RTL.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD P", $81, "RTL.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD PRTL.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD PRTL.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s24_show_clearing:
 	cmp #$24
 	bne @s29_show_tree
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD T", $81, "REE.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD TREE.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD TREE.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s29_show_tree:
 	cmp #$29
 	bne @s2c_music_towne
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD L\x81OOK.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD L", $81, "OOK.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD LOOK.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD LOOK.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s2c_music_towne:
@@ -371,32 +371,32 @@ start_scene:
 	cmp #$2d
 	bne @s2f_show_fair
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD F\x81AIR.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD F", $81, "AIR.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD FAIR.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD FAIR.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s2f_show_fair:
 	cmp #$2f
 	bne @s32_show_wagon
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD W\x81AGN.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD W", $81, "AGN.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD WAGN.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD WAGN.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s32_show_wagon:
 	cmp #$32
 	bne @s33_show_gypsy
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD G\x81YPS.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD G", $81, "YPS.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD GYPS.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD GYPS.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s33_show_gypsy:
 	cmp #$33
 	bne @s35_show_table
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD T\x81ABL.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD T", $81, "ABL.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD TABL.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD TABL.SPK,A$4000",$8d, 0
 @next_scene:
 	jmp next_scene
 
@@ -404,8 +404,8 @@ start_scene:
 	cmp #$35
 	bne @next_scene
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD C\x81RDS,A$4000\n\x00'
-	.byte $84,"BLOAD C", $81, "RDS,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD CRDS,A$4000\n\x00'
+	.byte $84,"BLOAD CRDS,A$4000",$8d, 0
 	jsr wait_key
 
 ; Begin fortune telling
@@ -568,10 +568,10 @@ conclusion:
 	jsr wait_key
 	lda #$00
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x04BLOAD N\x81PRT,A$0\n\x04BLOAD N\x81LST,A$EE00\n\x04BLOAD N\x81RST,A$EC00\n\x00'
-	.byte $84,"BLOAD N", $81, "PRT,A$0",$8d
-	.byte $84,"BLOAD N", $81, "LST,A$EE00",$8d
-	.byte $84,"BLOAD N", $81, "RST,A$EC00",$8d
+	jsr j_primm_cout ;b'\x04BLOAD NPRT,A$0\n\x04BLOAD NLST,A$EE00\n\x04BLOAD NRST,A$EC00\n\x00'
+	.byte $84,"BLOAD NPRT,A$0",$8d
+	.byte $84,"BLOAD NLST,A$EE00",$8d
+	.byte $84,"BLOAD NRST,A$EC00",$8d
 	.byte 0
 	lda game_mode
 	sta game_mode_pre_combat

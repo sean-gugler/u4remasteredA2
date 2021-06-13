@@ -731,13 +731,13 @@ string_table:
 	.byte "AH, THE BLACK", $8d
 	.byte "STONE, YES I'VE", $8d
 	.byte "HEARD OF IT.", $8d
-	.byte "BUT, ONLY THE", $8d
+	.byte "BUT, THE ONLY", $8d
 	.byte "ONE WHO KNOWS", $8d
 	.byte "WHERE IT LIES", $8d
 	.byte "IS THE WIZARD", $8d
 	.byte "MERLIN.", $8d
 	.byte 0
-	.byte "FOR NAVAGATION", $8d
+	.byte "FOR NAVIGATION", $8d
 	.byte "A SEXTANT IS", $8d
 	.byte "VITAL... ASK", $8d
 	.byte "FOR ITEM 'D'", $8d
@@ -876,4 +876,4 @@ try_spend:
 	rts
 
 ; junk
-	.byte 0
+;	.byte 0

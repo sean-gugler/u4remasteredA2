@@ -402,8 +402,8 @@ use_stone:
 	lda principle_keypart,y
 	ora threepartkey
 	sta threepartkey
-	jsr j_primm  ;b'THOU DOTH FIND\nONE THIRD OF THE\nTHREE PART KEY!\n\x00'
-	.byte "THOU DOTH FIND", $8d
+	jsr j_primm  ;b'THOU DOST FIND\nONE THIRD OF THE\nTHREE PART KEY!\n\x00'
+	.byte "THOU DOST FIND", $8d
 	.byte "ONE THIRD OF THE", $8d
 	.byte "THREE PART KEY!", $8d
 	.byte 0
@@ -420,10 +420,10 @@ use_stone_in_abyss:
 	lda tile_under_player
 	cmp #dng_tile_altar
 	bne @no_effect
-	jsr j_primm  ;b'\nAS THOU\nDOTH APPROACH\n\x00'
+	jsr j_primm  ;b'\nAS THOU\nDOST APPROACH\n\x00'
 	.byte $8d
 	.byte "AS THOU", $8d
-	.byte "DOTH APPROACH", $8d
+	.byte "DOST APPROACH", $8d
 	.byte 0
 	jsr ask_virtue
 	bne @no_effect
@@ -462,9 +462,9 @@ use_stone_in_abyss:
 	sta (ptr1),y
 	jsr j_primm  ;b'\nTHE ALTER\nCHANGES BEFORE\nTHYNE EYES!\n\x00'
 	.byte $8d
-	.byte "THE ALTER", $8d
+	.byte "THE ALTAR", $8d
 	.byte "CHANGES BEFORE", $8d
-	.byte "THYNE EYES!", $8d
+	.byte "THINE EYES!", $8d
 	.byte 0
 	jmp return_to_dungeon
 
@@ -525,26 +525,53 @@ use_skull:
 	jmp print_none_owned
 
 @have_skull:
-	lda game_mode
-	bmi j_print_no_effect
-	jsr j_primm  ;b'\nHOLDING THE EVIL\nSKULL ALOFT...\n\x00'
+;	lda game_mode
+;	bmi j_print_no_effect
+; ENHANCED: skull should still not work in the abyss,
+; but no reason it shouldn't behave normally in other dungeons.
+	lda current_location
+	cmp #loc_dng_abyss
+	beq j_print_no_effect
+
+	jsr j_primm  ;b'\nYOU HOLD THE\nEVIL SKULL OF\nMONDAIN THE\nWIZARD ALOFT....\n\x00'
 	.byte $8d
-	.byte "HOLDING THE EVIL", $8d
-	.byte "SKULL ALOFT...", $8d
+	.byte "YOU HOLD THE", $8d
+	.byte "EVIL SKULL OF", $8d
+	.byte "MONDAIN THE", $8d
+	.byte "WIZARD ALOFT....", $8d
 	.byte 0
 	jsr shake_screen
 	jsr j_invertview
 	jsr shake_screen
 	jsr j_invertview
 	jsr shake_screen
+	
+	lda game_mode   ; ENHANCED: skull in combat
+	bmi @combat     ; ENHANCED: skull in combat
+
 	ldx #object_max
-	lda #$00
+; BUGFIX: in dungeon, skull must clear tile states, not just object table
+; (also, seems reasonable to only clear current level, not entire dungeon)
 @clear:
+	lda object_dng_level,x
+	cmp dungeon_level
+	bne @next_object
+	lda object_xpos,x
+	sta dest_x
+	lda object_ypos,x
+	sta dest_y
+	jsr j_gettile_dungeon
+	and #dng_tile_type_mask
+	sta (ptr1),y
+; BUGFIX end
+	lda #$00
 	sta object_tile_type,x
 	sta object_tile_sprite,x
+@next_object:
 	dex
 	bpl @clear
 	jsr j_update_view
+@penalty:
 	lda #virtue_last - 1
 	sta zpea
 @next_virtue:
@@ -555,6 +582,35 @@ use_skull:
 	bpl @next_virtue
 	jsr j_update_status
 	jmp return_to_dungeon
+
+; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
+@combat:
+	ldx #foes_max
+@next:
+	lda combat_foe_tile,x
+	beq @skip
+	cmp #tile_lord_british
+	beq @skip
+@kill_foe:
+	stx zpea
+	lda combat_foe_cur_x,x
+	sta target_x
+	lda combat_foe_cur_y,x
+	sta target_y
+	lda #tile_attack_red
+	sta attack_sprite
+	jsr j_update_view_combat
+	lda #sound_damage
+	jsr j_playsfx
+	ldx zpea
+	lda #$00
+	sta attack_sprite
+	sta combat_foe_hp,x
+	sta combat_foe_tile,x
+@skip:
+	dex
+	bpl @next
+	bmi @penalty
 
 get_input:
 	lda #char_question
@@ -745,9 +801,10 @@ dec_virtue:
 	rts
 
 @lost_an_eighth:
-	jsr j_primm  ;b'\nAN EIGHTH LOST!\n\x00'
+	jsr j_primm  ;b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
 	.byte $8d
-	.byte "AN EIGHTH LOST!", $8d
+	.byte "THOU HAST LOST", $8d
+	.byte "AN EIGHTH!", $8d
 	.byte 0
 	lda #$99
 	ldy zpd9
@@ -769,11 +826,11 @@ ask_virtue:
 	jmp @level8
 
 @level1:
-	jsr j_primm  ;b'\nA VOICE RINGS\nOUT: WHAT VIRTUE\nDOST STEM FROM\n\x00'
+	jsr j_primm  ;b'\nA VOICE RINGS\nOUT: WHAT VIRTUE\nDOTH STEM FROM\n\x00'
 	.byte $8d
 	.byte "A VOICE RINGS", $8d
 	.byte "OUT: WHAT VIRTUE", $8d
-	.byte "DOST STEM FROM", $8d
+	.byte "DOTH STEM FROM", $8d
 	.byte 0
 	ldx dungeon_level
 	bne @level2
@@ -840,7 +897,7 @@ ask_virtue:
 	.byte "VIRTUE EXISTS", $8d
 	.byte "INDEPENDENTLY OF", $8d
 	.byte "TRUTH, LOVE AND", $8d
-	.byte "COURAGE!", $8d
+	.byte "COURAGE?", $8d
 	.byte 0
 
 @get_reply:
@@ -855,4 +912,4 @@ abyss_altar_stone_used:
 	.byte 0
 
 ; junk
-	.byte $ff,$ff
+;	.byte $ff,$ff

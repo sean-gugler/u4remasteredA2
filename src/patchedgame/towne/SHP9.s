@@ -289,8 +289,8 @@ welcome:
 	jsr j_printname
 	jsr j_primm  ;b'\nI AM HAWKWIND\nSEER OF SOULS\nI SEE THAT WHICH\nIS WITHIN THEE\nAND DRIVES THEE\nTO DEEDS OF GOOD\nOR EVIL...\n\x00'
 	.byte $8d
-	.byte "I AM HAWKWIND", $8d
-	.byte "SEER OF SOULS", $8d
+	.byte "I AM HAWKWIND,", $8d
+	.byte "SEER OF SOULS.", $8d
 	.byte "I SEE THAT WHICH", $8d
 	.byte "IS WITHIN THEE", $8d
 	.byte "AND DRIVES THEE", $8d
@@ -298,10 +298,10 @@ welcome:
 	.byte "OR EVIL...", $8d
 	.byte 0
 	jsr j_waitkey
-	jsr j_primm  ;b'\nFOR WHAT PATH\nDOTH THOU SEEK\nENLIGHTENMENT?\n\x00'
+	jsr j_primm  ;b'\nFOR WHAT PATH\nDOST THOU SEEK\nENLIGHTENMENT?\n\x00'
 	.byte $8d
 	.byte "FOR WHAT PATH", $8d
-	.byte "DOTH THOU SEEK", $8d
+	.byte "DOST THOU SEEK", $8d
 	.byte "ENLIGHTENMENT?", $8d
 	.byte 0
 	jmp input_word
@@ -342,7 +342,7 @@ input_word:
 	jsr j_primm  ;b'\nHAWKWIND SAYS:\nFARE THE WELL\nAND MAY THOU\nCOMPLETE THE\nQUEST OF\nTHE AVATAR!\n\x00'
 	.byte $8d
 	.byte "HAWKWIND SAYS:", $8d
-	.byte "FARE THE WELL", $8d
+	.byte "FARE THEE WELL", $8d
 	.byte "AND MAY THOU", $8d
 	.byte "COMPLETE THE", $8d
 	.byte "QUEST OF", $8d
@@ -374,8 +374,9 @@ check_avatar:
 	.byte "HE SAYS:", $8d
 	.byte "THOU HAST BECOME", $8d
 	.byte "A PARTIAL AVATAR", $8d
-	.byte "IN THAT ATRIBUTE", $8d
-	.byte "THOU NEED NOT MY", $8d
+	.byte "IN THAT", $8d
+	.byte "ATTRIBUTE. THOU", $8d
+	.byte "NEED NOT MY", $8d
 	.byte "INSIGHTS.", $8d
 	.byte 0
 	jmp ask_again
@@ -573,24 +574,25 @@ inc_ptr:
 string_table:
 	.byte 0
 	.byte "THOU ART A THIEF", $8d
-	.byte "AND A SCOUNDREL", $8d
+	.byte "AND A SCOUNDREL.", $8d
 	.byte "THOU MAY NOT", $8d
 	.byte "EVER BECOME AN", $8d
 	.byte "AVATAR!", $8d
 	.byte 0
 	.byte "THOU ART A COLD", $8d
-	.byte "AND CRUEL BRUTE", $8d
+	.byte "AND CRUEL BRUTE.", $8d
 	.byte "THOU SHOULDST GO", $8d
 	.byte "TO PRISON FOR", $8d
 	.byte "THY CRIMES!", $8d
 	.byte 0
 	.byte "THOU ART A", $8d
-	.byte "COWARD THOU DOST", $8d
-	.byte "FLEE FROM THE", $8d
-	.byte "HINT OF DANGER!", $8d
+	.byte "COWARD, THOU", $8d
+	.byte "DOST FLEE FROM", $8d
+	.byte "THE HINT OF", $8d
+	.byte "DANGER!", $8d
 	.byte 0
 	.byte "THOU ART AN", $8d
-	.byte "UNJUST WRETCH", $8d
+	.byte "UNJUST WRETCH.", $8d
 	.byte "THOU ART A", $8d
 	.byte "FULSOME MEDDLER!", $8d
 	.byte 0
@@ -602,14 +604,14 @@ string_table:
 	.byte "GRANT IT!", $8d
 	.byte 0
 	.byte "THOU ART A CAD", $8d
-	.byte "AND A BOUNDER", $8d
+	.byte "AND A BOUNDER.", $8d
 	.byte "THY PRESENCE IS", $8d
 	.byte "AN AFFRONT, THOU", $8d
 	.byte "ART LOW AS A", $8d
 	.byte "SLUG!", $8d
 	.byte 0
 	.byte "THY SPIRIT IS", $8d
-	.byte "WEAK AND FEEBLE", $8d
+	.byte "WEAK AND FEEBLE.", $8d
 	.byte "THOU DOST NOT", $8d
 	.byte "STRIVE FOR", $8d
 	.byte "PERFECTION!", $8d
@@ -635,13 +637,13 @@ string_table:
 	.byte 0
 	.byte "THOU DOST NOT", $8d
 	.byte "DISPLAY A GREAT", $8d
-	.byte "DEAL OF VALOR", $8d
+	.byte "DEAL OF VALOR.", $8d
 	.byte "THOU DOST FLEE", $8d
 	.byte "BEFORE THE NEED!", $8d
 	.byte 0
 	.byte "THOU ART CRUEL", $8d
 	.byte "AND UNJUST, IN", $8d
-	.byte "TIME THOU WILL", $8d
+	.byte "TIME THOU WILT", $8d
 	.byte "SUFFER FOR THY", $8d
 	.byte "CRIMES!", $8d
 	.byte 0
@@ -659,7 +661,7 @@ string_table:
 	.byte "THOU DOST NOT", $8d
 	.byte "TAKE THE TIME TO", $8d
 	.byte "CARE ABOUT THY", $8d
-	.byte "INNER BEING A", $8d
+	.byte "INNER BEING, A", $8d
 	.byte "MUST TO BE AN", $8d
 	.byte "AVATAR!", $8d
 	.byte 0
@@ -679,7 +681,7 @@ string_table:
 	.byte 0
 	.byte "THOU HAST NOT", $8d
 	.byte "SHOWN THY", $8d
-	.byte "COMPASSION WELL", $8d
+	.byte "COMPASSION WELL.", $8d
 	.byte "BE MORE KIND", $8d
 	.byte "UNTO OTHERS!", $8d
 	.byte 0
@@ -700,7 +702,7 @@ string_table:
 	.byte "THY SACRIFICE", $8d
 	.byte "IS SMALL.", $8d
 	.byte "GIVE OF THY", $8d
-	.byte "LIFES BLOOD SO", $8d
+	.byte "LIFE'S BLOOD SO", $8d
 	.byte "THAT OTHERS MAY", $8d
 	.byte "LIVE.", $8d
 	.byte 0
@@ -739,12 +741,12 @@ string_table:
 	.byte 0
 	.byte "THOU ART SHOWING", $8d
 	.byte "VALOR IN THE", $8d
-	.byte "FACE OF DANGER", $8d
+	.byte "FACE OF DANGER.", $8d
 	.byte "STRIVE TO BECOME", $8d
 	.byte "YET MORE SO!", $8d
 	.byte 0
 	.byte "THOU DOST SEEM", $8d
-	.byte "FAIR AND JUST", $8d
+	.byte "FAIR AND JUST.", $8d
 	.byte "STRIVE TO UPHOLD", $8d
 	.byte "JUSTICE EVEN", $8d
 	.byte "MORE STERNLY!", $8d
@@ -764,19 +766,19 @@ string_table:
 	.byte 0
 	.byte "THOU ART DOING", $8d
 	.byte "WELL ON THE PATH", $8d
-	.byte "TO INNER SIGHT", $8d
+	.byte "TO INNER SIGHT.", $8d
 	.byte "CONTINUE TO SEEK", $8d
 	.byte "THE INNER LIGHT!", $8d
 	.byte 0
 	.byte "THOU DOST SEEM", $8d
-	.byte "A HUMBLE SOUL", $8d
+	.byte "A HUMBLE SOUL.", $8d
 	.byte "THOU ART SETTING", $8d
 	.byte "STRONG STONES TO", $8d
 	.byte "BUILD VIRTUES", $8d
 	.byte "UPON!", $8d
 	.byte 0
 	.byte "THOU ART TRULY", $8d
-	.byte "AN HONEST SOUL", $8d
+	.byte "AN HONEST SOUL.", $8d
 	.byte "SEEK YE NOW TO", $8d
 	.byte "REACH ELEVATION!", $8d
 	.byte 0
@@ -787,13 +789,13 @@ string_table:
 	.byte "NOW ELEVATION!", $8d
 	.byte 0
 	.byte "THOU ART A TRULY", $8d
-	.byte "VALIANT WARRIOR", $8d
+	.byte "VALIANT WARRIOR.", $8d
 	.byte "SEEK YE NOW", $8d
 	.byte "ELEVATION IN THE", $8d
 	.byte "VIRTUE OF VALOR!", $8d
 	.byte 0
 	.byte "THOU ART JUST", $8d
-	.byte "AND FAIR SEEK", $8d
+	.byte "AND FAIR. SEEK", $8d
 	.byte "YE NOW THE", $8d
 	.byte "ELEVATION!", $8d
 	.byte 0
@@ -810,16 +812,17 @@ string_table:
 	.byte "ELEVATION!", $8d
 	.byte 0
 	.byte "SPIRITUALITY", $8d
-	.byte "IS IN THY NATURE", $8d
-	.byte "SEEK YE KNOW", $8d
-	.byte "THE ELEVATION!", $8d
+	.byte "IS IN THY", $8d
+	.byte "NATURE. SEEK YE", $8d
+	.byte "NOW THE", $8d
+	.byte "ELEVATION!", $8d
 	.byte 0
 	.byte "THY HUMILITY", $8d
 	.byte "SHINES BRIGHT", $8d
-	.byte "UPON THY BEING", $8d
+	.byte "UPON THY BEING.", $8d
 	.byte "SEEK YE NOW FOR", $8d
 	.byte "ELEVATION!", $8d
 	.byte 0
 
 ; junk:  ,"HINT O
-	.byte $2c,$22,$48,$49,$4e,$54,$20,$4f
+;	.byte $2c,$22,$48,$49,$4e,$54,$20,$4f

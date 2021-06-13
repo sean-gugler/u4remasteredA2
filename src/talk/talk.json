@@ -34,7 +34,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A DANCING JESTER", 
+        "description": "A DANCING\nJESTER.", 
         "health": "PERFECTLY HOPPY!", 
         "humility_question": false, 
         "job": "TO ENTERTAIN.", 
@@ -51,7 +51,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BURLY GUARD", 
+        "description": "A BURLY GUARD.", 
         "health": "GREAT!", 
         "humility_question": true, 
         "job": "I GUARD THE\nCASTLE AND MY\nLIEGE!", 
@@ -69,7 +69,7 @@
     }, 
     {
         "description": "A PERSON WITH\nA WHITE HAT.", 
-        "health": "WELL...ALL BUT\nMY FINGER,\nWHICH I CUT!", 
+        "health": "WELL... ALL BUT\nMY FINGER,\nWHICH I CUT!", 
         "humility_question": false, 
         "job": "I AM THE CHEF.", 
         "keyword_1": "FOOD", 
@@ -85,10 +85,10 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A REAPER", 
+        "description": "A REAPER.", 
         "health": "NOT SO GOOD,\nNO ONE TO EAT\nIN HERE!", 
         "humility_question": false, 
-        "job": "I KILL,\nADVENTURERS!", 
+        "job": "I KILL\nADVENTURERS!", 
         "keyword_1": "KILL", 
         "keyword_2": "THING", 
         "keyword_response_1": "THERE IS A THING\nWHICH CAN KILL\nMANY!", 
@@ -119,14 +119,14 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A WISE MAGE", 
+        "description": "A WISE MAGE.", 
         "health": "I AM OLD,\nVERY OLD....", 
         "humility_question": false, 
         "job": "I AM HERE\nTO HELP THEE.", 
         "keyword_1": "HELP", 
         "keyword_2": "CASTLE", 
         "keyword_response_1": "SEEK HELP IN\nTHE CASTLES!", 
-        "keyword_response_2": "SEEK:\nTHE LYCAEUM,\nEMPATH ABBEY,\nSERPENT CASTLE!", 
+        "keyword_response_2": "SEEK:\nTHE LYCAEUM,\nEMPATH ABBEY,\nSERPENT'S\nCASTLE!", 
         "name": "ZORIN", 
         "pronoun": "HE", 
         "question": "WILT THOU\nGO HITHER?", 
@@ -136,7 +136,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BURLY GUARD", 
+        "description": "A BURLY GUARD.", 
         "health": "COULDN'T BE\nBETTER!", 
         "humility_question": false, 
         "job": "I GUARD THE\nCASTLE AND ALL\nWITHIN.", 
@@ -153,7 +153,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "WATER", 
+        "description": "WATER.", 
         "health": "FINE.", 
         "humility_question": false, 
         "job": "I HOLD A SECRET.", 
@@ -165,7 +165,7 @@
         "pronoun": "IT", 
         "question": "MORE?", 
         "question_no_answer": "OH.", 
-        "question_trigger": null, 
+        "question_trigger": "keyword 2", 
         "question_yes_answer": "IF THE CORRECT\nCOLORS OF STONES\nARE USED IN THE\nALTARS, A KEY OF\nTHREE PARTS CAN\nBE GAINED!", 
         "turns_away_prob": 0
     }, 
@@ -187,7 +187,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "AN INJURED\nFIGHTER", 
+        "description": "AN INJURED\nFIGHTER.", 
         "health": "I HAVE A\nGRIEVOUS WOUND.", 
         "humility_question": false, 
         "job": "I FIGHT FOR\nMY COUNTRY.", 
@@ -204,7 +204,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BOUNCING\nJESTER", 
+        "description": "A BOUNCING\nJESTER.", 
         "health": "GOOD, THANKS.", 
         "humility_question": false, 
         "job": "I AM THE ROYAL\nJESTER", 
@@ -221,7 +221,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GUARD", 
+        "description": "A GUARD.", 
         "health": "EXCELLENT", 
         "humility_question": false, 
         "job": "A GUARD", 
@@ -238,7 +238,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SOLEMN RANGER", 
+        "description": "A SOLEMN RANGER.", 
         "health": "I AM WELL.", 
         "humility_question": false, 
         "job": "I SEARCH FOR\nTHE INNER LIGHT.", 
@@ -249,13 +249,13 @@
         "name": "SHEILA", 
         "pronoun": "SHE", 
         "question": "DOST THOU KNOW\nOF MANTRA?", 
-        "question_no_answer": "THE MANTRA ARE\nCHANTS NEEDED\nTO\nFOCUS THY\nTHOUGHTS WHILE\nMEDITATING.", 
+        "question_no_answer": "THE MANTRA ARE\nCHANTS NEEDED\nTO FOCUS THY\nTHOUGHTS WHILE\nMEDITATING.", 
         "question_trigger": "keyword 2", 
         "question_yes_answer": "GOOD.", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GRIM SHEPHERD", 
+        "description": "A GRIM SHEPHERD.", 
         "health": "I AM FINE, BUT\nTHOU MUST\nGO BACK!", 
         "humility_question": false, 
         "job": "I AM HERE\nTO WARN THEE!", 
@@ -272,7 +272,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A STATELY BARON", 
+        "description": "A STATELY BARON.", 
         "health": "VERY WELL.", 
         "humility_question": false, 
         "job": "I RULE THIS\nPROVINCE.", 
@@ -285,11 +285,11 @@
         "question": "DOST THOU WISH\nTO KNOW IT NOW?", 
         "question_no_answer": "PERHAPS\nANOTHER TIME.", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "IT IS 'VER' SEEK\nYE NOW THE\nOTHER PARTS!", 
+        "question_yes_answer": "IT IS 'VER'!\nSEEK YE NOW THE\nOTHER PARTS!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A CHARMING LADY", 
+        "description": "A CHARMING LADY.", 
         "health": "WELL.", 
         "humility_question": false, 
         "job": "I RULE WITH\nMY LORD.", 
@@ -306,7 +306,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SLEEPY GUARD", 
+        "description": "A SLEEPY GUARD.", 
         "health": "VERY SLEEPY.", 
         "humility_question": false, 
         "job": "GUARD THE GATE,\nGUARD THE BARON,\nGUARD THE\nBARONESS, WATCH\nTHE TOWERS....", 
@@ -323,7 +323,7 @@
         "turns_away_prob": 14
     }, 
     {
-        "description": "A WISE OLD SAGE", 
+        "description": "A WISE OLD SAGE.", 
         "health": "MY BONES ACHE\nBUT MY MIND\nIS SHARP!", 
         "humility_question": false, 
         "job": "I AM AN OLD\nWIZARD, BUT HAVE\nMUCH TO SHOW!", 
@@ -391,11 +391,11 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SHORT DRUID", 
+        "description": "A SHORT DRUID.", 
         "health": "WHY I AM FINE,\nYOU TOO I HOPE.", 
         "humility_question": true, 
         "job": "RESEARCH", 
-        "keyword_1": "REAS", 
+        "keyword_1": "RESE", 
         "keyword_2": "JUST", 
         "keyword_response_1": "I AM LOOKING FOR\nTHE BOOK OF\nJUSTICE!", 
         "keyword_response_2": "IT MUST BE HERE\nSOMEWHERE!", 
@@ -408,7 +408,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A STATELY WIZARD", 
+        "description": "A STATELY\nWIZARD.", 
         "health": "VERY WELL,\nTHANKS!", 
         "humility_question": false, 
         "job": "TO WELCOME THEE!", 
@@ -432,8 +432,8 @@
         "keyword_1": "TRUTH", 
         "keyword_2": "MEDI", 
         "keyword_response_1": "THE PRINCIPLE\nUPON WHICH I\nMEDITATE.", 
-        "keyword_response_2": "MEDITATE AT EACH\nSHRINE FOR 1, 2\nAND 3 MINUTES,\nTHEN SHALT THOU\nKNOW THE PATHS\nOF GOODNESS!", 
-        "name": "A TRUTH\nSEEKER.", 
+        "keyword_response_2": "MEDITATE AT EACH\nSHRINE FOR 1, 2\nAND 3 CYCLES,\nTHEN SHALT THOU\nKNOW THE PATHS\nOF GOODNESS!", 
+        "name": "A TRUTH\nSEEKER", 
         "pronoun": "HE", 
         "question": "A", 
         "question_no_answer": "A", 
@@ -459,24 +459,24 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A TALL AGILE MAN", 
+        "description": "A TALL AGILE\nMAN.", 
         "health": "I AM WELL.", 
         "humility_question": false, 
         "job": "I AM THE\nLIBRARIAN.", 
         "keyword_1": "LIBR", 
         "keyword_2": "TRUTH", 
         "keyword_response_1": "HEREIN IS THE\nLARGEST STORE\nOF KNOWLEDGE IN\nBRITANNIA EXCEPT\nTHE CODEX!", 
-        "keyword_response_2": "LOOK UNDER 'T'", 
-        "name": "LORD TERENCE     ", 
+        "keyword_response_2": "LOOK UNDER 'T'.", 
+        "name": "LORD TERENCE", 
         "pronoun": "HE", 
-        "question": "ART THOU LOOKING\nFOR A PATICULAR\nBOOK?", 
+        "question": "ART THOU LOOKING\nFOR A PARTICULAR\nBOOK?", 
         "question_no_answer": "FEEL FREE\nTO BROWSE.", 
         "question_trigger": "keyword 1", 
         "question_yes_answer": "WHICH BOOK?", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A FLIGHTY JESTER", 
+        "description": "A FLIGHTY\nJESTER.", 
         "health": "UNHAPPY.", 
         "humility_question": false, 
         "job": "TO ENTERTAIN!", 
@@ -506,11 +506,11 @@
         "question": "DOST THOU INTEND\nTO STEAL?", 
         "question_no_answer": "GOOD, YOU HAD\nME WORRIED!", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "I SHAN'T STOP\nTHEE", 
+        "question_yes_answer": "I SHAN'T STOP\nTHEE.", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A NOBLE WIZARD", 
+        "description": "A NOBLE WIZARD.", 
         "health": "GOOD ENOUGH.", 
         "humility_question": false, 
         "job": "I TEACH MAGICAL\nSPELLS.", 
@@ -518,7 +518,7 @@
         "keyword_2": "RECALL", 
         "keyword_response_1": "I HAVE A\nSPECIALTY!", 
         "keyword_response_2": "YES,\nRESURRECTION\nIT TAKES: ASH,\nGINSENG, GARLIC,\nSILK, BLOODMOSS,\nAND MANDRAKE!", 
-        "name": "NIGEL, AT THY\nSERVICE.", 
+        "name": "NIGEL, AT THY\nSERVICE", 
         "pronoun": "HE", 
         "question": "DOST THOU KNOW\nWHAT IT IS?", 
         "question_no_answer": "SORRY.", 
@@ -527,7 +527,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A PITIFUL BEGGAR", 
+        "description": "A PITIFUL\nBEGGAR.", 
         "health": "I AM COLD\nAND SICK!\nOH... PLEASE...", 
         "humility_question": false, 
         "job": "I SIT AND BEG\nOH... PLEASE...", 
@@ -544,7 +544,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A STATELY BARON", 
+        "description": "A STATELY BARON.", 
         "health": "VERY WELL.", 
         "humility_question": false, 
         "job": "I RULE THIS\nPROVINCE.", 
@@ -557,11 +557,11 @@
         "question": "DOST THOU WISH\nTO KNOW IT NOW?", 
         "question_no_answer": "PERHAPS\nANOTHER TIME.", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "IT IS 'AMO' SEEK\nYE NOW THE\nOTHER PARTS! ", 
+        "question_yes_answer": "IT IS 'AMO'!\nSEEK YE NOW THE\nOTHER PARTS!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A CHARMING LADY", 
+        "description": "A CHARMING LADY.", 
         "health": "WELL.", 
         "humility_question": false, 
         "job": "I RULE WITH\nMY LORD.", 
@@ -574,11 +574,11 @@
         "question": "DOST THOU\nSEEK LOVE?", 
         "question_no_answer": "THEN THOU SHALT\nNOT FIND IT!", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "THEN MAY THOU\nFIND IT!", 
+        "question_yes_answer": "THEN MAYST THOU\nFIND IT!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A LOVELY LADY", 
+        "description": "A LOVELY LADY.", 
         "health": "OVERWORKED!", 
         "humility_question": false, 
         "job": "I AM A LADY\nIN WAITING.", 
@@ -595,15 +595,15 @@
         "turns_away_prob": 40
     }, 
     {
-        "description": "AN ANKH", 
+        "description": "AN ANKH.", 
         "health": "I EXIST.", 
         "humility_question": false, 
         "job": "I RESONATE\nTHOUGHTS.", 
         "keyword_1": "RESON", 
         "keyword_2": "LOVE", 
-        "keyword_response_1": "WHAT ARE THY\nTHOUGHTS.", 
+        "keyword_response_1": "WHAT ARE THY\nTHOUGHTS?", 
         "keyword_response_2": "SEEK YE THE\nCANDLE OF LOVE\nFOR ONLY WITH IT\nAND TWO OTHER\nPARTS MIGHT THOU\nENTER THE ABYSS!", 
-        "name": "LIFE.", 
+        "name": "LIFE", 
         "pronoun": "IT", 
         "question": "DOST THOU\nHAVE IT?", 
         "question_no_answer": "ASK THE BARD\nBEYOND THE\nSECRET PASSAGE!", 
@@ -612,7 +612,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GUARD", 
+        "description": "A GUARD.", 
         "health": "FINE.", 
         "humility_question": false, 
         "job": "I GUARD THE\nPASSAGES.", 
@@ -629,7 +629,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GUARD", 
+        "description": "A GUARD.", 
         "health": "TOP NOTCH.", 
         "humility_question": true, 
         "job": "A GATE GUARD", 
@@ -816,7 +816,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A STATELY BARON", 
+        "description": "A STATELY BARON.", 
         "health": "VERY WELL.", 
         "humility_question": false, 
         "job": "I RULE THIS\nPROVINCE.", 
@@ -841,7 +841,7 @@
         "keyword_2": "GUARD", 
         "keyword_response_1": "THESE ARE THE\nGATES TO SERPENT\nCASTLE.", 
         "keyword_response_2": "GUARD, WATCH,\nPROTECT.", 
-        "name": "THE GATE GUARD.", 
+        "name": "THE GATE GUARD", 
         "pronoun": "HE", 
         "question": "ART THOU HERE TO\nFIND COURAGE?", 
         "question_no_answer": "THEN PERHAPS TO\nBECOME A GUARD!", 
@@ -850,7 +850,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A WOUNDED SAILER", 
+        "description": "A WOUNDED\nSAILOR.", 
         "health": "I ALONE SURVIVED\nTHE SHIPWRECK.", 
         "humility_question": false, 
         "job": "I AM A SAILOR.", 
@@ -892,12 +892,12 @@
         "keyword_2": "DUNG", 
         "keyword_response_1": "I TRAIN SO THAT\nI MIGHT SURVIVE\nTHE DUNGEONS!", 
         "keyword_response_2": "I PLAN TO\nCONQUER THE\nSECRET OF THE\nALTAR ROOMS.", 
-        "name": "A RANGER.", 
+        "name": "A RANGER", 
         "pronoun": "HE", 
         "question": "DOST THOU?", 
         "question_no_answer": "WIMP.", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "ASK OUR TEACHER\nABOUT THE ROOMS\nFOR SHE KNOWNS\nMUCH!", 
+        "question_yes_answer": "ASK OUR TEACHER\nABOUT THE ROOMS\nFOR SHE KNOWS\nMUCH!", 
         "turns_away_prob": 0
     }, 
     {
@@ -935,7 +935,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BURLY GUARD", 
+        "description": "A BURLY GUARD.", 
         "health": "EXCELLENT.", 
         "humility_question": false, 
         "job": "WE GUARD OUR\nLORD'S TREASURE.", 
@@ -1003,7 +1003,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A HANDSOME GUARD", 
+        "description": "A HANDSOME\nGUARD.", 
         "health": "SO FAR, SO GOOD.", 
         "humility_question": false, 
         "job": "I GUARD THIS\nPASSAGE.", 
@@ -1076,7 +1076,7 @@
         "humility_question": false, 
         "job": "I WELCOME THEE\nUNTO SERPENT\nCASTLE!", 
         "keyword_1": "SENTRI", 
-        "keyword_2": "HEALER", 
+        "keyword_2": "VISIT", 
         "keyword_response_1": "HE IS THE LORD\nHERE, TAKE THE\nWEST PASSAGE.", 
         "keyword_response_2": "TAKE THE EAST\nPASSAGE.", 
         "name": "MICHELLE", 
@@ -1088,7 +1088,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A YOUNG MAGE", 
+        "description": "A YOUNG MAGE.", 
         "health": "QUITE GOOD.", 
         "humility_question": false, 
         "job": "I SEEK\nADVENTURE!", 
@@ -1105,7 +1105,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "STARVING\nJOURNALIST", 
+        "description": "A STARVING\nJOURNALIST.", 
         "health": "I FEEL FINE...\nIF I COULD JUST\nQUIT SMOKING!", 
         "humility_question": false, 
         "job": "I AM A WRITER.", 
@@ -1176,7 +1176,7 @@
         "description": "A MEEK SHEPHERD.", 
         "health": "PRETTY GOOD.", 
         "humility_question": true, 
-        "job": "I AM SHEPHERD.", 
+        "job": "I AM A SHEPHERD.", 
         "keyword_1": "HUMBLE", 
         "keyword_2": "HUMI", 
         "keyword_response_1": "HUMILITY IS\nNOT DERIVED FROM\nTHE DIRECT\nCOMBINATION OF\nTRUTH, LOVE OR\nCOURAGE.", 
@@ -1226,7 +1226,7 @@
     {
         "description": "A TALL MAGE.", 
         "health": "BEEN BETTER.", 
-        "humility_question": false, 
+        "humility_question": true, 
         "job": "I STRIVE TO LIVE\nAN HONEST LIFE!", 
         "keyword_1": "HONE", 
         "keyword_2": "TRUTH", 
@@ -1241,7 +1241,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "AN ELDERLY WOMAN", 
+        "description": "AN ELDERLY\nWOMAN.", 
         "health": "TIRED, SO TIRED.", 
         "humility_question": false, 
         "job": "I AM AN\nALCHEMIST.", 
@@ -1309,7 +1309,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BOUNCY JESTER", 
+        "description": "A BOUNCY JESTER.", 
         "health": "VERY GOOD.", 
         "humility_question": false, 
         "job": "I EARN AN HONEST\nLIVING, JESTING!", 
@@ -1360,7 +1360,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "CHARMING BARD", 
+        "description": "A CHARMING BARD.", 
         "health": "GOOD.", 
         "humility_question": false, 
         "job": "I PLAY FOR\nTHE PEOPLE.", 
@@ -1377,7 +1377,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A CHARMING\nJESTER", 
+        "description": "A CHARMING\nJESTER.", 
         "health": "VERY WELL.", 
         "humility_question": false, 
         "job": "I DANCE AND\nSING FOR THE\nCHILDREN.", 
@@ -1394,7 +1394,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SMALL CHILD", 
+        "description": "A SMALL CHILD.", 
         "health": "VERY HAPPY.", 
         "humility_question": false, 
         "job": "SINGING", 
@@ -1411,7 +1411,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GUARD", 
+        "description": "A GUARD.", 
         "health": "GOOD.", 
         "humility_question": false, 
         "job": "I GUARD THE\nBRIDGE.", 
@@ -1457,12 +1457,12 @@
         "pronoun": "HE", 
         "question": "HAST THOU\nSEEN HIM?", 
         "question_no_answer": "FIND HIM IN\nSERPENT CASTLE\nFOR HE KNOWS OF\nORBS!", 
-        "question_trigger": "keyword 2", 
+        "question_trigger": "keyword 1", 
         "question_yes_answer": "ONLY HE KNOWS\nTHE ORB'S GIFT!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A DRUNKEN\nFIGHTER", 
+        "description": "A DRUNKEN\nFIGHTER.", 
         "health": "AND A BOTTLE\nOF...", 
         "humility_question": false, 
         "job": "YO HO HO...\nAND A BOTTLE...\nOF RUM...\nHIC...", 
@@ -1479,7 +1479,7 @@
         "turns_away_prob": 20
     }, 
     {
-        "description": "A BARD IN GREEN", 
+        "description": "A BARD IN GREEN.", 
         "health": "SHHH", 
         "humility_question": false, 
         "job": "SHHH, I'M\nPLAYING!", 
@@ -1513,7 +1513,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SMALL CHILD", 
+        "description": "A SMALL CHILD.", 
         "health": "O.K.", 
         "humility_question": false, 
         "job": "I AM LEARNING\nCOMPASSION.", 
@@ -1530,7 +1530,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A TIRED SHEPHERD", 
+        "description": "A TIRED\nSHEPHERD.", 
         "health": "GOOD.", 
         "humility_question": false, 
         "job": "I WATCH OVER\nTHE CHILDREN.", 
@@ -1666,7 +1666,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A 5 FOOT\nPREGNANT WOMAN", 
+        "description": "A 5 FOOT\nPREGNANT WOMAN.", 
         "health": "FINE, ALL BUT\nTHE LUMP IN\nMY STOMACH.", 
         "humility_question": false, 
         "job": "I WATCH OVER\nMY SHEEP.", 
@@ -1707,7 +1707,7 @@
         "keyword_1": "EVIL", 
         "keyword_2": "KILL", 
         "keyword_response_1": "KILL NOT\nNON-EVIL\nCREATURES BUT\nSTILL ALWAYS\nSTAND THY\nGROUND!", 
-        "keyword_response_2": "LET THEM FLEE\nINSTEAD.\nNEVER\nFLEE UNINJURED!", 
+        "keyword_response_2": "LET THEM FLEE\nINSTEAD. NEVER\nFLEE UNINJURED!", 
         "name": "SIR WILLIAM", 
         "pronoun": "HE", 
         "question": "ART THOU\nVALIANT?", 
@@ -1758,7 +1758,7 @@
         "keyword_1": "VALOR", 
         "keyword_2": "MANTRA", 
         "keyword_response_1": "I FIND THAT 'TIS\nEASY TO BE BRAVE\nFROM A SAFE\nDISTANCE!", 
-        "keyword_response_2": "THE MANTRA OF\nVALOR IS 'RA'\nUSE IT IN THE\nSHRINE ON THE\nNEXT ISLE!", 
+        "keyword_response_2": "THE MANTRA OF\nVALOR IS 'RA'.\nUSE IT IN THE\nSHRINE ON THE\nNEXT ISLE!", 
         "name": "AESOP", 
         "pronoun": "HE", 
         "question": "KNOW WHAT\nI MEAN?", 
@@ -1785,7 +1785,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BEAUTIFUL MAGE", 
+        "description": "A BEAUTIFUL\nMAGE.", 
         "health": "WELL ENOUGH.", 
         "humility_question": false, 
         "job": "I AM LOCKED UP\nIN THIS TOWER.", 
@@ -1798,11 +1798,11 @@
         "question": "DOST THOU HAVE\nA SHIP?", 
         "question_no_answer": "TOO BAD.", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "THEN THOU DOST\nNEED A SEXTANT\nASK THE BARKEEP\nFOR HE KNOWS\nMORE!", 
+        "question_yes_answer": "THEN THOU DOST\nNEED A SEXTANT.\nASK THE BARKEEP\nFOR HE KNOWS\nMORE!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A WITHERING SOUL", 
+        "description": "A WITHERING\nSOUL.", 
         "health": "VERY NEAR DEATH!", 
         "humility_question": false, 
         "job": "I BUILT THESE\nPASSAGES AND\nTHEY WALLED\nME IN!", 
@@ -1853,7 +1853,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A STRANGE PERSON", 
+        "description": "A STRANGE\nPERSON.", 
         "health": "O.K.", 
         "humility_question": true, 
         "job": "I SEEK THE STONE", 
@@ -1904,7 +1904,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A QUIET DRUID", 
+        "description": "A QUIET DRUID.", 
         "health": "I AM WELL.", 
         "humility_question": false, 
         "job": "I STRIVE TO\nUNDERSTAND\nJUSTICE.", 
@@ -1921,7 +1921,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A TALL GUARD", 
+        "description": "A TALL GUARD.", 
         "health": "YES.", 
         "humility_question": false, 
         "job": "TO GUARD\nTHE COURT.", 
@@ -2006,7 +2006,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A CHANTING DRUID", 
+        "description": "A CHANTING\nDRUID.", 
         "health": "BEH... BEH...", 
         "humility_question": false, 
         "job": "BEH... BEH...", 
@@ -2026,7 +2026,7 @@
         "description": "A WISE DRUID.", 
         "health": "I AM WELL.", 
         "humility_question": false, 
-        "job": "WELCOME THEE TO\nYEW CITY OF\nJUSTICE!", 
+        "job": "WELCOME THEE TO\nYEW, CITY OF\nJUSTICE!", 
         "keyword_1": "JUST", 
         "keyword_2": "YEW", 
         "keyword_response_1": "LOVE NO ONE MORE\nTHAN THE TRUTH,\nFOR JUSTICE\nSEEKS NO FAVORS.\nTEMPER THY\nJUSTICE WITH\nUNDERSTANDING.", 
@@ -2044,11 +2044,11 @@
         "health": "WELL TREATED.", 
         "humility_question": false, 
         "job": "I HAVE SINNED.", 
-        "keyword_1": "SINED", 
+        "keyword_1": "SINNED", 
         "keyword_2": "FELON", 
         "keyword_response_1": "I HAVE GOTTEN\nCHESTS IN THE\nTOWNES AND\nKILLED NON-EVIL\nCREATURES.", 
         "keyword_response_2": "HE IS A MEAN\nNASTY UGLY\nVILLAIN!", 
-        "name": "A POOR BEGGAR.", 
+        "name": "A POOR BEGGAR", 
         "pronoun": "HE", 
         "question": "SHOULD THOU BE\nIN WITH THE\nFELON?", 
         "question_no_answer": "GOOD.", 
@@ -2063,7 +2063,7 @@
         "job": "I EAT PEOPLE\nWHO BUG ME!", 
         "keyword_1": "VILL", 
         "keyword_2": "PEOPLE", 
-        "keyword_response_1": "THATS ME\nALRIGHT!", 
+        "keyword_response_1": "THAT'S ME\nALRIGHT!", 
         "keyword_response_2": "LIKE THEE!", 
         "name": "VORPAL", 
         "pronoun": "HE", 
@@ -2091,7 +2091,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SMALL CHILD", 
+        "description": "A SMALL CHILD.", 
         "health": "I AM FINE.", 
         "humility_question": false, 
         "job": "I WORK FOR\nJONES.", 
@@ -2111,7 +2111,7 @@
         "description": "A WITHERED FORM.", 
         "health": "I AM STARVING\nAND SICK.", 
         "humility_question": false, 
-        "job": "SEE MY POOR BABY\nI BEG FOR HIM.", 
+        "job": "SEE MY POOR\nBABY? I BEG\nFOR HIM.", 
         "keyword_1": "BABY", 
         "keyword_2": "JUST", 
         "keyword_response_1": "OH, NO, MY BABY\nIS DYING!", 
@@ -2142,7 +2142,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BIG GUARD", 
+        "description": "A BIG GUARD.", 
         "health": "O.K.", 
         "humility_question": true, 
         "job": "TO PRESERVE\nTHE PEACE AND\nINSURE JUSTICE!", 
@@ -2271,7 +2271,7 @@
         "keyword_response_2": "I USED IT!", 
         "name": "JUDE", 
         "pronoun": "HE", 
-        "question": "IF I HELP THEE\nWILT THOU SWEAR\nTO ONLY USE IT\nAT THE MOUTH OF\nTHE ABYSS TO\nDESTROY IT?", 
+        "question": "IF I HELP THEE,\nWILT THOU SWEAR\nTO ONLY USE IT\nAT THE MOUTH OF\nTHE ABYSS TO\nDESTROY IT?", 
         "question_no_answer": "OH.", 
         "question_trigger": "keyword 2", 
         "question_yes_answer": "IT CAN BE FOUND\nAT LAT-P'F\"\nLONG-M'F\" ON THE\nDARKEST NIGHT!", 
@@ -2285,12 +2285,12 @@
         "keyword_1": "HEAR", 
         "keyword_2": "STONE", 
         "keyword_response_1": "WHAT DOES THOU\nWISH TO KNOW?", 
-        "keyword_response_2": "THE STONE OF\nSACRIFICE IS\nORANGE IN COLOUR\nAND USED IN THE\nALTAR ROOMS OF\nLOVE AND\nCOURAGE!", 
+        "keyword_response_2": "THE STONE OF\nSACRIFICE IS\nORANGE IN COLOR\nAND USED IN THE\nALTAR ROOMS OF\nLOVE AND\nCOURAGE!", 
         "name": "ALKERION", 
         "pronoun": "HE", 
         "question": "SEEKETH THOU?", 
         "question_no_answer": "OH.", 
-        "question_trigger": "mistake", 
+        "question_trigger": "keyword 2", 
         "question_yes_answer": "GOOD LUCK.", 
         "turns_away_prob": 0
     }, 
@@ -2339,7 +2339,7 @@
         "keyword_response_2": "AVATARS STRIVE\nTO BE VIRTUOUS.", 
         "name": "SHENTIS", 
         "pronoun": "HE", 
-        "question": "DOST THOU STRIVE\nFOR VIRTUE!", 
+        "question": "DOST THOU STRIVE\nFOR VIRTUE?", 
         "question_no_answer": "AN AVATAR THOU\nART NOT!", 
         "question_trigger": "keyword 2", 
         "question_yes_answer": "THEN PERHAPS\nTHOU SHALT\nBECOME AN\nAVATAR!", 
@@ -2448,10 +2448,10 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "HANDSOME FIGHTER", 
+        "description": "A HANDSOME\nFIGHTER.", 
         "health": "VERY WELL.", 
         "humility_question": false, 
-        "job": "I AM TOWNE LEADER", 
+        "job": "I AM TOWNE\nLEADER", 
         "keyword_1": "LEAD", 
         "keyword_2": "HONOR", 
         "keyword_response_1": "'TIS AN HONOR!", 
@@ -2472,17 +2472,17 @@
         "keyword_1": "FIELDS", 
         "keyword_2": "NIGHT", 
         "keyword_response_1": "POISON IS MY\nFAVORITE.", 
-        "keyword_response_2": "NIGHTSHADE MAY\nBE FOUND ONLY\nNEAR LAT-J'F\"\nLONG-C'O\" ONLY ON\nTHE DARKEST OF\nNIGHTS!", 
+        "keyword_response_2": "NIGHTSHADE MAY\nBE FOUND ONLY\nNEAR LAT-J'F\"\nLONG-C'O\" ONLY\nON THE DARKEST\nOF NIGHTS!", 
         "name": "VIRGIL", 
         "pronoun": "HE", 
-        "question": "'TIS IT THINE?", 
+        "question": "IS IT THINE?", 
         "question_no_answer": "WELL I\nDON'T CARE!", 
         "question_trigger": "keyword 1", 
         "question_yes_answer": "BRAVO!", 
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SLEEPY FIGHTER", 
+        "description": "A SLEEPY\nFIGHTER.", 
         "health": "TIRED.", 
         "humility_question": false, 
         "job": "I DRINK A TOAST\nTO HONOR!", 
@@ -2499,7 +2499,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A BONY SKELETON", 
+        "description": "A BONY SKELETON.", 
         "health": "WHAT DO\nYOU MEAN?", 
         "humility_question": false, 
         "job": "I HAIL FROM\nDUNGEON DEEP.", 
@@ -2535,7 +2535,7 @@
     {
         "description": "A DIGNIFIED\nPALADIN.", 
         "health": "I AM WELL.", 
-        "humility_question": false, 
+        "humility_question": true, 
         "job": "I SEARCH\nFOR HONOR.", 
         "keyword_1": "HONOR", 
         "keyword_2": "DIGNIT", 
@@ -2550,7 +2550,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A COWERING CHILD", 
+        "description": "A COWERING\nCHILD.", 
         "health": "SCARED!", 
         "humility_question": false, 
         "job": "I RAN FROM\nTHE BULL!", 
@@ -2587,7 +2587,7 @@
         "description": "A SCRUFFY\nMERCHANT.", 
         "health": "A BIT\nRAGGED OUT.", 
         "humility_question": false, 
-        "job": "A TRADE\nIN RUMORS.", 
+        "job": "I TRADE\nIN RUMORS.", 
         "keyword_1": "RUMOR", 
         "keyword_2": "RUNE", 
         "keyword_response_1": "ABOUT WHAT?", 
@@ -2686,7 +2686,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A WANDERING MAGE", 
+        "description": "A WANDERING\nMAGE.", 
         "health": "ADEQUATE.", 
         "humility_question": false, 
         "job": "I SEEK THE\nSKELETON!", 
@@ -2732,7 +2732,7 @@
         "pronoun": "HE", 
         "question": "DOST THOU SEEK\nTHIS \"TRUTH\"?", 
         "question_no_answer": "ALAS.", 
-        "question_trigger": null, 
+        "question_trigger": "keyword 2", 
         "question_yes_answer": "SOME THINGS TAKE\nFOREVER BUT\nBRICK BY BRICK\nMOUNTAINS CAN BE\nBUILT!", 
         "turns_away_prob": 0
     }, 
@@ -2756,7 +2756,7 @@
     {
         "description": "A TALL RANGER.", 
         "health": "I AM ALIVE.", 
-        "humility_question": false, 
+        "humility_question": true, 
         "job": "I CARRY THE\nLIGHT WITHIN MY\nHEART.", 
         "keyword_1": "LIGHT", 
         "keyword_2": "PHILOS", 
@@ -2808,7 +2808,7 @@
         "description": "A RADIANT\nRANGER.", 
         "health": "I AM FINE.", 
         "humility_question": false, 
-        "job": "I AM READING THE\nWIZARD'S JOURNAL.", 
+        "job": "I AM READING THE\nWIZARD'S\nJOURNAL.", 
         "keyword_1": "JOURN", 
         "keyword_2": "STONE", 
         "keyword_response_1": "IT TELLS OF THE\nWHITE STONE.", 
@@ -2839,7 +2839,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A SKILLED RANGER", 
+        "description": "A SKILLED\nRANGER.", 
         "health": "WELL.", 
         "humility_question": false, 
         "job": "I STRIVE ALONG\nTHE PATH.", 
@@ -2917,7 +2917,7 @@
         "keyword_response_2": "I AM NOT AFRAID\nOF TOMORROW; I\nHAVE SEEN\nYESTERDAY AND I\nLOVE TODAY.", 
         "name": "WHITE", 
         "pronoun": "HE", 
-        "question": "ART THOU\nFEARLESS IN ALL\nTHING?", 
+        "question": "ART THOU\nFEARLESS IN ALL\nTHINGS?", 
         "question_no_answer": "DANGER IS REAL!", 
         "question_trigger": "keyword 1", 
         "question_yes_answer": "BOASTFUL FOOL!", 
@@ -2932,7 +2932,7 @@
         "keyword_2": "OM", 
         "keyword_response_1": "MANTRA?", 
         "keyword_response_2": "SEARCH FOR\nTHE RUNE OF\nSPIRITUALITY IN\nTHE TREASURE\nCHAMBER OF\nBRITANNIA!", 
-        "name": "THE ANKH OF\nSPIRITUALTY", 
+        "name": "THE ANKH OF\nSPIRITUALITY", 
         "pronoun": "IT", 
         "question": "HAST THOU FOUND\nTHE SHRINE?", 
         "question_no_answer": "ENTER THE GATE\nOF FULL MOONS!", 
@@ -2975,14 +2975,14 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A GHOSTLY FIGURE", 
+        "description": "A GHOSTLY\nFIGURE.", 
         "health": "I AM MANY\nYEARS DEAD.", 
         "humility_question": false, 
         "job": "I HAUNT\nTHIS INN!", 
         "keyword_1": "HAUNT", 
         "keyword_2": "STONE", 
         "keyword_response_1": "THE QUEST IS\nNOT COMPLETE!", 
-        "keyword_response_2": "THE WHITE STONE\nSITS ATOP THE\nSERPENT'S SPINE,\nIT CAN ONLY BE\nREACHED BY ONE\nWHO FLOATS\nWITHIN THE\nCLOUDS.", 
+        "keyword_response_2": "THE WHITE STONE\nSITS ATOP THE\nSERPENT'S SPINE.\nIT CAN ONLY BE\nREACHED BY ONE\nWHO FLOATS\nWITHIN THE\nCLOUDS.", 
         "name": "ISAAC", 
         "pronoun": "HE", 
         "question": "ART THOU ON\nTHE QUEST?", 
@@ -3376,7 +3376,7 @@
         "keyword_response_2": "MY QUEST IS TO\nDEFEAT THE EVILS\nOF THE WORLD.", 
         "name": "SIR HOBIE", 
         "pronoun": "HE", 
-        "question": "'TIS THY\nQUEST ALSO?", 
+        "question": "'TIS THY QUEST\nALSO?", 
         "question_no_answer": "A SHAME IT IS!", 
         "question_trigger": "keyword 2", 
         "question_yes_answer": "WE ARE AS ONE.", 
@@ -3519,7 +3519,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A WHITE STALLION", 
+        "description": "A WHITE\nSTALLION.", 
         "health": "GOOD, GOOD.", 
         "humility_question": false, 
         "job": "OH, NOT MUCH.", 
@@ -3558,7 +3558,7 @@
         "humility_question": false, 
         "job": "I AM A GUARD.", 
         "keyword_1": "GUARD", 
-        "keyword_2": "HUNGR", 
+        "keyword_2": "HUNGER", 
         "keyword_response_1": "I GUARD\nTHE CITY!", 
         "keyword_response_2": "YES, I AM\nVERY HUNGRY!", 
         "name": "RANKBREATH", 
@@ -3570,7 +3570,7 @@
         "turns_away_prob": 20
     }, 
     {
-        "description": "A SCRUFFY SAILOR", 
+        "description": "A SCRUFFY\nSAILOR.", 
         "health": "SALTY.", 
         "humility_question": false, 
         "job": "I AM A SAILOR!", 
@@ -3593,7 +3593,7 @@
         "job": "I'M A\nPIRATE MATEY!", 
         "keyword_1": "PIRA", 
         "keyword_2": "RAID", 
-        "keyword_response_1": "WE RAID THE\nCOASTS OF\nBRITANNIA FUN,\nEH!", 
+        "keyword_response_1": "WE RAID THE\nCOASTS OF\nBRITANNIA, FUN\nEH!", 
         "keyword_response_2": "PILLAGE\nAND BURN!", 
         "name": "SILVER JOHN", 
         "pronoun": "HE", 
@@ -3606,7 +3606,7 @@
     {
         "description": "A NIMBLE THIEF.", 
         "health": "AS GOOD AS\nI NEED BE!", 
-        "humility_question": false, 
+        "humility_question": true, 
         "job": "WHAT'S IT\nTO THEE?", 
         "keyword_1": "THIEF", 
         "keyword_2": "CLEVER", 
@@ -3621,7 +3621,7 @@
         "turns_away_prob": 10
     }, 
     {
-        "description": "A SOLEMN RANGER", 
+        "description": "A SOLEMN RANGER.", 
         "health": "O.K.", 
         "humility_question": false, 
         "job": "I TRAVEL.", 
@@ -3678,7 +3678,7 @@
         "job": "I USE\nBLACK MAGIC!", 
         "keyword_1": "MAGIC", 
         "keyword_2": "MIX", 
-        "keyword_response_1": "I CAST POWERFUL\nMAGIC MISSLE\nSPELLS.", 
+        "keyword_response_1": "I CAST POWERFUL\nMAGIC MISSILE\nSPELLS.", 
         "keyword_response_2": "TRY ONE BLACK\nPEARL AND ONE\nPART SULPHUROUS\nASH!", 
         "name": "STARLIGHT", 
         "pronoun": "HE", 
@@ -3757,7 +3757,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "A PLUMP MERCHANT", 
+        "description": "A PLUMP\nMERCHANT.", 
         "health": "GREAT!", 
         "humility_question": false, 
         "job": "I SELL WINE!", 
@@ -3859,7 +3859,7 @@
         "turns_away_prob": 0
     }, 
     {
-        "description": "SHORT ROTUND MAN\nWITH A HAT AND\nVEST.", 
+        "description": "A SHORT, ROTUND\nMAN WITH A HAT\nAND VEST.", 
         "health": "I AM FINE,\nTHANK THEE.", 
         "humility_question": false, 
         "job": "TRAVELING DAN,\nTHE TINKER MAN.", 
@@ -4274,7 +4274,7 @@
         "keyword_1": "RIVER", 
         "keyword_2": "WORD", 
         "keyword_response_1": "IT FLOWS\nENDLESSLY.", 
-        "keyword_response_2": "THE KINGS OF THE\nCASTLES WHICH\nREPRESENT THE\nTHREE PRINCIPLES\nOF VIRTUE EACH\nKNOW ONE BUT ONE\nSYLLABLE OF THE\nWORD OF PASSAGE!", 
+        "keyword_response_2": "THE KINGS OF THE\nCASTLES WHICH\nREPRESENT THE\nTHREE PRINCIPLES\nOF VIRTUE EACH\nKNOW BUT ONE\nSYLLABLE OF THE\nWORD OF PASSAGE!", 
         "name": "BROTHER ZAIR", 
         "pronoun": "HE", 
         "question": "AGREE?", 
@@ -4330,7 +4330,7 @@
         "pronoun": "SHE", 
         "question": "KNOW YE WHAT\nTHEY ARE?", 
         "question_no_answer": "THE TRUTHS OF\nTHE UNIVERSE,\nTHE LOVE OF THE\nHEART, AND THE\nCOURAGE OF THE\nSOUL!", 
-        "question_trigger": null, 
+        "question_trigger": "keyword 2", 
         "question_yes_answer": "GOOD.", 
         "turns_away_prob": 0
     }, 

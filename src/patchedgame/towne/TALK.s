@@ -54,11 +54,11 @@ npc_dialogue = $eee0
 
 	.segment "DIALOG"
 
-dialog_strings:                 .res $f0
-dialog_keyword_1:               .res 6
-dialog_keyword_2:               .res 6
+dialog_strings:                 .res $f5
+dialog_keyword_1:               .res 4
+dialog_keyword_2:               .res 4
 dialog_question_trigger:        .res 1
-dialog_special:                 .res 1
+;dialog_special:                 .res 1
 dialog_humility:                .res 1
 dialog_turns_away_probability:  .res 1
 
@@ -101,6 +101,8 @@ print_name:
 	.byte 0
 	lda #$01
 	jsr print_string
+	lda #char_period   ;TEXTFIX period after name, always
+	jsr j_console_out  ;TEXTFIX
 	lda #char_enter
 	jsr j_console_out
 	jmp talk_prompt
@@ -117,10 +119,11 @@ maybe_fight:
 @fight:
 	jmp start_combat
 
-	jsr pronoun_says_newline
-	jsr j_primm  ;b'GO AWAY!\r\x00'
-	.byte "GO AWAY!", $8d
-	.byte 0
+; dead code, unused in original game
+;	jsr pronoun_says_newline
+;	jsr j_primm  ;b'GO AWAY!\r\x00'
+;	.byte "GO AWAY!", $8d
+;	.byte 0
 talk_prompt:
 	jsr j_primm  ;b'\rYour interest:\r\x00'
 	.byte $8d
@@ -205,8 +208,8 @@ check_question_trigger:
 	lda zpea
 	cmp dialog_question_trigger
 	beq ask_question
-	cmp dialog_special ;unused, no data sets this flag.
-	beq special        ;unused
+;	cmp dialog_special ;unused, no data sets this flag.
+;	beq special        ;unused
 	jmp talk_prompt
 
 ask_question:
@@ -254,11 +257,11 @@ ask_question:
 	jmp @get_response
 
 ; unused original code, maybe stub for second virtue, like honesty?
-special:
-	jsr j_primm  ;b'SPECIAL!\r\x00'
-	.byte "SPECIAL!", $8d
-	.byte 0
-	jmp talk_prompt
+;special:
+;	jsr j_primm  ;b'SPECIAL!\r\x00'
+;	.byte "SPECIAL!", $8d
+;	.byte 0
+;	jmp talk_prompt
 
 pronoun_turns_away:
 	lda #$02
@@ -272,9 +275,9 @@ pronoun_turns_away:
 start_combat:
 	lda #$02
 	jsr print_string
-	jsr j_primm  ;b' SAYS:\rON GUARD! FOOL!\r\x00'
+	jsr j_primm  ;b' SAYS:\rEN GARDE! FOOL!\r\x00'
 	.byte " SAYS:", $8d
-	.byte "ON GUARD! FOOL!", $8d
+	.byte "EN GARDE! FOOL!", $8d
 	.byte 0
 	ldx zpea
 	lda #$ff
@@ -381,38 +384,77 @@ keyword_2:
 	.byte "    "
 
 ; original scheme uses 00 as separators.
+;print_string:
+;	tay
+;	lda #<dialog_strings
+;	sta ptr1
+;	lda #>dialog_strings
+;	sta ptr1 + 1
+;	ldx #$00
+;@check:
+;	lda (ptr1,x)
+;	beq @eos
+;@next:
+;	jsr @inc_ptr
+;	jmp @check
+;@eos:
+;	dey
+;	beq @print
+;	jmp @next
+;@print:
+;	jsr @inc_ptr
+;	ldx #$00
+;	lda (ptr1,x)
+;	beq @done
+;	jsr j_console_out
+;	jmp @print
+;@done:
+;	rts
+;@inc_ptr:
+;	inc ptr1
+;	bne @skip
+;	inc ptr1 + 1
+;@skip:
+;	rts
+;
+; Patch makes room for longer strings to fix language mistakes
+; by using high bit as separator. (and cutting keywords from
+; 6 chars to 4, since that's all the parser checks anyway)
+; As a bonus, the following routine is also a few bytes smaller
+; than the original above.
+
 print_string:
-	tay
+	tax
 	lda #<dialog_strings
 	sta ptr1
 	lda #>dialog_strings
 	sta ptr1 + 1
-	ldx #$00
-@check:
-	lda (ptr1,x)
-	beq @eos
 @next:
-	jsr @inc_ptr
-	jmp @check
-@eos:
-	dey
+	dex
 	beq @print
-	jmp @next
+	ldy #0
+@check:
+	lda (ptr1),y
+	bpl @eos
+	iny
+	bne @check
+@eos:
+	tya
+	sec
+	adc ptr1
+	sta ptr1
+	bne @next
 @print:
-	jsr @inc_ptr
-	ldx #$00
-	lda (ptr1,x)
-	beq @done
+	ldy #0
+	lda (ptr1),y
+	bpl @last
 	jsr j_console_out
-	jmp @print
-@done:
-	rts
-@inc_ptr:
 	inc ptr1
-	bne @skip
-	inc ptr1 + 1
-@skip:
-	rts
+	bne @print
+@last:
+	ora #$80
+	jmp j_console_out
+
 
 check_join:
 	lda lt_x
@@ -570,7 +612,7 @@ give_gold_add_virtue:
 	ora gold
 	bne @has_gold_left
 	lda #$03
-	ldy #virtue_honor     ;BUG: awarded HONOR (5), but advice to give last gold comes from shrine of SACRIFICE (4).
+	ldy #virtue_sacrifice     ;BUGFIX. Original value was 5 (honor)
 	jsr add_virtue
 @has_gold_left:
 	lda move_counter + 3
@@ -638,7 +680,7 @@ decline_reason:
 	bne @experienced
 	jsr j_primm  ;b'HUMBLE\x00'
 	.byte "HUMBLE", 0
-; BUG. rts missing
+	rts    ; BUGFIX. rts missing in original.
 
 @experienced:
 	jsr j_primm  ;b'EXPERIENCED\x00'
@@ -742,7 +784,7 @@ talk_done:
 	rts
 
 ; Junk from segment alignment
-	.byte "Y", $8d
-	.byte "LOST.", $8d
-	.byte 0
-	.byte $4c,$30
+;	.byte "Y", $8d
+;	.byte "LOST.", $8d
+;	.byte 0
+;	.byte $4c,$30

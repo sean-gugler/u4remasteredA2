@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Generate TLK.BIN compatible with the retail disk image.
+Generate TLK.BIN for use with patched TALK.s.
 by Sean Gugler
 """
 
@@ -22,9 +22,12 @@ def usage(argv):
     return p.parse_args(argv[1:])
 
 def encode_string(s, lastbit=True):
-    bytes = list(ord(c.upper()) for c in s.replace("\n", "\x8d"))
+    for line in s.split("\n"):
+        if len(line) > 16:
+            print(u"Line too long: '%s'" % line)
+    bytes = list(ord(c.upper()) | 0x80 for c in s.replace("\n", "\r"))
     if lastbit:
-        bytes[0:0] = [0]
+        bytes[-1] &= 0x7f
     return bytes
 
 def bcd(i):
@@ -37,7 +40,6 @@ def encode_trigger(t):
         "health": 4,
         "keyword 1": 5,
         "keyword 2": 6,
-        "mistake": 10,  #preserve bad retail data byte for one character
     }[t]
 
 CONV_KEYS = [
@@ -55,16 +57,16 @@ CONV_KEYS = [
 
 def encode_conv(conv):
     strings = list(flatten(encode_string(conv[key], lastbit=True) for key in CONV_KEYS))
-    kMax = 0xf0
+    kMax = 0xf5
+    assert(len(strings) < kMax)
     strings = (strings + [0] * kMax)[:kMax]
-    kw1 = encode_string((conv["keyword_1"] + "      ")[:6], lastbit=False)
-    kw2 = encode_string((conv["keyword_2"] + "      ")[:6], lastbit=False)
+    kw1 = encode_string((conv["keyword_1"] + "    ")[:4], lastbit=False)
+    kw2 = encode_string((conv["keyword_2"] + "    ")[:4], lastbit=False)
     trigger = encode_trigger(conv["question_trigger"])
-    special = 0  # unused retail flag, stub code in game prints "SPECIAL!"
     humility = 1 if conv["humility_question"] else 0
     turnsaway = bcd(conv["turns_away_prob"])
     
-    bytelist = strings + kw1 + kw2 + [trigger, special, humility, turnsaway]
+    bytelist = strings + kw1 + kw2 + [trigger, humility, turnsaway]
     return bytes(bytelist)
 
 def main(argv):

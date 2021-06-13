@@ -145,6 +145,7 @@ htxt = $e400
 	.byte $84,"BLOAD HTXT,A$E400", $8d
 	.byte $84,"BRUN BOOT,A$6000", $8d
 	.byte 0
+	.byte 0
 
 print_cout:
 	pla

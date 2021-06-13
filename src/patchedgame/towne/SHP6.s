@@ -417,7 +417,7 @@ fall_asleep:
 	lda (ptr1),y
 	cmp #status_Sleep
 	bne @recover_hp
-	lda #$c1     ;BUG: A should be G
+	lda #status_Good     ;BUGFIX: was 'A' ("awake"?)
 	sta (ptr1),y
 @recover_hp:
 	lda #$32
@@ -596,10 +596,10 @@ string_table:
 	.byte "BED ROOM WITH", $8d
 	.byte "A BACK DOOR", $8d
 	.byte "FOR 15gp.", 0
-	.byte "UNFORTUNATLY, I", $8d
+	.byte "UNFORTUNATELY, I", $8d
 	.byte "HAVE BUT ONLY", $8d
 	.byte "A VERY SMALL", $8d
-	.byte "ROOM WITH 1 BED,", $8d
+	.byte "ROOM WITH 1 BED.", $8d
 	.byte "WORSE YET, IT IS", $8d
 	.byte "HAUNTED! IF YOU", $8d
 	.byte "DO WISH TO STAY", $8d
@@ -802,5 +802,5 @@ restore_mp:
 	rts
 
 ; junk
-	.byte $07,$f8,$18,$69,$01,$d8,$91,$fe
-	.byte $c6,$d4,$10,$ab,$60,$0a
+;	.byte $07,$f8,$18,$69,$01,$d8,$91,$fe
+;	.byte $c6,$d4,$10,$ab,$60,$0a

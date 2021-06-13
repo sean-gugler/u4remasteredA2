@@ -8,6 +8,9 @@ char_question = $bf
 
 dng_tile_ladder_d = $20
 dng_tile_altar = $b0
+dng_tile_type_mask = $f0
+
+foes_max = $0f
 
 item_have_candle = $01
 item_have_book = $02
@@ -27,6 +30,7 @@ object_max = $1f
 
 sound_damage = $06
 
+tile_attack_red = $4f
 tile_lord_british = $5e
 
 virtue_last = $08

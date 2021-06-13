@@ -588,7 +588,8 @@ unused:
 shrine_msg_idx:
 	.byte $00,$03,$06,$09,$0c,$0f,$12,$15
 shrine_msg_per_cycle:
-	.byte $18, 0, 0, 0, 1, 1, 1, 2, 2, 2	; BUG: always msg 0. @vision does not multiply num_cycles by 3
+;	.byte $18, 0, 0, 0, 1, 1, 1, 2, 2, 2	; BUG: always msg 0. @vision does not multiply num_cycles by 3
+	.byte $18, 0, 1, 2, 1, 1, 1, 2, 2, 2	; BUGFIX: only indices 1-3 matter.
 bit_msb:
 	.byte $80,$40,$20,$10,$08,$04,$02,$01
 
@@ -733,9 +734,9 @@ string_table:
 ; STRING $02 (2)
 	.byte "CHEAT NOT THE", $8d
 	.byte "MERCHANTS AND", $8d
-	.byte "PEDDLERS FOR TIS", $8d
-	.byte "AN EVIL THING", $8d
-	.byte "TO DO!", $8d
+	.byte "PEDDLERS FOR", $8d
+	.byte "'TIS AN EVIL", $8d
+	.byte "THING TO DO!", $8d
 	.byte 0
 ; STRING $03 (3)
 	.byte "SECOND, READ THE", $8d
@@ -813,7 +814,7 @@ string_table:
 ; STRING $0D (13)
 	.byte "TO GIVE THY LAST", $8d
 	.byte "GOLD PIECE UNTO", $8d
-	.byte "THE NEEDY, SHOWS", $8d
+	.byte "THE NEEDY SHOWS", $8d
 	.byte "GOOD MEASURE OF", $8d
 	.byte "SELF-SACRIFICE!", $8d
 	.byte 0
@@ -821,12 +822,13 @@ string_table:
 	.byte "FOR THEE TO FLEE", $8d
 	.byte "AND LEAVE THY", $8d
 	.byte "COMPANIONS IS A", $8d
-	.byte "SELFSEEKING ACTION", $8d
-	.byte "TO BE AVIODED!", $8d
+	.byte "SELF-SEEKING", $8d
+	.byte "ACTION TO BE", $8d
+	.byte "AVOIDED!", $8d
 	.byte 0
 ; STRING $0F (15)
 	.byte "TO GIVE OF THY", $8d
-	.byte "LIFES BLOOD SO", $8d
+	.byte "LIFE'S BLOOD SO", $8d
 	.byte "THAT OTHERS MAY", $8d
 	.byte "LIVE IS A VIRTUE", $8d
 	.byte "OF GREAT PRAISE!", $8d
@@ -861,8 +863,9 @@ string_table:
 	.byte "INNER BEING!", $8d
 	.byte 0
 ; STRING $14 (20)
-	.byte "MEDITATION LEADS", $8d
-	.byte "TO ENLIGHTENMENT", $8d
+	.byte "MEDITATION", $8d
+	.byte "LEADS TO", $8d
+	.byte "ENLIGHTENMENT.", $8d
 	.byte "SEEK YE ALL", $8d
 	.byte "WISDOM AND", $8d
 	.byte "KNOWLEDGE!", $8d
@@ -881,7 +884,7 @@ string_table:
 	.byte "THAT WHICH THOU", $8d
 	.byte "ART NOT, HUMBLE", $8d
 	.byte "ACTIONS SPEAK", $8d
-	.byte "WELL THEE!", $8d
+	.byte "WELL OF THEE!", $8d
 	.byte 0
 ; STRING $17 (23)
 	.byte "STRIVE NOT TO", $8d

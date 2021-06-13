@@ -321,5 +321,5 @@ input_char:
 	rts
 
 ; junk
-	.byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-	.byte $ff,$ff
+;	.byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+;	.byte $ff,$ff

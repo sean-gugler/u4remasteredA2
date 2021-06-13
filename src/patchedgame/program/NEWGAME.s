@@ -340,24 +340,24 @@ start_scene:
 	cmp #$23
 	bne @s24_show_clearing
 	jsr portal_vanish
-	jsr j_primm_cout ;b'\x04BLOAD PRTL.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD PRTL.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD P\x81RTL.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD P", $81, "RTL.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s24_show_clearing:
 	cmp #$24
 	bne @s29_show_tree
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD TREE.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD TREE.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD T", $81, "REE.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s29_show_tree:
 	cmp #$29
 	bne @s2c_music_towne
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD LOOK.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD LOOK.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD L\x81OOK.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD L", $81, "OOK.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s2c_music_towne:
@@ -371,32 +371,32 @@ start_scene:
 	cmp #$2d
 	bne @s2f_show_fair
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD FAIR.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD FAIR.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD F\x81AIR.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD F", $81, "AIR.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s2f_show_fair:
 	cmp #$2f
 	bne @s32_show_wagon
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD WAGN.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD WAGN.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD W\x81AGN.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD W", $81, "AGN.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s32_show_wagon:
 	cmp #$32
 	bne @s33_show_gypsy
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD GYPS.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD GYPS.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD G\x81YPS.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD G", $81, "YPS.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s33_show_gypsy:
 	cmp #$33
 	bne @s35_show_table
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD TABL.SPK,A$4000\n\x00'
-	.byte $84,"BLOAD TABL.SPK,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD T\x81ABL.SPK,A$4000\n\x00'
+	.byte $84,"BLOAD T", $81, "ABL.SPK,A$4000",$8d, 0
 @next_scene:
 	jmp next_scene
 
@@ -404,8 +404,8 @@ start_scene:
 	cmp #$35
 	bne @next_scene
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD CRDS,A$4000\n\x00'
-	.byte $84,"BLOAD CRDS,A$4000",$8d, 0
+	jsr j_primm_cout ;b'\x04BLOAD C\x81RDS,A$4000\n\x00'
+	.byte $84,"BLOAD C", $81, "RDS,A$4000",$8d, 0
 	jsr wait_key
 
 ; Begin fortune telling
@@ -1255,12 +1255,12 @@ string_table:
 	.byte "B) show Compassion, giving the Beggar a", $ff
 	.byte "coin, knowing it won't be missed?", 0
 ; STRING $02 (2)
-	.byte "Thou has been prohibited by thy absent", $ff
+	.byte "Thou hast been prohibited by thy absent", $ff
 	.byte "Lord from joining thy friends in a close", $ff
 	.byte "pitched battle. Dost thou A) refrain, so", $ff
-	.byte "thou may Honestly claim obedience; or", $ff
+	.byte "thou mayst Honestly claim obedience; or", $ff
 	.byte "B) show Valor, and aid thy comrades,", $ff
-	.byte "knowing thou may deny it later?", 0
+	.byte "knowing thou mayst deny it later?", 0
 ; STRING $03 (3)
 	.byte "A merchant owes thy friend money, now", $ff
 	.byte "long past due. Thou dost see the same", $ff
@@ -1270,7 +1270,7 @@ string_table:
 	.byte "the gold first?", 0
 ; STRING $04 (4)
 	.byte "Thee and thy friend are valiant but", $ff
-	.byte "penniless warriors. Thou both go out to", $ff
+	.byte "penniless warriors. Ye both go out to", $ff
 	.byte "slay a mighty dragon. Thy friend thinks", $ff
 	.byte "he slew it, thee did. When asked, dost", $ff
 	.byte "thou A) Truthfully claim the gold; or", $ff
@@ -1283,7 +1283,7 @@ string_table:
 	.byte "oath by Honestly speaking; or B) uphold", $ff
 	.byte "Honor by silently keeping thine oath?", 0
 ; STRING $06 (6)
-	.byte "Thy friend seeks admittance to thy", $ff
+	.byte "Thy friend seeketh admittance to thy", $ff
 	.byte "Spiritual order. Thou art asked to vouch", $ff
 	.byte "for his purity of Spirit, of which thou", $ff
 	.byte "art unsure. Dost thou A) Honestly", $ff
@@ -1292,7 +1292,7 @@ string_table:
 ; STRING $07 (7)
 	.byte "Thy Lord mistakenly believes he slew a", $ff
 	.byte "dragon. Thou hast proof that thy lance", $ff
-	.byte "felled the beast.  When asked, dost thou", $ff
+	.byte "felled the beast. When asked, dost thou", $ff
 	.byte "A) Honestly claim the kill and the", $ff
 	.byte "prize; or B) Humbly permit thy Lord his", $ff
 	.byte "belief?", 0
@@ -1416,7 +1416,7 @@ string_table:
 	.byte "thy wealth to feed hundreds of starving", $ff
 	.byte "children, and receive public adulation;", $ff
 	.byte "or B) Humbly live out thy life, willing", $ff
-	.byte "thy fortune to thy heirs?", 0
+	.byte "thy fortune to thine heirs?", 0
 ; STRING $1A (26)
 	.byte "In thy youth thou pledged to marry thy", $ff
 	.byte "sweetheart. Now thou art on a sacred", $ff
@@ -1510,7 +1510,7 @@ string_table:
 	.byte "aura suggestive of ancient power.", 0
 ; STRING $28 (40)
 	.byte "The tongue of the title is beyond your", $ff
-	.byte "keen. You dare not open the book and", $ff
+	.byte "ken. You dare not open the book and", $ff
 	.byte "disturb whatever sleeps within. You", $ff
 	.byte "decide to peruse the History. Settling", $ff
 	.byte "back under the willow tree, you open the", $ff
@@ -1596,7 +1596,7 @@ string_table:
 	.byte "The gypsy places the last two cards", $ff
 	.byte 0
 ; STRING $38 (56)
-	.byte "upon the table, they are the cards of", $ff
+	.byte "upon the table. They are the cards of", $ff
 	.byte 0
 ; STRING $39 (57)
 	.byte "honesty", 0

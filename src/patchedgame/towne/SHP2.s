@@ -571,5 +571,5 @@ check_inline_keyword:
 	rts
 
 ; junk
-	.byte $04,$20,$54,$08,$ee,$4f,$7d,$20
-	.byte $db,$82,$10
+;	.byte $04,$20,$54,$08,$ee,$4f,$7d,$20
+;	.byte $db,$82,$10

@@ -508,8 +508,8 @@ sell_menu:
 	jsr j_printbcd
 :	lda payment + 1
 	jsr j_printbcd
-	jsr j_primm  ;b'gp FOR THAT\n\x00'
-	.byte "gp FOR THAT", $8d
+	jsr j_primm  ;b'gp FOR THAT.\n\x00'
+	.byte "gp FOR THAT.", $8d
 	.byte 0
 	lda zp_item_type
 	clc
@@ -726,7 +726,7 @@ string_table:
 	.byte 0
 	.byte "THESE MACES HAVE", $8d
 	.byte "A HARDENED SHAFT", $8d
-	.byte "AND A 5lb HEAD", $8d
+	.byte "AND A 5lb HEAD,", $8d
 	.byte "FAIRLY PRICED", $8d
 	.byte "AT 100gp.", $8d
 	.byte 0
@@ -757,7 +757,7 @@ string_table:
 	.byte "FLASKS OF OIL", $8d
 	.byte "MAKE GREAT", $8d
 	.byte "WEAPONS AND", $8d
-	.byte "CREATES A WALL", $8d
+	.byte "CREATE A WALL", $8d
 	.byte "OF FIRE TOO,", $8d
 	.byte "5gp EACH.", $8d
 	.byte 0
@@ -771,12 +771,13 @@ string_table:
 	.byte "THIS MAGICAL AXE", $8d
 	.byte "CAN BE THROWN AT", $8d
 	.byte "THY ENEMY AND", $8d
-	.byte "WILL THEN RETURN", $8d
-	.byte "ALL FOR 1500gp.", $8d
+	.byte "WILL THEN", $8d
+	.byte "RETURN, ALL FOR", $8d
+	.byte "1500gp.", $8d
 	.byte 0
 	.byte "MAGICAL SWORDS", $8d
 	.byte "SUCH AS THESE", $8d
-	.byte "ARE RARE INDEED", $8d
+	.byte "ARE RARE INDEED!", $8d
 	.byte "I WILL PART WITH", $8d
 	.byte "ONE FOR 2500gp.", $8d
 	.byte 0
@@ -969,5 +970,5 @@ prev_console_y:
 	.byte 0
 
 ; junk [ FIRE TOO,",$8]
-	.byte $20,$46,$49,$52,$45,$20,$54,$4f
-	.byte $4f,$2c,$22,$2c,$24,$38
+;	.byte $20,$46,$49,$52,$45,$20,$54,$4f
+;	.byte $4f,$2c,$22,$2c,$24,$38

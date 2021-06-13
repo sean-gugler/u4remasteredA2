@@ -564,7 +564,7 @@ prev_cursor_y:
 	.byte 0
 
 ; junk
-	.byte $a2,$00,$a1,$fe,$f0,$06,$20,$69,$8c
+;	.byte $a2,$00,$a1,$fe,$f0,$06,$20,$69,$8c
 ; [disassembly of above]
 ;	ldx #$00
 ;	lda (ptr1,x)

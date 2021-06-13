@@ -1,0 +1,673 @@
+:CODE START
+0800
+:CODE END
+2000
+:DATA BYTES
+0ADB-0ADC
+0B48-0B49
+0ED6-0EF7
+107B-107C
+1094-10A6
+113C-113F
+1162-1166
+117C-1182
+118D-118F
+11AF-11B6
+11F0-11F6
+1232-1238
+123C-1242
+1246-124C
+1250-1256
+12F1-1319
+156B-157B
+15C3-15D6
+1676-1679
+167F-16AA
+16AD-16C7
+16CA-16E3
+1703-1711
+1714-1726
+1729-173B
+173C-177C
+1855-1868
+1881-1894
+189A-18AC
+18B4-18C6
+18EC-18FB
+1912-191C
+1923-1929
+192D-1938
+1A7F-1A81
+1B09-1F08
+1F51-1F5C
+1FF4-2000
+16E6-1700
+:WORDS
+1948-1962
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+0ADC
+0B49
+107C
+118F
+1319
+157B
+1679
+1A81
+1F08
+1F5C
+0EF7
+:REMOVED BYTES
+:FULL COMMENTS
+1FF4 Junk from segment padding
+1378 unused?
+:SIDE COMMENTS
+0A9B  sector header marker for DATA
+0A9F RWTS_marker_byte_3
+0AA7 RWTS_param_LO
+0AA9 RWTS_param_HI
+1139 "F:"
+115F " G:"
+1179 " SHP:"
+11AC "WIND "
+11ED "DIR: "
+122F "NORTH"
+1239 "SOUTH"
+1243 " EAST"
+124D " WEST"
+187E "\nPLEASE PLACE THE\n"
+1897 " DISK\nINTO DRIVE "
+18B1 "\nAND PRESS [ESC]\n"
+18E9 "^dBLOADDISK,D1\n"
+190F "BRITANNIA"
+1920 "TOWNE"
+192A "UNDERWORLD"
+1F96 #mode_world
+1F9A #mode_towne
+1FCD #>towne_map
+1FDB #>dng_map
+1F48 #>world_map_nw
+0C33 #xy_last_towne
+0C3E #xy_last_towne
+0C5F #tile_grass
+0C69 #xy_last_screen
+0C73 #xy_last_screen
+0C83 #xy_center_screen
+0C8A #xy_center_screen
+0C19 #xy_center_screen
+0C20 #xy_center_screen
+0CCA #xy_last_screen
+0CD4 #xy_last_screen
+0CE8 #xy_last_screen
+0CF7 #xy_last_screen
+0CE3 #xy_center_screen
+0CF2 #xy_center_screen
+0D16 #xy_center_screen
+0D24 #xy_center_screen
+0D1B #xy_last_screen
+0D29 #xy_last_screen
+0DA5 #tile_forest
+0DA9 #tile_mountain
+0DAD #tile_secret_panel
+0DB5 #tile_wall
+0DB1 #tile_blank
+0E50 #tile_blank
+0E54 #tile_wall
+0E4C #tile_secret_panel
+0E48 #tile_mountain
+0E44 #tile_forest
+1FD1 #<towne_map
+09A5 #>world_map_nw
+09F1 #>world_map_nw
+0A50 #>world_map_nw
+0C56 #>world_map_nw
+0CBC #>world_map_nw
+1392 #>world_map_nw
+1F4C #<world_map_nw
+0981 #>world_map_ne
+0A01 #>world_map_ne
+0A60 #>world_map_ne
+09B5 #>world_map_sw
+09CD #>world_map_sw
+0A7B #>world_map_sw
+0991 #>world_map_se
+09DD #>world_map_se
+0A70 #>world_map_se
+1F62 #xy_center_screen
+1F70 #xy_center_screen
+1F14 #xy_last_tile_cache
+1F24 #xy_last_tile_cache
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+000B game_mode
+000C dungeon_level
+000D balloon_flying
+000E player_transport
+000F party_size
+0010 dng_direction
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+001B ship_hull
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD charptr
+00BE charptr+1
+00C6 magic_aura
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CE console_xpos
+00CF console_ypos
+00D0 diskid
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 currplayer
+00D6 hexnum
+00D7 bcdnum
+00DE reqdisk
+00DF currdrive
+00E0 lt_y
+00E1 lt_x
+00E2 lt_rwflag
+00E3 lt_addr_hi
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F2 tilerow
+00F4 movement_mode
+00F5 direction
+00FC ptr2
+00FD ptr2+1
+00FE ptr1
+00FF ptr1 + 1
+0200 currmap
+0280 tempmap
+02B1 tempmap+49
+02BB tempmap+59
+02BC tempmap+60
+02BD tempmap+61
+02C7 tempmap+71
+0323 spin_drive_motor
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+0899 move_east
+08A6 @notileborder
+08BC movedone
+08BD move_west
+08CA @notileborder
+08E0 move_south
+08ED @notileborder
+0903 @done
+0904 move_north
+0911 @notileborder
+0927 @done
+0928 map_scroll_east
+092A @scroll
+093A map_scroll_west
+093C @scroll
+094C map_scroll_south
+094E @scroll
+095E map_scroll_north
+0960 @scroll
+0970 loadtiles_east
+0998 loadtiles_west
+09BC loadtiles_south
+09E4 loadtiles_north
+0A08 player_teleport
+0A26 @eastern
+0A44 @southern
+0A7F loadsector
+0AB5 waitkey
+0ABA @wait
+0AD3 @gotkey
+0ADB idletimeout
+0ADC idle
+0AE2 idle_britannia
+0AF0 idle_towne
+0AF8 idle_dungeon
+0B05 idle_delay
+0B08 idle_other
+0B0F @animate
+0B12 delay
+0B16 @delay
+0B1D update_balloon
+0B31 @east
+0B38 @south
+0B3E @west
+0B44 @north
+0B47 @done
+0B48 movement_counter
+0B49 animate_view
+0B52 idle_combat
+0B5A @copy
+0B65 @nextmonster
+0B86 @settile
+0B93 @checkmimic
+0BA4 @anim4
+0BB6 @dontanim
+0BBC @next
+0BBF animateplayers
+0BC1 @nextplayer
+0BEB @animate
+0BF4 @settile
+0BF7 @next
+0C10 @done
+0C13 update_towne
+0C2C @nexttile
+0C5F @out_of_bounds
+0C61 @settile
+0C7A update_britannia
+0C96 @copymap
+0CD8 update_monsters
+0CDA @nextmonster
+0D0C @nomonster
+0D3D @skipmoongates
+0D61 @copy
+0D6D lineofsight
+0D71 @clear
+0D81 lospass1
+0D8D @nexttile
+0DCE @playertile
+0DD6 @blocking
+0DE4 lospass2
+0DEE @next
+0E02 @continue
+0E12 @diagonal
+0E25 @horizontal
+0E31 @vertical
+0E3A @checkblock
+0E5B @playertile
+0E63 @blocking
+0E74 drawview
+0ED5 @done
+0ED6 deltax
+0EE1 deltay
+0EEC distance
+0EF7 nexthoriz
+0F03 nextvert
+0F0F animate_tiles
+0F11 @animate_next
+0F20 @animate_seamonster
+0F37 @animate_monster
+0F4F @animate_nonmonster
+0F57 @animate_npc
+0F5A @animate_player
+0F65 @dontanim
+0F6E @animend
+0F73 @animdone
+0F81 primm_xy
+0F85 primm
+0F8D @next
+0F95 @skip
+0F96 @primmaddr
+0F97 @primmaddr + 1
+0FA0 @done
+0FA9 console_out
+0FBA @noteol
+0FC0 console_newline
+0FD1 @notbottom
+0FD2 primm_cout
+0FE4 @next
+0FEA @skip
+0FF6 @done
+0FFF @cout
+1002 get_stats_ptr
+1011 centername
+1018 @count
+1026 @gotlen
+1031 printname
+1038 @print
+1049 @done
+104A printname8
+1051 @print
+1062 @done
+1063 drawcursor_xy
+1067 drawcursor
+1073 clearcursor
+1075 dodrawcursor
+107B cursor_ctr
+107C printbcd
+108B printdigit
+1091 clearstatwindow
+10A8 @clearstatline
+10B6 @clear
+10C3 update_status
+10CD @next_virtue
+10D6 @partial_avatar
+10DA @not_avatar
+10E9 +
+10F8 @nextplayer
+1135 @printfood
+1179 @ship
+1187 @done
+118D stats_saved_xpos
+118E stats_saved_ypos
+118F update_wind
+11A1 @nochange
+11C5 @west
+11CB @north
+11D1 @east
+11D7 @south
+11DA @done
+11E2 print_direction
+1202 @north
+1208 @east
+120E @south
+1214 @west
+1217 @printlevel
+122F printnorth
+1239 printsouth
+1243 printeast
+124D printwest
+1257 getsign
+1260 @negative
+1262 @zero
+1263 stats_save_pos
+126E stats_rest_pos
+1279 getnumdel
+127B getnumber
+128C @seconddigit
+12A3 @notretordel
+12B2 @convhex
+12BF @count
+12C6 @counted
+12C9 @done
+12CA getplayernum
+12D8 @gotnum
+12E3 blocked_tile
+12E5 @next
+12EE @blocked
+12F1 walkable_tiles
+1319 clearbitmap
+1323 @clear
+1331 clearview
+1333 @nextline
+1341 @clear
+134C invertview
+134E @nextline
+135A @invert
+1369 mulax
+1371 @add
+1377 @zero
+1397 scroll_tiles
+13AB @save_and_scroll
+1418 animate_fields
+147D animate_flags
+1491 @castle
+14A5 @shipwest
+14C8 @shipeast
+14EB @lbcastle
+14FF @flagsdone
+1500 div32
+1501 div16
+1506 mul32
+1507 mul16
+150C scankey
+1519 @notspace
+151F @notdel
+152D @done
+152E getkey
+153B @movebuf
+1546 @gotkey
+1549 @empty
+154A rand
+1552 @add
+155D @inc
+1565 @done
+156B rnd0
+156C rnd1
+156D rnd2
+156E rnd3
+157A rndf
+157B fastrand
+1594 console_scroll
+1596 doscroll
+15B0 @scroll
+15B1 @scrollsrc
+15B2 @scrollsrc+1
+15B4 @scrolldst
+15B5 @scrolldst+1
+15D7 drawchar
+15EB @drawchar
+15FC @charsrc
+15FD @charsrc+1
+15FF @chardst
+1600 @chardst+1
+160F +
+1618 drawvert
+1620 drawhoriz
+1625 dodrawvh
+1645 @draw
+1659 @vert
+165E @drawdone
+166F @next
+1675 @gotnext
+1676 draw_hvflag
+1677 draw_savex
+1678 draw_savey
+1679 drawinterface
+173C moon_gfx
+173D moon_gfx+1
+173E moon_gfx+2
+173F moon_gfx+3
+1740 moon_gfx+4
+1741 moon_gfx+5
+1742 moon_gfx+6
+1743 moon_gfx+7
+177C update_moons
+1803 @noupdate
+181F @moongate_appears
+182A @moongate_disappears
+1837 moongate_update
+1855 moon_counter
+1856 moon_ctr_trammel
+1857 moon_ctr_felucca
+1858 moongate_xtab
+1860 moongate_ytab
+1868 request_disk
+186A @request
+1874 @onedrive
+187E @askchange
+18C6 @wait
+18CF @twodrives
+18E1 @checkdisk
+18F8 @file_char_drive
+1908 @done
+1909 askdisk
+191D @towne
+192A @underworld
+1939 playsfx
+1947 @done
+1948 sfxtab
+1949 sfxtab+1
+1962 sfx_walk
+1964 @repeat
+196C @delay
+1976 sfx_error2
+1978 @delay
+1984 sfx_error1
+1986 @delay
+1994 sfx_ship_fire
+1998 @delay
+19A5 sfx_attack
+19A9 @delay
+19B5 sfx_unknown
+19B9 @delay
+19C5 sfx_player_hits
+19C7 @repeat
+19CD @delay
+19D7 sfx_monster_hits
+19D9 @repeat
+19DF @delay
+19E9 sfx_flee
+19ED @delay
+19FA sfx_magic1
+1A10 sfx_whirlpool
+1A12 @1
+1A14 @2
+1A15 @3
+1A28 sfx_magic2
+1A30 @1
+1A34 @2
+1A37 @3
+1A40 @4
+1A57 @5
+1A5B @6
+1A5E @7
+1A67 @8
+1A7F sfx_m2_ctr1
+1A80 sfx_m2_ctr2
+1A81 sfx_storm
+1A83 @1
+1A85 @2
+1A86 @3
+1A99 centerstring
+1AA7 @checkeos
+1AAB @next
+1AB1 @endofstr
+1AB7 @foundstr
+1AC5 @lastchar
+1AD3 printstring
+1ADE @checkeos
+1AE2 @next
+1AE8 @endofstr
+1AEE @foundstr
+1AFD @lastchar
+1B02 nextstrchar
+1B08 @nomsb
+1B09 strings
+2000 HGR
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 togglesnd
+E000 bmplineaddr_lo
+E008 bmplineaddr_lo+8
+E0C0 bmplineaddr_hi
+E0C8 bmplineaddr_hi+8
+ED00 virtues_and_stats
+EE00 map_status
+EE20 object_xpos
+EE40 object_ypos
+EE60 object_tile
+1F08 gettile_bounds
+1F2E gettile_britannia
+1F5C gettile_opposite
+1F80 gettile_currmap
+1F8D gettile_tempmap
+1F94 get_player_tile
+1FB7 gettile_towne
+1FD6 gettile_dungeon
+0007 dest_y
+0006 dest_x
+1F51 mul_11
+1FA1 @world
+1FAC @towne
+00FA temp_x
+00FB temp_y
+1F2B @out_of_bounds
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_drawn_tile
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+00C0 first_x
+00C1 first_y
+00C2 count_x
+00C3 count_y
+00C4 curr_x
+00C5 curr_y
+E800 world_map_NW
+E900 world_map_NE
+EA00 world_map_SW
+EB00 world_map_SE
+:DISABLED HILO LABELS
+11A4
+11E5
+1217
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

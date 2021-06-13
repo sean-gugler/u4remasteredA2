@@ -1,0 +1,160 @@
+:CODE START
+8000
+:CODE END
+829D
+:DATA BYTES
+8188-81A0
+8003-8016
+:WORDS
+801E-8022
+:POINTERS
+8016-801E-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8022
+81A0
+:REMOVED BYTES
+:FULL COMMENTS
+8052 In TEXT region, skip final 8 bytes of each half-page (reserved for DOS)
+8040 F000->0400, F400->FD00
+8070 Preserve interrupt vectors
+809E Two psgs will be used. Each slot has 2, A $Cx00 B $Cx80. Card type 1:A, 2:B, 3:AB
+8003 NOTE: PSG = programmable sound generator (AY-3-8913 chip)
+8188 6x [chip#,voice#] pairs, for 1- or 2-card configurations
+:SIDE COMMENTS
+806C #>music_data + 4
+80A0 clear slot to 00 unless validated
+80B0 retain specified slot
+80A4 #max_slot
+80AC #max_mb_type
+80C4 dormant BUG: should also TAY in case type=3
+8135 3 per board
+81AC last-minute patch before release? unused
+81B8 #mb_reg_DDRA
+81BA port A (data) all bits output
+81BE #mb_reg_DDRB
+81C0 port B (cmd) 3 bits output (valid cmds 0-7)
+814B which psg chip
+8174 which voice in that chip
+81F4 #mb_reg_ORB
+81F6 #psg_cmd_reset
+81FA #psg_cmd_inactive
+8233 #mb_reg_IER
+8235 80 activate + 40 timer 1
+8228 #<mb_irq_handler
+822F #>mb_irq_handler
+8276 #mb_reg_ORA
+827B #mb_reg_ORB
+827D #psg_cmd_latch
+8281 #psg_cmd_inactive
+8278 select register X in cur_psg
+8285 #mb_reg_ORA
+828A #mb_reg_ORB
+8287 set register X to value A
+828C #psg_cmd_write
+8290 #psg_cmd_inactive
+8206 disable noise generators, enable voices A,B,C
+81FE #psg_reg_last
+8202 #psg_reg_voice_enable
+8139 #max_channels * 2 - 1
+8149 #max_channels * 2 - 2
+:USER LABELS
+C083 hw_LCBANK2
+8039 select_bank2
+F000 music_data
+0400 text_page
+009A ptr1
+009B ptr1 + 1
+009C ptr2
+009D ptr2 + 1
+8052 copy_part1
+8050 copy_page
+805D copy_part2
+8072 save_vectors
+8094 restore_vectors
+8081 copy_part3
+8040 relocate_MBSM
+FFFA interrupt_vector
+8003 temp_vector
+80A0 @validate_slot_type
+80B2 @set_slot
+0080 mb_1_slot
+0082 mb_2_slot
+80C4 @only_use_mb_2
+0083 mb_2_type
+0081 mb_1_type
+80B8 @count_mbs
+80C0 @abort
+801F psg1_base + 1
+0087 mb_io_base + 1
+8021 psg2_base + 1
+0086 mb_io_base
+801E psg1_base
+8020 psg2_base
+80F8 @set_addr
+80EA @both_psg_same_slot
+80F6 @use_two_mb_slots
+80CE check_mb_types
+80E4 @have_two_mb
+809E set_psg_addresses
+8188 one_mb_table
+8194 two_mb_table
+800A chan
+813B @copy_table
+8143 +
+0480 psg1_next_values
+814B @next_pair
+8131 @start
+04F0 num_psgs
+04F1 mb_num_channels
+8122 set_channel_tables
+8009 cur_psg
+81A7 @next
+04D8 chan_base
+04D9 chan_base + 1
+0088 psg_io
+0089 psg_io + 1
+81A0 set_psg_lines_output
+81D1 @next_psg
+823B @abort
+FFFE irq_vector
+FFFF irq_vector + 1
+821A activate_irq
+0500 mb_irq_handler
+8294 @skip
+826B @next_register
+8246 @next_psg
+0098 cur_values
+0096 next_values
+04C0 chan_next_addr
+04C1 chan_next_addr + 1
+04CC chan_cur_addr
+04CD chan_cur_addr + 1
+0099 cur_values + 1
+0097 next_values + 1
+823F set_psg_registers
+8208 +
+8200 @next_register
+81CA init_psg_registers
+812D @abort
+8016 psg_next_table
+8017 psg_next_table + 1
+801A psg_cur_table
+801B psg_cur_table + 1
+0490 psg2_next_values
+04A0 psg1_cur_values
+04B0 psg2_cur_values
+800B chan + 1
+8022 init_mockingboards
+04E4 chan_freq_reg
+04E5 chan_level_reg
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

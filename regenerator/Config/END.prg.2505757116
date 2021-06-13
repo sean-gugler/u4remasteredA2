@@ -1,0 +1,502 @@
+:CODE START
+8800
+:CODE END
+9984
+:DATA BYTES
+8809-8820
+909E-90B2
+9173-9183
+8836-8887
+889D-88CA
+88D2-88F5
+88FD-8932
+8955-8991
+89A8-89BE
+89C1-89DB
+89E3-89F9
+8A0E-8A2F
+8A52-8A64
+8A6C-8AA1
+8AB3-8ADB
+8AE9-8B0A
+8B1E-8B54
+8B7A-8BCB
+8BD6-8C1D
+8C23-8C7B
+8C81-8CD4
+8CDA-8D2A
+8D30-8DA9
+8DB2-8E2F
+8E3A-8E95
+8E9B-8F1D
+8F23-8FA9
+8FAF-900A
+9026-9065
+9094-9096
+9109-9133
+913B-914D
+9199-91AC
+8938-8942
+9264-9265
+921A-921C
+91DA-91DF
+91E0-9214
+9556-9884
+9884-9983
+9983-9984
+90D6-90F0
+9068-9069
+940D-943A
+:WORDS
+:POINTERS
+953C-9556-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+9265
+921C
+9214
+90F0
+9069
+943A
+:REMOVED BYTES
+:FULL COMMENTS
+9884 junk
+940D SUPER UNPACKER COPYRIGHT 1983 BY STEVEN MEUSE
+:SIDE COMMENTS
+8806 b'\x04BLOAD CSTRING,A$4000\n\x00'
+909B b'\x04BLOADU\x81LT4,A$4000\n\x00'
+9170 b'\x04BLOADD\x81ISK,D1\n\x00'
+8833 b'\n\n\nThere is a\nsudden darkness,\nand you find\nyourself alone\nin an empty\nchamber.\n\x00'
+889A b'\nThou dost not\nhave the key of\nthree parts.\n\x00'
+88CF b'\nYou use your\nkey of three\nparts.\n\x00'
+88FA b"\nA voice rings\nout, 'What is\nthe Word of\nPassage?'\n\n\x00"
+8952 b'\nThou hast not\nproved thy\nleadership in\nall eight\nvirtues.\n\x00'
+89A5 b'\nThou art not\nready.\n\x00'
+89BE b'\nPassage is not\ngranted.\n\x00'
+89E0 b'\nPassage is\ngranted.\n\x00'
+8A0B b'\nThy quest is not\nyet complete.\n\x00'
+8A4F b'\nThe voice says:\n\x00'
+8A69 b'\nThou art well\nversed in the\nvirtues of the\nAvatar.\n\x00'
+8AB0 b'\n\nThe floor\nrumbles beneath\nyour feet.\n\x00'
+8AE6 b'\nAbove the din,\nthe voice asks:\n\x00'
+8B1B b'\nThou dost not\nknow the true\nnature of the\nUniverse.\n\x00'
+8B77 b'\n\nThe boundless\nknowledge of the\nCodex of\nUltimate Wisdom\nis revealed unto\nthee.\x00'
+8BD3 b'\n\nThe voice says:\nThou hast proven\nthyself to be\ntruly good in\nnature.\x00'
+8C20 b'\n\nThou must know\nthat thy quest\nto become an\nAvatar is the\nendless quest of\na lifetime.\x00'
+8C7E b'\n\nAvatarhood is a\nliving gift. It\nmust always and\nforever be\nnurtured to\nflourish.\x00'
+8CD7 b'\n\nFor if thou dost\nstray from the\npaths of virtue,\nthy way may be\nlost forever.\x00'
+8D2D b'\n\nReturn now unto\nthine own world,\nlive there as an\nexample to thy\npeople, as our\nmemory of thy\ngallant deeds\nserves us.\x00'
+8DAF b'\n\nAs the sound of\nthe voice trails\noff, darkness\nseems to rise\naround you.\nThere is a\nmoment of\nintense, \nwrenching\nvertigo.\x00'
+8E37 b'\n\nYou open your\neyes to a\nfamiliar circle\nof stones. You\nwonder of your\nrecent\nadventures.\x00'
+8E98 b'\n\nIt seems a time\nand place very\ndistant. You\nwonder if it\nreally happened.\nThen you realize\nthat in your\nhand you hold\nThe Ankh.\x00'
+8F20 b'\n\nYou walk away\nfrom the circle,\nknowing that\nyou can always\nreturn from\nwhence you came,\nsince you now\nknow the secret\nof the gates.\x00'
+8FAC b'\n\nCONGRATULATIONS!\n   Thou hast\n   completed\n   ULTIMA IV\n  Quest of the\n     AVATAR\n  in \x00'
+9023 b'\n turns! Report\n thy feat unto\nLord British at\nOrigin Systems!\x00'
+9091 b'\n\x00'
+9106 b'\nPLEASE PLACE THE\nULTIMA DISK\nINTO DRIVE \x00'
+9138 b'\nAND PRESS [ESC]\n\x00'
+9196 b'\n\nThe voice asks:\n\x00'
+8829 #mode_suspended
+8935 b"VERAMOCOR\x00"
+92B5 #char_enter
+9269 #char_question
+9271 #char_enter
+9275 #char_left_arrow
+9279 #char_space
+9294 #char_space
+929D #char_space
+91C3 #<answer_table
+91C7 #>answer_table
+9150 #char_ESC
+90F4 #disk_britannia
+90F8 #disk_dungeon
+916B #char_0
+9096 #disk_ultima
+90B2 #disk_britannia
+90C8 #loc_world
+90CC #mode_world
+907D #char_space
+9085 #char_0
+936F left door edge
+9376 right door edge
+88CA abyss
+89DB abyss
+8B54 castle Britannia
+945E #max_spk_col
+9460 #max_spk_row
+9475 #min_spk_row
+947A #min_spk_col
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D balloon_flying
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 spk_pattern_ptr
+00B1 spk_pattern_ptr+1
+00B8 spk_repeat_flag
+00BD charptr
+00BE charptr+1
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 diskid
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zpD8
+00D9 zpD9
+00DA zpDA
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 lt_track
+00E1 lt_sector
+00E2 lt_rwflag
+00E3 lt_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zp_char_count
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zpF0
+00F2 tilerow
+00F4 movement_mode
+00F5 direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 end_left
+00FA end_right
+00FB cur_row
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 draw_stack
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 tempmap
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 bitmap
+8800 j_overlay_entry
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_drawn_tile
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+921A save_party_size
+88CF @have_three_part_key
+92A7 @got_input
+926E @get_char
+9214 waitkey
+928E @backspace
+9265 get_input
+92AD @pad_zeroes
+9248 @ptr
+9249 @ptr + 1
+923E @next
+922F check_inline_keyword
+9264 @mismatch
+9246 +
+9258 @done
+91E0 answer_table
+91DA keyword_compare
+91CF @copy_keyword
+9222 @inner
+9220 @outer
+921C delay
+921E @count
+92D4 shake_down
+92D6 @next
+92EC @copy
+92FF @skip
+9303 shake_up
+9305 @next
+931B @copy
+932E @skip
+92BB shake_screen
+9556 string_table
+933F @next_char
+9343 @next_string
+935F inc_ptr
+9349 @end_string
+934F @print_char
+935E @done
+9365 +
+9334 print_string
+9191 voice_asks
+921B question_number
+91AC input_answer
+90F0 insert_disk
+914D -
+9168 @load_disk_id
+9156 @drive2
+90FC @drive1
+9106 @print_prompt
+9180 @drive_number
+9190 @ok
+90F2 @check_disk
+90E3 world_location_y
+90D6 world_location_x
+4009 j_game_init
+908B return_to_world
+9065 halt
+8B59 game_over_win
+9068 leading_spaces
+9069 print_bcd
+9074 print_digit
+9087 @print
+9081 @end_spaces
+9084 @allow_zeroes
+8AB0 @ask_final_question
+9401 +
+9402 set_ptr2_line
+93F7 next_ptr1
+93DC @next_row
+93DA end_scroll
+9398 @scroll_left_out
+93AB @scroll_right_out
+9391 @next_row
+93C7 -
+93C5 @delay
+4000 cstring_gfx
+938F @next_scroll
+9368 @next_row
+9366 anim_open_door
+953D spk_addr_table + 1
+953C spk_addr_table
+89BE @denied
+89A5 @not_avatar
+899B -
+8999 @check_virtues
+89E0 @granted
+8A38 @correct
+8AA9 @next_question
+8A06 @ask_question
+943A draw_spk
+00BA spk_pattern_flag
+00BB spk_pattern_len_cur
+00B4 spk_repeat_code
+00B5 spk_pattern_code
+00B6 spk_row
+00B2 spk_byte
+00B7 spk_repeat_count
+00B3 spk_pattern_length
+00B9 spk_pattern_count
+9458 +
+9460 @next_col
+9464 @next_row
+947F spk_write_byte
+94EC @do_repeat
+9504 @do_pattern
+9489 @read_byte
+94B1 @check_pattern
+9491 @set_repeat
+9497 +
+94A1 +
+94AB +
+94DF @do_literal
+94B5 @set_pattern
+94BB +
+94C7 +
+94D1 +
+94EB @continue
+9522 @next_pattern
+9518 @pattern_literal
+950C -
+950E @dead_code
+9537 @pattern_done
+937F begin_scroll
+:DISABLED HILO LABELS
+90C8
+9387
+938B
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

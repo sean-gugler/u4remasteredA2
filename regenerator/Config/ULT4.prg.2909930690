@@ -1,0 +1,3623 @@
+:CODE START
+4000
+:CODE END
+87EE
+:DATA BYTES
+4036-4047
+404E-4060
+4066-408D
+40BD-40C0
+4139-4142
+4148-414E
+4154-415B
+4166-4175
+417B-418A
+4190-41A0
+41A4-41AF
+41B5-41BD
+41C3-41CD
+41D6-41DD
+41E3-41F3
+41F9-4204
+420A-4214
+4223-4230
+4319-4322
+4356-435F
+4432-4438
+44FA-4501
+45CB-45D1
+45D5-45DB
+463E-464A
+4659-4666
+46F0-46F8
+47A4-47AD
+47BD-47C4
+47E8-47F2
+480A-480C
+4814-4822
+482D-4836
+486F-4883
+48A1-48A8
+48D0-48D3
+48FB-490A
+4921-4922
+4956-4970
+4973-4978
+4A0C-4A11
+4AC2-4AC8
+4BC8-4BD2
+4BF9-4C09
+4C0C-4C11
+4CD1-4CD6
+4E73-4E82
+4E8F-4E9D
+4EAC-4EBC
+4EEE-4EF7
+4F18-4F23
+4F2D-4F36
+4F59-4F69
+4F7A-4F88
+4FB5-4FC6
+4FDB-4FED
+5005-500C
+5087-5091
+50BC-50D0
+50FA-510E
+511B-5122
+5128-5130
+5180-518A
+5195-519E
+51BB-51CA
+51DD-51F1
+51FC-523C
+5253-526D
+5281-5296
+52C4-52CA
+52ED-52FF
+5384-539E
+5444-5449
+5453-5459
+5463-546A
+5470-5475
+5478-5480
+549F-54A8
+54F1-5503
+5516-551E
+5524-5534
+554A-555C
+5567-557B
+5595-55A4
+55C1-55CD
+55F9-5600
+5620-5625
+562F-5639
+5650-565A
+5678-568A
+569F-56B0
+56B8-56BE
+56C4-56DE
+56FC-5709
+5735-5743
+574B-575E
+576C-5782
+57A9-57B4
+57FB-580C
+580F-5811
+581C-5822
+5852-585B
+5861-586A
+5877-587F
+588D-58A1
+58B7-58CB
+58D4-58E4
+58FB-5943
+599E-59A7
+59B9-59D4
+59E8-59F0
+5A59-5A69
+5A6F-5A72
+5A82-5A92
+5AA3-5AAE
+5AB6-5ACA
+5AD8-5ADE
+5B20-5B35
+5B65-5B79
+5B99-5BAD
+5BC0-5BD4
+5C1B-5C2F
+5C42-5C4A
+5C52-5C65
+5C7F-5C87
+5C92-5C96
+5CA0-5CA5
+5CAB-5CC3
+5CD7-5CDF
+5D4F-5D57
+5D5A-5D60
+5DC8-5DCE
+5DE6-5DED
+5DF3-5DFD
+5E03-5E0E
+5E2C-5E32
+5E84-5E88
+5E99-5E9D
+5EAE-5EB3
+5EC4-5EC9
+5EDA-5EDF
+5EF0-5EF4
+5F0C-5F10
+5F28-5F2C
+5F44-5F47
+5F5B-5F5E
+600C-6016
+6070-6078
+608E-6097
+60EA-60F6
+6108-6114
+6122-612B
+6139-613F
+614D-6153
+6163-616D
+617E-6186
+6197-619F
+61BF-61C6
+61EB-61F1
+61FB-6201
+620B-6211
+621C-6228
+6257-625C
+6267-626D
+627A-6280
+628B-629B
+62AA-62B5
+630D-6318
+6373-6375
+641D-642E
+64DC-64E5
+64EF-6500
+6506-650D
+6578-6586
+67EB-67F9
+6B8C-6B94
+6DBA-6DC6
+6E6D-6E6E
+6E6E-6E6F
+6E6F-6E70
+6E70-6E71
+6E71-6E72
+6E72-6E73
+6E73-6E74
+6E74-6E75
+6E75-6E76
+6E76-6E77
+6E77-6E78
+6E78-6E79
+6E79-6E7A
+6E7A-6E7B
+6E7B-6E7C
+6E7C-6E7D
+6EC7-6EDB
+6EE6-6EED
+6EF4-6EFA
+6F01-6F0A
+6FA4-6FB9
+7069-707C
+71AE-71B2
+71C5-71C8
+7525-752D
+7634-7646
+7664-7672
+76BB-76C9
+76DE-76DF
+76DF-76E0
+76E0-76E1
+76E1-76E2
+76E2-76E3
+76E3-76E4
+76E4-76E5
+76E5-76E6
+76E6-76E7
+76E7-76E8
+76E8-76E9
+76E9-76EA
+76ED-76F8
+786A-7877
+78BC-78C3
+78D7-78DE
+78F2-78F8
+790C-7912
+79C8-79D3
+7A08-7A25
+7A6D-7A6F
+7A77-7A7F
+7AF2-7AF9
+7B31-7B3C
+7C23-7C2C
+7C49-7C4F
+7C86-7C90
+7C9A-7CA5
+7CAF-7CB7
+7CC1-7CC9
+7CCF-7CD6
+7CD9-7CE4
+7CF7-7D00
+7D5F-7D62
+7D65-7D6C
+7D72-7D7E
+7DB9-7DC8
+7DCE-7DD5
+7DE1-7E86
+7F07-7F08
+811E-8121
+81F3-81FE
+821D-822B
+8236-823D
+8247-824F
+825A-8263
+8282-8288
+8292-829B
+82A1-82A7
+83F9-8400
+8404-840B
+840F-8415
+8419-841F
+84C7-84DB
+858C-85A8
+86A4-86B6
+87EE-888B
+4345-434D
+45FB-4613
+:WORDS
+:POINTERS
+4233-4235-0
+4235-4237-0
+4237-4239-0
+4239-423B-0
+423B-423D-0
+423D-423F-0
+423F-4241-0
+4241-4243-0
+4243-4245-0
+4245-4247-0
+4247-4249-0
+4249-424B-0
+424B-424D-0
+424D-424F-0
+424F-4251-0
+4251-4253-0
+4253-4255-0
+4255-4257-0
+4257-4259-0
+4259-425B-0
+425B-425D-0
+425D-425F-0
+425F-4261-0
+4261-4263-0
+4263-4265-0
+4265-4267-0
+4922-4956-0
+7885-7887-0
+7887-7889-0
+7889-788B-0
+788B-788D-0
+788D-788F-0
+788F-7891-0
+7891-7893-0
+7893-7895-0
+7895-7897-0
+7897-7899-0
+7899-789B-0
+789B-789D-0
+789D-789F-0
+789F-78A1-0
+78A1-78A3-0
+78A3-78A5-0
+78A5-78A7-0
+78A7-78A9-0
+78A9-78AB-0
+78AB-78AD-0
+78AD-78AF-0
+78AF-78B1-0
+78B1-78B3-0
+78B3-78B5-0
+78B5-78B7-0
+78B7-78B9-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+4267
+434D
+4613
+4970
+4C09
+523C
+54EE
+5811
+5A69
+5D57
+629B
+6375
+6B94
+6BE2
+6E7D
+713D
+76EA
+78B9
+7A6F
+7D62
+7E86
+7F08
+8121
+:REMOVED BYTES
+:FULL COMMENTS
+4000 main jump table
+40FF debug print virtue levels
+66A9 Set difficulty based on how long you've been playing
+6D58 stupid; same routine pasted twice!
+7718 town or world
+7F41 collide player
+803D collide_terrain
+877A BUG: stack overflow. Entered here via JSR but exit via JMP to load_shrine or cmd_done
+87EE END OF FILE. Rest is repeated garbage.
+6B8C unused
+:SIDE COMMENTS
+4033 b'\x84BLOAD PRTY,A$0\n\x00'
+4063 b'\x84BLOAD LIST,A$EE00\n\x84BLOAD ROST,A$EC00\n\x00'
+4656 b'\x84BLOAD TLST\n\x00'
+50B9 b'\x84BLOAD DNGD,A$8C00\n\x00'
+50F7 b'\x84BLOAD DNG@,A$E800\n\x00'
+51DA b'\x84BLOAD SHRN,A$8800\n\x00'
+5250 b'\x84BSAVE TLST,A$EE00,L$100\n\x00'
+527E b'\n\x84BLOAD MAP@,A$8B00\n\x00'
+5564 b'\x84BLOAD HOLE,A$8800\n\x00'
+5748 b'\x84BLOAD MIX,A$8800\n\x00'
+588A b'\x84BLOAD TMAP,A$9000\n\x00'
+58B4 b'\x84BLOAD DNGD,A$8C00\n\x00'
+58F8 b'\x84BSAVE LIST,A$EE00,L$100\n\x84BSAVE ROST,A$EC00,L$200\n\x84BSAVE PRTY,A$0,L$20\n\x00'
+5AB3 b'\x84BLOAD SEAR,A$8800\n\x00'
+5B62 b'\x84BLOAD LORD,A$8800\n\x00'
+5B96 b'\x84BLOAD TALK,A$8800\n\x00'
+5BBD b'\x84BLOAD SHPS,A$8800\n\x00'
+5C18 b'\x84BLOAD SHP@,A$8800\n\x00'
+5C4F b'\x84BLOAD USE,A$8800\n\x00'
+7066 b'\x84BLOAD CON@,A$240\n\x00'
+84C4 b'\x84BLOAD SAVE,A$8800\n\x00'
+5E29 b'>PLR-\x00'
+5E81 b'MP:\x00'
+5E96 b'LV:\x00'
+5EAB b'STR:\x00'
+5EC1 b'DEX:\x00'
+5ED7 b'INT:\x00'
+5EED b'HP:\x00'
+5F09 b'HM:\x00'
+5F25 b'EX:\x00'
+5F41 b'W:\x00'
+5F58 b'A:\x00'
+6009 b'>WEAPONS<\x00'
+608B b'>ARMOUR<\x00'
+6105 b'>EQUIPMENT<\x00'
+617B b'>ITEMS<\x00'
+62A7 b'>REAGENTS<\x00'
+630A b'>MIXTURES<\x00'
+404B b'\nNO ACTIVE GAME!\n\x00'
+40BA b'\n>\x00'
+4136 b'\n>Zzzzz\n\x00'
+4145 b'Pass\n\x00'
+4151 b'WHAT?\n\x00'
+4163 b'NOT A PLAYER!\n\x00'
+4178 b'ONLY ON FOOT!\n\x00'
+418D b'SLOW PROGRESS!\n\x00'
+41A1 b'NOT HERE!\n\x00'
+41B2 b"CAN'T!\n\x00"
+41C0 b'ABORTED!\n\x00'
+41D3 b'DONE.\n\x00'
+41E0 b'YOU HAVE NONE!\n\x00'
+41F6 b'DISABLED!\n\x00'
+4207 b'BLOCKED!\n\x00'
+4220 b'DRIFT ONLY!\n\x00'
+4316 b'Advance\n\x00'
+4353 b'Retreat\n\x00'
+442F b'left\n\x00'
+44F7 b'right\n\x00'
+45C8 b'Turn \x00'
+45D2 b'Sail \x00'
+463B b'LEAVING...\n\x00'
+46ED b'Attack-\x00'
+47A1 b'Board <-\x00'
+47BA b'Board \x00'
+47E5 b'frigate!\n\x00'
+4811 b'Mount horse!\n\x00'
+482A b'balloon\n\x00'
+486C b'Cast spell:\nplayer-\x00'
+489E b'SPELL-\x00'
+48CD b'!\n\x00'
+48F8 b'M.P. TOO LOW!\n\x00'
+4970 b'WHO-\x00'
+4A09 b'WH0-\x00'
+4ABF b'TYPE-\x00'
+4BC5 b'TO PHASE-\x00'
+4C09 b'WHO-\x00'
+4CCE b'WHO-\x00'
+4E70 b'DUNGEON ONLY!\n\x00'
+4E8C b'COMBAT ONLY!\n\x00'
+4EA9 b'OUTDOORS ONLY!\n\x00'
+4EEB b'FAILED!\n\x00'
+4F15 b'DIRECTION-\x00'
+4F2A b'Descend \x00'
+4F56 b'down!\nTo level \x00'
+4F77 b'Land Balloon\n\x00'
+4FB2 b'to\nfirst floor!\n\x00'
+4FD8 b'into\nthe depths!\n\x00'
+5002 b'Enter \x00'
+5084 b'dungeon!\n\x00'
+5118 b'ruin!\n\x00'
+5125 b'towne!\n\x00'
+517D b'village!\n\x00'
+5192 b'castle!\n\x00'
+51B8 b'the\nshrine of\n\x00'
+52C1 b'Fire-\x00'
+52EA b'ONLY BROADSIDES!\n\x00'
+5381 b'Get chest, who\nwill open-\x00'
+5441 b'ACID\x00'
+5450 b'SLEEP\x00'
+5460 b'POISON\x00'
+546D b'BOMB\x00'
+5475 b' TRAP!\n\x00'
+549C b'EVADED!\n\x00'
+54EE b'THE CHEST HOLDS:\n\x00'
+5513 b'-GOLD!\n\x00'
+5521 b'Hole up & camp\n\x00'
+5547 b'MUST BE ON FOOT!\n\x00'
+5592 b'Ignite torch!\n\x00'
+55BE b'Jimmy lock-\x00'
+55F6 b'Klimb \x00'
+561D b'up!\n\x00'
+562C b'To level \x00'
+564D b'altitude\n\x00'
+5675 b'to\nsecond floor!\n\x00'
+569C b'Locate position\n\x00'
+56B5 b'WITH \x00'
+56C1 b'with sextant:\n\n latitude:\x00'
+56F9 b'"\nlongitude:\x00'
+5732 b'Mix reagents\n\x00'
+5769 b'New order:\nexchange #\x00'
+57A6 b'    with #\x00'
+57F8 b'\nYOU MUST LEAD!\n\x00'
+5819 b'Open-\x00'
+584F b'OPENED!\n\x00'
+585E b'Peer at \x00'
+5874 b'a gem!\n\x00'
+58D1 b'Quit & save...\n\x00'
+599B b' moves!\n\x00'
+59B6 b'Ready a weapon\nfor player-\x00'
+59E5 b'Weapon:\x00'
+5A6C b'A \x00'
+5A7F b'\nMAY NOT USE A\n\x00'
+5AA0 b'Search...\n\x00'
+5AD5 b'Talk-\x00'
+5B1D b'FUNNY, NO\nRESPONSE!\n\x00'
+5C3F b'Use...\n\x00'
+5C7C b'Volume \x00'
+5C8F b'ON\n\x00'
+5C9D b'OFF\n\x00'
+5CA8 b'Wear armour\nfor player-\x00'
+5CD4 b'Armour:\x00'
+5D57 b'X-it \x00'
+5DC5 b'Yell \x00'
+5DE3 b'whoa!\n\x00'
+5DF0 b'giddyup!\n\x00'
+5E00 b'Ztats for-\x00'
+606D b'A-HANDS\x00'
+60E7 b'A-NO ARMOUR\x00'
+611F b'-TORCHES\x00'
+6136 b'-GEMS\x00'
+614A b'-KEYS\x00'
+6160 b'-SEXTANTS\x00'
+6194 b'STONES:\x00'
+61BC b'RUNES:\x00'
+61E8 b'BELL \x00'
+61F8 b'BOOK \x00'
+6208 b'CANDL\x00'
+6219 b'3 PART KEY:\x00'
+6254 b'HORN\x00'
+6264 b'WHEEL\x00'
+6277 b'SKULL\x00'
+641A b'\nBRIDGE TROLLS!\n\x00'
+64D9 b'\nWINDS!\n\x00'
+64EC b'\nFALLING ROCKS!\n\x00'
+6503 b'\nPIT!\n\x00'
+6575 b'\nSTARVING!!!\n\x00'
+67E8 b'\nATTACKED BY\n\x00'
+6DB7 b"IT'S DARK!\n\x00"
+6EC4 b'\nTHE ALTER ROOM\nOF \x00'
+6EE3 b'TRUTH\n\x00'
+6EF1 b'LOVE\n\x00'
+6EFE b'COURAGE\n\x00'
+6FA1 b'\n\n**** COMBAT ****\n\n\x00'
+71AB b'\nW:\x00'
+71C2 b'\n>\x00'
+7522 b'FLEES!\n\x00'
+7631 b'\nBATTLE IS LOST!\n\x00'
+7661 b'\nLEAVE ROOM!\n\x00'
+76B8 b'INTO DUNGEON\n\x00'
+76EA b'\nVICTORY!\n\x00'
+7867 b'\nIS KILLED!\n\x00'
+78B9 b'North\n\x00'
+78D4 b'South\n\x00'
+78EF b'East\n\x00'
+7909 b'West\n\x00'
+7A05 b'ALL MUST USE\nTHE SAME EXIT!\n\x00'
+7A74 b'Attack-\x00'
+7AEF b'RANGE-\x00'
+7B2E b'LAST ONE!\n\x00'
+7C20 b'KILLED!\n\x00'
+7C46 b'EXP.+\x00'
+7C83 b'FLEEING!\n\x00'
+7C97 b'CRITICAL!\n\x00'
+7CAC b'HEAVILY\x00'
+7CBE b'LIGHTLY\x00'
+7CCC b'BARELY\x00'
+7CD6 b' WOUNDED!\n\x00'
+7CF4 b'MISSED!\n\x00'
+7D62 b'Cast, \x00'
+7D6F b'Get chest!\n\x00'
+7DB6 b'Ready weapon:\n\x00'
+7DCB b'Ztats\n\x00'
+81F0 b'POISONED!\n\x00'
+821A b'ELECTRIFIED!\n\x00'
+8233 b'FIERY \x00'
+8244 b'SLEPT!\n\x00'
+8257 b'FAILED.\n\x00'
+827F b'LAVA \x00'
+828F b'MAGICAL \x00'
+829E b'HIT!\n\x00'
+83F6 b'North\n\x00'
+8401 b'South\n\x00'
+840C b'East\n\x00'
+8416 b'West\n\x00'
+8589 b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
+86A1 b'\nTHY SHIP SINKS!\n\x00'
+4009 #music_off
+4017 #-
+401B #-
+401F #mode_loading
+4023 #aura_none
+4027 #disk_britannia
+408D #-
+4097 #mode_world
+40A7 #music_Overworld
+40C3 #char_none
+40CA #char_space
+40D1 #char_enter
+40D8 #char_up_arrow
+40DF #char_down_arrow
+40E6 #char_slash
+40ED #char_left_arrow
+40F4 #char_right_arrow
+40FB #char_ctrl_S
+4102 #-
+4112 #virtue_last
+411C #char_alpha_first
+4120 #char_alpha_last
+4125 #char_alpha_first
+415B #sound_what
+4214 #sound_blocked
+4219 #-
+4269 #mode_dungeon
+4272 #tile_balloon
+4279 #tile_ship_north
+4280 #tile_ship_west
+4284 #tile_ship_east
+4288 #tile_ship_south
+428C #sound_footstep
+42A4 #tile_ship_north
+42C1 #wind_dir_north
+42D6 #tile_castle_center
+42DC #tile_castle_center
+42F7 #sound_footstep
+42FE #mode_world
+4334 # modulo
+433E # modulo
+434F #mode_dungeon
+436B #-
+4373 #tile_balloon
+437A #tile_ship_south
+4381 #tile_ship_east
+4385 #tile_ship_west
+4389 #tile_ship_north
+438D #sound_footstep
+43AE #-
+43BC #tile_ship_south
+43D9 #wind_dir_south
+4405 #sound_footstep
+440C #mode_world
+441C #xy_last_towne
+4428 #mode_dungeon
+443B #-
+443D #-
+444C #tile_balloon
+4453 #tile_ship_west
+445A #tile_ship_north
+445E #tile_ship_south
+4462 #tile_ship_east
+4466 #tile_horse_east
+446A #tile_horse_west
+446E #sound_footstep
+4486 #tile_ship_west
+44A3 #wind_dir_west
+44CF #sound_footstep
+44D6 #mode_world
+44F0 #mode_dungeon
+4504 #-
+4506 #-
+4515 #tile_balloon
+451C #tile_ship_east
+4523 #tile_ship_north
+4527 #tile_ship_south
+452B #tile_ship_west
+452F #tile_horse_west
+4533 #tile_horse_east
+4537 #sound_footstep
+4555 #tile_ship_east
+456C #wind_dir_east
+4584 #-
+45A7 #sound_footstep
+45AE #mode_world
+45BE #xy_last_towne
+45DC #-
+45EA #tile_pirate
+4615 #aura_horn
+4619 #-
+461B #tile_daemon
+462B #-
+4636 #music_off
+464D #mode_loading
+4651 #disk_britannia
+4671 #mode_world
+4675 #loc_world
+4681 #-
+4685 #tile_balloon
+469A #music_Overworld
+469F #-
+46A6 #tile_swamp
+46AA #tile_bushes
+46AE #tile_forest
+46B2 #tile_hills
+46B6 #tile_field_fire
+46BA #-
+46C3 #-
+46CC #-
+46D5 #-
+46DB #tile_water_shallow
+46DF #tile_whirlpool
+46E3 #tile_monster
+46E7 #-
+46FA #mode_dungeon
+4711 $zp_index
+4716 #tile_whirlpool
+471A #tile_twister
+4720 #mode_towne
+4724 #object_max
+4729 #tile_guard
+472D #tile_lord_british
+4736 #-
+4740 #mode_towne
+4744 $zp_index
+474E #virtue_compassion
+4750 #-
+4755 #virtue_justice
+4757 #-
+475C #virtue_honor
+475E #-
+4763 $zp_index
+477A #mode_world
+478B #-
+478D $zp_index
+479D #tile_walk
+47B2 #tile_horse_west
+47B6 #tile_horse_east
+47C6 #tile_ship_west
+47CA #tile_ship_north
+47CE #tile_ship_east
+47D2 #tile_ship_south
+47D6 #tile_balloon
+47E0 #tile_ship_first
+4803 #-
+480C #tile_horse_west
+4825 #tile_balloon
+4836 #balloon_landed
+483D $zp_transport
+483F #object_max
+4844 #animation_mask
+4846 $zp_transport
+4859 #object_inanimate_first
+485F #-
+48BB #char_alpha_first
+48BD # 26, A-Z spells
+48C8 #string_spells
+48E0 #-
+48E9 #player_magic_points
+493E b'WHO-\x00'
+4986 #player_status
+498A #status_Sleep
+498E #status_Good
+49A3 #tile_ship_last
+49BA # no blink near abyss isle
+4A1F #player_status
+4A23 #status_Poison
+4A27 #status_Good
+4A30 #mode_dungeon
+4A3B #mode_world
+4A4F #tile_field_first
+4A53 #tile_field_last
+4A8A #tile_field_first
+4A8E #tile_field_last
+4AB2 #dng_tile_type_mask
+4AB4 #dng_tile_field
+4AB8 #-
+4ACB #tile_field_first
+4ACD #char_P
+4AD2 #char_L
+4AD7 #char_F
+4ADC #char_S
+4AE3 $zp_field_type
+4AE9 #mode_dungeon
+4B07 $zp_field_type
+4B09 #-
+4B0B #dng_tile_field
+4B21 #xy_last_screen
+4B2C #xy_last_screen
+4B3B $zp_field_type
+4B4E #-
+4B59 #tile_attack_red
+4B75 #sound_damage
+4B7D #tile_attack_small
+4B81 #tile_attack_blue
+4B85 #tile_attack_red
+4B89 # 232 fixed damage for Kill
+4B8E #-
+4B93 # 24-31,56-63,88-95,120-127
+4B98 #-
+4B9D # 32-63,96-127,160-191,224-255
+4BA2 #-
+4BA7 # 16-31,48-63
+4BA9 #-
+4BB8 #tile_ship_last
+4BBE #mode_world
+4BD6 #char_1
+4BD8 #-
+4C21 #-
+4C27 75 - 99 pts
+4C43 #tile_attack_blue
+4C4E #aura_jinx
+4C52 #-
+4C6A #tile_whirlpool
+4C75 #-
+4C7B #mode_dungeon
+4C96 #tile_attack_small
+4CA1 #aura_negate
+4CAD #-
+4CBA #aura_protect
+4CC2 #aura_quickness
+4CC9 not allowed in combat!
+4CE4 #player_status
+4CE8 #status_Dead
+4CEF #status_Good
+4CFC #foes_max
+4D08 #tile_balron
+4D14 #-
+4D28 #foes_max
+4D2F #tile_lord_british
+4D36 # 192+ hp == immune!
+4D3D # 2/4 chance
+4D3F # 1/4 chance
+4D43 #hp_fleeing
+4D59 #tile_attack_red
+4D61 #sound_damage
+4D66 #-
+4D80 #foes_max
+4D8D # 1/2 chance
+4D8F #hp_fleeing
+4DC3 #wind_dir_north
+4DC8 #wind_dir_south
+4DCF #wind_dir_west
+4DD4 #wind_dir_east
+4DF4 # 32 attempts
+4DF6 $zp_attempts
+4DFB #-
+4E02 #-
+4E0B $zp_attempts
+4E2A #-
+4E2E # BUG: stack overflow
+4E33 # 32 attempts
+4E35 $zp_attempts
+4E3A #-
+4E41 #-
+4E4A $zp_attempts
+4E60 #loc_dng_abyss
+4E6C #mode_dungeon
+4EA5 #mode_world
+4EC8 #sound_cast
+4ED4 # base pitch
+4ED7 #sound_spell_effect
+4EE1 #aura_negate
+4EF7 #sound_alert
+4EFF #tile_ghost
+4F03 #tile_phantom
+4F07 #tile_skeleton
+4F0B #tile_liche
+4F12 #-
+4F26 #tile_balloon
+4F38 #loc_castle_britannia
+4F3E #mode_dungeon
+4F47 #dng_tile_type_mask
+4F49 #dng_tile_ladder_d
+4F4D #dng_tile_ladder_du
+4F6C #-
+4F8A #tile_grass
+4F8E #-
+4F9F #tile_walk
+4FA8 #tile_ladder_down
+4FAE #-
+4FC6 #music_off
+4FCB #char_A
+4FD0 #music_explore
+4FED # start in the middle, not usual 1,1
+4FF3 # hythloth longitude
+4FF7 # hythloth latitude
+4FFB #loc_dng_hythloth
+500E only in world
+5013 #object_last
+5037 #tile_dungeon_entrance
+503B #tile_towne
+5042 #tile_castle
+5049 #tile_village
+5050 #tile_castle_center
+5057 #tile_ruin
+505E #tile_shrine
+5065 #tile_field_fire
+5069 #location_world
+5073 #-
+5077 #location_world
+5096 #tile_walk
+509A #-
+50A1 # start at 1,1
+50A7 #music_off
+50AF #music_off
+50B4 #disk_dungeon
+50D3 #mode_dungeon
+50D7 #dng_dir_east
+50E3 #-
+50E7 #music_Dungeon
+50F2 #char_0 - loc_dng_first
+510E #-
+5130 #music_off
+513B #-
+513F #-
+5146 #towne_first
+5148 #num_townes
+514C $zp_index
+5154 #-
+515B #player_class_index
+515F $zp_index
+5168 #-
+516A #object_max
+5175 #music_Towne
+518D #music_off
+51A4 #-
+51A8 #-
+51AC #-
+51B0 #music_Castles
+51CD #string_shrines
+51D5 #music_off
+51F4 #music_explore
+5242 #string_locations
+524B #disk_britannia
+5271 #disk_towne
+5279 #char_at_sign
+5296 #-
+52B9 #mode_towne
+52CC #tile_ship_first
+52D0 #tile_ship_last
+52E2 #tile_ship_north
+52E6 #tile_ship_south
+52FF #sound_what
+5309 #tile_ship_west
+530D #tile_ship_east
+5314 #sound_cannon
+5319 #range_missile_travel
+5326 #tile_attack_small
+534E #tile_attack_red
+5355 #sound_damage
+5362 # characters roll chance, objects instant obliterate
+5369 # 1/4 chance
+536D #-
+5374 #tile_lord_british
+53B9 #mode_dungeon
+53BF #tile_chest
+53CD #tile_chest
+53D1 #tile_floor_brick
+53D5 #virtue_honesty
+53D7 #-
+53DC #virtue_justice
+53DE #-
+53E3 #virtue_honor
+53E5 #-
+53ED #object_max
+53F2 #tile_chest
+5409 #-
+5416 #dng_tile_chest
+5428 #-
+5434 #-
+5436 $zp_trap_type
+5438 1/16 bomb, 3/16 poison, 3/16 sleep, 9/16 acid
+543B $zp_trap_type
+543D $zp_trap_type
+544C #trap_sleep
+545C #trap_poison
+5487 #player_dexterity
+548F # DEX + 25
+5493 #-
+54A8 #sound_alert
+54B0 $zp_trap_type
+54BA #trap_sleep
+54C1 #player_status
+54C3 #status_Sleep
+54CE #tile_human_prone
+54D8 #trap_poison
+54DF #player_status
+54E1 #status_Poison
+5503 #-
+550E $zp_amount
+5536 loc_world
+553A #mode_dungeon
+5543 #tile_walk
+555F #music_off
+5581 #music_explore
+5588 #mode_dungeon
+55A4 #party_stat_torches
+55AE #-
+55B4 #mode_dungeon
+55D2 #mode_world
+55DC #tile_door_locked
+55E3 #party_stat_keys
+55ED #tile_door_unlocked
+55EF #-
+5604 #loc_castle_britannia
+560A #mode_dungeon
+5613 #dng_tile_type_mask
+5615 #dng_tile_ladder_u
+5619 #dng_tile_ladder_du
+563C #-
+5649 #tile_balloon
+5665 #tile_ladder_up
+566B #tile_walk
+568A #music_off
+568F # second floor of castle britannia
+5694 #music_explore
+56E5 #char_alpha_first
+56F1 #-
+56F4 #char_alpha_first
+5710 #char_alpha_first
+571C #-
+571F #char_alpha_first
+5743 #music_off
+5761 #music_explore
+578A #-
+57BC #-
+57D3 #player_stat_max
+5827 #mode_towne
+5831 #tile_door_unlocked
+5835 #tile_door_locked
+5846 # self close after N turns
+584B #tile_floor_brick
+586A #party_stat_gems
+5885 #music_off
+58A1 #music_peer
+58AB #mode_dungeon
+58AF #music_off
+58CB #music_explore
+58EE #music_off
+58F3 #disk_britannia
+5943 #music_explore
+594D #-
+5951 #-
+5957 #-
+595B #-
+5961 #-
+5965 #-
+596B #-
+596F #-
+59B0 #-
+5A03 #char_alpha_first
+5A05 #weapon_last
+5A0C $zp_selected
+5A0E #weapon_none
+5A13 #party_stat_weapons
+5A21 #player_class_bit
+5A25 $zp_selected
+5A2F #player_weapon
+5A36 #party_stat_weapons
+5A3C #player_weapon
+5A3E $zp_selected
+5A45 #party_stat_weapons
+5A4B $zp_selected
+5A4E #string_weapon_first
+5A75 #player_class_index
+5A7A #string_class_first
+5A92 $zp_selected
+5A95 #string_weapon_first
+5AAE #music_off
+5ACD #music_explore
+5AE9 #tile_sign_first
+5AED #tile_sign_last
+5B07 #tile_shopkeeper
+5B19 #loc_dng_first
+5B47 #lt_rwflag_read
+5B4F #music_off
+5B59 #tile_lord_british
+5B5D #disk_britannia
+5B79 #music_British
+5B81 #music_off
+5B86 #disk_towne
+5B8B #music_Castles
+5BB0 #music_explore
+5BB8 #music_off
+5BD4 #-
+5BDB #-
+5BE2 try 8 types of shop
+5BEF row 24
+5BF5 #loc_village_paws
+5BF9 #shop_horse
+5BFF row 25
+5C05 #loc_castle_britannia
+5C09 #shop_hawkwind
+5C13 #char_0
+5C2F #music_shop
+5C37 #music_explore
+5C4A #music_off
+5C6C #music_explore
+5C74 #music_combat
+5C99 #-
+5CF2 #char_alpha_first
+5CF4 #armour_last
+5CFB $zp_selected
+5CFD #armour_none
+5D02 #party_stat_armour
+5D10 #player_class_bit
+5D14 $zp_selected
+5D1B $zp_selected
+5D1E # adjust to re-use same code as weapon
+5D20 $zp_selected
+5D25 #player_armour
+5D2C #party_stat_armour
+5D32 #player_armour
+5D34 $zp_selected
+5D3B #party_stat_armour
+5D41 $zp_selected
+5D44 #string_armour_first
+5D62 #tile_ship_first
+5D66 #tile_ship_last
+5D6A #tile_horse_last
+5D6E #tile_balloon
+5D82 #-
+5D8D #object_max
+5D95 #object_inanimate_first
+5D9C #-
+5D9E # overwrite random slot 10-1F
+5DB3 #-
+5DBB #tile_walk
+5DD0 #tile_horse_west
+5DD4 #tile_horse_east
+5E25 #-
+5E27 #-
+5E37 #char_less
+5E3C #-
+5E40 #-
+5E47 #-
+5E4B #-
+5E52 #player_gender
+5E59 #char_space
+5E5E #-
+5E65 #player_class_index
+5E6A #string_class
+5E76 #player_status
+5E7D #-
+5E7F #-
+5E8B #player_magic_points
+5E92 #-
+5E94 #-
+5EA0 #player_max_hp_hi
+5EA7 #-
+5EA9 #-
+5EB6 #player_strength
+5EBD #-
+5EBF #-
+5ECC #player_dexterity
+5ED3 #-
+5ED5 #-
+5EE2 #player_intelligence
+5EE9 #-
+5EEB #-
+5EF7 #player_cur_hp_hi
+5EFE #player_cur_hp_lo
+5F05 #-
+5F07 #-
+5F13 #player_max_hp_hi
+5F1A #player_max_hp_lo
+5F21 #-
+5F23 #-
+5F2F #player_experience_hi
+5F36 #player_experience_lo
+5F3D #-
+5F3F #-
+5F4A #player_weapon
+5F4F #string_weapon_first
+5F54 #-
+5F56 #-
+5F61 #player_armour
+5F66 #string_armour
+5FCA #-
+5FDB combat restore
+6E5D not returning from "jsr dng_check_attacked" in "cmd_done"
+5FEA #char_left_arrow
+5FEE #char_right_arrow
+5FF2 #-
+5FF8 #-
+6001 #-
+6003 #-
+6005 $zp_index
+6007 $zp_display_line
+6016 $zp_display_line
+6018 #-
+601B #-
+601F $zp_display_line
+6021 #-
+6027 $zp_index
+602C #party_stat_weapons
+6035 $zp_index
+6038 #char_alpha_first
+603E #-
+6043 #char_hyphen
+6052 #char_hyphen
+6057 $zp_index
+605A #string_weapons_short
+605F $zp_display_line
+6061 $zp_index
+6063 $zp_index
+6065 #-
+6078 $zp_display_line
+6083 #-
+6085 #-
+6087 $zp_index
+6089 $zp_display_line
+6097 #-
+609B $zp_display_line
+60A1 $zp_index
+60A6 #-
+60AF $zp_index
+60B2 #char_alpha_first
+60B8 #-
+60BD #char_hyphen
+60CC #char_hyphen
+60D1 $zp_index
+60D4 #string_armour
+60D9 $zp_display_line
+60DB $zp_index
+60DD $zp_index
+60DF #-
+60F6 $zp_display_line
+6101 #-
+6103 #-
+6117 #party_stat_torches
+612E #party_stat_gems
+6142 #party_stat_keys
+6156 #party_stat_sextant
+6177 #-
+6179 #-
+6186 #-
+618F $zp_item_flags
+619F #-
+61A1 $zp_item_flags
+61B7 $zp_item_flags
+61C6 #-
+61C8 $zp_item_flags
+61E4 #item_flag_bell
+61F4 #item_flag_book
+6204 #item_flag_candle
+622B #key3_flag_truth
+622F #char_T
+6237 #key3_flag_love
+623B #char_L
+6243 #key3_flag_courage
+6247 #char_C
+6286 #-
+628B BWPOGRYB
+6293 HSHSJVCH
+62A1 #-
+62A3 #-
+62A5 $zp_reagent_index
+62B6 $zp_reagent_index
+62B8 #party_stat_reagents
+62C0 $zp_reagent_count
+62C6 $zp_reagent_index
+62C8 #char_A
+62CD $zp_reagent_count
+62CF #-
+62D3 #char_hyphen
+62D8 $zp_reagent_count
+62E3 #char_hyphen
+62E9 $zp_reagent_index
+62EB #string_reagent_first
+62F0 $zp_reagent_index
+62F2 $zp_reagent_index
+62F4 #-
+6302 #-
+6304 #-
+6306 $zp_index
+6308 $zp_display_line
+6318 $zp_display_line
+631D # column width
+6323 # left margin
+632B $zp_display_line
+632D # wrap after 8 rows
+6333 $zp_index
+633A $zp_index
+633D #char_A
+6342 #char_hyphen
+6347 $zp_index
+634F $zp_display_line
+6351 $zp_index
+6353 $zp_index
+6355 # 26, A-Z spells
+6381 # full hull strength
+6388 1/4 chance
+6390 # repair 1 hull
+639C #player_status
+63A0 #status_Sleep
+63A7 1/8 chance
+63AB #status_Good
+63AD wake up
+63B2 #status_Poison
+63B6 #-
+63BE #sound_damage
+63E9 #mode_dungeon
+63F5 #dng_tile_type_mask
+63F7 #dng_tile_room
+6409 #mode_world
+640F #tile_bridge_narrow
+6416 #chance_8
+642E #tile_troll
+643A #tile_bridge_narrow
+6445 airborne
+644A #mode_dungeon
+6467 #tile_swamp
+646B #tile_field_poison
+646F #tile_field_fire
+6473 #tile_field_sleep
+6477 #tile_lava
+6486 #status_Good
+648A #status_Poison
+649C #status_Sleep
+64A2 #tile_human_prone
+64B2 #dng_tile_type_mask
+64B4 #dng_tile_field
+64BA #-
+64BE #-
+64C2 #-
+64C9 #dng_tile_trap
+64CF #-
+64D3 #-
+64E5 #-
+6510 #tile_swamp
+6514 #tile_field_poison
+6518 #tile_field_fire
+651C #tile_field_sleep
+6520 #tile_lava
+6533 #status_Good
+653A #chance_8
+653E #status_Poison
+6540 #player_status
+655D #chance_4
+6561 #status_Sleep
+6563 #player_status
+658F #-
+659B #sound_damage
+65AD #player_class_index
+65B1 $zp_index
+65B3 #player_intelligence
+65BB $zp_index ;mage
+65BF bard
+65C2 fighter
+65C5 druid
+65C8 tinker
+65CB paladin
+65CE ranger
+65D1 # shepherd
+65E8 $zp_mp_max
+65EA #player_magic_points
+65EE $zp_mp_max
+65F4 #-
+660F #-
+6619 #-
+6620 #-
+6630 #mode_world
+6637 #mode_dungeon
+6642 #chance_16
+6649 # set temp2 to world-space coord of loaded region's origin
+665C #xy_center_screen
+6663 #xy_center_screen
+6667 #object_wandering_max
+666C # slot already occupied
+6671 #xy_max_tile_cache
+6678 #xy_last_screen
+667A # don't spawn in view, always off-screen
+667F #xy_max_tile_cache
+6686 #xy_last_screen
+668D #tile_water_shallow
+668F # allowed in deep or coast water
+6691 #tile_grass
+6693 # not in shallow water or swamp
+6695 #tile_mountain
+6697 # not in anything mountain or higher
+6699 Convert from cache coordinate (tile_x,y) to absolute coordinate (player_x,y)
+66AB # moves >= 1,000,000
+66AF #-
+66B1 # moves < 10,000
+66B3 # moves < 20,000
+66B5 #-
+66B7 moves >= 30,000
+66B9 # mask, orc - wisp
+66BE # mask, orc - snake
+66C3 # mask, orc - balron
+66D1 # rand AND rand => each bit has 1/4 chance of being set
+66D5 #tile_monster_land
+66E3 #chance_8
+66FA # random water monster
+66FD #tile_monster_water
+66FF #tile_pirate_east
+6703 #tile_pirate_west
+6716 #-
+671E $zp_index
+6723 #xy_max_dungeon
+672E #xy_max_dungeon
+6739 # space occupied
+673E # 4 possibilities, starting from index = dungeon level
+6745 #tile_monster_dungeon
+6747 #tile_monster_mimic
+674B $zp_index
+677C #mode_world
+6783 #mode_towne
+678A #mode_dungeon
+67A2 #object_mobs_max
+67AF #-
+67B9 #-
+67BD $zp_index
+67C2 $zp_index
+67C7 #-
+67D6 #tile_whirlpool
+67DA #tile_twister
+67E1 #-
+67FC $zp_index
+680D #range_missile_travel + 1
+6814 #tile_pirate
+681E #tile_pirate_west
+6822 #tile_pirate_north
+6826 #tile_pirate_east
+683B #tile_pirate
+6845 #tile_pirate_west
+684F #tile_pirate_north
+6859 #tile_pirate_east
+6870 #-
+6877 # chance_4
+687E #tile_pirate_west
+6889 #tile_pirate_north
+6894 #tile_pirate_east
+6898 #-
+689F #-
+68BE #-
+68E0 #-
+68F5 #tile_pirate_north
+68FB #tile_pirate_south
+6905 #tile_pirate_west
+690B #tile_pirate_east
+691B #-
+691D #tile_pirate
+6926 #tile_serpent
+692A #tile_lava_lizard
+692E #tile_hydra
+693A #range_missile_attack
+6943 #range_missile_attack
+694F $zp_index
+6951 #-
+6953 $zp_attempts
+6958 #tile_whirlpool
+695C #tile_twister
+6968 #chance_4
+69CC $zp_attempts
+69E8 # mode non-combat
+69ED #object_max
+69EF #-
+69F1 $zp_attempts
+6A1A #-
+6A25 $zp_index
+6A7C #ai_toward_only
+6A80 $zp_attempts
+6A89 #xy_last_towne
+6A8F #xy_last_towne
+6AB0 #object_max
+6AC1 #tile_mimic
+6AC5 #tile_reaper
+6AC9 #-
+6ACB $zp_attempts
+6AFE #xy_max_dungeon
+6B17 #xy_max_dungeon
+6B2E #xy_max_dungeon
+6B3F $zp_attempts
+6B73 #dng_tile_type_mask
+6B82 #tile_monster_dungeon
+6B87 #-
+6B89 #-
+6B99 # opposite
+6B9B # modulo
+6BA3 #-
+6BAB #-
+6BB2 #-
+6BB7 #mode_world
+6BBC #object_wandering_max
+6BC1 #tile_whirlpool
+6BC5 #tile_twister
+6BCD #sound_drown
+6BCF $zp_sound
+6BE2 #object_max
+6BE4 $zp_index
+6BE6 $zp_index
+6BE8 # doesn't affect itself
+6BED # nothing there
+6BFF # destroy what's there
+6C07 $zp_index
+6C0E $zp_sound
+6C13 $zp_index
+6C1D #sound_twister
+6C1F $zp_sound
+6C3A #tile_whirlpool
+6C41 # center of Lock Lake
+6C45 #-
+6C49 #sound_drown
+6C53 #tile_ship_west
+6C60 #tile_twister
+6C67 #sound_twister
+6C7E #tile_attack_small
+6C8D #tile_attack_red
+6C9E #tile_attack_red
+6CAD #tile_attack_red
+6CBE #range_missile_travel
+6CC0 $zp_missile_travel
+6CCF #sound_cannon
+6CEC # hit player
+6D06 $zp_missile_travel
+6D0A # miss
+6D0F #sound_damage
+6D16 # characters roll chance, objects instant obliterate
+6D1D #chance_4
+6D21 #-
+6D8A #-
+6D90 #-
+6D96 #-
+6D9C #-
+6DA9 #aura_none
+6DAF #mode_dungeon
+6DCF #-
+6DD1 #-
+6DD9 # inn combat is only with main player
+6DE1 #mode_combat_inn
+6DE5 #tile_rogue
+6DEB #arena_inn
+6DF2 #-
+6DF8 #dng_tile_type_mask
+6DFA #dng_tile_trap
+6DFE #dng_tile_fountain
+6E02 #dng_tile_field
+6E06 #dng_tile_room
+6E0A #dng_tile_wall
+6E10 #-
+6E14 #tile_monster_dungeon - 4
+6E25 #dng_tile_type_mask
+6E29 #object_max
+6E40 #-
+6E54 #-
+6E6D #arena_dng_hall ; hall
+6E6E #arena_dng_ladder_up
+6E6F #arena_dng_ladder_down
+6E70 #arena_dng_ladder_both
+6E71 #arena_dng_chest
+6E72 #arena_dng_hall ; hole up
+6E73 #arena_dng_hall ; hole down
+6E74 #arena_dng_hall ; orb
+6E75 #arena_dng_hall ; trap
+6E76 #arena_dng_hall ; fountain
+6E77 #arena_dng_hall ; field
+6E78 #arena_dng_hall ; altar
+6E79 #arena_dng_door
+6E7A #arena_dng_hall ; room
+6E7B #arena_dng_secret_door
+6E7C #arena_dng_hall ; wall
+6E7D #music_off
+6E85 #loc_dng_first
+6E87 up to 16 rooms per dungeon
+6E89 # except abyss, 16 rooms per 2 levels
+6E97 #-
+6E9B #lt_rwflag_read
+6EAA #mode_combat_dng_room
+6EAE #-
+6EBA # room index "altar"
+6EC0 # except in abyss
+6EDD #-
+6EED #principle_truth
+6EFA #principle_love
+6F0A #principle_courage
+6F0E #-
+6F17 #foes_max
+6F24 # reverse facing to choose entrance
+6F2A 00 south  10 west  20 north  30 east
+6F57 # dead
+6F60 #foes_max
+6F80 HP = P/2 | rand(P)
+6F92 #tile_mimic
+6F96 #tile_chest
+6FBD #-
+6FC8 #tile_ship_last
+6FCE #tile_ship_last
+6FD2 #tile_ship_first
+6FD8 #tile_pirate
+6FDC #tile_rogue
+6FE0 #arena_ship_v_ship
+6FE7 #tile_water_last
+6FEB #arena_ship_s_shore
+6FF0 #arena_ship_at_sea
+6FF7 #tile_pirate
+6FFB #tile_rogue
+6FFF #arena_ship_n_shore
+7006 #tile_water_last
+700A #arena_shore
+7011 #tile_swamp
+7015 #arena_swamp
+701A #tile_brush
+701E #arena_brush
+7023 #tile_forest
+7027 #arena_forest
+702C #tile_hills
+7030 #arena_mountains
+7035 #tile_floor_stone
+7039 #arena_floor_stone
+703E #tile_floor_brick
+7042 #arena_floor_brick
+7047 #tile_bridge_narrow
+704B #tile_bridge_top
+704F #tile_bridge_bottom
+7053 #tile_bridge_middle
+7057 #arena_bridge
+705C #arena_grass
+7061 #music_off
+707E #mode_combat_inn
+7084 #mode_combat_wandering
+708A #mode_towne
+7090 #mode_combat_inn
+7096 #tile_guard
+709A # max index 0 = just one foe
+70A3 # Party * 2 (index 0 through P*2-1)
+70AA Dead code? Never encounter characters outside a towne.
+70AF 2-8 character foes
+70B1 idx 0 overruns table[24], previous foe_count as new max (BUG?)
+70C2 $zp_cur_foe_index
+70C7 Must be less than 2x party size
+70D8 #foes_max
+70F0 $zp_cur_foe_index
+70F7 1/32 chance
+70FB 3/32 chance
+712A HP = P/2 | rand(P)
+7139 $zp_cur_foe_index
+713F #mode_combat_inn
+7165 #-
+716E #music_combat
+7176 #-
+717A #-
+718C #-
+719B #tile_human_prone
+71B5 #player_weapon
+71BD #string_weapon_first
+71D0 #char_space
+71D7 #char_enter
+71DE #char_up_arrow
+71E5 #char_down_arrow
+71EC #char_slash
+71F3 #char_left_arrow
+71FA #char_right_arrow
+7201 #char_alpha_first
+7205 #char_alpha_last
+720A #char_alpha_first
+722D #aura_quickness
+7236 1/2 chance
+723C #player_status
+7240 #status_Sleep
+7247 1/8 chance
+724B #status_Good
+726C #-
+7273 #foes_max
+7275 $zp_cur_foe_index
+7277 $zp_cur_foe_index
+7289 1/8 chance
+7290 #-
+7298 #tile_zorn
+729C #aura_negate
+72A0 #-
+72A7 #tile_wisp
+72AE #chance_8
+72B2 #xy_last_screen
+72B9 #xy_last_screen
+72C8 $zp_cur_foe_index
+72E7 $zp_nearest_dist
+72E9 #-
+7303 $zp_dist
+730F $zp_dist
+7311 $zp_nearest_dist
+7315 $zp_nearest_dist
+7340 $zp_cur_foe_index
+7345 #tile_mimic
+7349 #tile_chest
+734E $zp_nearest_dist
+7350 #-
+7354 #tile_mimic
+735C #chance_4
+7368 #tile_attack_blue
+736E #aura_negate
+737E #chance_4
+7382 $zp_cur_foe_index
+7387 #tile_balron
+738B #tile_reaper
+7391 #aura_negate
+739B #-
+739D #sound_spell_effect
+73A5 #player_last
+73B3 #player_status
+73B7 #status_Good
+73C0 #status_Sleep
+73C4 #tile_human_prone
+73D2 $zp_cur_foe_index
+73D7 #hp_fleeing + 1
+73EC $zp_nearest_dist
+73EE #-
+73F2 $zp_cur_foe_index
+73F7 #tile_gremlin
+7401 #tile_rogue
+740B $zp_cur_foe_index
+7410 #tile_mimic
+7417 #tile_reaper
+741E #-
+7420 $zp_attempts
+747F $zp_attempts
+7483 $zp_nearest_dist
+7485 #-
+748C $zp_cur_foe_index
+749C #xy_last_screen
+74A5 #xy_last_screen
+74AF #-
+74B3 $zp_cur_foe_index
+74C2 $zp_cur_foe_index
+74C4 #tile_field_poison
+74C8 #tile_field_fire
+74CC #tile_field_sleep
+74D0 #tile_lava
+74E6 #-
+74EB #sound_damage
+74F6 #tile_lava_lizard
+74FA #tile_daemon
+7501 # 0..127
+7505 #sound_damage
+750D $zp_cur_foe_index
+751A $zp_cur_foe_index
+752D $zp_cur_foe_index
+7537 #virtue_compassion
+7539 #-
+753E #virtue_justice
+7540 #-
+7545 #-
+7547 $zp_cur_foe_index
+754F #sound_alert
+7559 #aura_jinx
+755E $zp_cur_foe_index
+7566 #tile_attack_red
+7578 #sound_damage
+757D #-
+7587 #-
+7592 $zp_cur_foe_index
+759A $zp_cur_foe_index
+75B0 #aura_none
+75BA #-
+75C2 #sound_alert
+75CB #chance_4
+75D2 #-
+75E6 #-
+75ED #-
+75F6 #sound_alert
+7601 #mode_combat_dng_room
+7605 #foes_max
+7614 #player_max
+7626 #mode_combat_dng_room
+7646 #virtue_valor
+7648 #-
+7650 #virtue_compassion
+7652 #-
+7657 #virtue_justice
+7659 #-
+7679 #dng_dir_west
+767E #dng_dir_east
+7688 #dng_dir_north
+768D #dng_dir_south
+7695 T,L,C == 0,1,2
+76B0 #music_off
+76CF #music_explore
+76D7 #-
+76DE North of Truth   is Deceit
+76DF East  of Truth   is Shame
+76E0 South of Truth   is Hythloth
+76E1 West  of Truth   is Wrong
+76E2 North of Love    is Despise
+76E3 East  of Love    is Wrong
+76E4 South of Love    is Hythloth
+76E5 West  of Love    is Covetous
+76E6 North of Courage is Destard
+76E7 East  of Courage is Covetous
+76E8 South of Courage is Hythloth
+76E9 West  of Courage is Shame
+76FF #virtue_valor
+7704 0-1
+770B #mode_combat_inn
+7714 #mode_dungeon
+771A #tile_monster
+771E #tile_pirate
+7722 20 <= n < 30  or  50 <= n < 60  then monster
+7726 #-
+772A #-
+772E #-
+7734 #tile_bat
+7738 #tile_slime
+773C #tile_gazer
+7740 #tile_insects
+7744 #tile_wisp
+775E #tile_chest
+7776 #tile_ship_west
+7783 #tile_bat
+7787 #tile_insects
+778B #tile_slime
+779C #dng_tile_chest
+77A3 #object_max
+77AF #mode_world
+77B3 #object_inanimate_first
+77B7 #object_last - object_inanimate_first
+77BD #object_inanimate_first
+77C3 #mode_combat_inn
+77CB #mode_dungeon
+77D2 #music_explore
+77D7 #-
+77E2 #music_explore
+77F6 #tile_attack_small
+77FE #sound_foe_attack
+7803 #-
+780A #aura_protection
+7811 # 1/2 chance
+7816 #player_armour
+7833 #tile_attack_red
+783E #sound_firewalk
+7843 #-
+784B $zp_cur_foe_index
+7854 Attack = rand(P/4)
+7877 #virtue_sacrifice
+7879 #-
+7923 #sound_footstep
+792A #xy_last_screen
+7933 #xy_last_screen
+7960 #sound_footstep
+7967 #mode_combat_dng_room
+796B #-
+796D $zp_index
+7984 #-
+79A6 $zp_index
+79A9 #-
+79AB $zp_index
+79AE # up to 4 triggers
+79BD #-
+79D5 #mode_combat_dng_room
+79E5 #xy_last_screen
+7A25 #sound_blocked
+7A30 #xy_fled
+7A38 #-
+7A3D #sound_alert
+7A44 #mode_combat_wandering
+7A52 #player_cur_hp_hi
+7A56 #player_max_hp_hi
+7A5C #virtue_valor
+7A5E #-
+7A63 #virtue_sacrifice
+7A65 #-
+7A6F #-
+7A99 #weapon_halberd
+7AB7 #tile_attack_small
+7ABF #-
+7AC4 #sound_player_attack
+7ACE #-
+7AD6 #weapon_dagger
+7AE3 #xy_last_screen
+7AEB #weapon_flaming_oil
+7AFD #char_num_first
+7AFF < 10
+7B0C #weapon_dagger
+7B10 #weapon_flaming_oil
+7B15 #party_stat_weapons
+7B23 # dead code
+7B28 #player_weapon
+7B2A #weapon_none
+7B44 #tile_attack_small
+7B4C #weapon_magic_wand
+7B50 #tile_attack_blue
+7B58 #-
+7B62 #sound_player_attack
+7B79 #loc_dng_abyss
+7B80 #weapon_magic_axe ; or better
+7B8A #weapon_flaming_oil
+7B91 #tile_water_last
+7B95 #tile_field_fire
+7B9A #tile_attack_red
+7BA2 #weapon_magic_wand
+7BA6 #tile_attack_blue
+7BAE #player_dexterity
+7BB7 hit chance = (128 + DEX * 2) / 255
+7BCA #player_strength
+7BDA damage = max(255, STR + weapon)
+7BE4 #sound_damage
+7BE9 #-
+7BF7 $zp_cur_foe_index
+7C01 $zp_cur_foe_index
+7C06 #tile_lord_british
+7C18 #-
+7C36 Exp = hi(P) + 1
+7C3E #-
+7C51 #-
+7C62 $zp_cur_foe_index
+7C6B calc percentages
+7C6F $zp_percent_50
+7C71 $zp_percent_25
+7C73 $zp_percent_25
+7C76 $zp_percent_25
+7C78 $zp_percent_75
+7C7A $zp_cur_foe_index
+7C7F #hp_fleeing + 1
+7C93 $zp_percent_25
+7CA8 $zp_percent_50
+7CBA $zp_percent_75
+7CEA #sound_player_attack
+7CEF #-
+7D03 #weapon_flaming_oil
+7D0A #xy_last_screen
+7D13 #xy_last_screen
+7D1C #tile_water_last
+7D20 #tile_field_fire
+7D2B #weapon_magic_axe
+7D32 #-
+7D47 #tile_attack_small
+7D57 #-
+7D8E #tile_chest
+7D95 #tile_floor_stone
+7D9C #mode_dungeon
+7DAB #dng_tile_chest
+7DAF #-
+7DD5 bug: never RTS
+7E88 #-
+7E8B 1000NNNx
+7E8F 1NNNNNxx + 4
+7E91 #-
+7E94 000NNNNN + 24  (BUG: should be 000NNNNx)
+7E9D #player_status
+7EA1 #status_Good
+7EA5 #status_Poison
+7EAF #player_status
+7EB3 #status_Good
+7EB7 #status_Poison
+7EBB #status_Sleep
+7ECA #-
+7ED0 #player_status
+7ED4 #status_Good
+7ED8 #status_Poison
+7EDC #status_Dead
+7EE0 #tile_human_prone
+7EE3 #player_class_index
+7EE8 #tile_human_class
+7EEA tile(humans + class * 2)
+7EEE #-
+7F04 #-
+7F08 $zp_tile_type
+7F0A $zp_save_xreg
+7F17 #tile_whirlpool
+7F1B #tile_twister
+7F1F #object_max
+7F37 #tile_chest
+7F53 #tile_pirate
+7F68 #chance_4
+7F71 #tile_twister
+7F77 #tile_bat
+7F7B #tile_ghost
+7F7F #tile_insects
+7F83 #tile_zorn
+7F87 #tile_daemon
+7F8B #tile_dragon
+7F8F #tile_balron
+7F95 $zp_tile_type
+7F97 #tile_water_last
+7F9B #tile_field_lightning
+7FA1 $zp_tile_type
+7FAA #tile_pirate
+7FAE $zp_tile_type
+7FB0 #tile_water_shallow
+7FB6 $zp_tile_type
+7FB8 #tile_water_last
+7FBE $zp_tile_type
+7FC0 #tile_water_last
+7FCB $zp_save_xreg
+7FCD #-
+7FD0 $zp_save_xreg
+7FD5 $zp_tile_type
+7FDE #xy_last_screen
+7FE4 #xy_last_screen
+7FE8 $zp_cur_foe_index
+7FED #hp_fleeing + 1
+7FF7 $zp_cur_foe_index
+800A #chance_4
+800E #foes_max
+8023 #player_last
+803D $zp_cur_foe_index
+8044 #tile_twister
+804A #tile_bat
+804E #tile_ghost
+8052 #tile_insects
+8056 #tile_zorn
+805A #tile_daemon
+805E #tile_dragon
+8062 #tile_balron
+8068 $zp_tile_type
+806A #tile_water_last
+806E #tile_field_lightning
+8074 $zp_tile_type
+807D $zp_tile_type
+807F #tile_water_last
+8085 $zp_tile_type
+8087 #tile_water_last
+8095 #-
+809C #dng_tile_foe_mask
+80A1 #dng_tile_type_mask
+80A3 #dng_tile_trap
+80A7 #dng_tile_fountain
+80AB #dng_tile_field
+80AF #dng_tile_room
+80B3 #dng_tile_wall
+80BA #chance_8
+80CC #-
+80D5 #dng_tile_type_mask
+80D7 #dng_tile_door
+80DB #dng_tile_secret_door
+80DF #dng_tile_room
+80E9 #dng_tile_door ; or higher
+80EF #-
+80F7 #mode_towne
+8114 #tile_door_unlocked
+8118 #-
+8121 #tile_class_mage
+8125 #tile_lord_british
+8129 #tile_nixie
+812D #tile_squid
+8131 #tile_serpent
+8135 #tile_seahorse
+8139 #tile_spider
+813D #tile_troll
+8141 #tile_mimic
+8145 #tile_gazer
+8149 #tile_python
+814D #tile_ettin
+8151 #tile_cyclops
+8155 #tile_mage
+8159 #tile_liche
+815D #tile_lava_lizard
+8161 #tile_daemon
+8165 #tile_hydra
+8169 #tile_dragon
+816D #tile_reaper
+8171 #tile_balron
+8175 #-
+8178 #tile_field_poison
+817B #tile_field_lightning
+817E #tile_field_fire
+8181 #tile_field_sleep
+8184 #tile_boulder
+8187 #tile_attack_blue
+818A #tile_attack_red
+818D #tile_lava
+8190 #tile_attack_small
+8196 #-
+8199 #tile_field_first
+81AB #sound_cannon
+81C3 #-
+81C8 #tile_lava
+81DA #tile_lava
+81EC #tile_field_poison
+8204 chance 50%
+8209 #player_status
+820D #status_Good
+8211 #status_Poison
+8216 #tile_field_lightning
+822F #tile_field_fire
+8240 #tile_field_sleep
+8267 #player_status
+826B #status_Good
+826F #status_Sleep
+8273 #tile_human_prone
+827B #tile_lava
+828B #tile_attack_blue
+82BB #sound_firewalk
+82C3 #-
+82ED #foes_max
+8306 $zp_cur_foe_index
+8308 #-
+831D #xy_last_screen
+8323 #xy_last_screen
+832C #tile_water_last
+8330 #tile_white_space
+8334 #tile_secret_panel
+8338 #tile_diagonal_first
+833C #tile_diagonal_last
+834F #-
+8355 #-
+835B #-
+8361 #-
+8369 #-
+836F #-
+8384 #-
+838F #-
+8393 #-
+839A #char_enter
+839E #char_up_arrow
+83A2 #char_slash
+83A6 #char_down_arrow
+83AA #char_left_arrow
+83AE #char_right_arrow
+83B2 #char_space
+83C9 #-
+83DD #-
+83F3 #-
+8424 #object_mobs_max
+8429 #loc_dng_first
+842D #object_max
+844A $zp_index
+8452 #tile_monster_first
+8454 #monster_water_last
+8458 1000NNNx  print(N+1)
+845A #-
+845F #char_newline
+8468 #-
+846D 20 <= n < 30  or  50 <= n < 60
+8471 #-
+8475 #-
+8479 #-
+847D 0xxNNNNx
+8481 print(N + 4D)
+8486 # phantom
+8494 #char_newline
+84B7 #-
+84BA #music_off
+84BF #disk_britannia
+84DE #music_explore
+8506 # column START
+850A # preserve high-bit color palette
+850F # column END
+8519 #-
+851D #-
+8523 #-
+8526 #-
+8531 #-
+8535 #-
+853A #-
+8546 #-
+8554 #-
+8564 00 == Avatar
+856A 99 == clamp max
+8571 $zp_amount
+857C $zp_amount
+8582 01 == clamp min
+85AF $zp_amount
+85B4 #player_cur_hp_lo
+85BA $zp_amount
+85C1 #-
+85C8 #-
+85CB #-
+85D5 #player_status
+85D7 #status_Dead
+85DF #tile_human_prone
+85E6 #-
+85E9 $zp_amount
+85EE #player_cur_hp_lo
+85F4 $zp_amount
+85FB #-
+8600 #player_cur_hp_hi
+8604 #player_max_hp_hi
+860A #player_cur_hp_lo
+860E #player_max_hp_lo
+8614 #player_max_hp_hi
+8618 #player_cur_hp_hi
+861C #player_max_hp_lo
+8620 #player_cur_hp_lo
+8625 $zp_amount
+8627 #party_stat_gold_lo
+862E $zp_amount
+8637 #-
+864E #player_experience_lo
+865B #-
+866D # 0 - 29
+867C #sound_damage
+868A #tile_ship_last
+8692 # fixed damage 10
+8697 #-
+86C2 # 1/2 chance
+86D4 # 0-25 damage
+86ED #sound_firewalk
+86F6 #char_newline
+872B # 11 tiles (22 columns)
+8744 #-
+875A # 11 tiles (22 columns)
+8775 #tile_moongate_full
+877C #-
+8782 #-
+878C #sound_spell_effect
+878E #-
+8793 #loc_shrine_sacrifice
+87AC #sound_spell_effect
+87AE #-
+87BF #sound_spell_effect
+87C1 #-
+87CC non-monster
+87D0 #tile_seahorse
+87D4 #tile_rat
+87D8 #tile_bat
+87DC #tile_spider
+87E0 #tile_insects
+87E4 #tile_python
+87EB #-
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D balloon_flying
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+00B0 key_buf
+00B8 key_buf_len
+00BD charptr
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 diskid
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zpD8
+00D9 zpD9
+00DA zpDA
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 lt_track
+00E1 lt_sector
+00E2 lt_rwflag
+00E3 lt_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zpEA
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zpF0
+00F2 tilerow
+00F4 movement_mode
+00F5 direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0046 kbd_buf_count
+0277 kbd_buffer
+0286 kernal_COLOR
+0400 screen
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_creatures
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 bitmap
+4009 game_init
+4033 load_saved_game
+4060 halt
+4063 load_saved_map
+408D game_start
+40AC next_turn
+40BA @prompt
+40CA +
+40D1 +
+40D8 +
+40DF +
+40E6 +
+40ED +
+4106 @next
+411C check_cmd_alpha
+4136 cmd_timeout
+4145 done_pass
+4151 done_what
+415B done_sound_deny
+4163 done_not_a_player
+4178 done_only_on_foot
+418D done_slow_progress
+41A1 done_not_here
+41B2 done_cant
+41C0 done_aborted
+41D0 done_done
+41E0 done_have_none
+41F6 done_disabled
+4207 done_blocked
+4220 done_drift_only
+4233 cmd_table
+4234 cmd_table + 1
+4267 cmd_direction_up
+4270 @check_transport
+4279 +
+4280 +
+428C @move_on_land
+429E +
+42A4 @set_ship_facing
+42B1 @move_ship
+42C1 +
+42CE +
+42D4 @try_move
+42E5 @denied
+42EA @allowed
+42F7 +
+430A @towne
+4315 @done
+4316 @dng_try_advance
+432C +
+432E dng_move
+4345 dng_dir_delta_x
+4349 dng_dir_delta_y
+434D cmd_direction_down
+4369 +
+4371 @check_transport
+437A +
+4381 +
+438D @move_on_land
+439F +
+43A2 @check_shrine_humility
+43B9 @cmd_done
+43BC @set_ship_facing
+43C9 @move_ship
+43D9 +
+43E6 +
+43EC @try_move
+43F8 +
+4405 +
+4418 @towne
+4425 @done
+4426 cmd_direction_left
+444A @check_transport
+4453 +
+445A +
+446E @move_on_land
+4480 +
+4486 @set_ship_facing
+4493 @move_ship
+44A3 +
+44B0 +
+44B6 @try_move
+44C2 +
+44CF +
+44E2 @towne
+44ED @done
+44EE cmd_direction_right
+4513 @check_transport
+451C +
+4523 +
+4537 @move_on_land
+4549 +
+454F @set_ship_facing
+455C @move_ship
+456C +
+4579 +
+457C @check_abyss_cove
+458B @cmd_done
+458E @try_move
+459A +
+45A7 +
+45BA @towne
+45C7 @done
+45C8 print_turn
+45D2 print_sail
+45DC spawn_pirate_fleet
+45DE @next
+45FB pirate_fleet_x
+4603 pirate_fleet_y
+460B pirate_fleet_sprite
+4613 spawn_daemon_guard
+461B @next
+4633 @done
+4636 leave_to_world
+4679 @check_exit_hythloth
+4685 @spawn_balloon
+4697 @done
+46A6 check_slow_terrain
+46BA @allowed
+46BD @slowed
+46C0 @chance_8
+46C9 @chance_4
+46D2 @chance_2
+46DB can_ship_move_here
+46E7 @yes
+46EA @no
+46ED cmd_attack
+4701 +
+4709 +
+470E @nothing_there
+4711 +
+4726 @next
+4731 @hostile
+473B @skip
+473E @check_virtue
+474E @penalty
+4763 do_attack
+4786 @mini_map
+478B @init_foe
+479B cmd_board
+47B0 @on_foot
+47DD @nothing_boardable
+47E0 @board_ship
+4803 @new_ship
+480A last_ship_x
+480B last_ship_y
+480C board_horse
+4825 board_balloon
+483D do_board
+4841 @next
+4858 @skip
+485F @remove_from_map
+4867 @done
+486C cmd_cast
+4888 @not_a_player
+488B +
+4891 +
+489B choose_spell
+48B9 @not_combat
+48C4 +
+48DE +
+490D @deduct_mp
+4921 current_spell
+4922 spell_jump_table
+4923 spell_jump_table+1
+4956 spell_mp_cost
+4970 spell_awake
+497D @fail
+4980 +
+499E @not_in_combat
+49A1 spell_blink
+49A7 @fail
+49AA @not_in_ship
+49C1 @find_patch_edge
+49C8 @find_farthest_legal
+49E5 add_delta
+49F7 sub_delta
+4A09 spell_cure
+4A16 @fail
+4A19 +
+4A2E spell_dispel_field
+4A41 @fail
+4A44 @world
+4A4F @try_dispel
+4A5E @towne
+4A6C @combat
+4A9A @dungeon
+4ABF spell_energy_field
+4AE0 @fail
+4AE3 @allowed
+4AED @dungeon
+4B12 @combat
+4B43 spell_fireball
+4B4E spell_attack_failed
+4B56 do_fireball
+4B5E launch_attack_spell
+4B68 @travel
+4B8E @damage_medium
+4B98 @damage_high
+4BA2 @damage_low
+4BA9 @clear_sprite
+4BB6 spell_gate
+4BC5 +
+4BDC @fail
+4BDF +
+4BF9 moongate_x
+4C01 moongate_y
+4C09 spell_heal
+4C16 @fail
+4C19 +
+4C32 spell_iceball
+4C40 +
+4C4B spell_jinx
+4C50 set_spell_aura
+4C59 spell_kill
+4C67 +
+4C72 spell_light
+4C82 +
+4C85 spell_missile
+4C93 +
+4C9E spell_negate
+4CA6 spell_open_chest
+4CB4 +
+4CB7 spell_protect
+4CBF spell_quickness
+4CC7 spell_resurrect
+4CCB res_view_fail
+4CCE try_resurrect
+4CDE +
+4CEF +
+4CF6 spell_sleep
+4CFE @next
+4D19 @skip
+4D1F spell_tremor
+4D2A @next
+4D4B @hit
+4D74 @skip
+4D7A spell_undead
+4D82 @next
+4D94 @skip
+4D9A spell_view
+4DA1 +
+4DAA spell_wind
+4DB8 +
+4DC8 @south
+4DCD @east_west
+4DD4 @east
+4DD6 @done
+4DDB spell_x_it
+4DE4 spell_y_up
+4DF4 +
+4DF8 @try_random
+4E14 @ok
+4E1F spell_z_down
+4E31 +
+4E37 @try_random
+4E53 @ok
+4E5E not_abyss
+4E69 @ok
+4E6A dungeon_only
+4E87 @ok
+4E88 combat_only
+4EA2 @ok
+4EA3 outdoors_only
+4EC1 @ok
+4EC2 spell_effect
+4EEA @ok
+4EEB failed
+4EFF is_undead
+4F0F @no
+4F12 @yes
+4F15 prompt_direction
+4F24 cmd_descend
+4F45 @dungeon
+4F54 +
+4F77 @balloon
+4F97 @not_here
+4F9A @nope
+4F9D @castle_britannia
+4FA6 +
+4FD8 @to_dungeon
+5002 cmd_enter
+5013 +
+5015 @next
+501B +
+5042 +
+5049 +
+5050 +
+5057 +
+505E +
+5065 +
+5070 enter_abyss
+507E +
+5084 enter_dungeon
+5094 check_on_foot
+50A1 +
+50AF begin_dng_load
+50EF load_map_dungeon
+5104 @file_char_dungeon
+5111 @reset_map
+5118 print_ruin
+5125 print_towne
+5130 enter_towne
+5152 @check_npc_joined
+5168 @remove_joinable_npc
+5175 @play_towne_music
+517D print_village
+518D print_castle
+51B8 print_shrine
+51D5 load_shrine
+51FC location_map_x
+521C location_map_y
+523C print_location_name
+524B file_write_temp_map
+526E load_towne
+527B load_letter_location
+528C @map_number
+5298 @copy_map
+52BE fire_at_what
+52C1 cmd_fire
+52DC +
+52EA @only_broadsides
+5307 @moving_n_s
+5314 @do_fire
+531D @next
+5348 @cannon_hit
+536D @destroyed
+537E @done
+5381 cmd_get_chest
+53A6 +
+53AF +
+53B7 try_get_chest
+53C6 +
+53ED get_in_world
+53EF @next
+5404 @skip
+5409 @found_chest
+5411 get_chest
+5414 get_in_dungeon
+541D +
+542C do_get_chest
+5434 @trapped
+544C +
+545C +
+546D +
+5475 @try_evade
+549C trap_evaded
+54B0 check_acid
+54BA @check_sleep
+54D8 @check_poison
+54EB check_bomb
+54EE collect_gold
+5521 cmd_hole_up
+5541 @check_transport
+555F @load_file_camp
+558F +
+5592 cmd_ignite
+55AE +
+55BB +
+55BE cmd_jimmy_lock
+55D9 +
+55E3 +
+55ED +
+55F6 cmd_klimb
+560E @deny
+5611 @dungeon
+561D +
+562C +
+5647 @world
+5663 @castle_britannia
+5675 +
+569C cmd_locate
+56C1 @have_sextant
+572F cmd_mix_reagents
+5769 cmd_new_order
+578A +
+5797 +
+57BC +
+57C7 +
+57D0 +
+57DF @next
+57F5 you_must_lead
+580F new_order_stat_ptr
+5810 new_order_stat_ptr+1
+5811 cmd_open_door
+582B @not_here
+582E +
+583C +
+585E cmd_peer_gem
+5874 +
+5885 do_view
+58CB @skip
+58D1 cmd_quit
+58EE +
+594B @print_move_count
+5973 @digits_8
+5978 @digits_7
+597D @digits_6
+5982 @digits_5
+5987 @digits_4
+598C @digits_3
+5991 @digits_2
+5996 @digits_1
+59A8 @print_hi_bcd
+59B0 @print_lo_bcd
+59B6 cmd_ready_weapon
+59DF +
+59E2 ask_weapon
+5A01 +
+5A0C @check_inv
+5A1E @check_class_legal
+5A2F @unequip_current
+5A3C @equip_new
+5A4B @print_weapon_name
+5A59 weapon_class_masks
+5A69 weap_arm_disallowed
+5AA0 cmd_search
+5AD5 cmd_talk
+5AE6 check_through_sign
+5B0E check_direct
+5B1D no_response
+5B38 +
+5B93 @talk_non_british
+5BB0 @end_talk
+5BB8 check_shop
+5BE4 @next
+5BFD +
+5C0E @no_response
+5C11 load_shop
+5C25 @file_char_shop
+5C3F cmd_use_item
+5C74 @combat
+5C7C cmd_volume
+5C99 @off
+5CA8 cmd_wear_armour
+5CCE +
+5CD1 ask_armour
+5CF0 +
+5CFB @check_inv
+5D0D @check_class_legal
+5D25 @unequip_current
+5D32 @eqiup_new
+5D41 @print_armour_name
+5D4F armour_class_masks
+5D57 cmd_x_it
+5D72 @what
+5D75 @ship
+5D82 @horse
+5D86 @balloon
+5D8D @find_empty_slot
+5D8F @next
+5DA1 @exit_transport
+5DC5 cmd_yell_horse
+5DDB +
+5DF0 +
+5E00 cmd_ztats
+5E16 @check_valid_player
+5E1F zstats_for_player
+5F80 @prev_page
+5F87 zstats_page_1
+5F98 ztats_page_2
+5FA2 ztats_page_3
+5FAC ztats_page_4
+5FB6 ztats_page_5
+5FC0 ztats_page_6
+5FD1 quit_view
+5FE2 @done
+5FE5 input_ztats_key
+5FF5 @key_prev
+5FF8 @key_next
+5FFB ztats_1_weapons
+6016 @next
+604F @two_digit
+6052 +
+6061 @skip
+606D @nothing
+607D display_armour
+6097 @next
+60C9 @two_digit
+60CC +
+60DB @skip
+60E7 @no_armour
+60FB display_tools
+616D +
+6171 display_quests
+61A1 @next
+61AF @skip
+61B2 display_runes
+61C8 @next
+61D6 @skip
+61D9 display_items
+61F1 +
+6201 +
+6211 display_3_part_key
+6234 +
+6240 +
+624C display_horn_etc
+625C +
+626D +
+6280 +
+6284 next_line
+628B stone_sym
+6293 rune_sym
+629B display_reagents
+62B5 @next
+62E0 @two_digit
+62E3 +
+62F0 @skip
+62FC display_spells
+6318 @next
+6351 @skip
+635D save_cursor
+6368 restore_cursor
+6373 saved_cursor_x
+6374 saved_cursor_y
+6375 cmd_done
+637F +
+6395 update_player_health
+6399 @next
+63B2 @check_poison
+63C6 @player_done
+63D4 +
+63E7 @update_dungeon
+63FE @update_light
+6404 +
+6407 tile_effect
+6441 @no_trolls
+6446 +
+6453 @in_combat
+647B @burn
+6481 @poison1
+6497 @sleep1
+64AD @end_effect
+64B0 @in_dungeon
+64C9 @check_trap
+64D9 @winds
+64EC @falling_rocks
+6503 @pit
+6510 @check_field
+6524 @damage_all
+6527 @field_done
+652A @poison_all
+652E @next_p
+654A @skip_p
+6551 @sleep_all
+6555 @next_s
+656D @skip_s
+6574 @done
+6575 starving
+658A @next
+6594 +
+65A4 recover_mp
+65A8 @next
+65D1 @mp_0
+65D6 @mp_1_of_4
+65DB @mp_2_of_4
+65DF @mp_3_of_4
+65E5 @mp_4_of_4
+65F9 @skip
+65FE eat_food
+662C @done
+662E spawn_monsters
+6637 +
+663E +
+663F spawn_world
+6649 +
+6669 @try_spawn
+6699 @land
+66B9 @foes_medium
+66BE @foes_easy
+66C3 @foes_hard
+66C5 @choose_monster
+66DD @no_spawn
+66E0 @water
+6705 +
+670B @next_spawn_slot
+6711 @done
+6712 spawn_dungeon
+6719 @try_spawn
+676F @next_spawn_slot
+6779 @done
+677A mobs_act
+6783 +
+678A +
+6791 +
+6792 mobs_act_world
+67A4 @next
+67C7 @out_of_range
+67CF @skip
+67D3 mob_world_take_turn
+67E5 player_attacked
+680D check_range
+681B @check_cannon
+682A @facing_n_s
+6831 @facing_e_w
+6838 @try_ship_move
+6842 @facing_west
+684F @facing_north
+6859 @facing_east
+6865 @facing_south
+686D @turn_or_sail
+6889 @try_sail_north
+6894 @try_sail_east
+689F @try_sail_south
+68A6 @try_sail_e_w
+68C8 @try_sail_n_s
+68EA @no_move
+68EB @turn_ship
+68FB @turn_south
+6901 @turn_east_or_west
+690B @turn_east
+6911 @turn_ship_random
+6923 @not_pirate
+6932 @range_attack
+6951 @try_move
+696C @x_or_y
+698A @try_y
+69A3 @try_x
+69BC @try_random
+69D1 @do_move
+69E8 mobs_act_towne
+69ED +
+69EF @next
+6A04 @try_random
+6A17 @toward_player
+6A2A @no_move
+6A2D @x_or_y
+6A4B @try_y
+6A64 @try_x
+6A87 @do_move
+6AA9 @skip
+6AAF @done
+6AB0 mobs_act_dungeon
+6AB2 @next
+6AD0 @skip
+6AD3 @check_at_player
+6AE1 @try_random
+6B0F @try_y
+6B28 @try_x
+6B46 @do_move
+6B77 @no_move
+6B7D @done
+6B81 tile_to_monster_num
+6B94 is_wind_favorable
+6BA1 @downwind
+6BA9 @upwind
+6BAF @no
+6BB2 @yes
+6BB5 check_water_hazards
+6BBC +
+6BBE @next_obj
+6BC9 @next_hazard
+6BCD @whirlpool
+6BE2 @check_objects
+6BE4 @next_victim
+6C17 @skip
+6C1D @twister
+6C35 enter_whirlpool
+6C5B enter_twister
+6C7E fire_cannon_pirate
+6C89 +
+6C9E fire_red_missile
+6CA9 +
+6CBE fire_world_missile
+6CD4 @next
+6CEF @check_other_object
+6D0D @missile_impact
+6D21 @destroyed
+6D29 @no_player_damage
+6D2C manhattan_dist_foe
+6D58 manhattan_dist_towne
+6D84 end_turn
+6DAD @check_light
+6DC6 @update
+6DCF inn_combat
+6DD3 -
+6DF0 dng_check_attacked
+6E2B @next
+6E51 @skip
+6E54 @attacked
+6E57 -
+6E6C @nope
+6E6D dungeon_arena
+6E7D do_dungeon_room
+6E95 +
+6EF1 @love
+6EFE @courage
+6F0C @init_arena
+6F11 -
+6F19 -
+6F30 @next_player
+6F55 @inactive
+6F5C +
+6F62 @next_foe
+6F9B @skip_foe
+6FA1 init_combat
+6FC0 @clear
+6FD6 @ship
+6FE5 @pirate
+6FF0 +
+6FF5 @not_ship
+7004 @land_arena
+700F +
+701A +
+7023 +
+702C +
+7035 +
+703E +
+7047 +
+7057 @bridge
+705C @default
+705E load_arena
+7073 @file_char_arena
+707C initialize_arena
+7088 +
+7094 @towne_arena
+709F @maximize_foes
+70A8 set_foe_count
+70B3 @lookup_max_foes
+70C2 clamp_foe_count
+70D5 @choose_foe_slot
+70FF @no_companion
+7104 @companion
+7110 @companion_double
+7120 @commit_foe
+713D @place_players
+7147 @next_player
+7163 @remove_player
+716A +
+716E begin_combat
+717A start_players_turn
+7180 combat_take_turn
+7191 @end_turn
+7194 @check_fled_or_slept
+71D0 +
+71D7 +
+71DE +
+71E5 +
+71EC +
+71F3 +
+71FA +
+7201 +
+721B @invalid_key
+721E combat_cmd_done
+7239 combat_end_turn
+7257 @end_wake_up
+7269 @next_turn
+726C @players_done
+7277 foe_take_turn
+7281 +
+7290 @wake_up
+7295 @check_zorn
+72A7 @check_wisp
+72B2 @wisp_teleport
+72D7 calc_nearest_player
+72ED @next
+731B @skip
+7326 calc_direction
+7359 calc_attack_type
+7372 @attack_allowed
+737B no_range_attack
+738F @cast_sleep
+73A9 @next
+73CB @skip
+73D2 @check_flee
+73EC @check_is_adjacent
+7401 @check_rogue
+7408 +
+740B @try_foe_move
+7417 +
+741E +
+7422 @x_or_y
+743F @try_y
+7457 @try_x
+746F @try_random
+748C do_foe_move
+74AF check_tile_effect
+74D6 @effect_sleep
+74F3 @effect_fire
+74FE @effect_poison
+750D next_foe
+7514 +
+7517 fleeing
+7545 @fled
+7557 do_jinx
+755E +
+7599 @miss
+759D end_foes_turn
+75B4 +
+75BA steal_food
+75C8 try_steal_gold
+75F5 +
+75FE @done
+75FF check_scene_over
+7607 -
+7614 check_players_gone
+7616 -
+7623 @still_here
+7624 player_flee
+762A combat_players_fled
+7650 @not_evil
+7661 combat_exit_room
+7679 @west
+767E @east
+7683 @north
+768D @south
+768F do_exit_room
+76CC @dungeon
+76DE altar_room_exits
+76EA foes_vanquished
+7709 +
+7712 +
+7734 @monster
+7751 @drop_loot
+7769 @pirate
+777E @done
+7781 @dungeon
+77A3 get_free_object_slot
+77A5 @next
+77B7 @replace_random
+77C0 @done
+77C1 combat_over
+77D2 +
+77DE @restore_towne
+77E8 do_foe_melee_attack
+7813 @check_armour
+7827 @no_damage
+782D @yes_damage
+7833 player_injured
+787E @done
+7885 combat_cmd_table
+7886 combat_cmd_table + 1
+78B9 combat_move_up
+78D4 combat_move_down
+78EF combat_move_right
+7909 combat_move_left
+7923 try_move
+7931 +
+793A +
+7945 +
+7953 +
+796B @floor_triggers
+796F @next
+7998 +
+79A6 @skip
+79B2 @cmd_done
+79B5 xy_to_offset
+79C8 mult_by_11
+79D3 try_flee
+79EF +
+79F7 @already_fleeing_x
+79FD @already_fleeing_y
+7A03 @cannot_split_party
+7A2D do_flee
+7A6A @no_penalty
+7A6D flee_x
+7A6E flee_y
+7A6F combat_cmd_attack
+7A87 +
+7AAF @skip_inc
+7AB7 melee_attack
+7ADD did_hit
+7AE3 ranged_attack
+7B06 @valid_digit
+7B09 use_weapon
+7B14 @deduct_thrown
+7B23 last_one
+7B3C check_target
+7B44 +
+7B55 +
+7B67 +
+7B77 target_hit
+7B87 @can_damage
+7B9A @no_oil_fire
+7BAB +
+7BC7 @calc_damage
+7BDC +
+7BF4 inflict_damage
+7C0D +
+7C5B +
+7C5E @done
+7C62 still_alive
+7C93 @percent_25
+7CA8 @percent_50
+7CBA @percent_75
+7CCC @percent_HI
+7CD6 @wounded
+7CE4 @done
+7CE5 missed
+7CEF +
+7D25 @end_attack
+7D28 end_attack
+7D4C -
+7D5C @cmd_done
+7D5F current_weapon
+7D60 aim_range
+7D61 missile_traveled
+7D62 combat_cmd_cast
+7D6F combat_cmd_get
+7D7E try_get_chest_combat
+7D95 +
+7DB3 @skip
+7DB6 combat_cmd_ready
+7DCB combat_cmd_ztats
+7DE1 foe_power_table
+7E15 foe_companion_table
+7E39 foe_max_count
+7E5D foe_count
+7E5E weapon_damage_table
+7E6E armour_table
+7E76 is_ranged_table
+7E86 foe_index_from_tile
+7E93 @done
+7E94 @not_monster
+7E9A is_awake
+7EAC is_alive
+7EBF is_not
+7EC2 in_party
+7ECA @is
+7ECD get_player_sprite
+7EE3 @normal
+7EEB @dead
+7EEE rand_modulo
+7EF8 @subtract
+7F04 @clear_flags
+7F06 @done
+7F07 modulus
+7F08 legal_move_world_twn
+7F14 @collide_other_foe
+7F21 @next
+7F3E @skip
+7F50 @check_pirate
+7F57 @avoid_repeat_move
+7F6C @collide_terrain
+7F95 @phase
+7FA1 @land
+7FAA @water
+7FB6 @water_creature
+7FBE @fly
+7FCB @allow
+7FD0 @deny
+7FD5 legal_move_combat
+7FE8 @is_fleeing
+7FF1 @deny
+7FF4 @allow
+7FF7 @avoid_repeat_move
+800E @collide_other_foe
+8010 @next
+8023 @collide_player
+803A @skip
+8068 @phase
+8074 @land
+807D @water
+8085 @fly
+8095 @return_true
+8098 @return_false
+809B legal_move_dungeon
+80CC @allow
+80CF @pop_deny
+80D0 @deny
+80D3 dng_can_advance
+80E5 dng_can_retreat
+80EF adv_retreat_yes
+80F2 adv_retreat_no
+80F5 close_open_door
+8101 @countdown
+8107 @close
+8118 @done
+811E door_open_x
+811F door_open_y
+8120 door_open_countdown
+8121 get_rangeattack_type
+8178 @poison
+817B @lightning
+8181 @sleep
+8184 @boulder
+8187 @attack_blue
+818A @attack_red
+818D @lava
+8190 @attack_small
+8193 @rand_field
+819C do_foe_range_attack
+81B0 @move_missile
+81C0 @clear_sprite
+81CD @create_lava
+81E0 hit_player
+8216 @check_lightning
+822F @check_fire
+8240 @check_sleep
+8257 @fail
+8264 +
+827B @check_lava
+828B @check_magic
+829E @hit
+82AB effect_poison_sleep
+82C9 check_hit_player
+82CD @next
+82E8 @skip
+82ED check_hit_foe
+82EF @next
+8302 @skip
+8305 @done
+830B next_arena_tile
+8340 @blocked
+8345 @ok
+8352 @fail
+8355 math_sign
+835E +
+8360 @done
+8361 math_abs
+8366 @negate
+836C math_negate
+8372 input_target_xy
+8386 @done
+8387 input_direction
+838C @return_none
+8392 @check_input_key
+83BC @up
+83C6 @down
+83D0 @left
+83DA @right
+83E1 @set_new_xy
+83F6 print_north
+8401 print_south
+840C print_east
+8416 print_west
+8420 get_mob_at_temp_xy
+8429 @not_world
+842D any_obj_at_temp_xy
+842F check_next_object
+8444 temp_xy_skip
+8447 temp_xy_none
+844A print_attacker_name
+844F print_target_name
+8459 @print
+8465 @monster_non_water
+846D @non_monster
+847D @npc
+8486 @inanimate
+848B input_char
+8494 +
+849B anyone_awake
+849F @next_alive
+84AB @next_awake
+84B7 @yes
+84BA run_file_dead
+84E6 invert_all_players
+84EA @next
+84F2 invert_player_name
+84FC @next_row
+8508 @next_col
+8519 encode_bcd_value
+8525 @dec
+852D @max
+852F @done
+8531 decode_bcd_value
+8538 @inc
+8540 @done
+8541 inc_stat
+854D +
+854F dec_stat
+855B +
+855D inc_virtue
+856C @done
+8571 dec_virtue
+857A @lost_eighth_rts
+8582 @underflow
+8584 +
+8589 @lost_eighth
+85AF dec_player_hp
+85CB @died
+85E6 @done
+85E9 inc_player_hp
+8624 @done
+8625 inc_party_gold
+8648 @no_overflow
+8649 inc_player_exp
+8669 @no_overflow
+866A burn_player
+8679 damage_party
+86B9 @damage_ship
+86BB @check_each_player
+86BF @next
+86D4 @damage_player
+86DF @skip
+86EA hilight_damaged_plr
+86F6 print_newline
+86FC shake_screen
+8715 move_view_down
+8717 @next_x
+872D @next_y
+8740 +
+8744 move_view_up
+8746 @next_x
+875C @next_y
+876F +
+8775 check_enter_moongate
+877A +
+879A gate_to_gate
+87CC is_evil
+87EB @not_evil
+8800 j_overlay_entry
+8807 talk_lord_british
+8B00 file_buf
+8D00 file_buf+$200
+8E00 file_buf+$300
+8F00 file_buf+$400
+8C00 j_dng_check_update
+8C06 j_dng_neighbor_tiles
+A100 j_fileio
+A103 j_readblock
+A106 j_loadtitle
+A109 j_togglesnd
+A10C j_kernalin
+A10F j_setirqv
+A112 j_clearkbd
+A115 j_irqhandler
+A118 j_init_tempmap_cache
+A11B j_flush_tempmap_cache
+A11E j_save_7e_7f
+A800 tilecolors1
+A900 tilecolors2
+EC00 player_stats
+ED00 party_stats
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_drawn_tile
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+0200 room_start_triggers
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 tempmap
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+D020 vic_BORDERCOL
+D021 vic_SCREENCOL
+D400 sid_START
+D418 sid_VOLUME
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+E180 chrlineaddr_lo
+E198 chrlineaddr_hi
+E1B0 tilecolors0
+E800 towne_map
+E900 towne_map+$100
+EA00 towne_map+$200
+EB00 towne_map+$300
+F300 tilecolors3
+FF81 kernal_CINT
+FF84 kernal_IOINIT
+FF87 kernal_RAMTAS
+FF8A kernal_RESTOR
+FF8D kernal_VECTOR
+FF90 kernal_SETMSG
+FF93 kernal_SECOND
+FF96 kernal_TKSA
+FF99 kernal_MEMTOP
+FF9C kernal_MEMBOT
+FF9F kernal_SCNKEY
+FFA2 kernal_SETTMO
+FFA5 kernal_ACPTR
+FFA8 kernal_CIOUT
+FFAB kernal_UNTLK
+FFAE kernal_UNLSN
+FFB1 kernal_LISTEN
+FFB4 kernal_TALK
+FFB7 kernal_READST
+FFBA kernal_SETLFS
+FFBD kernal_SETNAM
+FFC0 kernal_OPEN
+FFC3 kernal_CLOSE
+FFC6 kernal_CHKIN
+FFC9 kernal_CKOUT
+FFCC kernal_CLRCH
+FFCF kernal_BASIN
+FFD2 kernal_BSOUT
+FFD5 kernal_LOAD
+FFD8 kernal_SAVE
+FFDB kernal_SETTIM
+FFDE kernal_RDTIM
+FFE1 kernal_STOP
+FFE4 kernal_GETIN
+FFE7 kernal_CLALL
+FFEA kernal_UDTIM
+FFED kernal_SCRORG
+FFF0 kernal_PLOT
+FFF3 kernal_IOBASE
+40F4 +
+40FB +
+6B8C wind_dir_delta_x
+6B90 wind_dir_delta_y
+9000 j_peer
+:DISABLED HILO LABELS
+4017
+4129
+412E
+4671
+4C4E
+4FF3
+4FF7
+513B
+51A4
+579C
+5B47
+5E3C
+5E47
+6C41
+6E9B
+729C
+871A
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+1800
+:SYSTEM
+Apple II

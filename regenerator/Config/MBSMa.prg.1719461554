@@ -1,0 +1,117 @@
+:CODE START
+0400
+:CODE END
+0800
+:DATA BYTES
+0478-0490
+04F8-0500
+0578-0580
+05F8-0600
+0678-0680
+06F8-0700
+0778-0780
+07F8-0800
+04E4-04F2
+0490-04A0
+04A0-04C0
+:WORDS
+04C0-04E4
+0780-0788
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+:REMOVED BYTES
+:FULL COMMENTS
+:SIDE COMMENTS
+050C #mb_reg_T16
+0519 #mb_reg_T14
+05B7 #mb_reg_ORA
+05B9 select register X in cur_psg
+05BC #mb_reg_ORB
+05BE #psg_cmd_latch
+05C2 #psg_cmd_inactive
+05C6 #mb_reg_ORA
+05C8 set register X to value A
+05CB #mb_reg_ORB
+05CD #psg_cmd_write
+05D1 #psg_cmd_inactive
+0432 #mb_reg_ACR ; Auxiliary Control Register
+0438 #mb_reg_T14
+043F #mb_reg_T15
+0446 #mb_reg_IER ; Interrupt Enable Register
+0448 80 activate + 40 timer 1
+0547 #psg_reg_last
+054B #psg_reg_voice_enable
+054F disable noise generators, enable voices A,B,C
+055A #mb_reg_IER
+055C 80 deactivate + 40 timer 1
+:USER LABELS
+0478 DOS_1
+04F8 DOS_2
+0578 DOS_3
+05F8 DOS_4
+0678 DOS_5
+06F8 DOS_6
+0778 DOS_7
+07F8 DOS_8
+04F0 num_psgs
+04F1 mb_num_channels
+04D8 chan_io_base
+04D9 chan_io_base + 1
+0500 mb_irq_handler
+0086 mb_io_base
+04C0 chan_next_addr
+04C1 chan_next_addr + 1
+04CC chan_cur_addr
+04CD chan_cur_addr + 1
+0480 psg1_next_values
+0490 psg2_next_values
+04A0 psg1_cur_values
+04B0 psg2_cur_values
+0580 set_psg_registers
+044D cur_psg
+0587 @next_psg
+0096 next_values
+0097 next_values + 1
+0098 cur_values
+0099 cur_values + 1
+0088 psg_io
+0089 psg_io + 1
+05AC @next_register
+05D5 @skip
+04E4 chan_freq_reg
+04E5 chan_level_reg
+0082 mus_busy
+0084 mus_ptr
+0426 @next_channel
+0085 mus_ptr + 1
+0400 music_start
+0454 num_tunes
+040C @next_tune
+077F tune_addr - 1
+0780 tune_addr
+044F tune_channels_inuse
+0450 tune_channels_exist
+0790 chan_something_addr
+052B +
+0523 read_channel_byte
+008A chan1_ptr
+008B chan1_ptr + 1
+0560 @done
+0549 @next_register
+0551 +
+053D @next_psg
+052E music_stop
+FD00 music_update
+0456 freq_lo
+0457 freq_hi
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

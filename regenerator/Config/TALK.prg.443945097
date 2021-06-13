@@ -1,0 +1,247 @@
+:CODE START
+8800
+:CODE END
+8E30
+:DATA BYTES
+881F-882A
+884C-8853
+8878-8882
+8885-8896
+88C3-88E4
+88F5-88FC
+890D-8918
+895D-8965
+896D-897D
+89B0-89BC
+89C2-89CC
+89D7-89E6
+89F1-8A09
+8A1B-8A22
+8B38-8B4D
+8B58-8B66
+8B6C-8B8A
+8B9A-8BB6
+8C17-8C3A
+8C40-8C4A
+8C61-8C81
+8C92-8CC7
+8CF2-8CF9
+8D00-8D0E
+8D15-8D1D
+8D24-8D29
+8D30-8D3C
+8D43-8D4D
+8D54-8D5E
+8D65-8D6C
+8D6F-8D7B
+8E01-8E1D
+8A81-8A82
+8AA5-8ACD
+8E25-8E30
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8A82
+:REMOVED BYTES
+:FULL COMMENTS
+89BF unused original code, maybe stub for second virtue, like honesty?
+8ACD original scheme uses 00 as separators.
+8D6C BUG. rts missing
+8E25 Junk from segment alignment
+:SIDE COMMENTS
+881C b'\rYOU MEET\r\x00'
+8849 b' I AM\r\x00'
+8875 b'GO AWAY!\r\x00'
+8882 b'\rYour interest:\r\x00'
+88C0 b' THAT,\rI CANNOT HELP\rTHEE WITH.\r\x00'
+88F2 b' BYE.\r\x00'
+890A b'YOU SEE A\r\x00'
+895A b' ASKS:\r\x00'
+896A b'\r\rYou respond:\r\x00'
+89AD b'YES, OR NO:\x00'
+89BF b'SPECIAL!\r\x00'
+89D4 b' TURNS AWAY!\r\r\x00'
+89EE b' SAYS:\rON GUARD! FOOL!\r\x00'
+8A18 b' SAYS:\x00'
+8B35 b'I CANNOT\rJOIN THEE.\r\x00'
+8B55 b'THOU ART NOT\r\x00'
+8B69 b'\rENOUGH FOR ME\rTO JOIN THEE.\r\x00'
+8B97 b'I AM HONORED\rTO JOIN THEE!\r\x00'
+8C14 b' I DO\rNOT NEED THY\rGOLD, KEEP IT!\r\x00'
+8C3D b'How much-\x00'
+8C5E b'\rTHOU HAST NOT\rTHAT MUCH GOLD!\r\x00'
+8C8F b' OH,\rTHANK THEE!\rI SHALL NEVER\rFORGET THY\rKINDNESS!\r\x00'
+8CEF b'HONEST\x00'
+8CFD b'COMPASSIONATE\x00'
+8D12 b'VALIANT\x00'
+8D21 b'JUST\x00'
+8D2D b'SACRIFICIAL\x00'
+8D40 b'HONORABLE\x00'
+8D51 b'SPIRITUAL\x00'
+8D62 b'HUMBLE\x00'
+8D6C b'EXPERIENCED\x00'
+8DFE b'\rTHOU HAST LOST\rAN EIGHTH!\r\x00'
+8945 unused, no data sets this flag.
+8948 unused, removed by patch.
+8CD4 BUG. Virtue 5 is HONOR, but shrine of SACRIFICE (4) advises to give last gold.
+882F #char_enter
+8841 #char_enter
+8858 #char_enter
+8899 #char_enter
+8936 #char_enter
+8950 #char_enter
+8980 #char_enter
+8988 #char_N
+898C #char_Y
+8A26 #char_enter
+8A39 #char_enter
+8A3D #char_left_arrow
+8A41 #char_space
+8A2C #char_question
+8A64 #char_space
+8A7B #char_enter
+8A71 #char_space
+8C4D #char_enter
+8C87 #char_enter
+:USER LABELS
+8800 talk
+EFF0 dialog_keyword_1
+8802 @copy_keywords
+8AB9 keyword_1
+EFF6 dialog_keyword_2
+8ABD keyword_2
+00EA zpEA
+00E6 monster_type
+EE60 object_tile_type
+8ACD print_string
+0824 j_console_out
+084E j_rand
+EFFF dialog_turns_away_probability
+8860 maybe_fight
+8882 talk_prompt
+8846 print_name
+8A13 pronoun_says
+00D8 zpDB
+886F @fight
+89CF pronoun_turns_away
+89E9 start_combat
+8A23 pronoun_says_newline
+0821 j_primm
+8A2C get_input
+88B8 @check_input
+88B5 @fight
+8A82 compare_keywords
+88E7 @found_keyword
+893E check_question_trigger
+88EF @bye
+88FF @name
+8E24 talk_done
+8906 @look
+891D @join
+8933 print_response_newline
+8924 @give
+8AFF check_join
+892B @keyword
+8C0B check_give
+EFFC dialog_question_trigger
+894D ask_question
+EFFD dialog_special
+89BF special
+896A @get_response
+0300 inbuffer
+899D @no
+89AA @yes_or_no
+8D7C subtract_humility
+8D91 add_humility
+8A81 input_ctr
+8A36 @get_char
+0800 j_waitkey
+8A6E @got_input
+8A5A @backspace
+00CE console_xpos
+8A73 @pad_spaces
+8A86 @next
+8AA5 keywords
+8A8D @compare
+8A9E @nomatch
+EF00 dialog_strings
+00FE ptr1
+00FF ptr1 + 1
+8AD8 @check
+8ADC @next
+8AE2 @eos
+8AF8 @inc_ptr
+8AE8 @print
+8AF7 @done
+8AFE @skip
+00E1 lt_x
+8B32 @cant_join
+000A current_location
+00D5 towne_virtue
+00D4 currplayer
+082D j_get_stats_ptr
+ED00 game_stats
+8B28 @part_avatar
+8B50 @decline
+000F party_size
+EC1A player_stats + hp_hi
+8B8D @not_enough_xp
+8B94 accept_join
+8CEB decline_reason
+8B52 @print_decline
+EE00 object_tile_sprite
+084B j_update_view
+8BCD @next
+8BDF @found_slot
+8C08 @done
+00FC ptr2
+00FD ptr2 + 1
+8BF5 @move
+0869 j_clearstatwindow
+0845 j_update_status
+8C3D @how_much
+085A j_getnumber
+00D7 bcdnum
+8C59 @give_amount
+8DAA subtract_gold
+8C84 @has_gold
+8CCA give_gold_add_virtue
+ED14 gold + 1
+ED13 gold
+8CD9 @has_gold_left
+8DD2 add_virtue
+001F move_counter + 3
+0017 last_humility_check
+8CEA @too_soon
+8CFA @compassionate
+8D0F @valiant
+8D1E @just
+8D2A @sacrificial
+8D3D @honorable
+8D4E @spiritual
+8D5F @humble
+EFFE dialog_humility
+8D90 @not_humility
+8DE6 subtract_virtue
+8DA9 @not_humility
+8DC5 @underflow
+8DE1 @overflow
+00D9 zpD9
+8DFE @lost_an_eigth
+8DEF @set_virtue
+00DA zpDA
+8DF9 @underflow
+8D6C @experienced
+EEC0 npc_can_move
+EEE0 npc_dialogue
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

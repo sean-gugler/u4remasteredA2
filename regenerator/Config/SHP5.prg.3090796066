@@ -1,0 +1,396 @@
+:CODE START
+8800
+:CODE END
+8ED0
+:DATA BYTES
+8803-8812
+8830-8872
+888A-88CE
+88FA-891A
+8920-8941
+894C-8980
+8986-89CC
+89EC-8A0E
+8A4A-8A64
+8A6A-8A8E
+8A98-8AE0
+8B08-8B1F
+8B27-8B31
+8B4E-8B6C
+8B93-8BCA
+8BCE-8C0B
+8C2D-8C5B
+8C7C-8C8C
+8C98-8CB2
+8D5B-8E42
+8EC1-8ED0
+8CD5-8CEB
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8CEB
+:REMOVED BYTES
+:FULL COMMENTS
+8E42 unused
+8D13 unused
+8CFB unused
+:SIDE COMMENTS
+8800 b'\nWELCOME UNTO\n\x00'
+882D b' SAYS:\nPEACE AND JOY BE\nWITH YOU FRIEND.\nARE YOU IN NEED\nOF HELP?\x00'
+8887 b' SAYS:\nWE CAN PERFORM:\nA-CURING\nB-HEALING\nC-RESURRECTION\nYOUR NEED:\x00'
+88F7 b'\nTHOU SUFFERS NOT\nFROM POISON!\n\x00'
+891D b'\nA CURING WILL\nCOST THEE 100gp.\n\x00'
+8949 b'\nI SEE BY THY\nPURSE THAT THOU\nHAST NOT ENOUGH\nGOLD.\x00'
+8983 b'\nI WILL\nCURE THEE FOR\nFREE, BUT GIVE\nUNTO OTHERS WHEN\nEVER THOU MAY!\n\x00'
+89E9 b'\nA HEALING WILL\nCOST THEE 200gp.\n\x00'
+8A47 b'\nTHOU ART NOT\nDEAD FOOL!\n\x00'
+8A67 b'\nRESURECTION WILL\nCOST THEE 300gp.\n\x00'
+8A95 b'\nI SEE BY THY\nPURSE THAT THOU\nHAST NOT ENOUGH\nGOLD. I CANNOT\nAID THEE.\n\x00'
+8B05 b' ASKS:\nWHO IS IN NEED?\x00'
+8B24 b'\nNO ONE?\n\x00'
+8B4B b' ASKS:\nDO YOU NEED\nMORE HELP?\x00'
+8B90 b' SAYS:\nMAY THY LIFE\nBE GUARDED BY\nTHE POWERS OF\nGOOD.\n\x00'
+8BCB b'\nART THOU WILLING\nTO GIVE 100pts\nOF THY BLOOD TO\nAID OTHERS?\x00'
+8C2A b'\nTHOU ART A\nGREAT HELP, WE\nARE IN DIRE\nNEED!\n\x00'
+8C79 b'\nWILT THOU PAY?\x00'
+8C95 b'\nTHEN I CANNOT\nAID THEE.\n\x00'
+8D23 #char_enter
+8CF4 #char_enter
+8CC7 #sound_spell_effect
+8C8F #char_Y
+8C19 #virtue_sacrifice
+8C23 #virtue_sacrifice
+8C0E #char_N
+8C12 #char_Y
+8B6F #char_Y
+8AED #status_Good
+8AEB #player_status
+8A3F #player_status
+8A43 #status_Dead
+8A20 #player_max_hp_hi
+8A28 #player_max_hp_lo
+8A24 #player_cur_hp_hi
+8A2C #player_cur_hp_lo
+89D7 #player_status
+89D9 #status_Good
+88F3 #status_Poison
+88EF #player_status
+88D1 #char_A
+88D8 #char_B
+88DF #char_C
+8875 #char_Y
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D balloon_flying
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD charptr
+00BE charptr+1
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 diskid
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zp_price
+00D9 zp_virtue_type
+00DA zp_virtue_amount
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 lt_track
+00E1 lt_sector
+00E2 lt_rwflag
+00E3 lt_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zp_index
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zp_count
+00F2 tilerow
+00F4 movement_mode
+00F5 direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 draw_stack
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 tempmap
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+1572 div32
+1573 div16
+1578 mul32
+1579 mul16
+2000 bitmap
+8800 j_overlay_entry
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_drawn_tile
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+8EA6 dec_virtue
+8E92 inc_virtue
+8EA1 @store
+8EB7 @underflow
+8EB9 @store
+8EBE @lost_an_eighth
+8E4E invert_player
+8E42 invert_all_players
+8E46 @next
+8E64 @next_col
+8E58 @next_row
+8E75 invert_view
+8E77 @next_row
+8E83 @next_col
+8D54 inc_ptr
+8D5A +
+8D53 @done
+8D44 @print_char
+8D38 @next_string
+8D3E @end_string
+8D34 @next_char
+8D5B string_table
+8D29 print_string
+8D23 print_newline
+8D22 @done
+8D1A @inc
+8D13 decode_bcd_value
+8CFB encode_bcd_value
+8D11 @done
+8D0F @max
+8D07 @dec
+8CEB input_char
+8CC1 special_fx
+8CD6 location_table
+8CD5 unused
+8CB5 deduct_gold
+8C77 ask_pay
+8B40 ask_more
+8C6D -
+8C23 yes_donate
+8C19 no_donate
+8B85 bye
+8BCB ask_donate
+8B76 try_donate
+887C menu
+8B3F @valid
+8B36 @validate
+8AFA ask_which_player
+8AE3 do_resurrect
+8A95 cannot_afford
+8A67 is_dead
+8A39 ask_resurrect
+8A18 try_heal
+89E6 ask_heal
+89CF try_cure
+89D4 do_cure
+8949 @no_money
+891D is_poisoned
+88E9 ask_cure
+88D8 +
+88DF +
+88E6 +
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

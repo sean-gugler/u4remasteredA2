@@ -1,0 +1,50 @@
+:CODE START
+FD00
+:CODE END
+FFF8
+:DATA BYTES
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+:REMOVED BYTES
+:FULL COMMENTS
+:SIDE COMMENTS
+:USER LABELS
+0080 tune_req
+0454 num_tunes
+0084 mus_ptr
+0085 mus_ptr + 1
+0780 tune_addr
+0781 tune_addr + 1
+04F1 mb_num_channels
+FD36 +
+0450 tune_channels_exist
+044F tune_channels_inuse
+0082 mus_busy
+FD39 @next_channel
+0089 chan_cursor - 1
+FD78 @next_channel
+0523 read_channel_byte
+052E music_stop
+FD00 music_update
+008A chan_cursor
+008B chan_cursor + 1
+04C0 chan_next_addr
+04C1 chan_next_addr + 1
+0096 next_values
+0097 next_values + 1
+0456 freq_lo
+0457 freq_hi
+04E4 chan_freq_reg
+04E5 chan_level_reg
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

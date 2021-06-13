@@ -1,0 +1,77 @@
+:CODE START
+4000
+:CODE END
+418D
+:DATA BYTES
+410E-411C
+4122-416C
+4006-4021
+4027-4092
+4095-40B5
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+416C
+:REMOVED BYTES
+:FULL COMMENTS
+40D7 silence COUT, leaving it active for DOS commands
+40E5 copy hi 4K of ROM to underlying RAM
+4102 load game files. SHP0:bank1, SHP1:bank2
+:SIDE COMMENTS
+410B b'\x04BLOAD S\x81HP0\n\x00'
+411F b'\x04BLOAD S\x81HP1\n\x04BLOAD T\x81BLS,A$E000\n\x04BLOAD H\x81TXT,A$E400\n\x04BRUN B\x81OOT,A$6000\n\x00'
+40E5 read twice to
+40E8 write-enable LC RAM bank2
+40D2 RTS
+4102 read-enable LC RAM bank2
+4105 read twice to
+4108 RW-enable LC RAM bank1
+411C read-enable LC RAM bank2
+:USER LABELS
+0046 kbd_buf_count
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD charptr
+00BE charptr+1
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0400 screen
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+417A +
+4174 inc_ptr
+4186 @done
+416C print_cout
+C081 hw_ROMIN
+FC58 rom_HOME
+FDED rom_COUT
+03EA dos_hook_cout
+0036 COUT_lo
+0037 COUT_hi
+40F7 -
+C083 hw_LCBANK2
+081B j_primm_cout
+00D0 disk_id
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

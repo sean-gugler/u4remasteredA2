@@ -504,8 +504,8 @@ sell_menu:
 	jsr j_printbcd
 :	lda payment + 1
 	jsr j_printbcd
-	jsr j_primm  ;b'gp FOR THAT\n\x00'
-	.byte "gp FOR THAT", $8d
+	jsr j_primm  ;b'gp FOR THAT.\n\x00'
+	.byte "gp FOR THAT.", $8d
 	.byte 0
 	lda zp_item_type
 	clc
@@ -664,26 +664,27 @@ string_table:
 	.byte "IS BOTH SUPPLE", $8d
 	.byte "AND STRONG, AND", $8d
 	.byte "COSTS A MERE", $8d
-	.byte "200gp, A BARGAN!", $8d
+	.byte "200gp, A", $8d
+	.byte "BARGAIN!", $8d
 	.byte 0
 	.byte "CHAIN MAIL IS", $8d
 	.byte "THE ARMOUR USED", $8d
 	.byte "BY MORE WARRIORS", $8d
-	.byte "THAN ALL OTHERS", $8d
+	.byte "THAN ALL OTHERS.", $8d
 	.byte "OURS COSTS 600gp", $8d
 	.byte 0
 	.byte "FULL PLATE", $8d
 	.byte "ARMOUR IS THE", $8d
-	.byte "ULTIMA IN NON-", $8d
+	.byte "ULTIMATE IN NON-", $8d
 	.byte "MAGIC ARMOUR,", $8d
 	.byte "GET YOURS", $8d
 	.byte "FOR 2000gp.", $8d
 	.byte 0
 	.byte "MAGIC ARMOUR IS", $8d
 	.byte "RARE AND", $8d
-	.byte "EXPENSIVE THIS", $8d
+	.byte "EXPENSIVE. THIS", $8d
 	.byte "CHAIN SELLS FOR", $8d
-	.byte "4000gp", $8d
+	.byte "4000gp.", $8d
 	.byte 0
 	.byte "MAGICAL PLATE", $8d
 	.byte "ARMOUR IS THE", $8d

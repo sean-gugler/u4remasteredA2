@@ -785,6 +785,10 @@ idle_combat:
 	tay
 	lda combat_foe_tile,x
 	beq @next
+	cmp #tile_anhk          ; BUGFIX
+	beq @dontanim           ; BUGFIX
+	cmp #tile_camp_fire     ; BUGFIX
+	beq @dontanim           ; BUGFIX
 	lda combat_foe_slept,x
 	bne @dontanim
 	lda combat_foe_tile,x
@@ -1937,22 +1941,22 @@ mulax:
 
 ; unused. To save even more memory, consider adjusting
 ; both 'update_britannia' and 'gettile_britannia'.
-	lda tile_ypos
-	jsr mul16
-	sta ptr2
-	lda tile_xpos
-	and #$0f
-	ora ptr2
-	sta ptr2
-	lda tile_ypos
-	and #$10
-	asl
-	ora tile_xpos
-	jsr div16
-	clc
-	adc #>world_map_nw
-	sta ptr2+1
-	rts
+;	lda tile_ypos
+;	jsr mul16
+;	sta ptr2
+;	lda tile_xpos
+;	and #$0f
+;	ora ptr2
+;	sta ptr2
+;	lda tile_ypos
+;	and #$10
+;	asl
+;	ora tile_xpos
+;	jsr div16
+;	clc
+;	adc #>world_map_nw
+;	sta ptr2+1
+;	rts
 
 scroll_tiles:
 	lda #$00
@@ -3035,7 +3039,7 @@ strings:
 	msbstring "AWAKEN"
 	msbstring "BLINK"
 	msbstring "CURE"
-	msbstring "DISPELL"
+	msbstring "DISPEL"
 	msbstring "ENERGY"
 	msbstring "FIREBALL"
 	msbstring "GATE"
@@ -3049,9 +3053,9 @@ strings:
 	msbstring "OPEN"
 	msbstring "PROTECTION"
 	msbstring "QUICKNESS"
-	msbstring "RESSURECT"
+	msbstring "RESURRECT"
 	msbstring "SLEEP"
-	msbstring "TREMMOR"
+	msbstring "TREMOR"
 	msbstring "UNDEAD"
 	msbstring "VIEW"
 	msbstring "WINDS"
@@ -3061,7 +3065,7 @@ strings:
 	msbstring "BRITANNIA"
 	msbstring "THE LYCAEUM"
 	msbstring "EMPATH ABBEY"
-	msbstring "SERPANTS HOLD"
+	msbstring "SERPENT'S HOLD"
 	msbstring "MOONGLOW"
 	msbstring "BRITAIN"
 	msbstring "JHELOM"
@@ -3071,16 +3075,16 @@ strings:
 	msbstring "SKARA BRAE"
 	msbstring "MAGINCIA"
 	msbstring "PAWS"
-	msbstring "BUCCANEERS DEN"
+	msbstring "BUCCANEER'S DEN"
 	msbstring "VESPER"
 	msbstring "COVE"
 	msbstring "DECEIT"
 	msbstring "DESPISE"
-	msbstring "DASTERD"
+	msbstring "DESTARD"
 	msbstring "WRONG"
 	msbstring "COVETOUS"
 	msbstring "SHAME"
-	msbstring "HYLOTHE"
+	msbstring "HYTHLOTH"
 	.byte "THE GREAT", $8D
 	msbstring "STYGIAN ABYSS!"
 	msbstring "HONESTY"
@@ -3240,7 +3244,3 @@ gettile_dungeon:
 	ldy #$00
 	lda (ptr1),y
 	rts
-
-; Junk from segment padding
-	.byte $30,$41,$30,$41,$30,$41,$30,$41
-	.byte $30,$41,$30,$41

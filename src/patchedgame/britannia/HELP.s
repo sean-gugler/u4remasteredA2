@@ -259,6 +259,9 @@ j_overlay_entry:
 	pla
 	lda #$01
 	jsr music_ctl
+	lda move_counter        ; BUFFIX Only give early help while
+	ora move_counter+1      ; BUGFIX move counter < 1,000 - not just
+	bne check_companions    ; BUGFIX simply when thousands digit is 0
 	lda move_counter + 2
 	and #$f0
 	bne check_companions
@@ -571,6 +574,6 @@ return_to_main_conv:
 	.byte 0
 
 ; junk
-	sta temp_x
-	lda a811f
-	.byte $85  ;sta ...
+;	sta temp_x
+;	lda a811f
+;	.byte $85  ;sta ...

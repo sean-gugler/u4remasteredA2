@@ -371,6 +371,15 @@ use_skull:
 	.byte "MONDAIN THE", $8d
 	.byte "WIZARD ALOFT....", $8d
 	.byte 0
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	
+	lda game_mode   ; ENHANCED: skull in combat
+	bmi @combat     ; ENHANCED: skull in combat
+
 	ldx #object_max
 @clear:
 	lda #$00
@@ -382,19 +391,14 @@ use_skull:
 	sta object_dng_level,x
 	sta npc_dialogue,x
 	jmp @next_object
-
 @lord_british:
 	lda #$ff
 	sta object_dng_level,x
 @next_object:
 	dex
 	bpl @clear
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
 	jsr j_update_view
+@penalty:
 	lda #virtue_last - 1
 	sta zpea
 @next_virtue:
@@ -405,6 +409,35 @@ use_skull:
 	bpl @next_virtue
 	jsr j_update_status
 	rts
+
+; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
+@combat:
+	ldx #foes_max
+@next:
+	lda combat_foe_tile,x
+	beq @skip
+	cmp #tile_lord_british
+	beq @skip
+@kill_foe:
+	stx zpea
+	lda combat_foe_cur_x,x
+	sta target_x
+	lda combat_foe_cur_y,x
+	sta target_y
+	lda #tile_attack_red
+	sta attack_sprite
+	jsr j_update_view_combat
+	lda #sound_damage
+	jsr j_playsfx
+	ldx zpea
+	lda #$00
+	sta attack_sprite
+	sta combat_foe_hp,x
+	sta combat_foe_tile,x
+@skip:
+	dex
+	bpl @next
+	bmi @penalty
 
 get_input:
 	lda #char_question

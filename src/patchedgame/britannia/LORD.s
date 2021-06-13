@@ -268,30 +268,32 @@ talk_lord_british:
 
 @check_alive:
 ; This routine is non-functional because of the BUG below.
-	lda #$01
-	sta curr_player
-	jsr j_get_stats_ptr
-	ldy #$45     ;BUG: should be #$12 - no idea where #$45 came from.
-	lda (ptr1),y
-	cmp #status_Dead
-	bne @alive
-	lda #status_Good
-	sta (ptr1),y
-	jsr j_printname
-	jsr j_primm  ;b'THOU SHALT\nLIVE AGAIN!\n\x00'
-	.byte "THOU SHALT", $8d
-	.byte "LIVE AGAIN!", $8d
-	.byte 0
-	ldx #$14
-	lda #sound_cast
-	jsr j_playsfx
-	jsr j_invertview
-	lda #sound_spell_effect
-	ldx #$c0
-	jsr j_playsfx
-	jsr j_invertview
-	jsr restore_party_hp
-	jsr j_update_status
+; Fixing this dormant code would affect the balance of
+; the game design, so I'm leaving it out.
+;	lda #$01
+;	sta curr_player
+;	jsr j_get_stats_ptr
+;	ldy #$45     ;BUG: should be #$12 - no idea where #$45 came from.
+;	lda (ptr1),y
+;	cmp #status_Dead
+;	bne @alive
+;	lda #status_Good
+;	sta (ptr1),y
+;	jsr j_printname
+;	jsr j_primm  ;b'THOU SHALT\nLIVE AGAIN!\n\x00'
+;	.byte "THOU SHALT", $8d
+;	.byte "LIVE AGAIN!", $8d
+;	.byte 0
+;	ldx #$14
+;	lda #sound_cast
+;	jsr j_playsfx
+;	jsr j_invertview
+;	lda #sound_spell_effect
+;	ldx #$c0
+;	jsr j_playsfx
+;	jsr j_invertview
+;	jsr restore_party_hp
+;	jsr j_update_status
 @alive:
 	jsr j_primm  ;b'LORD BRITISH\nSAYS: WELCOME\n\x00'
 	.byte "LORD BRITISH", $8d
@@ -402,8 +404,8 @@ check_xp:
 @ask_me:
 	jsr j_primm  ;b'\nWHAT WOULD THOU\nASK OF ME?\n\x00'
 	.byte $8d
-	.byte "WHAT WOULD THOU", $8d
-	.byte "ASK OF ME?", $8d
+	.byte "WHAT WOULDST", $8d
+	.byte "THOU ASK OF ME?", $8d
 	.byte 0
 	jmp input_word
 
@@ -502,7 +504,7 @@ ask_y_or_n:
 	.byte 0
 	rts
 
-	jmp ask_y_or_n
+;	jmp ask_y_or_n
 
 @yes:
 	lda #$00
@@ -543,7 +545,7 @@ answer_name:
 
 answer_look:
 	jsr j_primm  ;b'THOU SEE THE\nKING WITH THE\nROYAL SCEPTRE.\n\x00'
-	.byte "THOU SEE THE", $8d
+	.byte "THOU SEEST THE", $8d
 	.byte "KING WITH THE", $8d
 	.byte "ROYAL SCEPTRE.", $8d
 	.byte 0
@@ -636,7 +638,7 @@ answer_honesty:
 	jsr print_he_says
 	jsr j_primm  ;b'THE FAIR TOWNE\nOF MOONGLOW ON\nDAGGER ISLE, IS\nWHERE THE VIRTUE\nOF HONESTY\nTHRIVES!\n\x00'
 	.byte "THE FAIR TOWNE", $8d
-	.byte "OF MOONGLOW ON", $8d
+	.byte "OF MOONGLOW, ON", $8d
 	.byte "DAGGER ISLE, IS", $8d
 	.byte "WHERE THE VIRTUE", $8d
 	.byte "OF HONESTY", $8d
@@ -705,7 +707,7 @@ answer_spirituality:
 	jsr j_primm  ;b'IN SKARA BRAE\nTHE SPIRITUAL\nPATH IS TAUGHT,\nFIND IT ON AN\nISLE NEAR\nSPIRITWOOD!\n\x00'
 	.byte "IN SKARA BRAE", $8d
 	.byte "THE SPIRITUAL", $8d
-	.byte "PATH IS TAUGHT,", $8d
+	.byte "PATH IS TAUGHT.", $8d
 	.byte "FIND IT ON AN", $8d
 	.byte "ISLE NEAR", $8d
 	.byte "SPIRITWOOD!", $8d
@@ -852,9 +854,9 @@ answer_ankh:
 	.byte "THE ANKH IS THE", $8d
 	.byte "SYMBOL OF ONE", $8d
 	.byte "WHO STRIVES FOR", $8d
-	.byte "VIRTUE, KEEP IT", $8d
+	.byte "VIRTUE. KEEP IT", $8d
 	.byte "WITH THEE AT", $8d
-	.byte "TIMES FOR BY", $8d
+	.byte "ALL TIMES FOR BY", $8d
 	.byte "THIS MARK THOU", $8d
 	.byte "SHALT BE KNOWN!", $8d
 	.byte 0
@@ -944,7 +946,7 @@ answer_virtue:
 lb_intro:
 	jsr j_primm  ;b'LORD BRITISH\nRISES AND SAYS\nAT LONG LAST!\n\x00'
 	.byte "LORD BRITISH", $8d
-	.byte "RISES AND SAYS", $8d
+	.byte "RISES AND SAYS:", $8d
 	.byte "AT LONG LAST!", $8d
 	.byte 0
 	lda #$01
@@ -976,13 +978,13 @@ lb_intro:
 	.byte $8d
 	.byte "A CHAMPION OF", $8d
 	.byte "VIRTUE IS CALLED", $8d
-	.byte "FOR. THOU MAY BE", $8d
-	.byte "THIS CHAMPION,", $8d
-	.byte "BUT ONLY TIME", $8d
-	.byte "SHALL TELL. I", $8d
-	.byte "WILL AID THEE", $8d
-	.byte "ANY WAY THAT I", $8d
-	.byte "CAN!", $8d
+	.byte "FOR. THOU MAYST", $8d
+	.byte "BE THIS", $8d
+	.byte "CHAMPION, BUT", $8d
+	.byte "ONLY TIME SHALL", $8d
+	.byte "TELL. I WILL AID", $8d
+	.byte "THEE ANY WAY", $8d
+	.byte "THAT I CAN!", $8d
 	.byte 0
 	jsr j_waitkey
 	jsr j_primm  ;b'\nHOW MAY I\nHELP THEE?\n\x00'
@@ -1167,4 +1169,4 @@ exit_conversation:
 	rts
 
 ; junk
-	.byte $02
+;	.byte $02

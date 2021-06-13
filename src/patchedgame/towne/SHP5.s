@@ -406,10 +406,11 @@ ask_resurrect:
 	jmp ask_more
 
 is_dead:
-	jsr j_primm  ;b'\nRESURECTION WILL\nCOST THEE 300gp.\n\x00'
+	jsr j_primm  ;b'\nRESURRECTION WILL\nCOST THEE 300gp.\n\x00'
 	.byte $8d
-	.byte "RESURECTION WILL", $8d
-	.byte "COST THEE 300gp.", $8d
+	.byte "RESURRECTION", $8d
+	.byte "WILL COST THEE", $8d
+	.byte "300gp.", $8d
 	.byte 0
 	lda gold_hi
 	cmp #$03
@@ -793,11 +794,11 @@ dec_virtue:
 	jsr j_primm
 	.byte $8d
 	.byte "THOU HAST LOST", $8d
-;	.byte "AN EIGHTH!", $8d
-;	.byte 0
-;	ldy zp_virtue_type
-;	lda #$99
-;	jmp @continue
+	.byte "AN EIGHTH!", $8d
+	.byte 0
+	ldy zp_virtue_type
+	lda #$99
+	jmp @continue
 
 ; junk "RI AM VERY SO"
 ;	.byte $52,$49,$20,$41,$4d,$20,$56,$45

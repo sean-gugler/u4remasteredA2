@@ -746,5 +746,5 @@ input_digit:
 	rts
 
 ; junk
-	.byte $ff,$00,$00,$ff,$ff,$00,$00,$ff
-	.byte $ff,$00,$00
+;	.byte $ff,$00,$00,$ff,$ff,$00,$00,$ff
+;	.byte $ff,$00,$00

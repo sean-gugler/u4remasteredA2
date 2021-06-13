@@ -363,9 +363,11 @@ load_saved_map:
 	.byte $84,"BLOAD ROST,A$EC00", $8d
 	.byte 0
 game_start:
+	lda balloon_flying   ; BUGFIX: don't let players cheat by quitting
+	sta movement_mode    ; BUGFIX: over unlandable terrain and rebooting!
 	lda #$00
-	sta balloon_flying
-	sta movement_mode
+;	sta balloon_flying   ; BUGFIX
+;	sta movement_mode    ; BUGFIX
 	sta current_location
 	sta horse_mode
 	lda #mode_world
@@ -485,6 +487,13 @@ done_only_on_foot:
 	.byte "ONLY ON FOOT!", $8d
 	.byte 0
 	jmp done_sound_deny
+
+; back-ported from C64
+done_nothing_there:
+	jsr j_primm  ;b'NOTHING THERE!\n\x00'
+	.byte "NOTHING THERE!", $8d
+	.byte 0
+	jmp cmd_done
 
 done_slow_progress:
 	jsr j_primm  ;b'SLOW PROGRESS!\n\x00'
@@ -1201,10 +1210,13 @@ cmd_attack:
 :	jsr get_mob_at_temp_xy
 	bpl :+
 @nothing_there:
-	jmp done_what
+;	jmp done_what
+	jmp done_nothing_there   ; back-ported from C64
 
 :	stx zp_index
 	lda object_tile_type,x
+	cmp #tile_chest     ; BUGFIX
+	beq @nothing_there  ; BUGFIX
 	cmp #tile_whirlpool
 	beq @nothing_there
 	cmp #tile_twister
@@ -1245,9 +1257,21 @@ cmd_attack:
 	ldy #virtue_honor
 	lda #$03
 	jsr dec_virtue
+	jsr j_update_status   ; BUGFIX: if lost eighth, show that in status icon
 do_attack:
 	ldx zp_index
 	lda object_tile_type,x
+; BUGFIX: bad animations if you attack towne characters of these types.
+	cmp #tile_human_prone
+	bne :+
+	lda #tile_beggar
+:	cmp #tile_water_shallow
+	bne :+
+	lda #tile_water_coast
+:	cmp #tile_walk
+	bne :+
+	lda #tile_human_paladin
+: ;BUGFIX end
 	sta foe_type_encountered
 	lda object_xpos,x
 	sta pre_combat_x
@@ -1306,6 +1330,8 @@ cmd_board:
 	jmp done_what
 
 @board_ship:
+	lda current_location    ; BUGFIX: by coincidence, tile_ship_first == dng_tile_ladder_u
+	bne @nothing_boardable  ; BUGFIX: so only board ships on surface, not in dungeon
 	lda #tile_ship_first
 	jsr do_board
 	jsr j_primm  ;b'frigate!\n\x00'
@@ -1594,8 +1620,8 @@ sub_delta:
 	rts
 
 spell_cure:
-	jsr j_primm  ;b'WH0-\x00'
-	.byte "WH0-", 0
+	jsr j_primm  ;b'WHO-\x00'
+	.byte "WHO-", 0
 	jsr j_getplayernum
 	bne :+
 @fail:
@@ -2137,7 +2163,7 @@ spell_z_down:
 	lda dungeon_level
 	cmp #$07
 	bcc :+
-	jsr failed   ;BUG: stack overflow
+	jmp failed   ;BUGFIX: was JSR
 :	inc dungeon_level
 	lda #$20     ;32 attempts
 	sta zp_attempts
@@ -2363,13 +2389,17 @@ cmd_enter:
 	jsr j_primm  ;b'Enter \x00'
 	.byte "Enter ", 0
 	lda current_location
-	beq :+        ;only in world
-	jmp done_what
+	bne @not_allowed        ;only in world
+	lda player_transport    ; BUGFIX: "Enter" a towne or castle
+	cmp #tile_balloon       ; BUGFIX: while in balloon
+	bne :+                  ; BUGFIX: would get you stuck!
+	jmp done_cant           ; BUGFIX
 
 :	ldx #object_last
 @next:
 	dex
 	bpl :+
+@not_allowed:
 	jmp done_what
 
 :	lda location_map_x,x
@@ -2917,8 +2947,8 @@ collect_gold:
 	jsr inc_party_gold
 	lda zp_amount
 	jsr j_printbcd
-	jsr j_primm  ;b'-GOLD!\n\x00'
-	.byte "-GOLD!", $8d
+	jsr j_primm  ;b' GOLD!\n\x00'
+	.byte " GOLD!", $8d
 	.byte 0
 	jmp cmd_done
 
@@ -3766,6 +3796,8 @@ cmd_x_it:
 @horse:
 	lda #$00
 	sta horse_mode
+	jmp @find_empty_slot    ; back-ported from C64. Probably unnecessary.
+
 @balloon:
 	lda movement_mode
 	beq @find_empty_slot
@@ -4270,7 +4302,7 @@ display_items:
 	.byte "BOOK ", 0
 :	lda bell_book_candle
 	and #item_flag_candle
-	beq :+
+	beq display_3_part_key    ; BUGFIX: was :+
 	jsr j_primm  ;b'CANDL\x00'
 	.byte "CANDL", 0
 display_3_part_key:
@@ -4533,6 +4565,8 @@ tile_effect:
 	sta pre_combat_y
 	lda #tile_bridge_narrow
 	sta pre_combat_tile
+	pla     ; BUGFIX: entered via JSR from top-of-stack main loop
+	pla     ; BUGFIX: exit to init_combat which is also top-of-stack
 	jmp init_combat
 
 @no_trolls:
@@ -5061,7 +5095,7 @@ mob_world_take_turn:
 	beq check_range
 	cmp #tile_twister
 	beq check_range
-	jsr manhattan_dist_foe
+	jsr manhattan_dist
 	cmp #$02
 	bcs check_range
 player_attacked:
@@ -5077,6 +5111,8 @@ player_attacked:
 	lda object_ypos,x
 	sta temp_y
 	pla    ; not returning from "jsr mob_world_take_turn" in "mobs_act"
+	pla
+	pla    ; BUGFIX: not returning from "jsr mobs_act" in "cmd_done" either
 	pla
 	jmp do_attack
 
@@ -5138,7 +5174,7 @@ check_range:
 	bpl @try_sail_n_s
 	bmi @turn_or_sail
 @turn_or_sail:
-	jsr manhattan_dist_foe
+	jsr manhattan_dist
 	cmp #$06
 	bcs @turn_ship
 	jsr j_rand
@@ -5251,7 +5287,7 @@ check_range:
 	cmp #tile_hydra
 	bcc @try_move
 @range_attack:
-	jsr manhattan_dist_foe
+	jsr manhattan_dist
 	lda temp_x
 	jsr math_abs
 	cmp #range_missile_attack
@@ -5363,7 +5399,7 @@ mobs_act_towne:
 	jmp @x_or_y
 
 @toward_player:
-	jsr manhattan_dist_towne
+	jsr manhattan_dist
 	cmp #$02
 	bcs @x_or_y
 	lda object_dng_level,x
@@ -5788,31 +5824,7 @@ fire_world_missile:
 	lda #$ff
 	rts
 
-manhattan_dist_foe:
-	sec
-	lda player_xpos
-	sbc object_xpos,x
-	sta temp_x
-	jsr math_sign
-	sta delta_x
-	sec
-	lda player_ypos
-	sbc object_ypos,x
-	sta temp_y
-	jsr math_sign
-	sta delta_y
-	lda temp_x
-	jsr math_abs
-	sta zpd9
-	lda temp_y
-	jsr math_abs
-	clc
-	adc zpd9
-	sta zpd9
-	rts
-
-; strange, same routine pasted twice!
-manhattan_dist_towne:
+manhattan_dist:
 	sec
 	lda player_xpos
 	sbc object_xpos,x
@@ -6015,9 +6027,9 @@ do_dungeon_room:
 	lda lt_track
 	cmp #$07     ;except in abyss
 	bcs @init_arena
-	jsr j_primm  ;b'\nTHE ALTER ROOM\nOF \x00'
+	jsr j_primm  ;b'\nTHE ALTAR ROOM\nOF \x00'
 	.byte $8d
-	.byte "THE ALTER ROOM", $8d
+	.byte "THE ALTAR ROOM", $8d
 	.byte "OF ", 0
 	lda player_xpos
 	cmp #$03
@@ -7475,8 +7487,8 @@ try_flee:
 	beq do_flee
 	bne @cannot_split_party
 @cannot_split_party:
-	pla    ; BUG: not entered via JSR,
-	pla    ; BUG: nothing on stack to pop
+;	pla    BUGFIX: not entered via JSR,
+;	pla    BUGFIX: nothing on stack to pop
 	jsr j_primm  ;b'ALL MUST USE\nTHE SAME EXIT!\n\x00'
 	.byte "ALL MUST USE", $8d
 	.byte "THE SAME EXIT!", $8d
@@ -7913,10 +7925,11 @@ combat_cmd_ztats:
 	jsr j_primm  ;b'Ztats\n\x00'
 	.byte "Ztats", $8d
 	.byte 0
-	jsr zstats_for_player ;BUG: stack overflow, never RTS
-	jsr j_update_status
-	jsr invert_player_name
-	jmp combat_cmd_done
+	jmp zstats_for_player ;BUGFIX: was JSR
+	; dead code, not needed anyway
+	;jsr j_update_status
+	;jsr invert_player_name
+	;jmp combat_cmd_done
 
 foe_power_table:
 	.byte $ff,$ff,$40,$60,$80,$60,$ff,$ff
@@ -7961,8 +7974,8 @@ foe_index_from_tile:
 @done:
 	rts
 @not_monster:
-	and #$1f     ;000NNNNN + 24  (BUG: should be 000NNNNx)
-	clc
+	and #$1e     ;000NNNNx + 24  (BUGFIX: was 1f, 000NNNNN)
+	lsr          ;BUGFIX: was clc
 	adc #$24
 	rts
 
@@ -8922,6 +8935,18 @@ run_file_dead:
 	jsr j_overlay_entry
 	lda #music_explore
 	jsr music_ctl
+; BUGFIX
+; Reset stack. Impossible to know if we should pop 1, 3, or 4 frames
+; because we could have arrived here via any of the following JSR stacks:
+;     check_water_hazards > enter_whirlpool > damage_party, "thy ship sinks"
+;     check_water_hazards > enter_twister > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn, fire_cannon_pirate > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn > fire_red_missile > damage_party, "thy ship sinks"
+;     cmd_done > anyone_awake, all dead
+;     cmd_done, next_turn > anyone_awake, all dead
+; However, we do know that cmd_done is the top-most frame from which nothing ever RTS.
+	ldx #$FF    ; BUGFIX
+	txs         ; BUGFIX
 	jmp cmd_done
 
 invert_all_players:
@@ -9312,12 +9337,24 @@ check_enter_moongate:
 	rts
 
 ; BUG: stack overflow. Entered here via JSR but exit via JMP to load_shrine or cmd_done
-:	lda moon_phase_trammel
-	cmp #$04
+;:	lda moon_phase_trammel
+;	cmp #$04
+;	bne gate_to_gate
+;	lda moon_phase_felucca
+;	cmp #$04
+;	bne gate_to_gate
+
+; BUGFIX: fits in same byte count.
+; Since not every phase pair is possible, Trammel * 2 + Felucca == 12 if and only if both are 4.
+:	pla
+	pla
+;	nop
+	lda moon_phase_trammel
+	asl a       ;implicit CLC because phase < 8 always
+	adc moon_phase_felucca
+	cmp #$0c    ;only eq when both phases are 4
 	bne gate_to_gate
-	lda moon_phase_felucca
-	cmp #$04
-	bne gate_to_gate
+
 	jsr j_update_view
 	jsr j_invertview
 	lda #sound_spell_effect
@@ -9370,7 +9407,3 @@ is_evil:
 	lda #$00
 	rts
 
-; junk:  ON OF\nVIRTUE IS CA
-	.byte $cf,$ce,$a0,$cf,$c6,$8d,$d6,$c9
-	.byte $d2,$d4,$d5,$c5,$a0,$c9,$d3,$a0
-	.byte $c3,$c1

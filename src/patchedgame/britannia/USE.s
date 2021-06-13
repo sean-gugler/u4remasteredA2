@@ -450,6 +450,30 @@ use_wheel:
 	.byte 0
 	rts
 
+use_skull_at_abyss:
+	jsr j_primm  ;b'\nYOU CAST THE\nSKULL OF MONDAIN\nINTO THE ABYSS!\n\x00'
+	.byte $8d
+	.byte "YOU CAST THE", $8d
+	.byte "SKULL OF MONDAIN", $8d
+	.byte "INTO THE ABYSS!", $8d
+	.byte 0
+	lda #$ff
+	sta skull
+	lda #$07
+	sta zpea
+@next_virtue:
+	ldy zpea     ;BUGFIX: was #$ea (wrong opcode)
+	lda #$10
+	jsr inc_virtue
+	dec zpea
+	bpl @next_virtue
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	rts
+
 use_skull:
 	lda skull
 	cmp #$01
@@ -475,6 +499,10 @@ use_skull:
 	jsr shake_screen
 	jsr j_invertview
 	jsr shake_screen
+	
+	lda game_mode   ; ENHANCED: skull in combat
+	bmi @combat     ; ENHANCED: skull in combat
+
 	ldx #object_mobs_max
 	lda #$00
 @clear:
@@ -483,6 +511,7 @@ use_skull:
 	dex
 	bpl @clear
 	jsr j_update_view
+@penalty:
 	lda #virtue_last - 1
 	sta zpea
 @next_virtue:
@@ -494,29 +523,34 @@ use_skull:
 	jsr j_update_status
 	rts
 
-use_skull_at_abyss:
-	jsr j_primm  ;b'\nYOU CAST THE\nSKULL OF MONDAIN\nINTO THE ABYSS!\n\x00'
-	.byte $8d
-	.byte "YOU CAST THE", $8d
-	.byte "SKULL OF MONDAIN", $8d
-	.byte "INTO THE ABYSS!", $8d
-	.byte 0
-	lda #$ff
-	sta skull
-	lda #$07
-	sta zpea
-@next_virtue:
-	ldy #$ea     ;BUG: should be $ea not #$ea
-	lda #$10
-	jsr inc_virtue
-	dec zpea
-	bpl @next_virtue
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
-	rts
+; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
+@combat:
+	ldx #foes_max
+@next:
+	lda combat_foe_tile,x
+	beq @skip
+	cmp #tile_lord_british
+	beq @skip
+@kill_foe:
+	stx zpea
+	lda combat_foe_cur_x,x
+	sta target_x
+	lda combat_foe_cur_y,x
+	sta target_y
+	lda #tile_attack_red
+	sta attack_sprite
+	jsr j_update_view_combat
+	lda #sound_damage
+	jsr j_playsfx
+	ldx zpea
+	lda #$00
+	sta attack_sprite
+	sta combat_foe_hp,x
+	sta combat_foe_tile,x
+@skip:
+	dex
+	bpl @next
+	bmi @penalty
 
 get_input:
 	lda #char_question
@@ -708,5 +742,5 @@ dec_virtue:
 	jmp @continue
 
 ; junk. "WN\nTO US O"
-	.byte $d7,$ce,$8d,$d4,$cf,$a0,$d5,$d3
-	.byte $a0,$cf
+;	.byte $d7,$ce,$8d,$d4,$cf,$a0,$d5,$d3
+;	.byte $a0,$cf

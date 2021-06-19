@@ -285,10 +285,10 @@ target_y = $efff
 	.segment "OVERLAY"
 
 j_overlay_entry:
-	pla   ; pop 2 frames left from entering by BRUN
-	pla
-	pla
-	pla
+	pla   ; BUGFIX: pop 2 frames left from entering by BRUN
+	pla   ; BUGFIX
+	pla   ; BUGFIX
+	pla   ; BUGFIX
 	bit hw_lcbank1
 	bit hw_lcbank1
 	jsr j_primm_cout ;b'\x04BLOAD CSTRING,A$4000\n\x00'

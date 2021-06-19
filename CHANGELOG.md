@@ -11,6 +11,12 @@ https://github.com/sean-gugler/u4remasteredA2
 - Slideshow disk of in-game artwork, including tile sets.
 - Trainer (cheat codes)
 
+
+## [1.0.1] - 2021-06-19
+### Fixed
+- [Issue 3] Freeze early during the new game sequence.
+
+
 ## [1.0.0] - 2021-06-18
 ### Added
 - First public release.

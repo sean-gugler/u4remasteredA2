@@ -1,0 +1,6 @@
+version: "3"
+services:
+  u4remastera2:
+    build: .
+    volumes:
+      - ./output:/u4remasteredA2/output

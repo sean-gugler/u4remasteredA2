@@ -44,6 +44,7 @@ DISK_NAMES = program britannia towne underworld
 DISKS = $(patsubst %,u4%.do,$(DISK_NAMES))
 
 all: $(DISKS)
+	cp *.do output/
 
 
 # Tools.

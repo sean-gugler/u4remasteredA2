@@ -7,17 +7,30 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 ## [Unreleased]
+
 ### Added
 - Slideshow disk of in-game artwork, including tile sets.
+
+### Changed
+- Cleaned up some source code. No change to build result.
+
+
+## [1.1.0] - 2021-07-03
+
+### Added
 - Trainer (cheat codes)
+- Neutral gender option
+- Quit-&-save in dungeon
 
 
 ## [1.0.1] - 2021-06-19
+
 ### Fixed
 - [Issue 3] Freeze early during the new game sequence.
 
 
 ## [1.0.0] - 2021-06-18
+
 ### Added
 - First public release.
 

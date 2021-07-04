@@ -119,12 +119,6 @@ files/original/u4underworld.do
 ```
 Type `make all` to produce rebuilt versions of those disk images in the root folder.
 
-Building with Docker
---------------------
-
-* Download the files
-* $docker compose run u4remastera2 && docker compose rm -f && docker rmi u4remastereda2_u4remastera2:latest
-
 
 Reconstruction
 --------------

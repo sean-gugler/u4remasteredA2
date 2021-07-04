@@ -40,6 +40,8 @@ on_dos_error = $0329
 dos_hook_cout = $03ea
 screen = $0400
 j_primm_cout = $081b
+trainer_first = $9a90
+trainer_last = $9aa0
 j_readblock = $b7b5
 rwts_volume = $b7eb
 rwts_track = $b7ec
@@ -60,6 +62,7 @@ rom_cout = $fded
 tbls = $e000
 htxt = $e400
 
+num_trainers = trainer_last - trainer_first
 
 	.segment "MAIN"
 
@@ -131,6 +134,13 @@ htxt = $e400
 	inc ptr1 + 1
 	bne :-
 
+; clear trainers
+	lda #$00
+	ldx #num_trainers
+:	sta trainer_first,x
+	dex
+	bpl :-
+
 ; load game files. SHP0:bank1, SHP1:bank2
 	bit hw_lcbank2 ;read-enable LC RAM bank2
 	bit hw_lcbank1 ;read twice to
@@ -143,9 +153,16 @@ htxt = $e400
 	.byte $84,"BLOAD SHP1", $8d
 	.byte $84,"BLOAD TBLS,A$E000", $8d
 	.byte $84,"BLOAD HTXT,A$E400", $8d
-	.byte $84,"BRUN BOOT,A$6000", $8d
 	.byte 0
-	.byte 0
+
+	lda hw_keyboard
+	cmp #$54  ; T
+	beq trainer_menu
+	jsr j_primm_cout
+	.byte $84,"BRUN BOOT,A$6000", $8d, 0
+trainer_menu:
+	jsr j_primm_cout
+	.byte $84,"BRUN MENU,A$6000", $8d, 0
 
 print_cout:
 	pla

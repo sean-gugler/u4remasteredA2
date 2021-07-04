@@ -28,7 +28,7 @@ ptr_bitmap = $84
 ;ptr_bitmap + 1 = $85
 mb_count = $b0
 key_buf_len = $b8
-abc = $bc
+gender_chosen = $bc
 console_xpos = $ce
 console_ypos = $cf
 diskid = $d0
@@ -1371,6 +1371,7 @@ journey_onward:
 	lda #$00
 	jsr load_music
 	jsr j_primm_cout ;b'\x04BRUN ULT4,A$4000\n\x00'
+	.byte $84,"BLOAD TRAINERS", $8d
 	.byte $84,"BRUN ULT4,A$4000", $8d
 	.byte 0
 
@@ -1413,17 +1414,23 @@ init_new_game:
 	cmp #char_M
 	beq @male
 	cmp #char_F
+	beq @female      ; ENHANCEMENT
+	cmp #char_N      ; ENHANCEMENT: for "no" or "non-binary"
 	bne @input_sex
+	lda #$1b         ; ENHANCEMENT: use a neutral symbol
+	bne @run_newgame ; ENHANCEMENT
+@female:
 	lda #char_female
 	bne @run_newgame
 @male:
 	lda #char_male
 @run_newgame:
-	sta abc
+	sta gender_chosen
 	jsr clear_window
 	lda #$00
 	jsr load_music
 	jsr j_primm_cout ;b'\x04BRUN NEWGAME,A$6400,D1\n\x00'
+	.byte $84,"BLOAD TRAINERS,D1", $8d
 	.byte $84,"BRUN NEWGAME,A$6400,D1", $8d
 	.byte 0
 return:

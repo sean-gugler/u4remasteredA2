@@ -1,4 +1,8 @@
 
+balloon_landed = $00
+balloon_drift = $01
+balloon_steer = $02
+
 mode_world = $01
 mode_towne = $02
 

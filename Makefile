@@ -205,6 +205,14 @@ PRG_FILES_$(disk) := $(foreach file, $($(disk)_FILES), $(PRG_FOLDER)/$(file).prg
 BIN_$(disk) := $(BIN_FOLDER)/$(BIN_FILE)
 
 
+# Trainer.
+
+src/trainer/TRAINERS.cfg: tools/cfg_symbols.py src/trainer/TRAINERS.cfg_segments src/patchedgame/program/ULT4.prg
+	$(subst .prg,.lab,$^) $@
+
+PRG_FILES_program := $(PRG_FILES_program) src/trainer/TRAINERS.prg src/trainer/MENU.prg
+
+
 # Create disk images.
 
 u4%.do : $$(PRG_FILES_%) $$(BIN_%)

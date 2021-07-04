@@ -248,7 +248,7 @@ attack_sprite = $effd
 target_x = $effe
 target_y = $efff
 
-
+trainer_price = $9a9a
 
 	.segment "OVERLAY"
 
@@ -485,6 +485,7 @@ sell_menu:
 @bye:
 	jmp bye
 
+; PRICE_FIX: mace costs 100, sell for 50 not 0
 @make_offer:
 	lda zp_item_type
 	asl
@@ -492,11 +493,17 @@ sell_menu:
 	lda price,y
 	jsr decode_bcd_value
 	lsr
+	php      ;PRICE_FIX
 	jsr encode_bcd_value
 	sta payment
 	lda price + 1,y
 	jsr decode_bcd_value
-	lsr
+	plp      ;PRICE_FIX
+	bcc :+   ;PRICE_FIX
+	ldx trainer_price  ;PRICE_FIX
+	beq :+   ;PRICE_FIX
+	adc #99  ;PRICE_FIX add 100	(bcc implies sec)
+:	lsr
 	jsr encode_bcd_value
 	sta payment + 1
 	jsr j_primm  ;b'\nI WILL GIVE YOU\n\x00'

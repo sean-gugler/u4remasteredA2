@@ -37,7 +37,8 @@ aura_protection = $d0
 aura_quickness = $d1
 
 balloon_landed = $00
-balloon_aloft = $ff
+balloon_drift = $01
+balloon_steer = $02
 
 chance_4 = $03
 chance_8 = $07

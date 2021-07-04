@@ -910,25 +910,32 @@ draw_rune:
 	jsr swap_buf
 	jsr j_clearview
 	pla
+
 	asl
 	tax
 	lda rune_addr + 1,x
 	sta ptr2 + 1
 	lda rune_addr,x
 	sta ptr2
+
 	ldx #$00
 	stx spk_repeat_flag
 	stx spk_pattern_flag
 	stx spk_pattern_len_cur
+
 	lda (ptr2,x)
 	sta spk_repeat_code
 	inc ptr2
 	bne :+
 	inc ptr2 + 1
+
 :	lda (ptr2,x)
 	sta spk_pattern_code
 	inc ptr2
-	ldy #max_spk_col
+	bne :+        ; BUGFIX: only manifests if data is
+	inc ptr2 + 1  ; BUGFIX: exactly on a page boundary
+
+:	ldy #max_spk_col
 @next_col:
 	ldx #max_spk_row
 	stx spk_row

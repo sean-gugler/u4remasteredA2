@@ -18,7 +18,7 @@ dest_x = $06
 dest_y = $07
 game_mode = $0b
 dungeon_level = $0c
-balloon_flying = $0d
+terrain_occlusion = $0d
 player_transport = $0e
 party_size = $0f
 dng_direction = $10
@@ -68,7 +68,7 @@ moongate_ypos = $ef
 af0 = $f0
 af1 = $f1
 tilerow = $f2
-movement_mode = $f4
+balloon_movement = $f4
 direction = $f5
 temp_x = $fa
 temp_y = $fb
@@ -203,6 +203,10 @@ combat_player_tile = $efa0
 attack_sprite = $effd
 target_x = $effe
 target_y = $efff
+
+opcode_jsr = $20  ; JSR $hhll
+opcode_bit = $2c  ; BIT $hhll
+opcode_bcc = $90  ; BCC $rr
 
 
 
@@ -729,11 +733,18 @@ delay:
 	rts
 
 update_balloon:
-	lda player_transport
-	cmp #tile_balloon
-	bne @done
-	lda movement_mode
-	beq @done
+; TRAINER: balloon_steer
+	.assert balloon_drift = 1, error, "Balloon trainer math will break"
+	lda balloon_movement
+	lsr
+	bcc @done
+; TRAINER END
+;	lda player_transport
+;	cmp #tile_balloon
+;	bne @done
+;	lda balloon_movement
+;	beq @done
+
 	dec movement_counter
 	lda movement_counter
 	and #$03
@@ -1052,7 +1063,7 @@ update_monsters:
 	sta tile_under_player
 	lda player_transport
 	sta tempmap+(xy_last_screen * (xy_center_screen) + xy_center_screen)
-	lda balloon_flying
+	lda terrain_occlusion
 	beq lineofsight
 	ldx #(xy_last_screen * xy_last_screen - 1)
 @copy:
@@ -1521,9 +1532,7 @@ cursor_ctr:
 printbcd:
 	sta ada
 	jsr div16
-	clc
-	adc #$30
-	jsr console_out
+	jsr printdigit
 	lda ada
 	and #$0f
 printdigit:
@@ -1659,7 +1668,16 @@ update_wind:
 	jsr rand
 	bne @nochange
 	jsr rand
-	jsr getsign
+;	jsr getsign
+; SIZE_OPT inline "getsign" routine, no other callers
+	beq @zero
+	bmi @negative
+	lda #$01
+	.byte opcode_bit  ;skip next 2 bytes
+@negative:
+	lda #$ff
+@zero:
+; SIZE_OPT end
 	clc
 	adc direction
 	and #$03
@@ -1762,17 +1780,17 @@ printwest:
 	.byte " WEST", 0
 	rts
 
-getsign:
-	cmp #$00
-	beq @zero
-	bmi @negative
-	lda #$01
-	rts
-
-@negative:
-	lda #$ff
-@zero:
-	rts
+;getsign:
+;	cmp #$00
+;	beq @zero
+;	bmi @negative
+;	lda #$01
+;	rts
+;
+;@negative:
+;	lda #$ff
+;@zero:
+;	rts
 
 stats_save_pos:
 	lda console_xpos
@@ -1840,7 +1858,7 @@ getnumber:
 
 getplayernum:
 	jsr waitkey
-	beq @gotnum
+;	beq @gotnum  ; SIZE_OPT, unnecessary
 	sec
 	sbc #$b0
 	cmp #$09
@@ -1853,17 +1871,17 @@ getplayernum:
 	lda currplayer
 	rts
 
+; INPUT: A = tile type to check
+; OUTPUT: N = bmi blocked, bpl not
+; AFFECTS: X
 blocked_tile:
 	ldx #$28
 @next:
 	dex
-	bmi @blocked
+	bmi @done
 	cmp walkable_tiles,x
 	bne @next
-	rts
-
-@blocked:
-	lda #$ff
+@done:
 	rts
 
 walkable_tiles:
@@ -1939,7 +1957,7 @@ mulax:
 @zero:
 	rts
 
-; unused. To save even more memory, consider adjusting
+; unused. To save more memory, could be called from
 ; both 'update_britannia' and 'gettile_britannia'.
 ;	lda tile_ypos
 ;	jsr mul16

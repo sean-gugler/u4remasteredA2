@@ -17,7 +17,7 @@ britannia_y = $09
 current_location = $0a
 game_mode = $0b
 dungeon_level = $0c
-balloon_flying = $0d
+terrain_occlusion = $0d
 player_transport = $0e
 party_size = $0f
 dng_direction = $10
@@ -49,6 +49,7 @@ console_xpos = $ce
 console_ypos = $cf
 curr_player = $d4
 target_player = $d5
+zp_trainer_avoid = $d8
 zpd8 = $d8
 zpd9 = $d9
 zpda = $da
@@ -63,7 +64,8 @@ game_mode_pre_combat = $e8
 turn_counter = $e9
 zpea = $ea
 zpf0 = $f0
-movement_mode = $f4
+modulus = $f1
+balloon_movement = $f4
 direction = $f5
 temp2_x = $f6
 temp2_y = $f7
@@ -184,6 +186,17 @@ j_dng_neighbor_tiles = $8c06
 ;file_buf+$300 = $8e00
 ;file_buf+$400 = $8f00
 j_peer = $9000
+trainer_magic = $9a90
+trainer_food = $9a91
+trainer_torch = $9a92
+trainer_jimmy = $9a93
+trainer_peer = $9a94
+trainer_avoid = $9a95
+trainer_balloon = $9a96
+trainer_travel = $9a97
+trainer_pass = $9a98
+trainer_exit = $9a99
+trainer_price = $9a9a
 j_fileio = $a100
 j_readblock = $a103
 j_loadtitle = $a106
@@ -313,6 +326,14 @@ kernal_scrorg = $ffed
 kernal_plot = $fff0
 kernal_iobase = $fff3
 
+j_trainer_teleport = $fb00
+j_trainer_board = $fb03
+j_active_char_combat_start = $fb06
+j_active_char_player_turn = $fb09
+j_active_char_check = $fb0c
+j_active_char_check_command = $fb0f
+j_fixed_getkey = $fb12
+j_dirkey_trans_tab = $fb15
 
 
 	.segment "MAIN"
@@ -327,6 +348,8 @@ kernal_iobase = $fff3
 game_init:
 	lda #music_off
 	jsr music_ctl
+	lda #$ff
+	sta music_volume
 	bit hw_lcbank1
 	bit hw_lcbank1
 	jsr j_drawinterface
@@ -362,21 +385,36 @@ load_saved_map:
 	.byte $84,"BLOAD LIST,A$EE00", $8d
 	.byte $84,"BLOAD ROST,A$EC00", $8d
 	.byte 0
+;ENHANCEMENT: allow save in dungeon
+	lda game_mode
+	cmp #mode_dungeon
+	bne game_start
+	lda #0
+	sta game_mode  ;mode_loading
+	sta direction  ;wind_dir_west
+	jsr load_dungeon
+	jmp cmd_done
+;ENHANCEMENT END
+
 game_start:
-	lda balloon_flying   ; BUGFIX: don't let players cheat by quitting
-	sta movement_mode    ; BUGFIX: over unlandable terrain and rebooting!
+; BUGFIX: don't let players cheat by quitting
+; BUGFIX: over unlandable terrain and rebooting!
+	lda terrain_occlusion
+	ldx trainer_balloon
+	beq :+
+	asl   ; TRAINER: balloon_steer
+:	sta balloon_movement
+; BUGFIX END
 	lda #$00
-;	sta balloon_flying   ; BUGFIX
-;	sta movement_mode    ; BUGFIX
+;	sta terrain_occlusion   ; BUGFIX
+;	sta balloon_movement    ; BUGFIX
 	sta current_location
 	sta horse_mode
-	lda #mode_world
-	sta game_mode
-	sta direction
+	lda #1
+	sta game_mode  ;mode_world
+	sta direction  ;wind_dir_north
 	jsr j_update_status
 	jsr j_player_teleport
-	lda #$ff
-	sta music_volume
 	lda #music_Overworld
 	jsr music_ctl
 next_turn:
@@ -389,9 +427,11 @@ next_turn:
 @prompt:
 	jsr j_primm  ;b'\n>\x00'
 	.byte $8d,$1e,$00
-	jsr j_waitkey
+:	jsr j_waitkey
 	cmp #char_none
 	bne :+
+	lda trainer_pass    ; TRAINER: no idle pass
+	bne :-              ; TRAINER
 	jmp done_pass
 
 :	cmp #char_space
@@ -591,13 +631,22 @@ cmd_direction_up:
 @check_transport:
 	lda player_transport
 	cmp #tile_balloon
-	bne :+
+	bne @check_ship
+; TRAINER: balloon_steer
+	lda balloon_movement
+	lsr
+	beq @not_steering
+	jsr print_north
+	jsr j_move_north
+	jmp cmd_done
+@not_steering:
+; TRAINER end
 	jmp done_drift_only
 
-:	cmp #tile_ship_north
+@check_ship:
+	cmp #tile_ship_north
 	bne :+
 	jmp @move_ship
-
 :	cmp #tile_ship_west
 	beq @set_ship_facing
 	cmp #tile_ship_east
@@ -627,7 +676,7 @@ cmd_direction_up:
 	jsr print_north
 	lda tile_north
 	jsr can_ship_move_here
-	bpl :+
+	bcc :+
 	jmp done_blocked
 
 :	lda #wind_dir_north
@@ -654,31 +703,13 @@ cmd_direction_up:
 	jmp done_blocked
 
 @allowed:
+	lda #<j_move_north
+	sta try_walk_handler
 	lda tile_north
-	jsr check_slow_terrain
-	beq :+
-	jsr done_slow_progress
-	jmp @done
-
-:	lda #sound_footstep
-	jsr j_playsfx
-	lda game_mode
-	cmp #mode_world
-	bne @towne
-	jsr j_move_north
-	lda tile_north
-	jmp check_enter_moongate
-
-@towne:
-	dec player_ypos
-	lda player_ypos
-	bpl @done
-	pla
-	pla
-	jmp leave_to_world
-
-@done:
-	rts
+	ldx player_xpos
+	ldy player_ypos
+	dey
+	jmp try_walk
 
 @dng_try_advance:
 	jsr j_primm  ;b'Advance\n\x00'
@@ -728,13 +759,22 @@ cmd_direction_down:
 @check_transport:
 	lda player_transport
 	cmp #tile_balloon
-	bne :+
+	bne @check_ship
+; TRAINER: balloon_steer
+	lda balloon_movement
+	lsr
+	beq @not_steering
+	jsr print_south
+	jsr j_move_south
+	jmp cmd_done
+@not_steering:
+; TRAINER end
 	jmp done_drift_only
 
-:	cmp #tile_ship_south
+@check_ship:
+	cmp #tile_ship_south
 	bne :+
 	jmp @move_ship
-
 :	cmp #tile_ship_east
 	beq @set_ship_facing
 	cmp #tile_ship_west
@@ -778,7 +818,7 @@ cmd_direction_down:
 	jsr print_south
 	lda tile_south
 	jsr can_ship_move_here
-	bpl :+
+	bcc :+
 	jmp done_blocked
 
 :	lda #wind_dir_south
@@ -798,32 +838,13 @@ cmd_direction_down:
 	pla
 	jmp done_blocked
 
-:	lda tile_south
-	jsr check_slow_terrain
-	beq :+
-	jsr done_slow_progress
-	jmp @done
-
-:	lda #sound_footstep
-	jsr j_playsfx
-	lda game_mode
-	cmp #mode_world
-	bne @towne
-	jsr j_move_south
+:	lda #<j_move_south
+	sta try_walk_handler
 	lda tile_south
-	jmp check_enter_moongate
-
-@towne:
-	inc player_ypos
-	lda player_ypos
-	cmp #xy_last_towne
-	bcc @done
-	pla
-	pla
-	jmp leave_to_world
-
-@done:
-	rts
+	ldx player_xpos
+	ldy player_ypos
+	iny
+	jmp try_walk
 
 cmd_direction_left:
 	lda game_mode
@@ -845,13 +866,22 @@ cmd_direction_left:
 @check_transport:
 	lda player_transport
 	cmp #tile_balloon
-	bne :+
+	bne @check_ship
+; TRAINER: balloon_steer
+	lda balloon_movement
+	lsr
+	beq @not_steering
+	jsr print_west
+	jsr j_move_west
+	jmp cmd_done
+@not_steering:
+; TRAINER end
 	jmp done_drift_only
 
-:	cmp #tile_ship_west
+@check_ship:
+	cmp #tile_ship_west
 	bne :+
 	jmp @move_ship
-
 :	cmp #tile_ship_north
 	beq @set_ship_facing
 	cmp #tile_ship_south
@@ -885,7 +915,7 @@ cmd_direction_left:
 	jsr print_west
 	lda tile_west
 	jsr can_ship_move_here
-	bpl :+
+	bcc :+
 	jmp done_blocked
 
 :	lda #wind_dir_west
@@ -905,31 +935,13 @@ cmd_direction_left:
 	pla
 	jmp done_blocked
 
-:	lda tile_west
-	jsr check_slow_terrain
-	beq :+
-	jsr done_slow_progress
-	jmp @done
-
-:	lda #sound_footstep
-	jsr j_playsfx
-	lda game_mode
-	cmp #mode_world
-	bne @towne
-	jsr j_move_west
+:	lda #<j_move_west
+	sta try_walk_handler
 	lda tile_west
-	jmp check_enter_moongate
-
-@towne:
-	dec player_xpos
-	lda player_xpos
-	bpl @done
-	pla
-	pla
-	jmp leave_to_world
-
-@done:
-	rts
+	ldx player_xpos
+	ldy player_ypos
+	dex
+	jmp try_walk
 
 cmd_direction_right:
 	lda game_mode
@@ -951,13 +963,22 @@ cmd_direction_right:
 @check_transport:
 	lda player_transport
 	cmp #tile_balloon
-	bne :+
+	bne @check_ship
+; TRAINER: balloon_steer
+	lda balloon_movement
+	lsr
+	beq @not_steering
+	jsr print_east
+	jsr j_move_east
+	jmp cmd_done
+@not_steering:
+; TRAINER end
 	jmp done_drift_only
 
-:	cmp #tile_ship_east
+@check_ship:
+	cmp #tile_ship_east
 	bne :+
 	jmp @move_ship
-
 :	cmp #tile_ship_north
 	beq @set_ship_facing
 	cmp #tile_ship_south
@@ -991,7 +1012,7 @@ cmd_direction_right:
 	jsr print_east
 	lda tile_east
 	jsr can_ship_move_here
-	bpl :+
+	bcc :+
 	jmp done_blocked
 
 :	lda #wind_dir_east
@@ -1021,32 +1042,63 @@ cmd_direction_right:
 	pla
 	jmp done_blocked
 
-:	lda tile_east
-	jsr check_slow_terrain
-	beq :+
-	jsr done_slow_progress
-	jmp @done
+:	lda #<j_move_east
+	sta try_walk_handler
+	lda tile_east
+	ldx player_xpos
+	ldy player_ypos
+	inx
+;	jmp try_walk
 
+; SIZE_OPT to fit trainer
+; INPUT: A = dest tile  X,Y = dest location
+try_walk:
+	sta zpd8
+	stx try_walk_x
+	sty try_walk_y
+	jsr check_slow_terrain
+	bne :+
+	jmp done_slow_progress
 :	lda #sound_footstep
 	jsr j_playsfx
 	lda game_mode
 	cmp #mode_world
-	bne @towne
-	jsr j_move_east
-	lda tile_east
+	bne try_walk_towne
+try_walk_handler = * + 1
+	jsr j_move_north
+	lda zpd8
 	jmp check_enter_moongate
 
-@towne:
-	inc player_xpos
-	lda player_xpos
+try_walk_towne:
+try_walk_x = * + 1
+	lda #0
 	cmp #xy_last_towne
-	bcc @done
+	bcs try_walk_exit
+try_walk_y = * + 1
+	lda #0
+	cmp #xy_last_towne
+	bcs try_walk_exit
+@allow_move:
+	sta player_ypos
+	lda try_walk_x
+	sta player_xpos
+	rts
+try_walk_exit:
+; TRAINER: ask first
+	lda trainer_exit
+	beq @exit
+	jsr j_primm
+	.byte "Exit? ", 0
+	jsr input_char
+	cmp #'Y'
+	beq @exit
+	sec  ; cancel
+	rts
+; TRAINER end
+@exit:
 	pla
 	pla
 	jmp leave_to_world
-
-@done:
-	rts
 
 print_turn:
 	jsr j_primm  ;b'Turn \x00'
@@ -1146,53 +1198,43 @@ leave_to_world:
 	sta key_buf_len
 	jmp cmd_done
 
+; INPUT: A = tile type to check
+; OUTPUT: Z = slow
+; AFFECTS: A,Y
 check_slow_terrain:
-	cmp #tile_swamp
-	beq @chance_4
-	cmp #tile_bushes
-	beq @chance_8
-	cmp #tile_forest
-	beq @chance_4
-	cmp #tile_hills
-	beq @chance_2
-	cmp #tile_field_fire
-	beq @chance_2
-@allowed:
-	lda #$00
-	rts
+	ldy #4
+@next:
+	cmp @tile_type,y
+	bne @skip
+	jsr j_rand
+	and @slow_chance,y
+	rts  ; Z flag true means "slowed"
+@skip:
+	dey
+	bpl @next
+	rts  ; Z flag will be false, meaning "not slowed"
+@tile_type:
+	.byte tile_swamp
+	.byte tile_bushes
+	.byte tile_forest
+	.byte tile_hills
+	.byte tile_field_fire
+@slow_chance:
+	.byte $03
+	.byte $07
+	.byte $03
+	.byte $01
+	.byte $01
 
-@slowed:
-	lda #$ff
-	rts
-
-@chance_8:
-	jsr j_rand
-	and #$07
-	beq @slowed
-	bne @allowed
-@chance_4:
-	jsr j_rand
-	and #$03
-	beq @slowed
-	bne @allowed
-@chance_2:
-	jsr j_rand
-	and #$01
-	beq @allowed
-	bne @slowed
+; INPUT: A = tile type
+; OUTPUT: C set = cannot move here
 can_ship_move_here:
-	cmp #tile_water_shallow
-	bcc @yes
 	cmp #tile_whirlpool
-	bcc @no
-	cmp #tile_monster
-	bcs @no
-@yes:
-	lda #$00
+	bcs @high
+	cmp #tile_water_shallow
 	rts
-
-@no:
-	lda #$ff
+@high:
+	cmp #tile_monster
 	rts
 
 cmd_attack:
@@ -1201,6 +1243,11 @@ cmd_attack:
 	lda game_mode
 	cmp #mode_dungeon
 	bne :+
+;ENHANCEMENT: if trainer was used to avoid, allow attacking on your turn
+	lda #$00
+	sta zp_trainer_avoid
+	jsr dng_check_attacked
+;ENHANCEMENT end
 	jmp done_what
 
 :	jsr input_direction
@@ -1327,7 +1374,10 @@ cmd_board:
 	jmp board_balloon
 
 @nothing_boardable:
-	jmp done_what
+	lda trainer_travel   ; TRAINER: spawn vehicle
+	beq :+               ; TRAINER
+	jmp j_trainer_board  ; TRAINER
+:	jmp done_what
 
 @board_ship:
 	lda current_location    ; BUGFIX: by coincidence, tile_ship_first == dng_tile_ladder_u
@@ -1368,8 +1418,8 @@ board_balloon:
 	jsr j_primm  ;b'balloon\n\x00'
 	.byte "balloon", $8d
 	.byte 0
-	lda #balloon_landed
-	sta movement_mode
+;	lda #balloon_landed
+;	sta balloon_movement
 	jmp cmd_done
 
 do_board:
@@ -1443,6 +1493,8 @@ choose_spell:
 	jsr j_primm  ;b'!\n\x00'
 	.byte "!", $8d
 	.byte 0
+	lda trainer_magic   ;TRAINER: free mixtures
+	bne @trainer_magic  ;TRAINER
 	ldy current_spell
 	lda mixtures,y
 	bne :+
@@ -1469,6 +1521,7 @@ choose_spell:
 
 @deduct_mp:
 	sta (ptr1),y
+@trainer_magic:
 	lda current_spell
 	asl
 	tay
@@ -2281,7 +2334,7 @@ is_undead:
 	cmp #tile_liche
 	beq @yes
 @no:
-	lda #$ff
+	lda #$ff  ;TODO_OPT
 	rts
 
 @yes:
@@ -2293,12 +2346,16 @@ prompt_direction:
 	.byte "DIRECTION-", 0
 	rts
 
+print_descend:
+	jsr j_primm  ;b'Descend \x00'
+	.byte "Descend ", 0
+	rts
+
 cmd_descend:
 	lda player_transport
 	cmp #tile_balloon
 	beq @balloon
-	jsr j_primm  ;b'Descend \x00'
-	.byte "Descend ", 0
+	jsr print_descend
 	lda current_location
 	cmp #loc_castle_britannia
 	beq @castle_britannia
@@ -2328,6 +2385,18 @@ cmd_descend:
 	jmp cmd_done
 
 @balloon:
+	lda balloon_movement
+; TRAINER: balloon_steer
+	and trainer_balloon
+	beq @try_land
+	asl
+	sta balloon_movement
+	jsr print_descend
+	jsr print_newline
+@done:
+	jmp cmd_done
+; TRAINER end
+@try_land:
 	jsr j_primm  ;b'Land Balloon\n\x00'
 	.byte "Land Balloon", $8d
 	.byte 0
@@ -2335,9 +2404,10 @@ cmd_descend:
 	cmp #tile_grass
 	bne @not_here
 	lda #balloon_landed
-	sta movement_mode
-	sta balloon_flying
-	jmp cmd_done
+	sta balloon_movement
+	sta terrain_occlusion
+	beq @done  ; always
+	.assert balloon_landed = 0, error, "Balloon trainer math will break"
 
 @not_here:
 	jmp done_not_here
@@ -2416,7 +2486,7 @@ cmd_enter:
 	sta britannia_y
 	lda tile_under_player
 	cmp #tile_dungeon_entrance
-	beq enter_dungeon
+	beq try_enter_dungeon
 	cmp #tile_towne
 	bne :+
 	jmp print_towne
@@ -2442,12 +2512,12 @@ cmd_enter:
 	jmp print_shrine
 
 :	cmp #tile_field_fire
-	beq enter_abyss
+	beq try_enter_abyss
 	lda #location_world
 	sta current_location
 	jmp done_what
 
-enter_abyss:
+try_enter_abyss:
 	lda bell_book_candle
 	cmp #$77
 	beq :+
@@ -2458,7 +2528,7 @@ enter_abyss:
 :	jsr print_location_name
 	jmp check_on_foot
 
-enter_dungeon:
+try_enter_dungeon:
 	jsr j_primm  ;b'dungeon!\n\x00'
 	.byte "dungeon!", $8d
 	.byte 0
@@ -2478,16 +2548,7 @@ check_on_foot:
 	jsr music_ctl
 	jsr file_write_temp_map
 begin_dng_load:
-	lda #music_off
-	jsr music_ctl
-	lda #disk_dungeon
-	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BLOAD DNGD,A$8C00\n\x00'
-	.byte $84,"BLOAD DNGD,A$8C00", $8d
-	.byte 0
-	jsr load_map_dungeon
-	lda #mode_dungeon
-	sta game_mode
+	jsr load_dungeon
 	lda #dng_dir_east
 	sta dng_direction
 	lda temp_x
@@ -2496,11 +2557,24 @@ begin_dng_load:
 	sta player_ypos
 	lda #$00
 	sta dungeon_level
-	lda #music_Dungeon
-	jsr music_ctl
 	jmp cmd_done
 
-load_map_dungeon:
+load_dungeon:
+	lda #music_off
+	jsr music_ctl
+	lda #disk_dungeon
+	jsr j_request_disk
+	jsr j_primm_cout ;b'\x84BLOAD DNGD,A$8C00\n\x00'
+	.byte $84,"BLOAD DNGD,A$8C00", $8d
+	.byte 0
+	jsr load_dungeon_map
+	lda #mode_dungeon
+	sta game_mode
+	lda #music_Dungeon
+	jmp music_ctl
+	; rts  implicit
+
+load_dungeon_map:
 	clc
 	lda current_location
 	adc #char_0 - loc_dng_first
@@ -2992,6 +3066,8 @@ cmd_ignite:
 	jsr j_primm  ;b'Ignite torch!\n\x00'
 	.byte "Ignite torch!", $8d
 	.byte 0
+	lda trainer_torch  ;TRAINER: free torches
+	bne :+             ;TRAINER
 	ldy #party_stat_torches
 	jsr dec_stat
 	bcs :+
@@ -3019,7 +3095,9 @@ cmd_jimmy_lock:
 	beq :+
 	jmp done_not_here
 
-:	ldy #party_stat_keys
+:	lda trainer_jimmy   ;TRAINER: free keys
+	bne :+              ;TRAINER
+	ldy #party_stat_keys
 	jsr dec_stat
 	bcs :+
 	jmp done_have_none
@@ -3069,12 +3147,21 @@ cmd_klimb:
 	lda player_transport
 	cmp #tile_balloon
 	bne @deny
+
+; TRAINER: balloon_steer
+	lda terrain_occlusion
+	eor #1
+	and trainer_balloon
+	sta balloon_movement
+	inc balloon_movement
+	.assert balloon_drift = 1, error, "Balloon trainer math will break"
+; TRAINER end
+	lda #balloon_drift
+;	sta balloon_movement  ; replaced by TRAINER above
+	sta terrain_occlusion
 	jsr j_primm  ;b'altitude\n\x00'
 	.byte "altitude", $8d
 	.byte 0
-	lda #balloon_aloft
-	sta movement_mode
-	sta balloon_flying
 	jmp cmd_done
 
 @castle_britannia:
@@ -3272,6 +3359,8 @@ cmd_open_door:
 cmd_peer_gem:
 	jsr j_primm  ;b'Peer at \x00'
 	.byte "Peer at ", 0
+	lda trainer_peer   ;TRAINER: free gems
+	bne :+             ;TRAINER
 	ldy #party_stat_gems
 	jsr dec_stat
 	bcs :+
@@ -3310,6 +3399,13 @@ cmd_quit:
 	.byte "Quit & save...", $8d
 	.byte 0
 	jsr @print_move_count
+;ENHANCEMENT: allow save in dungeon
+	lda game_mode
+	sta zpd8
+	inc zpd8    ; disk# = game_mode + 1
+	cmp #mode_dungeon
+	beq :+
+;ENHANCEMENT END
 	lda current_location
 	beq :+
 	jmp done_not_here
@@ -3323,6 +3419,8 @@ cmd_quit:
 	.byte $84,"BSAVE ROST,A$EC00,L$200", $8d
 	.byte $84,"BSAVE PRTY,A$0,L$20", $8d
 	.byte 0
+	lda zpd8            ;ENHANCEMENT: allow save in dungeon
+	jsr j_request_disk  ;ENHANCEMENT
 	lda #music_explore
 	jsr music_ctl
 	jmp cmd_done
@@ -3504,7 +3602,8 @@ cmd_search:
 	jmp cmd_done
 
 cmd_talk:
-	jsr j_primm  ;b'Talk-\x00'
+	jsr j_trainer_teleport   ; TRAINER: teleport anywhere
+;	jsr j_primm  ;b'Talk-\x00'
 	.byte "Talk-", 0
 	jsr input_direction
 	bne check_through_sign
@@ -3799,7 +3898,7 @@ cmd_x_it:
 	jmp @find_empty_slot    ; back-ported from C64. Probably unnecessary.
 
 @balloon:
-	lda movement_mode
+	lda balloon_movement
 	beq @find_empty_slot
 	jmp done_not_here
 
@@ -4519,8 +4618,8 @@ update_player_health:
 	bcs :+
 	jsr starving
 :	jsr recover_mp
-	lda movement_mode
-	bmi @update_dungeon
+	lda balloon_movement
+	bne @update_dungeon
 	jsr check_water_hazards
 	jsr spawn_monsters
 	jsr mobs_act
@@ -4530,6 +4629,8 @@ update_player_health:
 	cmp #mode_dungeon
 	bne @update_light
 	jsr j_print_direction
+	lda trainer_avoid     ; TRAINER: prompt to avoid
+	sta zp_trainer_avoid  ; TRAINER
 	jsr dng_check_attacked
 	lda tile_under_player
 	and #dng_tile_type_mask
@@ -4557,7 +4658,10 @@ tile_effect:
 	.byte $8d
 	.byte "BRIDGE TROLLS!", $8d
 	.byte 0
-	lda #tile_troll
+	jsr check_avoid  ; TRAINER: ask to avoid
+	bne :+           ; TRAINER
+	rts              ; TRAINER
+:	lda #tile_troll
 	sta foe_type_encountered
 	lda player_xpos
 	sta pre_combat_x
@@ -4570,8 +4674,8 @@ tile_effect:
 	jmp init_combat
 
 @no_trolls:
-	lda movement_mode
-	bpl :+
+	lda balloon_movement
+	beq :+
 	rts          ;airborne
 
 :	lda game_mode
@@ -4819,6 +4923,8 @@ eat_food:
 	sta zpd8
 	sed
 	sec
+	lda trainer_food   ;TRAINER: free food
+	bne @done          ;TRAINER
 	lda food_frac
 	sbc zpd8
 	sta food_frac
@@ -5100,12 +5206,16 @@ mob_world_take_turn:
 	bcs check_range
 player_attacked:
 	jsr j_update_view
-	jsr j_primm  ;b'\nATTACKED BY\n\x00'
-	.byte $8d
-	.byte "ATTACKED BY", $8d
-	.byte 0
-	jsr print_attacker_name
+;SIZE_OPT to fit 'check_avoid' trainer
 	ldx zp_index
+	lda object_tile_type,x
+	sta foe_type_encountered
+	jsr attacked_by
+	bne :+           ; TRAINER
+	ldx zp_index     ; TRAINER
+	rts              ; TRAINER
+;SIZE_OPT end
+:	ldx zp_index
 	lda object_xpos,x
 	sta temp_x
 	lda object_ypos,x
@@ -5172,7 +5282,7 @@ check_range:
 	lda delta_y
 	beq @turn_or_sail
 	bpl @try_sail_n_s
-	bmi @turn_or_sail
+;	bmi @turn_or_sail
 @turn_or_sail:
 	jsr manhattan_dist
 	cmp #$06
@@ -5215,7 +5325,7 @@ check_range:
 	sta temp_y
 	jsr j_gettile_bounds
 	jsr legal_move_world_twn
-	bne @turn_ship_random
+	bcs @turn_ship_random
 	lda object_tile_sprite,x
 	and #$03
 	jsr is_wind_favorable
@@ -5231,7 +5341,7 @@ check_range:
 	sta temp_y
 	jsr j_gettile_bounds
 	jsr legal_move_world_twn
-	bne @turn_ship_random
+	bcs @turn_ship_random
 	lda object_tile_sprite,x
 	and #$03
 	jsr is_wind_favorable
@@ -5326,7 +5436,7 @@ check_range:
 	sta temp_y
 	jsr j_gettile_bounds
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 @try_y:
 	lda delta_y
 	beq @try_x
@@ -5338,7 +5448,7 @@ check_range:
 	sta temp_y
 	jsr j_gettile_bounds
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 @try_x:
 	lda delta_x
 	beq @try_random
@@ -5350,7 +5460,7 @@ check_range:
 	sta temp_y
 	jsr j_gettile_bounds
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 @try_random:
 	jsr j_rand
 	jsr math_sign
@@ -5423,7 +5533,7 @@ mobs_act_towne:
 	sta temp_y
 	jsr j_gettile_towne
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 @try_y:
 	lda delta_y
 	beq @try_x
@@ -5435,7 +5545,7 @@ mobs_act_towne:
 	sta temp_x
 	jsr j_gettile_towne
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 @try_x:
 	clc
 	lda object_xpos,x
@@ -5445,7 +5555,7 @@ mobs_act_towne:
 	sta temp_y
 	jsr j_gettile_towne
 	jsr legal_move_world_twn
-	beq @do_move
+	bcc @do_move
 	lda object_dng_level,x
 	cmp #ai_toward_only
 	beq @skip
@@ -5522,7 +5632,7 @@ mobs_act_dungeon:
 	sta dest_y
 	jsr j_gettile_dungeon
 	jsr legal_move_dungeon
-	beq @do_move
+	bcc @do_move
 @try_y:
 	lda delta_y
 	beq @try_x
@@ -5534,7 +5644,7 @@ mobs_act_dungeon:
 	sta dest_x
 	jsr j_gettile_dungeon
 	jsr legal_move_dungeon
-	beq @do_move
+	bcc @do_move
 @try_x:
 	clc
 	lda object_xpos,x
@@ -5545,7 +5655,7 @@ mobs_act_dungeon:
 	sta dest_y
 	jsr j_gettile_dungeon
 	jsr legal_move_dungeon
-	beq @do_move
+	bcc @do_move
 	dec zp_attempts
 	bpl @try_random
 	jmp @no_move
@@ -5590,10 +5700,10 @@ tile_to_monster_num:
 	rts
 
 ; unused
-wind_dir_delta_x:
-	.byte $ff,$00,$01,$00
-wind_dir_delta_y:
-	.byte $00,$ff,$00,$01
+;wind_dir_delta_x:
+;	.byte $ff,$00,$01,$00
+;wind_dir_delta_y:
+;	.byte $00,$ff,$00,$01
 
 is_wind_favorable:
 	cmp direction
@@ -5613,7 +5723,7 @@ is_wind_favorable:
 	and #$03
 	beq @yes
 @no:
-	lda #$ff
+	lda #$ff  ;TODO_OPT
 	rts
 
 @yes:
@@ -5925,7 +6035,17 @@ dng_check_attacked:
 	adc #tile_monster_dungeon - 4
 	sta foe_type_encountered
 	sta foe_type_combat
-	lda player_xpos
+; TRAINER: ask to avoid
+; skip "ATTACKED BY" text if trainer is inactive
+; because it wasn't in original game
+	lda zp_trainer_avoid
+	beq :+
+	jsr attacked_by
+	bne :+
+@nope:
+	rts
+; TRAINER end
+:	lda player_xpos
 	sta dest_x
 	lda player_ypos
 	sta dest_y
@@ -5969,9 +6089,6 @@ dng_check_attacked:
 	tax
 	lda dungeon_arena,x
 	jmp load_arena
-
-@nope:
-	rts
 
 dungeon_arena:
 	.byte arena_dng_hall ; hall
@@ -6369,12 +6486,14 @@ clamp_foe_count:
 begin_combat:
 	lda #music_combat
 	jsr music_ctl
+	jsr j_active_char_combat_start  ; ENHANCEMENT
 	bit hw_strobe
 	lda #$00
 	sta key_buf_len
 start_players_turn:
-	lda #$01
-	sta curr_player
+	jsr j_active_char_player_turn   ; ENHANCEMENT
+;	lda #$01                        ; ENHANCEMENT
+;	sta curr_player                 ; ENHANCEMENT
 	sta curr_player_turn
 combat_take_turn:
 	jsr is_alive
@@ -6393,7 +6512,8 @@ combat_take_turn:
 	beq @end_turn
 	cmp #tile_human_prone
 	beq @end_turn
-	jsr j_update_view
+	jsr j_active_char_check         ; ENHANCEMENT
+;	jsr j_update_view               ; ENHANCEMENT
 	jsr invert_player_name
 	jsr print_newline
 	jsr j_printname
@@ -6409,8 +6529,10 @@ combat_take_turn:
 	jsr j_printstring
 	jsr j_primm  ;b'\n>\x00'
 	.byte $8d,$1e,$00
-	jsr j_waitkey
+:	jsr j_waitkey
 	bne :+
+	lda trainer_pass    ; TRAINER: no idle pass
+	bne :-              ; TRAINER
 	jmp done_pass
 
 :	cmp #char_space
@@ -6456,7 +6578,8 @@ combat_take_turn:
 	jmp (ptr1)
 
 @invalid_key:
-	jmp done_what
+	jmp j_active_char_check_command ; ENHANCEMENT
+;	jmp done_what                   ; ENHANCEMENT
 
 combat_cmd_done:
 	lda curr_player_turn
@@ -6545,7 +6668,7 @@ foe_take_turn:
 	sta dest_y
 	jsr j_gettile_tempmap
 	jsr legal_move_combat
-	bmi @wisp_teleport
+	bcs @wisp_teleport
 	ldx zp_cur_foe_index
 	lda dest_x
 	sta combat_foe_cur_x,x
@@ -6735,7 +6858,7 @@ no_range_attack:
 	jsr do_jinx
 	jsr j_gettile_currmap
 	jsr legal_move_combat
-	beq do_foe_move
+	bcc do_foe_move
 @try_y:
 	lda delta_y
 	beq @try_x
@@ -6747,7 +6870,7 @@ no_range_attack:
 	jsr do_jinx
 	jsr j_gettile_currmap
 	jsr legal_move_combat
-	beq do_foe_move
+	bcc do_foe_move
 @try_x:
 	lda delta_x
 	beq @try_random
@@ -6759,7 +6882,7 @@ no_range_attack:
 	jsr do_jinx
 	jsr j_gettile_currmap
 	jsr legal_move_combat
-	beq do_foe_move
+	bcc do_foe_move
 @try_random:
 	jsr j_rand
 	jsr math_sign
@@ -7052,7 +7175,7 @@ do_exit_room:
 	sta britannia_y
 	lda #music_off
 	jsr music_ctl
-	jsr load_map_dungeon
+	jsr load_dungeon_map
 	jsr j_primm  ;b'INTO DUNGEON\n\x00'
 	.byte "INTO DUNGEON", $8d
 	.byte 0
@@ -7131,7 +7254,7 @@ foes_vanquished:
 	lda pre_combat_tile
 	jsr j_blocked_tile
 	bmi @done
-	bcc @done
+;	bcc @done   ; SIZE_OPT: Not needed. N=0 implies C=1 because CMP matched in j_blocked_tile
 @drop_loot:
 	jsr get_free_object_slot
 	lda pre_combat_x
@@ -7386,7 +7509,7 @@ try_move:
 
 :	jsr j_gettile_currmap
 	jsr check_slow_terrain
-	beq :+
+	bne :+
 	jsr done_slow_progress
 	jmp combat_cmd_done
 
@@ -7751,7 +7874,7 @@ inflict_damage:
 	jsr inc_player_exp
 	jsr j_primm  ;b'EXP.+\x00'
 	.byte "EXP.+", 0
-	lda zpd8
+	lda zp_amount
 	cmp #$10
 	bcs :+
 	jsr j_printdigit
@@ -7925,7 +8048,7 @@ combat_cmd_ztats:
 	jsr j_primm  ;b'Ztats\n\x00'
 	.byte "Ztats", $8d
 	.byte 0
-	jmp zstats_for_player ;BUGFIX: was JSR
+	jmp zstats_for_player    ;BUGFIX: was JSR
 	; dead code, not needed anyway
 	;jsr j_update_status
 	;jsr invert_player_name
@@ -7987,7 +8110,7 @@ is_awake:
 	beq in_party
 	cmp #status_Poison
 	beq in_party
-	lda #$ff
+	lda #$ff  ;TODO_OPT
 	rts
 
 is_alive:
@@ -8045,26 +8168,25 @@ rand_modulo:
 @subtract:
 	cmp modulus
 	bcc @clear_flags
-	sec
+;	sec
 	sbc modulus
 	jmp @subtract
 
 @clear_flags:
-	cmp #$00
+;	cmp #$00
 @done:
 	rts
 
-modulus:
-	.byte 0
+;modulus:
+;	.byte 0
 
+; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_world_twn:
 	sta zp_tile_type
-	stx zp_save_xreg
-	jsr check_slow_terrain
-	bpl @collide_other_foe
-	jmp @deny
+	jsr check_slow_terrain  ; preserves X
+	beq deny_move
 
-@collide_other_foe:
+; @collide_other_foe:
 	lda object_tile_type,x
 	cmp #tile_whirlpool
 	beq @avoid_repeat_move
@@ -8082,9 +8204,7 @@ legal_move_world_twn:
 	bne @skip
 	lda object_tile_type,y
 	cmp #tile_chest
-	beq @skip
-	jmp @deny
-
+	bne deny_move
 @skip:
 	dey
 	bpl @next
@@ -8095,89 +8215,38 @@ legal_move_world_twn:
 	bne @check_pirate
 	lda temp_y
 	cmp player_ypos
-	bne @check_pirate
-	jmp @deny
-
+	beq @return    ; Z=1 implies C=1
 @check_pirate:
 	lda object_tile_type,x
 	cmp #tile_pirate
-	beq @collide_terrain
+	beq @check_terrain
 @avoid_repeat_move:
 	lda temp_x
 	cmp object_xpos_prev,x
-	bne @collide_terrain
+	bne @check_terrain
 	lda temp_y
 	cmp object_ypos_prev,x
-	bne @collide_terrain
-	jsr j_rand
+	bne @check_terrain
+	jsr j_rand  ; preserves X
 	and #chance_4
-	bne @deny
-@collide_terrain:
+	bne deny_move
+@check_terrain:
 	lda object_tile_type,x
-	bpl @land
-	cmp #tile_twister
-	bcc @water
-	beq @fly
-	cmp #tile_bat
-	beq @fly
-	cmp #tile_ghost
-	beq @phase
-	cmp #tile_insects
-	beq @fly
-	cmp #tile_zorn
-	beq @phase
-	cmp #tile_daemon
-	beq @fly
-	cmp #tile_dragon
-	beq @fly
-	cmp #tile_balron
-	beq @fly
-	bne @land
-@phase:
-	lda zp_tile_type
-	cmp #tile_water_last
-	bcc @deny
-	cmp #tile_field_lightning
-	bne @allow
-	beq @deny
-@land:
-	lda zp_tile_type
-	jsr j_blocked_tile
-	bpl @allow
-	bmi @deny
-@water:
-	cmp #tile_pirate
-	bne @water_creature
-	lda zp_tile_type
-	cmp #tile_water_shallow
-	bcc @allow
-	bcs @deny
-@water_creature:
-	lda zp_tile_type
-	cmp #tile_water_last
-	bcc @allow
-	bcs @deny
-@fly:
-	lda zp_tile_type
-	cmp #tile_water_last
-	bcc @allow
-	jsr j_blocked_tile
-	bpl @allow
-	bmi @deny
-@allow:
+	stx zp_save_xreg
+	jsr collide_terrain
 	ldx zp_save_xreg
-	lda #$00
+@return:
 	rts
 
-@deny:
-	ldx zp_save_xreg
-	lda #$ff
+deny_move:
+	sec
 	rts
 
+; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_combat:
 	sta zp_tile_type
 	jsr check_slow_terrain
-	bmi @deny
+	beq deny_move
 	lda dest_x
 	cmp #xy_last_screen
 	bcs @is_fleeing
@@ -8187,14 +8256,9 @@ legal_move_combat:
 @is_fleeing:
 	ldx zp_cur_foe_index
 	lda combat_foe_hp,x
-	cmp #hp_fleeing + 1
-	bcc @allow
-@deny:
-	jmp @return_false
-
-@allow:
-	jmp @return_true
-
+	cmp #hp_fleeing + 1  ;sec (deny) if HP > fleeing
+@return:
+	rts
 @avoid_repeat_move:
 	ldx zp_cur_foe_index
 	lda combat_foe_prev_x,x
@@ -8205,7 +8269,7 @@ legal_move_combat:
 	bne @collide_other_foe
 	jsr j_rand
 	and #chance_4
-	bne @deny
+	bne deny_move
 @collide_other_foe:
 	ldx #foes_max
 @next:
@@ -8216,7 +8280,7 @@ legal_move_combat:
 	bne @collide_player
 	lda combat_foe_cur_y,x
 	cmp dest_y
-	beq @return_false
+	beq @return    ; Z=1 implies C=1
 @collide_player:
 	cpx #player_last
 	bcs @skip
@@ -8227,14 +8291,16 @@ legal_move_combat:
 	bne @skip
 	lda combat_player_ypos,x
 	cmp dest_y
-	beq @return_false
+	beq @return    ; Z=1 implies C=1
 @skip:
 	dex
 	bpl @next
-
-; collide_terrain
 	ldx zp_cur_foe_index
 	lda combat_foe_tile,x
+	; continue
+
+; OUTPUT: C = movement barred. bcc = no, bcs = yes
+collide_terrain:
 	bpl @land
 	cmp #tile_twister
 	bcc @water
@@ -8250,47 +8316,46 @@ legal_move_combat:
 	cmp #tile_daemon
 	beq @fly
 	cmp #tile_dragon
-	beq @fly
-	cmp #tile_balron
-	beq @fly
-	bne @land
-@phase:
-	lda zp_tile_type
-	cmp #tile_water_last
-	bcc @return_false
-	cmp #tile_field_lightning
-	bne @return_true
-	beq @return_false
+	bcs @fly
 @land:
 	lda zp_tile_type
-	jsr j_blocked_tile
-	bpl @return_true
-	bmi @return_false
-@water:
+	jmp @return_blocked
+@phase:
 	lda zp_tile_type
-	cmp #tile_water_last
-	bcc @return_true
-	bcs @return_false
+	cmp #tile_field_lightning
+	beq @return    ; Z=1 implies C=1
+	lda #tile_water_last
+	cmp zp_tile_type   ; invert operands, invert C
+	rts
+@water:
+	cmp #tile_pirate    ; always set C, all water foes are >= pirate
+	beq :+
+	clc     ; SIZE_OPT: after SBC, C reports > instead of >=
+:	lda zp_tile_type
+	sbc #tile_water_shallow  ; all water foes except pirates allowed in shallow
+	rts
 @fly:
 	lda zp_tile_type
 	cmp #tile_water_last
-	bcc @return_true
+	bcc @return
+@return_blocked:
 	jsr j_blocked_tile
-	jsr j_blocked_tile
-	bpl @return_true
-	bmi @return_false
-@return_true:
-	lda #$00
+	php    ; convert  bpl => bcc
+	pla    ; and      bmi => bcs
+	rol    ; via bit shifting
+@return:
 	rts
 
-@return_false:
-	lda #$ff
-	rts
 
+; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_dungeon:
 	pha
 	and #dng_tile_foe_mask
-	bne @pop_deny
+	beq @no_foe
+	pla
+	sec
+	rts
+@no_foe:
 	pla
 	and #dng_tile_type_mask
 	cmp #dng_tile_trap
@@ -8311,15 +8376,10 @@ legal_move_dungeon:
 	bne @allow
 	lda dest_y
 	cmp object_ypos_prev,x
-	beq @deny
-@allow:
-	lda #$00
-	rts
-
-@pop_deny:
-	pla
 @deny:
-	lda #$ff
+	rts    ; Z=1 implies C=1
+@allow:
+	clc
 	rts
 
 dng_can_advance:
@@ -8847,9 +8907,14 @@ temp_xy_none:
 	lda #$ff
 	rts
 
-print_attacker_name:
-	ldx zp_index
-	lda object_tile_type,x
+attacked_by:
+	jsr j_primm
+	.byte $8d, "ATTACKED BY", $8d, 0
+	lda foe_type_encountered
+	jsr print_target_name
+	jmp check_avoid  ; TRAINER: ask to avoid
+	;implicit rts
+
 print_target_name:
 	bpl @non_monster
 	sec
@@ -8891,6 +8956,17 @@ print_target_name:
 @inanimate:
 	lda #$13     ;phantom
 	jmp @print
+
+;TRAINER: avoid combat
+check_avoid:
+	ldx trainer_avoid
+	dex  ; return Z=0 to avoid
+	bne :+
+	jsr j_primm
+	.byte "Avoid? ", 0
+	jsr input_char
+	cmp #'Y'
+:	rts
 
 input_char:
 	jsr j_waitkey
@@ -9153,33 +9229,21 @@ inc_player_hp:
 
 inc_party_gold:
 	sta zp_amount
+	lda #<party_stats
+	sta ptr1
+	lda #>party_stats
+	sta ptr1 + 1
 	ldy #party_stat_gold_lo
-	sed
-	clc
-	lda party_stats,y
-	adc zp_amount
-	sta party_stats,y
-	dey
-	lda party_stats,y
-	adc #$00
-	sta party_stats,y
-	cld
-	bcc @no_overflow
-	lda #$99
-	sta party_stats,y
-	iny
-	sta party_stats,y
-@no_overflow:
-	rts
-
+	bne inc_4_digit   ; always
 inc_player_exp:
-	sta zpd8
+	sta zp_amount
 	jsr j_get_stats_ptr
 	ldy #player_experience_lo
+inc_4_digit:
 	sed
 	clc
 	lda (ptr1),y
-	adc zpd8
+	adc zp_amount
 	sta (ptr1),y
 	dey
 	lda (ptr1),y

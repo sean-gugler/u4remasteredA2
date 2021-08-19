@@ -24,7 +24,7 @@ from itertools import islice,chain
 def usage(argv):
     p = argparse.ArgumentParser(description = __doc__.split('\n')[1])  # extract first line of ''' header
     p.add_argument('shape0', help="input, PRG file for shape table 0")
-    p.add_argument('shape1', help="input, PRG file for shape table 2")
+    p.add_argument('shape1', help="input, PRG file for shape table 1")
     p.add_argument('tile0', help="output, PRG file for top half of tile sheet")
     p.add_argument('tile1', help="output, PRG file for bottom half of tile sheet")
     return p.parse_args(argv[1:])
@@ -49,7 +49,7 @@ def main(argv):
         half = islice(lines, 128)
 
         # Write each shape line into an initially-empty screen, with proper HGR memory placement.
-        data = bytearray(0x2000)
+        data = bytearray(0x2000 - 8)
         for i,line in zip(screen,half):
             # enumeration begins with odd column for correct colors.
             for j,byte in enumerate(line,1):

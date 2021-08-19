@@ -37,7 +37,7 @@ def main(argv):
     src = decode_file(src)
 
     # Write data into an initially-empty screen, with proper HGR memory placement.
-    data = bytearray(0x2000)
+    data = bytearray(0x2000 - 8)
 
     for col in reversed(range(40)):
         for row in reversed(range(144)):

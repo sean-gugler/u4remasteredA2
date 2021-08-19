@@ -1,5 +1,7 @@
-SHELL = /bin/sh
+# default target (first one listed). Actual dependencies added at bottom of file.
+all:
 
+#----------
 # Configuration options
 
 # Select source directory for game save files.
@@ -8,9 +10,11 @@ SAVEGAME=untouched
 
 # Tweak to trade off compressed size for compression speed.
 # Smallest size (largest offset) is 65535.
-EXOMIZER_MAX_OFFSET=65535
+# EXOMIZER_MAX_OFFSET=65535
 
 #----------
+
+SHELL = /bin/sh
 
 # Remove unfinished targets if interrupted or command failed
 .DELETE_ON_ERROR:
@@ -40,15 +44,15 @@ LD65FLAGS=
 # Disks.
 DISK_NAMES = program britannia towne underworld
 
-# u4program.do etc.  ("do" = Dos Order sectors, disk image file)
-DISKS = $(patsubst %,u4%.do,$(DISK_NAMES))
+output_dir = output
 
-all: $(DISKS)
+# u4program.do etc.  ("do" = Dos Order sectors, disk image file)
+DISKS = $(patsubst %,$(output_dir)/u4%.do,$(DISK_NAMES))
 
 
 # Tools.
 
-EXOMIZER=~/bin/exomizer
+# EXOMIZER=~/bin/exomizer
 
 DISTCLEAN += clean_tools
 clean_tools:
@@ -112,6 +116,7 @@ patched_dir = files/patched
 
 FOLDERS = \
 	$(extract_dir) \
+	$(output_dir) \
 	$(patsubst %,$(patched_dir)/%,$(DISK_NAMES))
 
 $(FOLDERS):
@@ -120,7 +125,7 @@ $(FOLDERS):
 
 # Extract files from disk images.
 
-ORIGINAL_DISKS = $(patsubst %,files/original/%,$(DISKS))
+ORIGINAL_DISKS = $(patsubst $(output_dir)/%,files/original/%,$(DISKS))
 
 EXTRACTED_DOS_FILES = \
 	$(patsubst %,$(extract_dir)/towne/%.prg,$(TOWNE_FILES)) \
@@ -162,6 +167,16 @@ game_files = $(foreach dir,$(game_dirs),$(dir)/*.o $(dir)/*.prg $(dir)/*.map $(d
 CLEAN += clean_patchedgame
 clean_patchedgame:
 	rm -f $(game_files)
+
+
+# Dependencies
+
+DEPS = $(patsubst %.s,%.d,$(wildcard src/*/*.s src/*/*/*.s))
+
+include $(DEPS)
+
+%.d: tools/make_dep.py %.s
+	$^ $@
 
 
 # Final game files.
@@ -206,7 +221,7 @@ BIN_$(disk) := $(BIN_FOLDER)/$(BIN_FILE)
 
 # Create disk images.
 
-u4%.do : $$(PRG_FILES_%) $$(BIN_%)
+$(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%)
 	@echo "Creating $@"
 	tools/dos33.py --format $@  || (rm -f $@ && exit 1)
 	tools/dos33.py --sector-write --track 0 --sector 0 $@ $(BIN_$*)  || (rm -f $@ && exit 1)
@@ -215,6 +230,75 @@ u4%.do : $$(PRG_FILES_%) $$(BIN_%)
 CLEAN += clean_diskimages
 clean_diskimages:
 	rm -f $(DISKS)
+
+
+# Slideshow disks
+
+program_dir = $(extract_dir)/program
+slideshow_dir_1 = files/slideshows/start
+slideshow_dir_2 = files/slideshows/end
+
+INTRO_FILES = $(filter %.SPK,$(PROGRAM_FILES))
+
+TILE_FILES = $(filter $(program_dir)/SHP%,$(PRG_FILES_program))
+TILE_SLIDES = \
+	$(slideshow_dir_1)/TILES00.prg \
+	$(slideshow_dir_1)/TILES80.prg
+
+SLIDE_FILES_1 = \
+	HELLO.bas \
+	ANIM.prg BGND.prg \
+	$(patsubst %.SPK,%.prg,$(INTRO_FILES)) \
+	CARDS0.prg CARDS1.prg \
+	FONT.prg
+
+$(slideshow_dir_1)/ANIM.prg: $(program_dir)/ANIM.prg
+	cp $^ $@
+
+$(slideshow_dir_1)/BGND.prg: $(program_dir)/BGND.prg
+	cp $^ $@
+
+$(slideshow_dir_1)/%.prg: tools/spk.py $(program_dir)/%.SPK.prg
+	$^ $@
+
+$(slideshow_dir_1)/CARDS%.prg: tools/cards.py $(program_dir)/CRDS.prg
+	$^ $(slideshow_dir_1)
+
+$(TILE_SLIDES): tools/tile_sheet.py $(TILE_FILES)
+	$^ $(TILE_SLIDES)
+
+$(slideshow_dir_1)/FONT.prg: tools/font.py $(program_dir)/HTXT.prg
+	$^ $@
+
+$(slideshow_dir_2)/END_WIN.prg: tools/end_screens.py $(extract_dir)/underworld/CSTRING.prg
+	$^ $(slideshow_dir_2)
+
+$(output_dir)/slideshow_start.do: $(patsubst %,$(slideshow_dir_1)/%,$(SLIDE_FILES_1)) $(TILE_SLIDES)
+	@echo "Creating $@"
+	tools/dos33.py --format $@  || (rm -f $@ && exit 1)
+	tools/dos33.py --sector-write --track 0 --sector 0 $@ files/slideshows/DOS33.bin  || (rm -f $@ && exit 1)
+	tools/dos33.py --write --attr files/slideshows/DOS33.attr $@ $^  || (rm -f $@ && exit 1)
+
+$(output_dir)/slideshow_end.do: $(slideshow_dir_2)/END_WIN.prg
+	@echo "Creating $@"
+	tools/dos33.py --format $@  || (rm -f $@ && exit 1)
+	tools/dos33.py --sector-write --track 0 --sector 0 $@ files/slideshows/DOS33.bin  || (rm -f $@ && exit 1)
+	tools/dos33.py --write --attr files/slideshows/DOS33.attr $@ $(slideshow_dir_2)  || (rm -f $@ && exit 1)
+
+
+CLEAN += clean_slideshow
+clean_slideshow:
+	rm -f $(slideshow_dir_1)/*.prg $(slideshow_dir_2)/.prg $(output_dir)/slideshow_start.do $(output_dir)/slideshow_end.do
+
+
+# Mockingboard driver, split for analysis with Regenerator
+# MBSM.prg => MBSMa.prg MBSMb.prg
+
+mb_dir = $(extract_dir)/program
+MB_FILES = $(mb_dir)/MBSMa.prg $(mb_dir)/MBSMb.prg
+
+$(MB_FILES): tools/mbsm_split.py $(mb_dir)/MBSM.prg
+	$^
 
 
 # Targets that are not explicit files
@@ -230,3 +314,5 @@ extract: $(EXTRACTED_DOS_FILES)
 clean: $(CLEAN)
 
 distclean: $(DISTCLEAN)
+
+all: $(DISKS) $(MB_FILES) $(output_dir)/slideshow_start.do $(output_dir)/slideshow_end.do | $(output_dir)

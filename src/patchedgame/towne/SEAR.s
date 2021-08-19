@@ -1,56 +1,34 @@
 	.include "uscii.i"
-	.include "SEAR.i"
 
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-player_xpos = $00
-player_ypos = $01
-current_location = $0a
-game_mode = $0b
-curr_player = $d4
+	.include "char.i"
+	.include "strings.i"
+	.include "jump_overlay.i"
+	.include "jump_subs.i"
+	.include "view_map.i"
+	.include "zp_main.i"
+
+	.include "PRTY.i"
+	.include "ROST.i"
+
+
+; --- Custom use of Zero Page
+
 zp_index = $d8
-;
-; **** ZP POINTERS ****
-;
-ptr1 = $fe
-;
-; **** USER LABELS ****
-;
-j_waitkey = $0800
-j_primm_exact = $081b
-j_primm = $0821
-j_console_out = $0824
-j_get_stats_ptr = $082d
-j_printstring = $087e
-map_buf = $8b00
-;map_buf+$100 = $8c00
-;map_buf+$200 = $8d00
-;map_buf+$300 = $8e00
-j_viewmap = $9000
-gem_buf = $e800
-;gem_buf+$100 = $e900
-;gem_buf+$200 = $ea00
-;gem_buf+$300 = $eb00
-party_stats = $ed00
-;party_stats + virtue_honor = $ed05
-runes = $ed0d
-bell_book_candle = $ed0e
-mystic_armour = $ed1f
-mystic_weapons = $ed2f
 
 
 	.segment "OVERLAY"
 
+.assert * = j_overlay_entry, error, "Wrong start address"
+
 search:
-	ldy #$0c
+	ldy #item_last - 1
 @next:
 	jsr compare_position
 	beq item_at_coordinate
 	dey
 	bpl @next
 print_nothing_here:
-	jsr j_primm  ;b'NOTHING HERE!\r\x00'
+	jsr j_primm
 	.byte "NOTHING HERE!", $8d
 	.byte 0
 	rts
@@ -82,14 +60,14 @@ find_rune:
 	sta runes
 	sty zp_index
 	jsr print_you_find
-	jsr j_primm  ;b'THE RUNE OF\r\x00'
+	jsr j_primm
 	.byte "THE RUNE OF", $8d
 	.byte 0
 	lda zp_index
 	clc
 	adc #string_virtues
 	jsr j_printstring
-	jsr j_primm  ;b'!\r\x00'
+	jsr j_primm
 	.byte "!", $8d
 	.byte 0
 	lda #$01
@@ -98,16 +76,16 @@ find_rune:
 
 find_book:
 	lda bell_book_candle
-	and #$02
+	and #item_have_book
 	beq @found
 	jmp print_nothing_here
 
 @found:
 	lda bell_book_candle
-	ora #$02
+	ora #item_have_book
 	sta bell_book_candle
 	jsr print_you_find
-	jsr j_primm  ;b'THE BOOK\rOF TRUTH!\r\x00'
+	jsr j_primm
 	.byte "THE BOOK", $8d
 	.byte "OF TRUTH!", $8d
 	.byte 0
@@ -117,16 +95,16 @@ find_book:
 
 find_candle:
 	lda bell_book_candle
-	and #$01
+	and #item_have_candle
 	beq @found
 	jmp print_nothing_here
 
 @found:
 	lda bell_book_candle
-	ora #$01
+	ora #item_have_candle
 	sta bell_book_candle
 	jsr print_you_find
-	jsr j_primm  ;b'THE CANDLE\rOF LOVE!\r\x00'
+	jsr j_primm
 	.byte "THE CANDLE", $8d
 	.byte "OF LOVE!", $8d
 	.byte 0
@@ -135,7 +113,7 @@ find_candle:
 	rts
 
 find_telescope:
-	jsr j_primm  ;b'YOU SEE A KNOB\rON THE TELESCOPE\rMARKED A-P\rYOU SELECT:\x00'
+	jsr j_primm
 	.byte "YOU SEE A KNOB", $8d
 	.byte "ON THE TELESCOPE", $8d
 	.byte "MARKED A-P", $8d
@@ -150,28 +128,28 @@ find_telescope:
 	pla
 	cmp #char_A
 	bcc @nothing_here
-	cmp #char_Q
+	cmp #char_P + 1
 	bcc @view_location
 @nothing_here:
 	jmp print_nothing_here
 
 @view_location:
 	sta file_char_map
-	jsr j_primm_exact ;b'\x04BLOAD MAP@,A$8B00\r\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD MAP"
 file_char_map:
 	.byte "@,A$8B00", $8d
 	.byte 0
 	jsr copymap
-	jsr j_primm_exact ;b'\x04BLOAD TMAP,A$9000\r\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TMAP,A$9000", $8d
 	.byte 0
-	lda #$00
+	lda #mode_suspended
 	sta game_mode
 	jsr j_viewmap
-	lda #$02
+	lda #mode_towne
 	sta game_mode
-	jsr j_primm_exact ;b'\x04BLOAD MAPB,A$8B00\r\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD MAPB,A$8B00", $8d
 	.byte 0
 	jsr copymap
@@ -180,20 +158,20 @@ file_char_map:
 copymap:
 	ldx #$00
 @copy:
-	lda map_buf,x
-	sta gem_buf,x
-	lda map_buf+$100,x
-	sta gem_buf+$100,x
-	lda map_buf+$200,x
-	sta gem_buf+$200,x
-	lda map_buf+$300,x
-	sta gem_buf+$300,x
+	lda load_buf,x
+	sta view_buf,x
+	lda load_buf+$100,x
+	sta view_buf+$100,x
+	lda load_buf+$200,x
+	sta view_buf+$200,x
+	lda load_buf+$300,x
+	sta view_buf+$300,x
 	inx
 	bne @copy
 	rts
 
 find_mystic_armour:
-	ldx #$07
+	ldx #virtue_last - 1
 	lda #$00
 @next_virtue:
 	ora party_stats,x
@@ -204,23 +182,23 @@ find_mystic_armour:
 	jmp print_nothing_here
 
 @avatar:
-	lda mystic_armour
+	lda armour_mystic
 	beq @found
 	jmp print_nothing_here
 
 @found:
 	jsr print_you_find
-	jsr j_primm  ;b'MYSTIC ARMOUR!\r\x00'
+	jsr j_primm
 	.byte "MYSTIC ARMOUR!", $8d
 	.byte 0
 	lda #$08
-	sta mystic_armour
+	sta armour_mystic
 	lda #$04
 	jsr add_xp100
 	rts
 
 find_mystic_weapons:
-	ldx #$07
+	ldx #virtue_last - 1
 	lda #$00
 @next_virtue:
 	ora party_stats,x
@@ -231,33 +209,33 @@ find_mystic_weapons:
 	jmp print_nothing_here
 
 @avatar:
-	lda mystic_weapons
+	lda weapon_mystic
 	beq @found
 	jmp print_nothing_here
 
 @found:
 	jsr print_you_find
-	jsr j_primm  ;b'MYSTIC WEAPONS!\r\x00'
+	jsr j_primm
 	.byte "MYSTIC WEAPONS!", $8d
 	.byte 0
 	lda #$08
-	sta mystic_weapons
+	sta weapon_mystic
 	lda #$04
 	jsr add_xp100
 	rts
 
 print_you_find:
-	jsr j_primm  ;b'YOU FIND...\r\x00'
+	jsr j_primm
 	.byte "YOU FIND...", $8d
 	.byte 0
 	sed
 	clc
 	lda party_stats + virtue_honor
-	beq @overflow
+	beq @set_value
 	adc #$05
-	bcc @overflow
+	bcc @set_value
 	lda #$99
-@overflow:
+@set_value:
 	sta party_stats + virtue_honor
 	cld
 	rts
@@ -291,25 +269,27 @@ item_ypos:
 item_location:
 	.byte $05,$06,$07,$08,$09,$0a,$01,$0d
 	.byte $02,$10,$02,$03,$04
+item_last = * - item_location
 
 add_xp100:
 	pha
 	lda #$01
 	sta curr_player
 	jsr j_get_stats_ptr
-	ldy #$1c
+	ldy #player_experience_hi
 	sed
 	pla
 	clc
 	adc (ptr1),y
-	bcc @overflow
+	bcc @set_value
 	lda #$99
 	iny
 	sta (ptr1),y
 	dey
-@overflow:
+@set_value:
 	sta (ptr1),y
 	cld
 	rts
 
+; junk
 	.byte 0

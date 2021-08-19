@@ -49,7 +49,7 @@ def main(argv):
     if args.catalog:
         catalog(args.disk_image)
     elif args.read:
-        read_files(args.disk_image, args.host_dir, *args.files)
+        read_files(args.disk_image, args.host_dir, args.attr, *args.files)
     elif args.write:
         write_files(args.disk_image, args.host_dir, args.attr, *args.files)
     elif args.sector_write:
@@ -261,7 +261,7 @@ class SectorChain:
                 return
             data = self.disk.read_sector(track, sector)
             if 0 != data[0]:
-                raise Exception(f"unexpected header byte in track/sector chain t{track:02x}s{sector:x}")
+                raise Exception(f"unexpected header byte in track/sector chain T:{track:02X} S:{sector:X}")
             yield data[3:], (track,sector)
             track  = data[1]
             sector = data[2]
@@ -372,7 +372,7 @@ class File:
             for i in range(0x09, 0xFC, 0x02):
                 track  = ts_list[i]
                 sector = ts_list[i+1]
-                if verbose: print(f'read  T {track:02x} S {sector:x}')
+                if verbose: print(f'read  T:{track:02X} S:{sector:X}')
                 if track == 0x00 and sector == 0x00:
                     break
                 yield self.disk.read_sector(track, sector)
@@ -460,12 +460,17 @@ def read_files(image_name, output_folder, attr_file=None, *files):
 
             out = bytearray()
 
-            size = entry.size * Disk.SECTOR_SIZE if ftype != 'B' else None
+            size = entry.blocks * Disk.SECTOR_SIZE if not ftype in 'BA' else None
             for data in File(vtoc).read(entry.track, entry.sector):
                 if size is None:
-                    size = read_word_littleendian(data, 2) + 2
-                    data = data[:2] + data[4:]
-                    host_name += '.prg'
+                    if ftype == 'B':
+                        size = read_word_littleendian(data, 2) + 2
+                        data = data[:2] + data[4:]
+                        host_name += '.prg'
+                    else:
+                        size = read_word_littleendian(data, 0)
+                        data = data[2:]
+                        host_name += '.bas'
                 if size > 0:
                     out.extend(data[:size])
                 size -= len(data)
@@ -532,6 +537,9 @@ def write_files(image_name, output_folder, attr_file, *files):
             data = f.read()
         if path.endswith('.prg'):
             data = data[:2] + write_word_littleendian(len(data) - 2) + data[2:]
+            path = path[:-4]
+        if path.endswith('.bas'):
+            data = write_word_littleendian(len(data)) + data
             path = path[:-4]
 
         e = CatalogEntry()

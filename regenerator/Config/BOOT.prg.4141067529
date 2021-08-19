@@ -4,10 +4,15 @@
 7394
 :DATA BYTES
 6003-602C
-69F0-6A19
-6B24-6B38
-6BEE-6C08
-70E6-70F6
+6080-6087
+6087-6089
+61BD-61C4
+61C4-6204
+6233-6234
+6257-646C
+64CD-64D0
+653B-6543
+674C-674D
 677A-679F
 67A6-67AF
 67B6-67C9
@@ -24,65 +29,57 @@
 6958-696F
 6999-69A5
 69AC-69BF
+69F0-6A19
 6A46-6A5A
 6A5E-6A73
+6A88-6AA5
+6B14-6B16
+6B24-6B38
 6B56-6B77
 6B7E-6B97
 6BAC-6BC6
+6BEE-6C08
+6CD5-6DDD
+6E6E-6ED2
+6F42-6F49
+6F49-6F51
 7040-7051
 705D-706A
 7073-7083
 70AE-70BF
 70CB-70D8
+70E6-70F6
 7114-7120
 712D-713C
 7149-7153
 7160-716D
-6233-6234
-6087-6089
-61C4-6204
-6257-646C
-6080-6087
-61BD-61C4
-653B-6543
-674C-674D
-6B14-6B16
-6A88-6AA5
-6CD5-6DDD
-6E6E-6ED2
-6F42-6F49
-64CD-64D0
 7170-7394
-6F49-6F51
 :WORDS
 :POINTERS
 :HILOLOOKUP
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-646C
 6089
 6204
-6AA5
-6DDD
-6ED2
+646C
 64D0
 6543
+674D
+6AA5
 6B38
+6DDD
+6ED2
 6F51
 :REMOVED BYTES
 :FULL COMMENTS
-6257 Table of X,Y coordinates. Origin at bottom left.
+6257 Table of X,Y coordinates with (0,0) at bottom left.
 6503 unused
 651A unused
 6673 Should have used I,J,K instead of plot_row,I,J in my opinion
 6FF9 unused
 :SIDE COMMENTS
 6000 b'\x04BLOAD A\x81NIM,A$4000\n\x04BLOAD B\x81GND,A$7A00\n\x00'
-69ED b'\x04BLOAD M\x81BSM,A$F000\n\x04BLOAD M\x81BSI,A$8000\n\x00'
-6B21 b'\x04BRUN U\x81LT4,A$4000\n\x00'
-6BEB b'\x04BRUN N\x81EWGAME,A$6400,D1\n\x00'
-70E3 b'\x04BLOAD DISK,D1\n\x00'
 6777 b'IN ANOTHER WORLD, IN A TIME TO COME.\x00'
 67A3 b'OPTIONS:\x00'
 67B3 b'Return to the view\x00'
@@ -99,81 +96,113 @@
 6955 b'3- Mockingboard A or C\x00'
 6996 b'Which slot?\x00'
 69A9 b'Enter a number 1-7\x00'
+69ED b'\x04BLOAD M\x81BSM,A$F000\n\x04BLOAD M\x81BSI,A$8000\n\x00'
 6A43 b'First Mockingboard:\x00'
 6A5B b'Second Mockingboard:\x00'
+6B21 b'\x04BRUN U\x81LT4,A$4000\n\x00'
 6B53 b'By what name shalt thou be known\x00'
 6B7B b'in this world and time? \x00'
 6BA9 b'Art thou Male or Female? \x00'
+6BEB b'\x04BRUN N\x81EWGAME,A$6400,D1\n\x00'
 703D b'PLEASE PLACE THE\x00'
 705A b'INTO DRIVE 1\x00'
 7070 b'AND PRESS [ESC]\x00'
 70AB b'PLEASE PLACE THE\x00'
 70C8 b'INTO DRIVE 2\x00'
+70E3 b'\x04BLOAD DISK,D1\n\x00'
 7111 b'ULTIMA DISK\x00'
 712A b'BRITANNIA DISK\x00'
 7146 b'TOWN DISK\x00'
 715D b'DUNGEON DISK\x00'
 60B1 invert Y-axis
-6156 ptr1 = BGND
 60C8 mode solid
 6105 mode random
 6129 width of logo, in bytes
 612B height of logo, in pixels
+6156 ptr1 = BGND
+647B column start
+64A8 column end
+64D0 file BGND at $7A00
+64D5 file ANIM at $4000
+674F mode_suspended
+6751 disk_none
+6757 disk_program
+6761 $tune_playing
+6763 $tune_queue_next
+6837 #char_0
+683B #char_9 + 1
+6840 #char_0
 6848 #char_T
 684C #char_O
 6850 #char_D
 6854 #char_B
 6858 #char_C
-6837 #char_0
-683B #char_9 + 1
-6840 #char_0
-6A27 #char_T
 6862 #char_R
 6869 #char_N
 6870 #char_J
 6877 #char_I
 687E #char_A
+6887 #music_off
+689B Apple //e
+68A5 $mb_1_slot
+68A7 $mb_1_type
+68A9 $mb_2_slot
+68AB $mb_2_type
 68F8 #char_O
 68FC #char_T
 6900 #char_ESC
 6972 #char_ESC
 6979 #char_1
 697D #char_3 + 1
-6982 #char_0
+6982 #char_num_first
+698A $mb_1_type,x
+69C2 #char_ESC
 69C9 #char_1
 69CD #char_7 + 1
-69D2 #char_0
-647B column start
-64A8 column end
+69D2 #char_num_first
+69DA $mb_1_slot,x
+6A1E #opcode_JMP ;reactivate SEL driver
+6A23 #music_off
+6A25 $tune_playing
+6A27 #music_Towne
+6A2C #music_explore
+6A7A #music_main
+6AA5 $tune_playing
+6AA7 $tune_queue_next
+6AAC #music_off
+6ABE benign BUG: should test (X) instead of X
+6AD4 not necessary
+6AE2 #music_off
+6AE4 $tune_queue_next
+6AE6 $tune_playing
+6AF1 $tune_queue_next
+6B00 unused
+6B1C #music_off
+6B38 #music_off
+6B43 #disk_britannia
+6B48 #disk_program
+6BD3 #char_M
+6BD7 #char_F
+6BDB #glyph_female
+6BDF #glyph_male
+6BE6 #music_off
+6C5B file ANIM at $4000
+6CB4 file ANIM at $4000
 6E01 #object_last
-70DE #char_0
-7090 #char_ESC
-7027 #disk_britannia
-702B #disk_dungeon
 6E51 world width
 6F24 for object 1, sprite is type, not just anim frame
 6F74 #char_DEL
-6F78 #char_backspace
+6F78 #char_left_arrow
 6F7A #char_enter
-6F7E #char_backspace
+6F7E #char_left_arrow
 6F82 #char_space
 6F9D #char_space
 6FA6 #char_space
 6FBE #char_enter
-64D0 file BGND at $7A00
-64D5 file ANIM at $4000
-689B Apple //e
-69C2 #char_ESC
-6A1E JMP - reactivate SEL driver
-6BD3 #char_M
-6BD7 #char_F
-6BDB #char_female
-6BDF #char_male
-6C5B file ANIM at $4000
-6CB4 file ANIM at $4000
-6B00 unused
-6ABE bug? meant to test (X)?
-6AD4 not necessary
+7027 #disk_britannia
+702B #disk_dungeon
+7090 #char_ESC
+70DE #char_num_first
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -188,7 +217,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 ptr_demo
@@ -208,11 +237,10 @@
 001E move_counter + 2
 001F move_counter + 3
 0046 kbd_buf_count
-00B0 key_buf
+00B0 mb_count
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -228,7 +256,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -243,10 +271,10 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -255,9 +283,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -268,7 +296,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 world_tiles
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -277,7 +305,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -285,7 +313,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -337,11 +365,7 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
 B7B5 j_readblock
 B7EB RWTS_volume
@@ -364,7 +388,7 @@ E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
-EC00 music_init
+EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
 ED08 torches
@@ -405,7 +429,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -416,256 +440,268 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-6000 boot
-C054 IO_PAGE1
-C057 IO_HIRES
-C052 IO_FULLSCREEN
-C050 IO_GRAPHICS
-604A init_map_objects
 0080 ptr1_bitmap
 0081 ptr1_bitmap + 1
-6092 @loop
-6089 clear_screen
-60C7 @done
-6234 inc_ptr_table
-623A +
-0084 ptr_bitmap
-0085 ptr_bitmap + 1
-E180 bmpcol_byte
-6081 plot_row
-6233 row_parity
-E29F bmpcol_bit
-6080 plot_column
-620D hplot_xy
-6204 hplot_white
-60A5 @next_pixel
-6257 pixel_writing
-609D draw_signature
-6256 @done
-624D -
-624C @delay
-6246 short_pause
-623D @delay
-623B long_pause
 0082 ptr2_bitmap
 0083 ptr2_bitmap + 1
+0084 ptr_bitmap
+0085 ptr_bitmap + 1
+00BC gender_chosen
+6000 boot
+604A init_map_objects
+6080 plot_column
+6081 plot_row
+6082 src_column
 6083 src_row
-6085 dst_row
 6084 dst_column
-61C0 blit_mode
-61A9 @write_byte
-61AB @next_column
-6087 num_columns
-6195 +
-61BF blit_width
+6085 dst_row
 6086 num_rows
+6087 num_columns
+6088 blit_page_offset
+6089 clear_screen
+6092 @loop
+609D draw_signature
+60A5 @next_pixel
+60C7 @done
+60C8 draw_and
+60E5 draw_blue_separator
+60EF @loop
+6105 draw_ultima_logo
+610F @next_progress
+6129 +
+613E blit_image
 6144 @do_row
 616A @do_column
-6082 src_column
+6195 +
+61A9 @write_byte
+61AB @next_column
 61BD mask_rand1
 61BE mask_rand2
-61C2 rand_8
+61BF blit_width
+61C0 blit_mode
 61C1 blit_progress
+61C2 rand_8
 61C3 blit_mask
 61C4 blit_mask_table
-613E blit_image
-60EF @loop
-60E5 draw_blue_separator
-6129 +
-610F @next_progress
-6105 draw_ultima_logo
-60C8 draw_and
+6204 hplot_white
+620D hplot_xy
+6233 row_parity
+6234 inc_ptr_table
+623A +
+623B long_pause
+623D @delay
+6246 short_pause
+624C @delay
+624D -
+6256 @done
+6257 pixel_writing
 646C draw_origin_systems
-6543 draw_present
-659F draw_quest_title
-6619 draw_map_window
-6673 draw_captive_scroll
-6692 +
-6680 @next_scroll
-6834 @get_input
-674C mockingboard_active
-6AF4 input_char
-6B14 cursor_x
-6B15 cursor_y
-685C @load_music
-6A74 load_music
-6A89 music_bank
-6A88 music_song
-6A82 @digit
-6A5A @no_key
-6A5B @odd
-69ED load_sound_drivers
-6862 +
-6869 +
-6870 +
-6877 +
-687E +
-6887 activate_mockingboar
-675C return_to_view
-6FDD number_of_drives
-6B16 journey_onward
-6B38 init_new_game
-6848 @check_alpha
-6769 draw_menu
-674D start_attract_mode
-6C08 return
-E068 bmplineaddr_lo + $68
-E128 bmplineaddr_hi + $68
-6FD4 @next_col
-6FC6 @next_row
-6FC4 clear_window
-7108 print_disk_name
-7123 @britannia
-713F @towne
-7156 @dungeon
-716F @done
-6C09 attract_loop
-6766 menu_main
-67E1 num_drives
-6907 one_mockingboard
-690B two_mockingboards
-690D +
-68F5 @get_input
-68A3 +
-696F @get_input
-6979 +
-69BF @get_input
-6981 menu_which_slot
-69C9 +
-690F menu_kind_mocking
-6A34 @skip
-64CF blitanim_loop_K
-6480 @next_column
-64CE blitanim_loop_J
-64CD blitanim_loop_I
-647B @next_row
 6476 @scroll
+647B @next_row
+6480 @next_column
+64CD blitanim_loop_I
+64CE blitanim_loop_J
+64CF blitanim_loop_K
 64D0 blit_from_slowpaint
 64D5 blit_from_animsheet
-6088 blit_page_offset
 64D7 +
 6503 get_bitmap_byte
-6548 @next_scroll
-654D @next_row
-6552 @next_column
-65B3 @next_column
-65AE @next_row
-65A9 @next_scroll
+651A mystery_routine
 6522 @add
 652D @inc
 6535 @done
 653B mystery_table
 6542 mystery_accumulator
-651A mystery_routine
-6628 @next_row
+6543 draw_present
+6548 @next_scroll
+654D @next_row
+6552 @next_column
+659F draw_quest_title
+65A9 @next_scroll
+65AE @next_row
+65B3 @next_column
+6619 draw_map_window
 6623 @next_column
-66F7 @dragon_sheet_x
-6720 @clip_dragon
+6628 @next_row
+6673 draw_captive_scroll
+6680 @next_scroll
+6692 +
+669D draw_captive_frame
+66C6 @next_row
 66CB @next_column
 66D0 @balron_sheet_x
 66DF @balron_sheet_y
-670D @dragon_sheet_y
 66F2 @clip_balron
-66C6 @next_row
-6DA7 sheet_balron_col
-6D95 sheet_balron_row
-6DCB sheet_dragon_col
-6DB9 sheet_dragon_row
-6CDD balron_anim_sequence
-6D55 dragon_anim_sequence
+66F7 @dragon_sheet_x
+670D @dragon_sheet_y
+6720 @clip_dragon
+6735 next_captive_frame
+674C mockingboard_active
+674D start_attract_mode
+675C return_to_view
+6766 menu_main
+6769 draw_menu
+67E1 num_drives
+6834 @get_input
+6848 @check_alpha
+685C @load_music
+6862 +
+6869 +
+6870 +
+6877 +
+687E +
+6887 @activate_mockingboard
+68A3 +
+68B7 how_many
+68F5 @get_input
+6907 one_mockingboard
+690B two_mockingboards
+690D +
+690F menu_kind_mocking
+696F @get_input
+6979 +
+6981 @set_type
+698C menu_which_slot
+69BF @get_input
+69C9 +
+69D1 @set_slot
+69E0 @do_second_card
+69ED load_sound_drivers
+6A34 @skip
+6A37 print_mockboard_1_2
+6A5A @no_key
+6A5B @odd
+6A74 load_music
+6A82 @digit
+6A88 music_tune
+6A89 music_bank
+6A8A music_bank_letter
+6A90 music_bank_tunes
+6AA5 update_music
+6AAC +
+6AB3 @get_bank_index
+6AB8 @next
+6AC0 @get_tune_number
+6AC8 @get_next_tune
+6AD0 @check_eol
+6AD6 @advance_demo_tune
+6AED +
+6AEE @same_bank
+6AF4 input_char
+6B14 cursor_x
+6B15 cursor_y
+6B16 journey_onward
+6B38 init_new_game
+6B4C @ask_name
+6BD0 @input_sex
+6BDF @male
+6BE1 @run_newgame
+6C08 return
+6C09 attract_loop
+6C18 update_attract_and_captives
+6C25 update_captives
+6C42 @balron_set_dst
+6C4F @balron_set_src
+6C6A @balron_blit
+6C80 @update_dragon
+6C98 @dragon_set_dst
+6CA8 @dragon_set_src
+6CC3 @dragon_blit
+6CD5 attract_twice
+6CD6 captive_row_cur
+6CD7 captive_unused1
+6CD8 captive_unused2
+6CD9 captive_sheet_y
+6CDA captive_sheet_x
 6CDB balron_anim_cur
 6CDC dragon_anim_cur
-669D draw_captive_frame
-6735 next_captive_frame
-6DDF @copy_map
-6E00 @skip
-6E6E world_row_index
-6DEA @next_object
+6CDD balron_anim_sequence
+6D55 dragon_anim_sequence
+6D95 sheet_balron_row
+6DA7 sheet_balron_col
+6DB9 sheet_dragon_row
+6DCB sheet_dragon_col
 6DDD draw_world_tiles
-6E73 attract_map
-7107 @ok
-8000 j_mbsi
-6A37 print_mockboard_1_2
-6A8A music_bank_letter
-6A90 music_bank_songs
-6AB8 @next
-6AB3 @get_bank_index
-6AC0 @get_song_number
-70F3 @drive_number
-70DB @load_disk_id
-701E @display_prompt
-701C insert_disk
-708D -
-7097 @drive2
-710A @program
-702F @drive1
-706A @wait_key
-7094 @have_disk
-6E49 @src2_hi
-6E4B @dst2_lo
-6E4C @dst2_hi
+6DDF @copy_map
+6DEA @next_object
+6E00 @skip
+6E06 update_attract
+6E16 @next_row
+6E37 @next_column
+6E38 @tile_index
 6E3F @src1_hi
 6E41 @dst1_lo
 6E42 @dst1_hi
-C083 hw_LCBANK2
-6E37 @next_column
-6E38 @tile_index
-6E16 @next_row
+6E49 @src2_hi
+6E4B @dst2_lo
+6E4C @dst2_hi
 6E6D @done
-6EEF @done
-7170 demo_cmd_table
-6EE9 @inc_ptr
-6EF0 @repeat_from_start
-6ED8 @next_cmd
+6E6E world_row_index
+6E73 attract_map
 6ED2 update_demo
-6F42 demo_mob_type
+6ED8 @next_cmd
+6EE9 @inc_ptr
+6EEF @done
+6EF0 @repeat_from_start
+6EFA @do_mob_cmd
 6F2B +
 6F34 @remove_mob
-6EFA @do_mob_cmd
-6F69 @delay
-6FB0 @enter
-6F97 @backspace
-6F63 @elapse_cursor
+6F42 demo_mob_type
 6F51 input_text
-6F7A +
-6FB6 @pad_buf
 6F55 @next_cursor
-6C18 update_attract_and_captives
-6E06 update_attract
-7009 @next_col
-6FFB @next_row
-6FF9 remove_window
-6FF2 -
+6F63 @elapse_cursor
+6F69 @delay
+6F7A +
+6F97 @backspace
+6FB0 @enter
+6FB6 @pad_buf
+6FC4 clear_window
+6FC6 @next_row
+6FD4 @next_col
+6FDD number_of_drives
 6FEE delay_96
+6FF2 -
+6FF9 remove_window
+6FFB @next_row
+7009 @next_col
+701C insert_disk
+701E @display_prompt
+702F @drive1
+706A @wait_key
+708D -
+7094 @have_disk
+7097 @drive2
+70DB @load_disk_id
+70F3 @drive_number
+7107 @ok
+7108 print_disk_name
+710A @program
+7123 @britannia
+713F @towne
+7156 @dungeon
+716F @done
+7170 demo_cmd_table
+8000 j_mbsi
+C050 hw_GRAPHICS
+C052 hw_FULLSCREEN
+C054 hw_PAGE1
+C057 hw_HIRES
 C081 hw_ROMIN
-FBC0 rom_ZIDBYTE
+C083 hw_LCBANK2
+E068 bmplineaddr_lo + $68
+E128 bmplineaddr_hi + $68
+E180 bmpcol_byte
+E29F bmpcol_bit
 FBB3 rom_signature
-6B4C @ask_name
-6BDF @male
-6BD0 @input_sex
-6BE1 @run_newgame
-6C25 update_captives
-6CD9 captive_sheet_y
-6CDA captive_sheet_x
-6CD6 captive_row_cur
-6C4F @balron_set_src
-6C42 @balron_set_dst
-6C6A @balron_blit
-6C80 @update_dragon
-6CA8 @dragon_set_src
-6C98 @dragon_set_dst
-6CC3 @dragon_blit
-6CD5 attract_twice
-6AA5 update_music
-6AC8 @get_next_song
-6AD0 @check_eol
-6AED +
-6AD6 @advance_demo_song
-6AAC +
-6AEE @same_bank
+FBC0 rom_ZIDBYTE
+FF00 TMP_PAGE
+FFFF TMP_ADDR
 :DISABLED HILO LABELS
-6105
+603F
 60E5
+6105
+6471
+6476
 6543
 6548
 65A4
@@ -674,10 +710,7 @@ FBB3 rom_signature
 66C1
 6769
 6B97
-6471
-6476
 7013
-603F
 :USER HILO
 :TAB SIZE
 0008

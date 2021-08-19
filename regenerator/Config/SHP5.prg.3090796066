@@ -22,9 +22,9 @@
 8C2D-8C5B
 8C7C-8C8C
 8C98-8CB2
+8CD5-8CEB
 8D5B-8E42
 8EC1-8ED0
-8CD5-8CEB
 :WORDS
 :POINTERS
 :HILOLOOKUP
@@ -34,9 +34,9 @@
 8CEB
 :REMOVED BYTES
 :FULL COMMENTS
-8E42 unused
-8D13 unused
 8CFB unused
+8D13 unused
+8E42 unused
 :SIDE COMMENTS
 8800 b'\nWELCOME UNTO\n\x00'
 882D b' SAYS:\nPEACE AND JOY BE\nWITH YOU FRIEND.\nARE YOU IN NEED\nOF HELP?\x00'
@@ -57,31 +57,39 @@
 8C2A b'\nTHOU ART A\nGREAT HELP, WE\nARE IN DIRE\nNEED!\n\x00'
 8C79 b'\nWILT THOU PAY?\x00'
 8C95 b'\nTHEN I CANNOT\nAID THEE.\n\x00'
-8D23 #char_enter
-8CF4 #char_enter
-8CC7 #sound_spell_effect
-8C8F #char_Y
-8C19 #virtue_sacrifice
-8C23 #virtue_sacrifice
-8C0E #char_N
-8C12 #char_Y
-8B6F #char_Y
-8AED #status_Good
-8AEB #player_status
-8A3F #player_status
-8A43 #status_Dead
-8A20 #player_max_hp_hi
-8A28 #player_max_hp_lo
-8A24 #player_cur_hp_hi
-8A2C #player_cur_hp_lo
-89D7 #player_status
-89D9 #status_Good
-88F3 #status_Poison
-88EF #player_status
+8875 #char_Y
 88D1 #char_A
 88D8 #char_B
 88DF #char_C
-8875 #char_Y
+88EF #player_status
+88F3 #status_Poison
+89D7 #player_status
+89D9 #status_Good
+8A20 #player_max_hp_hi
+8A24 #player_cur_hp_hi
+8A28 #player_max_hp_lo
+8A2C #player_cur_hp_lo
+8A3F #player_status
+8A43 #status_Dead
+8AEB #player_status
+8AED #status_Good
+8B6F #char_Y
+8B7D #player_cur_hp_hi
+8C0E #char_N
+8C12 #char_Y
+8C19 #virtue_sacrifice
+8C23 #virtue_sacrifice
+8C5E #player_cur_hp_hi
+8C69 delay 10 update cycles
+8C8F #char_Y
+8CC7 #sound_spell_effect
+8CD5 copy-pasted from SHP2
+8CE6 copy-pasted from SHP2
+8CF4 #char_enter
+8CFF 99
+8D23 #char_enter
+8E92 $zp_inc_amount
+8E9B $zp_inc_amount
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -96,7 +104,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -119,8 +127,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -136,7 +143,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -145,16 +152,16 @@
 00D6 hexnum
 00D7 bcdnum
 00D8 zp_price
-00D9 zp_virtue_type
-00DA zp_virtue_amount
+00D9 zp_save_reg
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -163,9 +170,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zp_count
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -176,7 +183,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -185,7 +192,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -193,7 +200,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -245,12 +252,72 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+887C menu
+88D8 +
+88DF +
+88E6 +
+88E9 ask_cure
+891D is_poisoned
+8949 @no_money
+89CF try_cure
+89D4 do_cure
+89E6 ask_heal
+8A18 try_heal
+8A39 ask_resurrect
+8A67 is_dead
+8A95 cannot_afford
+8AE3 do_resurrect
+8AFA ask_which_player
+8B36 @validate
+8B3F @valid
+8B40 ask_more
+8B76 try_donate
+8B85 bye
+8BCB ask_donate
+8C19 no_donate
+8C23 yes_donate
+8C6D -
+8C77 ask_pay
+8CB5 dec_gold
+8CC1 special_fx
+8CD5 price_unused
+8CD6 location_table
+8CE6 price_table_unused
+8CEB input_char
+8CFB encode_bcd_value
+8D07 @dec
+8D0F @max
+8D11 @done
+8D13 decode_bcd_value
+8D1A @inc
+8D22 @done
+8D23 print_newline
+8D29 print_string
+8D34 @next_char
+8D38 @next_string
+8D3E @end_string
+8D44 @print_char
+8D53 @done
+8D54 inc_ptr
+8D5A +
+8D5B string_table
+8E42 invert_all_players
+8E46 @next
+8E4E invert_player
+8E58 @next_row
+8E64 @next_col
+8E75 invert_view
+8E77 @next_row
+8E83 @next_col
+8E92 inc_virtue
+8EA1 @set_value
+8EA6 dec_virtue
+8EAF @continue
+8EB7 @underflow
+8EB9 @set_value
+8EBE @lost_an_eighth
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -312,8 +379,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -324,68 +391,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8EA6 dec_virtue
-8E92 inc_virtue
-8EA1 @store
-8EB7 @underflow
-8EB9 @store
-8EBE @lost_an_eighth
-8E4E invert_player
-8E42 invert_all_players
-8E46 @next
-8E64 @next_col
-8E58 @next_row
-8E75 invert_view
-8E77 @next_row
-8E83 @next_col
-8D54 inc_ptr
-8D5A +
-8D53 @done
-8D44 @print_char
-8D38 @next_string
-8D3E @end_string
-8D34 @next_char
-8D5B string_table
-8D29 print_string
-8D23 print_newline
-8D22 @done
-8D1A @inc
-8D13 decode_bcd_value
-8CFB encode_bcd_value
-8D11 @done
-8D0F @max
-8D07 @dec
-8CEB input_char
-8CC1 special_fx
-8CD6 location_table
-8CD5 unused
-8CB5 deduct_gold
-8C77 ask_pay
-8B40 ask_more
-8C6D -
-8C23 yes_donate
-8C19 no_donate
-8B85 bye
-8BCB ask_donate
-8B76 try_donate
-887C menu
-8B3F @valid
-8B36 @validate
-8AFA ask_which_player
-8AE3 do_resurrect
-8A95 cannot_afford
-8A67 is_dead
-8A39 ask_resurrect
-8A18 try_heal
-89E6 ask_heal
-89CF try_cure
-89D4 do_cure
-8949 @no_money
-891D is_poisoned
-88E9 ask_cure
-88D8 +
-88DF +
-88E6 +
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

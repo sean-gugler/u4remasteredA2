@@ -1,0 +1,16 @@
+xpos_abyss_cove_mouth = $dd
+ypos_abyss_cove_mouth = $e0
+xpos_abyss_entrance = $e9
+ypos_abyss_entrance = $e9
+xpos_abyss_shrine_min = $e5
+xpos_abyss_shrine_max = $ea
+ypos_abyss_shrine_min = $d4
+ypos_abyss_shrine_max = $d9
+xpos_balloon_spawn = $e9
+ypos_balloon_spawn = $f2
+xpos_castle_britannia = $56
+ypos_castle_britannia = $6c
+xpos_lord_british = $13
+ypos_lord_british = $08
+xpos_hythloth = $ef
+ypos_hythloth = $f0

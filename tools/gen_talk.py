@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -56,6 +56,7 @@ CONV_KEYS = [
 def encode_conv(conv):
     strings = list(flatten(encode_string(conv[key], lastbit=True) for key in CONV_KEYS))
     kMax = 0xf0
+    assert(len(strings) < kMax)
     strings = (strings + [0] * kMax)[:kMax]
     kw1 = encode_string((conv["keyword_1"] + "      ")[:6], lastbit=False)
     kw2 = encode_string((conv["keyword_2"] + "      ")[:6], lastbit=False)

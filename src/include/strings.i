@@ -1,0 +1,12 @@
+string_weapon_first = $25
+string_armour = $35
+string_armour_first = $35   ; FIXME
+string_weapons_short = $3d
+string_class = $4d
+string_class_first = $4d   ; FIXME
+string_reagent_first = $5d
+string_spells = $65
+string_spell_first = $65   ; FIXME
+string_locations = $7e
+string_shrines = $7e
+string_virtues = $97

@@ -3,7 +3,6 @@
 :CODE END
 8FC0
 :DATA BYTES
-8F45-8F4E
 8803-8810
 882E-884A
 885B-8868
@@ -14,6 +13,7 @@
 893C-894B
 8967-8979
 89A0-89C8
+89CB-89CD
 89FD-8A21
 8A27-8A42
 8A64-8A91
@@ -22,28 +22,27 @@
 8AF3-8AF9
 8B07-8B20
 8B55-8B66
+8B69-8B9B
+8BE3-8E7C
+8F0A-8F0C
+8F45-8F4E
 8FA1-8FAD
 8FB2-8FC0
-8F0A-8F0C
-8BE3-8E7C
-8B69-8B9B
-89CB-89CD
 :WORDS
 :POINTERS
 :HILOLOOKUP
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-8F0C
-8B9D
 89CD
+8B9D
+8F0C
 :REMOVED BYTES
 :FULL COMMENTS
-8ECA unused
-8E7C unused
 88B1 prompt
+8E7C unused
+8ECA unused
 :SIDE COMMENTS
-8F42 b'>ARMOUR<\x00'
 8800 b'\nWELCOME TO\n\x00'
 882B b' SAYS:\nWANT TO BUY\nOR SELL?\x00'
 8858 b'\nWELL THEN,\n\x00'
@@ -62,23 +61,46 @@
 8AF0 b'DEAL?\x00'
 8B04 b'HARUMPH, WHAT\nELSE THEN?\x00'
 8B52 b'GOOD, WHAT\nELSE?\x00'
+8F42 b'>ARMOUR<\x00'
 8F9E b'A-NO ARMOUR\x00'
-8F74 #char_hyphen
-8F69 #char_A
-8EAE #char_space
-8E90 #char_space
-8E8C #char_left_arrow
-8B9D #char_enter
-8B25 #party_stat_gold
-8A51 #char_A
-898A #party_stat_gold
+884D #char_B
+8851 #char_S
+8894 #char_alpha_first
+8899 #char_hyphen
+88D2 #char_alpha_first
+8924 #char_Y
+8928 #char_N
 894E #char_Y
 8955 #char_N
-88D2 #char_A
-8894 #char_A
-8899 #char_hyphen
-8851 #char_S
-884D #char_B
+898A #party_stat_gold_hi
+8A51 #char_alpha_first
+8A57 #armour_last
+8AFC #char_Y
+8B00 #char_N
+8B25 #party_stat_gold_hi
+8B9D #char_enter
+8E7C #char_question
+8E83 $zp_input_index
+8E88 #char_enter
+8E8C #char_left_arrow
+8E90 #char_space
+8E94 $zp_input_index
+8E9C $zp_input_index
+8E9E $zp_input_index
+8EA6 $zp_input_index
+8EAA $zp_input_index
+8EAE #char_space
+8EB8 $zp_input_index
+8EBA #char_space
+8EC4 #char_enter
+8ED2 $zp_mismatches
+8EE6 $zp_mismatches
+8EF1 $zp_mismatches
+8F10 99
+8F5D #party_stat_armour
+8F69 #char_alpha_first
+8F74 #char_hyphen
+8F83 #char_hyphen
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -93,7 +115,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -116,8 +138,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -133,7 +154,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -148,21 +169,21 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zp_char_count
+00EA zp_shop_num
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
-00F0 zp_mismatches
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F0 zp_inv_num
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -173,7 +194,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -182,7 +203,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -190,7 +211,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -227,7 +248,7 @@
 0863 j_animate_view
 0866 j_printdigit
 0869 j_clearstatwindow
-086C j_animate_creatures
+086C j_animate_tiles
 086F j_centername
 0872 j_print_direction
 0875 j_clearview
@@ -242,15 +263,75 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+8820 @buy_or_sell
+8858 @buy
+8868 buy_menu
+8885 @next_item
+88A9 @skip
+88D9 +
+88E2 @find_stock
+88F7 @found
+88FF @ask_buy
+891A -
+8939 @more
+8955 +
+8959 bye
+897A try_spend
+89CB payment
+89CC payment + 1
+89CD do_spend
+89EE +
+8A24 sell
+8A42 sell_menu
+8A94 @bye
+8A97 @make_offer
+8ACF +
 8AF0 @confirm
+8B23 @sell_item
+8B43 @skip_overflow
+8B69 location_table
+8B79 inventory
+8B8D price
+8B8E price + 1
+8B9D print_newline
+8BA3 input_char
+8BB1 print_string
+8BBC @next_char
+8BC0 @next_string
+8BC6 @end_string
+8BCC @print_char
+8BDB @done
+8BDC inc_ptr
 8BE2 +
 8BE3 string_table
+8E7C get_input
+8E85 @get_char
+8EA6 @backspace
+8EB8 @got_input
+8EBC @pad_spaces
+8ECA match_input_inline
+8ED6 @next_char
+8EDD +
+8EEB @end
+8EF4 save_console_xy
+8EFF restore_console_xy
+8F0A prev_console_x
+8F0B prev_console_y
+8F0C encode_bcd_value
+8F18 @dec
+8F20 @max
+8F22 @done
+8F24 decode_bcd_value
+8F2B @inc
+8F33 @done
+8F34 display_owned
+8F4E @next_row
+8F80 @two_digit
+8F83 +
+8F92 @next_item
+8F9E @nothing
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -272,8 +353,9 @@ E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
-EC00 music_init
+EC00 player_stats
 ED00 party_stats
+ED01 party_stats + 1
 ED08 torches
 ED09 gems
 ED0A keys
@@ -311,8 +393,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -323,71 +405,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8F92 @next_item
-8F9E @nothing
-8EFF restore_console_xy
-8F4E @next_row
-8BB1 print_string
-8F80 @two_digit
-8F83 +
-8EF4 save_console_xy
-8F34 display_owned
-8F33 @done
-8F2B @inc
-8F24 decode_bcd_value
-8F22 @done
-8F20 @max
-8F18 @dec
-8F0C encode_bcd_value
-8F0B prev_console_y
-8F0A prev_console_x
-8EEB @done
-8ED6 @next
-8EDD +
-8ECA check_inline_keyword
-8EBC @pad_spaces
-8EB8 @got_input
-8E85 @get_char
-8EA6 @backspace
-8E7C get_input
-8BDC inc_ptr
-8BDB @done
-8BCC @print_char
-8BC0 @next_string
-8BC6 @end_string
-8BBC @next_char
-8B9D print_newline
-8BA3 input_char
-8B8E price + 1
-8B8D price
-8B79 inventory
-8B69 location_table
-8A42 sell_menu
-8B43 @skip_overflow
-ED01 party_stats + 1
-89CB payment
-89CC payment + 1
-8B23 @sell_item
-8ACF +
-8A97 @make_offer
-8A94 @bye
-8959 bye
-8A24 sell
-8868 buy_menu
-89EE +
-89CD do_spend
-897A try_spend
-8955 +
-8939 @more
-88F7 @found
-88FF @ask_buy
-891A -
-88E2 @find_stock
-88D9 +
-8885 @next_item
-88A9 @skip
-8858 @buy
-8820 @buy_or_sell
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

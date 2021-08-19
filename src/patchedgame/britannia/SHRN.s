@@ -1,274 +1,44 @@
 	.include "uscii.i"
-	.include "SHRN.i"
 
-;
-; **** ZP FIELDS ****
-;
-spk_pattern_ptr = $b0
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-current_location = $0a
-game_mode = $0b
-last_meditated = $19
-;move_counter + 2 = $1e
-;spk_pattern_ptr = $b0
-;spk_pattern_ptr+1 = $b1
-spk_byte = $b2
-spk_pattern_length = $b3
-spk_repeat_code = $b4
-spk_pattern_code = $b5
-spk_row = $b6
-spk_repeat_count = $b7
-spk_repeat_flag = $b8
-spk_pattern_count = $b9
-spk_pattern_flag = $ba
-spk_pattern_len_cur = $bb
-console_xpos = $ce
-zpd9 = $d9
-zpda = $da
-zpea = $ea
-zpf0 = $f0
-ptr2 = $fc
-;ptr2 + 1 = $fd
-ptr1 = $fe
-;ptr1 + 1 = $ff
-;
-; **** ZP POINTERS ****
-;
-;ptr2 = $fc
-;ptr1 = $fe
-;
-; **** USER LABELS ****
-;
-player_xpos = $0000
-player_ypos = $0001
-tile_xpos = $0002
-tile_ypos = $0003
-map_x = $0004
-map_y = $0005
-dest_x = $0006
-dest_y = $0007
-britannia_x = $0008
-britannia_y = $0009
-dungeon_level = $000c
-balloon_flying = $000d
-player_transport = $000e
-party_size = $000f
-dng_direction = $0010
-light_duration = $0011
-moon_phase_trammel = $0012
-moon_phase_felucca = $0013
-horse_mode = $0014
-player_has_spoken_to_lb = $0015
-last_sleep = $0016
-last_humility_check = $0017
-altar_room_principle = $0018
-last_found_reagent = $001a
-ship_hull = $001b
-move_counter = $001c
-;move_counter + 1 = $001d
-;move_counter + 3 = $001f
-kbd_buf_count = $0046
-charptr = $00bd
-;charptr+1 = $00be
-foe_type_encountered = $00c0
-pre_combat_x = $00c1
-pre_combat_y = $00c2
-pre_combat_tile = $00c3
-curr_player_turn = $00c5
-magic_aura = $00c6
-aura_duration = $00c7
-tile_under_player = $00c8
-tile_north = $00c9
-tile_south = $00ca
-tile_east = $00cb
-tile_west = $00cc
-music_volume = $00cd
-console_ypos = $00cf
-diskid = $00d0
-numdrives = $00d1
-currdisk_drive1 = $00d2
-currdisk_drive2 = $00d3
-curr_player = $00d4
-target_player = $00d5
-hexnum = $00d6
-bcdnum = $00d7
-zpd8 = $00d8
-zpdb = $00db
-damage = $00dc
-reqdisk = $00de
-currdrive = $00df
-lt_track = $00e0
-lt_sector = $00e1
-lt_rwflag = $00e2
-lt_addr_hi = $00e3
-foe_type_combat = $00e6
-game_mode_pre_combat = $00e8
-turn_counter = $00e9
-moongate_tile = $00ed
-moongate_xpos = $00ee
-moongate_ypos = $00ef
-tilerow = $00f2
-movement_mode = $00f4
-direction = $00f5
-temp2_x = $00f6
-temp2_y = $00f7
-delta_x = $00f8
-delta_y = $00f9
-temp_x = $00fa
-temp_y = $00fb
-currmap = $0200
-room_start_foe_type = $0210
-room_start_foe_x = $0220
-room_start_foe_y = $0230
-map_start_foe_x = $0240
-room_start_player_y = $0248
-map_start_foe_y = $0250
-map_start_player_x = $0260
-map_start_player_y = $0268
-tempmap = $0280
-inbuffer = $0300
-dng_trigger_new_tile = $0310
-dng_trigger_pos = $0311
-dng_trigger_new_pos1 = $0312
-dng_trigger_new_pos2 = $0313
-music_ctl = $0320
-spin_drive_motor = $0323
-screen = $0400
-j_waitkey = $0800
-j_player_teleport = $0803
-j_move_east = $0806
-j_move_west = $0809
-j_move_south = $080c
-j_move_north = $080f
-j_drawinterface = $0812
-j_drawview = $0815
-j_update_britannia = $0818
-j_primm_cout = $081b
-j_primm_xy = $081e
-j_primm = $0821
-j_console_out = $0824
-j_clearbitmap = $0827
-j_mulax = $082a
-j_get_stats_ptr = $082d
-j_printname = $0830
-j_printbcd = $0833
-j_drawcursor = $0836
-j_drawcursor_xy = $0839
-j_drawvert = $083c
-j_drawhoriz = $083f
-j_request_disk = $0842
-j_update_status = $0845
-j_blocked_tile = $0848
-j_update_view = $084b
-j_rand = $084e
-j_loadsector = $0851
-j_playsfx = $0854
-j_update_view_combat = $0857
-j_getnumber = $085a
-j_getplayernum = $085d
-j_update_wind = $0860
-j_animate_view = $0863
-j_printdigit = $0866
-j_clearstatwindow = $0869
-j_animate_tiles = $086c
-j_centername = $086f
-j_print_direction = $0872
-j_clearview = $0875
-j_invertview = $0878
-j_centerstring = $087b
-j_printstring = $087e
-j_gettile_bounds = $0881
-j_gettile_britannia = $0884
-j_gettile_opposite = $0887
-j_gettile_currmap = $088a
-j_gettile_tempmap = $088d
-j_get_player_tile = $0890
-j_gettile_towne = $0893
-j_gettile_dungeon = $0896
-bitmap = $2000
-j_readblock = $b7b5
-rwts_volume = $b7eb
-rwts_track = $b7ec
-rwts_sector = $b7ed
-rwts_buf_lo = $b7f0
-rwts_buf_hi = $b7f1
-rwts_command = $b7f4
-hw_keyboard = $c000
-hw_strobe = $c010
-hw_speaker = $c030
-hw_lcbank1 = $c08b
-bmplineaddr_lo = $e000
-;bmplineaddr_lo + 7 = $e007
-;bmplineaddr_lo + 8 = $e008
-;bmplineaddr_lo + 9 = $e009
-;bmplineaddr_lo + 10 = $e00a
-bmplineaddr_hi = $e0c0
-;bmplineaddr_hi + 7 = $e0c7
-;bmplineaddr_hi + 8 = $e0c8
-;bmplineaddr_hi + 9 = $e0c9
-;bmplineaddr_hi + 10 = $e0ca
-music_init = $ec00
-party_stats = $ed00
-;party_stats + 1 = $ed01
-torches = $ed08
-gems = $ed09
-keys = $ed0a
-sextant = $ed0b
-stones = $ed0c
-runes = $ed0d
-bell_book_candle = $ed0e
-threepartkey = $ed0f
-food_hi = $ed10
-food_lo = $ed11
-food_frac = $ed12
-gold_hi = $ed13
-gold_lo = $ed14
-horn = $ed15
-wheel = $ed16
-skull = $ed17
-armour = $ed18
-weapons = $ed20
-reagents = $ed38
-mixtures = $ed40
-object_tile_sprite = $ee00
-;object_tile_sprite + object_max = $ee1f
-object_xpos = $ee20
-;object_xpos + object_max = $ee3f
-object_ypos = $ee40
-;object_ypos + object_max = $ee5f
-object_tile_type = $ee60
-;object_tile_type + object_max = $ee7f
-object_xpos_prev = $ee80
-object_ypos_prev = $eea0
-object_dng_level = $eec0
-npc_dialogue = $eee0
-combat_foe_cur_x = $ef00
-combat_foe_cur_y = $ef10
-combat_foe_prev_x = $ef20
-combat_foe_prev_y = $ef30
-combat_foe_hp = $ef40
-combat_foe_tile = $ef50
-combat_foe_drawn_tile = $ef60
-combat_foe_slept = $ef70
-;combat_player_xpos-1 = $ef7f
-combat_player_xpos = $ef80
-;combat_player_ypos-1 = $ef8f
-combat_player_ypos = $ef90
-;combat_player_tile-1 = $ef9f
-combat_player_tile = $efa0
-attack_sprite = $effd
-target_x = $effe
-target_y = $efff
+	.include "apple.i"
+	.include "char.i"
+	.include "map_objects.i"
+	.include "music.i"
+	.include "sound.i"
+	.include "jump_overlay.i"
+	.include "jump_subs.i"
+	.include "jump_system.i"
+	.include "super_packer.i"
+	.include "tables.i"
+	.include "zp_main.i"
 
-key_buf = $b0
+	.include "PRTY.i"
+	.include "ROST.i"
 
+
+; --- Custom use of Zero Page
+
+zp_index = $ea
+zp_count = $f0
+
+zp_save_reg = $d9
+; for consistency these should have been the same
+zp_dec_amount = $da
+zp_inc_amount = $d9
+
+
+; --- Configure Super-Packer
+
+max_spk_col = $16
+max_spk_row = $b7
+
+min_spk_col = $00
+min_spk_row = $07
 
 
 	.segment "OVERLAY"
 
-j_overlay_entry:
+.assert * = j_overlay_entry, error, "Wrong start address"
 	lda current_location
 	sec
 	sbc #loc_shrine_first
@@ -277,7 +47,7 @@ j_overlay_entry:
 	lda runes
 	and bit_msb,y
 	bne @haverune
-	jsr j_primm  ;b'\nTHOU DOST NOT\nBEAR THE RUNE\nOF ENTRY! A\nSTRANGE FORCE\nKEEPS YOU OUT!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU DOST NOT", $8d
 	.byte "BEAR THE RUNE", $8d
@@ -288,21 +58,21 @@ j_overlay_entry:
 	jmp exit_shrine
 
 @haverune:
-	jsr j_primm_cout ;b'\x04BLOAD SHRI,A$280\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SHRI,A$280", $8d
 	.byte 0
 	ldx #$7f
 @copymap:
-	lda tempmap,x
-	sta currmap,x
+	lda world_tiles,x
+	sta drawn_tiles,x
 	dex
 	bpl @copymap
-	lda #$ff
+	lda #mode_shrine
 	sta game_mode
 	jsr j_update_view
 	lda #music_shrine
 	jsr music_ctl
-	jsr j_primm  ;b'\nYOU ENTER THE\nANCIENT SHRINE\nAND SIT BEFORE\nTHE ALTAR...\n\nUPON WHAT VIRTUE\nDOST THOU\nMEDITATE?\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "YOU ENTER THE", $8d
 	.byte "ANCIENT SHRINE", $8d
@@ -317,7 +87,7 @@ j_overlay_entry:
 	sta num_cycles
 	jsr get_string
 @askcycles:
-	jsr j_primm  ;b'\nFOR HOW MANY\nCYCLES (0-3):\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "FOR HOW MANY", $8d
 	.byte "CYCLES (0-3):", 0
@@ -344,23 +114,23 @@ j_overlay_entry:
 
 @begin:
 	sta last_meditated
-	jsr j_primm  ;b'\nBEGIN MEDITATION\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "BEGIN MEDITATION", $8d
 	.byte 0
 @slowdots:
 	lda #$10
-	sta zpf0
+	sta zp_count
 @print:
 	jsr delay
 	lda #char_period
 	jsr j_console_out
-	dec zpf0
+	dec zp_count
 	bne @print
-	bit hw_strobe
+	bit hw_STROBE
 	lda #$00
 	sta key_buf_len
-	jsr j_primm  ;b'\nMANTRA\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "MANTRA", 0
 	jsr get_string
@@ -377,7 +147,7 @@ j_overlay_entry:
 	jmp @checkresult
 
 @wrongmantra:
-	jsr j_primm  ;b'\nTHOU ART NOT\nABLE TO FOCUS\nTHY THOUGHTS\nWITH THAT\nMANTRA!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU ART NOT", $8d
 	.byte "ABLE TO FOCUS", $8d
@@ -385,9 +155,9 @@ j_overlay_entry:
 	.byte "WITH THAT", $8d
 	.byte "MANTRA!", $8d
 	.byte 0
-	ldy #$06
+	ldy #virtue_spirituality
 	lda #$03
-	jsr decrease_virtue
+	jsr dec_virtue
 	jmp exit_shrine
 
 @checkresult:
@@ -401,18 +171,18 @@ j_overlay_entry:
 	jmp partial_avatar
 
 @vision:
-	jsr j_primm  ;b'\nTHY THOUGHTS\nARE PURE,\nTHOU ART GRANTED\nA VISION!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THY THOUGHTS", $8d
 	.byte "ARE PURE,", $8d
 	.byte "THOU ART GRANTED", $8d
 	.byte "A VISION!", $8d
 	.byte 0
-	ldy #$06
+	ldy #virtue_spirituality
 	lda num_cycles
 	asl
 	adc num_cycles
-	jsr increase_virtue
+	jsr inc_virtue
 	jsr j_waitkey
 	lda #char_enter
 	jsr j_console_out
@@ -460,11 +230,11 @@ short_delay:
 	bne @inner
 	dey
 	bne @outer
-	bit hw_strobe
+	bit hw_STROBE
 	rts
 
 no_focus:
-	jsr j_primm  ;b'\nTHOU ART UNABLE\nTO FOCUS THY\nTHOUGHTS ON\nTHIS SUBJECT!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU ART UNABLE", $8d
 	.byte "TO FOCUS THY", $8d
@@ -475,7 +245,7 @@ no_focus:
 	jmp exit_shrine
 
 still_weary:
-	jsr j_primm  ;b'\nTHY MIND IS\nSTILL WEARY\nFROM THY LAST\nMEDITATION!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THY MIND IS", $8d
 	.byte "STILL WEARY", $8d
@@ -485,49 +255,50 @@ still_weary:
 	jsr j_waitkey
 	jmp exit_shrine
 
-increase_virtue:
-	sta zpd9
+inc_virtue:
+	sta zp_inc_amount
 	sed
 	clc
 	lda party_stats,y
-	beq @nooverflow
-	adc zpd9
-	bcc @nooverflow
+	beq @set_value
+	adc zp_inc_amount
+	bcc @set_value
 	lda #$99
-@nooverflow:
+@set_value:
 	sta party_stats,y
 	cld
 	rts
 
-decrease_virtue:
-	sta zpda
-	sty zpd9
+dec_virtue:
+	sta zp_dec_amount
+	sty zp_save_reg
 	lda party_stats,y
 	beq @lost_an_eighth
-@subtract:
+@continue:
 	sed
 	sec
-	sbc zpda
-	beq :+
-	bcs @positive
-:	lda #$01
-@positive:
+	sbc zp_dec_amount
+	beq @underflow
+	bcs @set_value
+@underflow:
+	lda #$01
+@set_value:
 	sta party_stats,y
 	cld
 	rts
 
 @lost_an_eighth:
-	jsr j_primm  ;b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU HAST LOST", $8d
 	.byte "AN EIGHTH!", $8d
 	.byte 0
-	ldy zpd9
+	ldy zp_save_reg
 	lda #$99
-	jmp @subtract
+	jmp @continue
 
 partial_avatar:
-	jsr j_primm  ;b'\nTHOU HAST\nACHIEVED PARTIAL\nAVATARHOOD IN\nTHE VIRTUE OF\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU HAST", $8d
 	.byte "ACHIEVED PARTIAL", $8d
@@ -539,8 +310,8 @@ partial_avatar:
 	adc shrine_num
 	jsr j_printstring
 	jsr j_invertview
-	ldx #sound_spell_effect
-	lda #$09
+	ldx #$ff
+	lda #sound_spell_effect
 	jsr j_playsfx
 	jsr j_invertview
 	lda #char_enter
@@ -549,12 +320,12 @@ partial_avatar:
 	lda #$00
 	sta party_stats,y
 	jsr j_waitkey
-	jsr j_primm  ;b'\nTHOU ART GRANTED\nA VISION!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU ART GRANTED", $8d
 	.byte "A VISION!", $8d
 	.byte 0
-	lda #$00
+	lda #mode_suspended
 	sta game_mode
 	lda shrine_num
 	jsr draw_rune
@@ -565,8 +336,8 @@ get_number:
 	jsr j_waitkey
 	beq get_number
 	sec
-	sbc #char_0
-	cmp #$0a
+	sbc #char_num_first
+	cmp #$0a     ;10
 	bcc @ok
 	lda #$00
 @ok:
@@ -593,10 +364,10 @@ bit_msb:
 	.byte $80,$40,$20,$10,$08,$04,$02,$01
 
 get_string:
-	lda #$bf
+	lda #char_question
 	jsr j_console_out
 	lda #$00
-	sta zpea
+	sta zp_index
 @waitkey:
 	jsr j_waitkey
 	beq @timeout
@@ -605,20 +376,20 @@ get_string:
 	beq @done
 	cmp #char_left_arrow
 	beq @del
-	cmp #$a0     ;@char_space
+	cmp #char_space
 	bcc @waitkey
-	ldx zpea
+	ldx zp_index
 	sta inbuffer,x
 	jsr j_console_out
-	inc zpea
-	lda zpea
+	inc zp_index
+	lda zp_index
 	cmp #$0f
 	bcc @waitkey
 	bcs @done
 @del:
-	lda zpea
+	lda zp_index
 	beq @waitkey
-	dec zpea
+	dec zp_index
 	dec console_xpos
 	lda #char_space
 	jsr j_console_out
@@ -629,8 +400,8 @@ get_string:
 	lda num_cycles
 	beq @checkkey
 @done:
-	ldx zpea
-	lda #$a0
+	ldx zp_index
+	lda #char_space
 @clearend:
 	sta inbuffer,x
 	inx
@@ -642,9 +413,9 @@ get_string:
 
 compare_string:
 	lda #$0f
-	sta zpea
+	sta zp_index
 @nextstring:
-	lda zpea
+	lda zp_index
 	asl
 	asl
 	tay
@@ -657,13 +428,13 @@ compare_string:
 	inx
 	cpx #$04
 	bcc @compare
-	lda zpea
+	lda zp_index
 	rts
 
 @differ:
-	dec zpea
+	dec zp_index
 	bpl @nextstring
-	lda zpea
+	lda zp_index
 	rts
 
 virtues_and_mantras:
@@ -907,24 +678,29 @@ draw_rune:
 	jsr swap_buf
 	jsr j_clearview
 	pla
+
 	asl
 	tax
 	lda rune_addr + 1,x
 	sta ptr2 + 1
 	lda rune_addr,x
 	sta ptr2
+
 	ldx #$00
 	stx spk_repeat_flag
 	stx spk_pattern_flag
 	stx spk_pattern_len_cur
+
 	lda (ptr2,x)
 	sta spk_repeat_code
 	inc ptr2
 	bne :+
 	inc ptr2 + 1
+
 :	lda (ptr2,x)
 	sta spk_pattern_code
 	inc ptr2
+
 	ldy #max_spk_col
 @next_col:
 	ldx #max_spk_row
@@ -1074,8 +850,8 @@ swap_buf:
 key_buf_tmp:
 	.res 16, 0
 rune_addr:
-	.word rune_i,rune_n,rune_f,rune_i,rune_n
-	.word rune_i,rune_t,rune_y
+	.addr rune_i,rune_n,rune_f,rune_i,rune_n
+	.addr rune_i,rune_t,rune_y
 rune_i:
 	.byte $fb,$fd,$fd,$03,$07,$fb,$ff,$80
 	.byte $fb,$e2,$80,$9c,$fc,$f8,$fb,$16

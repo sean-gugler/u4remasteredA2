@@ -4,6 +4,7 @@
 973C
 :DATA BYTES
 6415-6429
+642F-6430
 643C-6455
 6489-64A2
 64AF-64C8
@@ -13,45 +14,45 @@
 6553-656C
 6579-6592
 659F-65B4
+6654-665A
+6666-6672
+667B-668C
 6737-6771
-69ED-69FD
+67E6-682C
 6941-6952
 695E-696B
 6974-6984
 69B5-69C6
 69D2-69DF
+69ED-69FD
 6A1B-6A27
 6A34-6A43
 6A50-6A5A
 6A67-6A74
-6654-665A
-6666-6672
-667B-668C
-6B84-6B86
-642F-6430
 6AEF-6AFE
-6CB3-973C
-67E6-682C
-6B96-6BC1
 6B06-6B3E
+6B84-6B86
+6B96-6BC1
+6CB3-973C
 :WORDS
 :POINTERS
-6B86-6B96-0
 6AFE-6B06-0
+6B86-6B96-0
 :HILOLOOKUP
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-6430
 6429
+6430
+6475
 682C
 :REMOVED BYTES
 :FULL COMMENTS
-6914 unused
-6B96 "SUPER-PACKER COPYRIGHT 1983 BY STEVEN MEUSE"
-6AB6 INPUT: A = color, X = column, Y = row
 65B7 Begin fortune telling
+6914 unused
+6AB6 INPUT: A = color, X = column, Y = row
 6B3E INPUT: A = card#, X = 0 left | 1 right
+6B96 "SUPER-PACKER COPYRIGHT 1983 BY STEVEN MEUSE"
 :SIDE COMMENTS
 6412 b'\x04BRUN U\x81LT4,A$4000\n\x00'
 6439 b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
@@ -63,65 +64,71 @@
 6550 b'\x04BLOAD G\x81YPS.SPK,A$4000\n\x00'
 6576 b'\x04BLOAD T\x81ABL.SPK,A$4000\n\x00'
 659C b'\x04BLOAD C\x81RDS,A$4000\n\x00'
+6651 b' and \x00'
+6663 b'. She says,\x00'
+6678 b"'Consider this:'\x00"
 6734 b'\x04BLOAD N\x81PRT,A$0\n\x04BLOAD N\x81LST,A$EE00\n\x04BLOAD N\x81RST,A$EC00\n\x00'
-69EA b'\x04BLOAD DISK,D1\n\x00'
 693E b'PLEASE PLACE THE\x00'
 695B b'INTO DRIVE 1\x00'
 6971 b'AND PRESS [ESC]\x00'
 69B2 b'PLEASE PLACE THE\x00'
 69CF b'INTO DRIVE 2\x00'
+69EA b'\x04BLOAD DISK,D1\n\x00'
 6A18 b'ULTIMA DISK\x00'
 6A31 b'BRITANNIA DISK\x00'
 6A4D b'TOWN DISK\x00'
 6A64 b'DUNGEON DISK\x00'
-6651 b' and \x00'
-6663 b'. She says,\x00'
-6678 b"'Consider this:'\x00"
-6987 #char_ESC
-6918 #disk_britannia
-691C #disk_dungeon
-640B key_buf_len
-64F5 #char_T
-6BC1 #>hgr_page2
-6BDB #max_spk_column
-6BDD #max_spk_row
+640B $key_buf_len
+640D #music_off
+64F5 #music_Towne
 65D2 #card1_col_min
+65D4 #gfx_green_even
+65D9 #gfx_green_odd
 65DE #card1_col_max
 65E2 #card2_col_min
+6622 #string_cards_first
 662E #string_cards_more
 6636 #string_cards_last
 663B #string_cards_of
-6622 #string_cards_first
-65D4 #gfx_green_even
-65D9 #gfx_green_odd
 6644 #string_virtue_first
 665E #string_virtue_first
-6B3F #card_row_top
-6B7F #card_row_bottom
-6B65 #card_col_count
 66AA #char_A
 66AE #char_B
-66FA discard
 66C4 set aside for runoff
+66FA discard
 6717 #string_farewell
+6722 #music_off
 6727 #string_transport
-67AB player_gender
+672F #music_off
+6775 #mode_suspended
+6792 #player_stat_max
+67AB #player_gender
 67B2 #player_strength
 67B9 #player_dexterity
 67C0 #player_intelligence
+67C7 #virtue_last - 1
+685D #portal_row_min
 6864 #portal_col_min
 6873 #portal_col_max
 687B #portal_row_max
-685D #portal_row_min
 6884 #portal_col_min
 6886 #gfx_blue_even
-6890 #gfx_blue_even
 688B #gfx_blue_odd
+6890 #gfx_blue_even
 6898 #portal_row_min
 68A5 #portal_row_min
 68AC #portal_col_min
 68BB #portal_col_max
 68C3 #portal_row_max
+6918 #disk_britannia
+691C #disk_dungeon
+6987 #char_ESC
+6B3F #card_row_top
+6B65 #card_col_count
+6B7F #card_row_bottom
+6BC1 #>screen_HGR2
+6BDB #max_spk_column
+6BDD #max_spk_row
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -136,7 +143,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -168,8 +175,7 @@
 00B9 spk_pattern_count
 00BA spk_pattern_flag
 00BB spk_pattern_len_cur
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 draw_col
 00C1 draw_row
 00C2 draw_ptr
@@ -185,7 +191,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -200,10 +206,10 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -212,9 +218,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -225,7 +231,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -234,7 +240,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -242,7 +248,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -294,11 +300,7 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -320,7 +322,7 @@ E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
-EC00 music_init
+EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
 ED08 torches
@@ -361,7 +363,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -372,120 +374,61 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
+00BC gender_chosen
+00C4 col_count
+4000 card_honesty
+4460 card_compassion
+48C0 card_valor
+4D20 card_justice
+5180 card_sacrifice
+55E0 card_honor
+5A40 card_spirituality
+5EA0 card_humility
+6000 save_portal_backgnd
 6409 start_game
 6429 wait_key
-6901 @next_col
-68F3 @next_row
-68F1 clear_text_area
-E068 bmplineaddr_lo + $68
-E128 bmplineaddr_hi + $68
-68D8 @next_col
-68CA @next_row
-6A0F print_disk_name
-68C8 clear_window
-696B @wait_key
-6984 -
-698B @have_disk
-69E2 @load_disk_id
-698E @drive2
-6920 @drive1
-6A0E @ok
-69FA @drive_number
-6916 @display_prompt
-6914 insert_disk
-6937 @d1_clear
-693A @d1_prompt
-69AB @d2_clear
-69AE @d2_prompt
-6A11 @program
-6A2A @britannia
-6A46 @towne
-6A5D @dungeon
-6A76 @done
-68E3 @next
-68ED @skip
-6BC1 spk_unpack
-6BE1 @next_row
-6BDD @next_col
 642F scene
-647F @s32_portal
-64A5 @s24_show_clearing
+6430 init_scene
+6458 @s1D_show_tree
 6463 next_scene
 646C start_scene
+6475 @s21_portal_appear
+647F @s23_portal_vanish
+64A5 @s24_show_clearing
 64CB @s29_show_tree
 64F1 @s2C_music_towne
 64FD @s2D_show_book
 6523 @s2F_show_fair
 6549 @s32_show_wagon
 656F @s33_show_gypsy
-6595 @s35_show_table
 6592 @next_scene
-6458 @s1D_show_tree
-6430 init_scene
-6AAF inc_ptr
-6AB5 +
-6A82 @next_char
-6A77 print_string
-6CB3 string_table
-6A8C @end_string
-6A86 @next_string
-6A92 @print_char
-6AAE @done
-6AA8 @no_newline
-6855 portal_appear
-689D portal_vanish
-6BFC spk_write_byte
-6C14 +
-6C1E +
-6C28 +
-6C38 +
-6C44 +
-6C4E +
-6C66 @continue
-6C67 @do_repeat
-6C06 @read_byte
-6C2E @check_pattern
-6C32 @set_pattern
-6C0E @set_repeat
-6C5C @do_literal
-6C7D @do_pattern
-6C91 @pattern_literal
-6C99 @next_pattern
-6CAE @pattern_done
-6C85 -
-6C87 @dead_code
+6595 @s35_show_table
 65C0 @clear_virtues
-67E6 card_eligible
-65D4 @next_col
-65E6 +
 65C6 fill_green
 65C8 @next_row
-663B @cards_of
-6636 @cards_last
-67F6 card_left
-67F7 card_right
-682C choose_fresh_card
-6604 -
-661D @in_order
-67F8 question_number
-68E1 mark_runoff_cards
+65D4 @next_col
+65E6 +
 65F8 @runoff
 65FB @pick_cards
+6604 -
+661D @in_order
 662A @not_first
-6B3E draw_card
-6B86 card_addr
-6B87 card_addr + 1
-6B6C @src_ptr
-6B6D @src_ptr + 1
-6B76 +
-00C4 col_count
-6B6B @next_col
-6B59 @next_row
-6B84 card_col_table
-67EE question_table
+6636 @cards_last
+663B @cards_of
 66A7 @input_AB
 66BE @chosen_on_left
+6714 conclusion
+6794 @set_player_class
+67A3 @set_player_name
+67C9 @set_virtues
+67E6 card_eligible
+67EE question_table
 67F5 card_chosen
+67F6 card_left
+67F7 card_right
+67F8 question_number
+67F9 start_world_x
+6801 start_world_y
 6809 cur_str
 680A cur_dex
 680B cur_int
@@ -493,37 +436,106 @@ E128 bmplineaddr_hi + $68
 6814 virtue_dex
 681C virtue_int
 6824 virtue_level
+682C choose_fresh_card
+6838 sound_portal_line
+683D @dur
+683F @freq
+6848 set_ptr1_line
+6855 portal_appear
+6861 @next_row
+6868 @next_col
+6872 +
+6881 @rise
+689D portal_vanish
+68A9 @fall
+68B0 @next_col
+68BA +
+68C8 clear_window
+68CA @next_row
+68D8 @next_col
+68E1 mark_runoff_cards
+68E3 @next
+68ED @skip
+68F1 clear_text_area
+68F3 @next_row
+6901 @next_col
+6914 insert_disk
+6916 @display_prompt
+6920 @drive1
+6937 @d1_clear
+693A @d1_prompt
+696B @wait_key
+6984 -
+698B @have_disk
+698E @drive2
+69AB @d2_clear
+69AE @d2_prompt
+69E2 @load_disk_id
+69FA @drive_number
+6A0E @ok
+6A0F print_disk_name
+6A11 @program
+6A2A @britannia
+6A46 @towne
+6A5D @dungeon
+6A76 @done
+6A77 print_string
+6A82 @next_char
+6A86 @next_string
+6A8C @end_string
+6A92 @print_char
+6AA8 @no_newline
+6AAE @done
+6AAF inc_ptr
+6AB5 +
 6AB6 draw_bead
-6714 conclusion
-6794 @set_player_class
-67A3 @set_player_name
-00BC gender_chosen
-67C9 @set_virtues
-67F9 start_world_x
-6801 start_world_y
-6AEF bead_row
-6AF6 bead_col
+6AD4 @next_row
 6AE3 @src_ptr
 6AE4 @src_ptr + 1
+6AEF bead_row
+6AF6 bead_col
 6AFE bead_addr
 6AFF bead_addr + 1
-6AD4 @next_row
 6B06 bead_white_even
 6B14 bead_white_odd
 6B22 bead_black_even
 6B30 bead_black_odd
-6848 set_ptr1_line
-6872 +
-6868 @next_col
-6861 @next_row
-683F @freq
-683D @dur
-6838 sound_portal_line
-6881 @rise
-68BA +
-68B0 @next_col
-68A9 @fall
-6000 save_portal_backgnd
+6B3E draw_card
+6B59 @next_row
+6B6B @next_col
+6B6C @src_ptr
+6B6D @src_ptr + 1
+6B76 +
+6B84 card_col_table
+6B86 card_addr
+6B87 card_addr + 1
+6BC1 spk_unpack
+6BDD @next_col
+6BE1 @next_row
+6BFC spk_write_byte
+6C06 @read_byte
+6C0E @set_repeat
+6C14 +
+6C1E +
+6C28 +
+6C2E @check_pattern
+6C32 @set_pattern
+6C38 +
+6C44 +
+6C4E +
+6C5C @do_literal
+6C66 @continue
+6C67 @do_repeat
+6C7D @do_pattern
+6C85 -
+6C87 @dead_code
+6C91 @pattern_literal
+6C99 @next_pattern
+6CAE @pattern_done
+6CB3 string_table
+E068 bmplineaddr_lo + $68
+E128 bmplineaddr_hi + $68
+FFFF TMP_ADDR
 :DISABLED HILO LABELS
 690B
 :USER HILO

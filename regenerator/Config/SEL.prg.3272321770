@@ -11,44 +11,55 @@
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
+0326
 039C
 :REMOVED BYTES
 :FULL COMMENTS
 :SIDE COMMENTS
 0381 b'\x04BLOAD MUSA,A$F000\n\x00'
+0342 By default, loop same tune. Demo changes this value.
+0344 #music_off
+0362 #disk_program
 0366 #char_M
-036B magic hidden file char on Disk 1
+036B magic hidden file char on Program Disk
 0372 #char_space
 0377 #char_M
+037C #music_off    ;stop current music before replacing data
+0398 #music_main
 :USER LABELS
-0328 save_reg_s
-0327 save_rts_hi
-0326 save_rts_lo
-081B j_primm_cout
-038E file_char_music
-00D0 diskid
-0372 @normal_filename
-0366 @cryptic_filename
-035D load_music
-038A file_char_first
-038B file_char_second
-F000 music_data
-0348 @wait
-03A7 -
-03A5 @delay
-B7E9 disk_slot
-C089 drive_motor_on
-C088 drive_motor_off
-039C spin_drive_motor
-0338 music_ctl
-037C @load_file
-0082 mus_busy
+0080 tune_req_now
+0081 tune_queue_next
+0082 tune_playing
 0084 mus_ptr
 0085 mus_ptr + 1
+00D0 disk_id
+0320 j_music_ctl
+0323 j_spin_drive_motor
+0326 err_resume_addr
+0327 err_resume_addr + 1
+0328 err_resume_stack
+0329 on_dos_error
+0338 music_ctl
+0348 @wait
 034C @done
-034D @start_music
-035C @skip
+034D play_tune
+035C @done
+035D load_music
+0366 @cryptic_filename
+0372 @normal_filename
+037C @load_file
+038A file_char_first
+038B file_char_second
+038E file_char_music
+039C spin_drive_motor
+03A5 @delay
+03A7 -
 0400 music_start
+081B j_primm_cout
+B7E9 RWTS_slot
+C088 drive_motor_off
+C089 drive_motor_on
+F000 music_data
 :DISABLED HILO LABELS
 0366
 0372

@@ -1,302 +1,44 @@
 	.include "uscii.i"
-	.include "BOOT.i"
 
-;
-; **** ZP FIELDS ****
-;
-ptr1_bitmap = $80
-;ptr1_bitmap + 1 = $81
-numdrives = $d1
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-game_mode = $0b
-party_size = $0f
-ptr_demo = $10
-;ptr_demo + 1 = $11
-demo_hold_count = $12
-cursor_hold = $13
-mb_80_slot = $80
-mb_81_type = $81
-mb_82 = $82
-mb_83 = $83
-;ptr1_bitmap = $80
-;ptr1_bitmap + 1 = $81
-ptr2_bitmap = $82
-;ptr2_bitmap + 1 = $83
-ptr_bitmap = $84
-;ptr_bitmap + 1 = $85
-mb_count = $b0
-key_buf_len = $b8
-abc = $bc
-console_xpos = $ce
-console_ypos = $cf
-diskid = $d0
-;numdrives = $d1
-currdisk_drive1 = $d2
-currdisk_drive2 = $d3
-reqdisk = $de
-currdrive = $df
+	.include "apple.i"
+	.include "char.i"
+	.include "disks.i"
+	.include "map_objects.i"
+	.include "music.i"
+	.include "jump_overlay.i"
+	.include "jump_subs.i"
+	.include "jump_system.i"
+	.include "tables.i"
+	.include "tiles.i"
+	.include "zp_demo.i"
+	.include "zp_main.i"
+	.include "zp_music.i"
+
+
+; Placeholder operands that get altered
+; by self-modifying code.
+
+TMP_PAGE = $ff00
+TMP_ADDR = $ffff
+
+
+; --- Custom use of Zero Page
+
 zp_keybuf_count = $ea
-tilerow = $f2
-ptr2 = $fc
-;ptr2 + 1 = $fd
-ptr1 = $fe
-;ptr1 + 1 = $ff
-;
-; **** ZP POINTERS ****
-;
-;ptr_demo = $10
-;ptr1_bitmap = $80
-;ptr2_bitmap = $82
-;ptr_bitmap = $84
-;ptr2 = $fc
-;ptr1 = $fe
-;
-; **** USER LABELS ****
-;
-player_xpos = $0000
-player_ypos = $0001
-tile_xpos = $0002
-tile_ypos = $0003
-map_x = $0004
-map_y = $0005
-dest_x = $0006
-dest_y = $0007
-britannia_x = $0008
-britannia_y = $0009
-current_location = $000a
-dungeon_level = $000c
-balloon_flying = $000d
-player_transport = $000e
-horse_mode = $0014
-player_has_spoken_to_lb = $0015
-last_sleep = $0016
-last_humility_check = $0017
-altar_room_principle = $0018
-last_meditated = $0019
-last_found_reagent = $001a
-ship_hull = $001b
-move_counter = $001c
-;move_counter + 1 = $001d
-;move_counter + 2 = $001e
-;move_counter + 3 = $001f
-kbd_buf_count = $0046
-charptr = $00bd
-;charptr+1 = $00be
-foe_type_encountered = $00c0
-pre_combat_x = $00c1
-pre_combat_y = $00c2
-pre_combat_tile = $00c3
-curr_player_turn = $00c5
-magic_aura = $00c6
-aura_duration = $00c7
-tile_under_player = $00c8
-tile_north = $00c9
-tile_south = $00ca
-tile_east = $00cb
-tile_west = $00cc
-music_volume = $00cd
-curr_player = $00d4
-target_player = $00d5
-hexnum = $00d6
-bcdnum = $00d7
-zpd8 = $00d8
-zpd9 = $00d9
-zpda = $00da
-zpdb = $00db
-damage = $00dc
-lt_track = $00e0
-lt_sector = $00e1
-lt_rwflag = $00e2
-lt_addr_hi = $00e3
-foe_type_combat = $00e6
-game_mode_pre_combat = $00e8
-turn_counter = $00e9
-moongate_tile = $00ed
-moongate_xpos = $00ee
-moongate_ypos = $00ef
-zpf0 = $00f0
-movement_mode = $00f4
-direction = $00f5
-temp2_x = $00f6
-temp2_y = $00f7
-delta_x = $00f8
-delta_y = $00f9
-temp_x = $00fa
-temp_y = $00fb
-world_tiles = $0200
-room_start_foe_type = $0210
-room_start_foe_x = $0220
-room_start_foe_y = $0230
-map_start_foe_x = $0240
-room_start_player_y = $0248
-map_start_foe_y = $0250
-map_start_player_x = $0260
-map_start_player_y = $0268
-tempmap = $0280
-inbuffer = $0300
-dng_trigger_new_tile = $0310
-dng_trigger_pos = $0311
-dng_trigger_new_pos1 = $0312
-dng_trigger_new_pos2 = $0313
-music_ctl = $0320
-spin_drive_motor = $0323
-screen = $0400
-j_waitkey = $0800
-j_player_teleport = $0803
-j_move_east = $0806
-j_move_west = $0809
-j_move_south = $080c
-j_move_north = $080f
-j_drawinterface = $0812
-j_drawview = $0815
-j_update_britannia = $0818
-j_primm_cout = $081b
-j_primm_xy = $081e
-j_primm = $0821
-j_console_out = $0824
-j_clearbitmap = $0827
-j_mulax = $082a
-j_get_stats_ptr = $082d
-j_printname = $0830
-j_printbcd = $0833
-j_drawcursor = $0836
-j_drawcursor_xy = $0839
-j_drawvert = $083c
-j_drawhoriz = $083f
-j_request_disk = $0842
-j_update_status = $0845
-j_blocked_tile = $0848
-j_update_view = $084b
-j_rand = $084e
-j_loadsector = $0851
-j_playsfx = $0854
-j_update_view_combat = $0857
-j_getnumber = $085a
-j_getplayernum = $085d
-j_update_wind = $0860
-j_animate_view = $0863
-j_printdigit = $0866
-j_clearstatwindow = $0869
-j_animate_tiles = $086c
-j_centername = $086f
-j_print_direction = $0872
-j_clearview = $0875
-j_invertview = $0878
-j_centerstring = $087b
-j_printstring = $087e
-j_gettile_bounds = $0881
-j_gettile_britannia = $0884
-j_gettile_opposite = $0887
-j_gettile_currmap = $088a
-j_gettile_tempmap = $088d
-j_get_player_tile = $0890
-j_gettile_towne = $0893
-j_gettile_dungeon = $0896
-bitmap = $2000
-j_mbsi = $8000
-j_overlay_entry = $8800
-j_readblock = $b7b5
-rwts_volume = $b7eb
-rwts_track = $b7ec
-rwts_sector = $b7ed
-rwts_buf_lo = $b7f0
-rwts_buf_hi = $b7f1
-rwts_command = $b7f4
-hw_keyboard = $c000
-hw_strobe = $c010
-hw_speaker = $c030
-io_graphics = $c050
-io_fullscreen = $c052
-io_page1 = $c054
-io_hires = $c057
-hw_romin = $c081
-hw_lcbank2 = $c083
-hw_lcbank1 = $c08b
-bmplineaddr_lo = $e000
-;bmplineaddr_lo + 7 = $e007
-;bmplineaddr_lo + 8 = $e008
-;bmplineaddr_lo + 9 = $e009
-;bmplineaddr_lo + 10 = $e00a
-;bmplineaddr_lo + $68 = $e068
-bmplineaddr_hi = $e0c0
-;bmplineaddr_hi + 7 = $e0c7
-;bmplineaddr_hi + 8 = $e0c8
-;bmplineaddr_hi + 9 = $e0c9
-;bmplineaddr_hi + 10 = $e0ca
-;bmplineaddr_hi + $68 = $e128
-bmpcol_byte = $e180
-bmpcol_bit = $e29f
-music_init = $ec00
-party_stats = $ed00
-;party_stats + 1 = $ed01
-torches = $ed08
-gems = $ed09
-keys = $ed0a
-sextant = $ed0b
-stones = $ed0c
-runes = $ed0d
-bell_book_candle = $ed0e
-threepartkey = $ed0f
-food_hi = $ed10
-food_lo = $ed11
-food_frac = $ed12
-gold_hi = $ed13
-gold_lo = $ed14
-horn = $ed15
-wheel = $ed16
-skull = $ed17
-armour = $ed18
-weapons = $ed20
-reagents = $ed38
-mixtures = $ed40
-object_tile_sprite = $ee00
-;object_tile_sprite + object_max = $ee1f
-object_xpos = $ee20
-;object_xpos + object_max = $ee3f
-object_ypos = $ee40
-;object_ypos + object_max = $ee5f
-object_tile_type = $ee60
-;object_tile_type + object_max = $ee7f
-object_xpos_prev = $ee80
-object_ypos_prev = $eea0
-object_dng_level = $eec0
-npc_dialogue = $eee0
-combat_foe_cur_x = $ef00
-combat_foe_cur_y = $ef10
-combat_foe_prev_x = $ef20
-combat_foe_prev_y = $ef30
-combat_foe_hp = $ef40
-combat_foe_tile = $ef50
-combat_foe_drawn_tile = $ef60
-combat_foe_slept = $ef70
-;combat_player_xpos-1 = $ef7f
-combat_player_xpos = $ef80
-;combat_player_ypos-1 = $ef8f
-combat_player_ypos = $ef90
-;combat_player_tile-1 = $ef9f
-combat_player_tile = $efa0
-attack_sprite = $effd
-target_x = $effe
-target_y = $efff
-rom_signature = $fbb3
-rom_zidbyte = $fbc0
-
 
 
 	.segment "MAIN"
 
 boot:
-	jsr j_primm_cout ;b'\x04BLOAD A\x81NIM,A$4000\n\x04BLOAD B\x81GND,A$7A00\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD A", $81, "NIM,A$4000", $8d
 	.byte $84,"BLOAD B", $81, "GND,A$7A00", $8d
 	.byte 0
 	jsr clear_screen
-	bit io_page1
-	bit io_hires
-	bit io_fullscreen
-	bit io_graphics
+	bit hw_PAGE1
+	bit hw_HIRES
+	bit hw_FULLSCREEN
+	bit hw_GRAPHICS
 	lda #<demo_cmd_table
 	sta ptr_demo
 	lda #>demo_cmd_table
@@ -346,9 +88,9 @@ blit_page_offset:
 	.byte $30
 
 clear_screen:
-	ldx #>bitmap
+	ldx #>screen_HGR1
 	stx ptr1_bitmap + 1
-	ldy #<bitmap
+	ldy #<screen_HGR1
 	sty ptr1_bitmap
 	tya
 @loop:
@@ -426,7 +168,7 @@ draw_ultima_logo:
 	lda #$22
 	sta src_row
 	sta dst_row
-	bit hw_keyboard
+	bit hw_KEYBOARD
 	bpl :+
 	lda #$38
 	sta blit_progress
@@ -480,7 +222,7 @@ blit_image:
 	clc
 	adc blit_progress
 	bcc :+
-	bit hw_speaker
+	bit hw_SPEAKER
 :	lda blit_progress
 	clc
 	adc rand_8
@@ -567,7 +309,7 @@ long_pause:
 	rts
 
 short_pause:
-	bit hw_keyboard
+	bit hw_KEYBOARD
 	bmi @done
 	sec
 @delay:
@@ -654,52 +396,52 @@ draw_origin_systems:
 	lda #$5a
 	sta blit_page_offset
 	lda #$00
-	sta blitanim_loop_i
+	sta blitanim_loop_I
 @scroll:
 	lda #$00
-	sta blitanim_loop_j
+	sta blitanim_loop_J
 @next_row:
 	lda #$09     ;column start
-	sta blitanim_loop_k
+	sta blitanim_loop_K
 @next_column:
-	lda blitanim_loop_k
+	lda blitanim_loop_K
 	sta src_column
 	sta dst_column
 	lda #$15
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sta src_row
 	lda #$1d
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sec
-	sbc blitanim_loop_i
+	sbc blitanim_loop_I
 	sta dst_row
 	jsr blit_from_slowpaint
-	inc blitanim_loop_k
-	lda blitanim_loop_k
+	inc blitanim_loop_K
+	lda blitanim_loop_K
 	cmp #$1e     ;column end
 	bcc @next_column
 	beq @next_column
-	inc blitanim_loop_j
-	lda blitanim_loop_j
-	cmp blitanim_loop_i
+	inc blitanim_loop_J
+	lda blitanim_loop_J
+	cmp blitanim_loop_I
 	bcc @next_row
 	beq @next_row
 	lda #$c0
 	jsr short_pause
-	inc blitanim_loop_i
-	lda blitanim_loop_i
+	inc blitanim_loop_I
+	lda blitanim_loop_I
 	cmp #$08
 	bcc @scroll
 	beq @scroll
 	rts
 
-blitanim_loop_i:
+blitanim_loop_I:
 	.byte $44
-blitanim_loop_j:
+blitanim_loop_J:
 	.byte $54
-blitanim_loop_k:
+blitanim_loop_K:
 	.byte $20
 
 blit_from_slowpaint:
@@ -771,42 +513,42 @@ mystery_accumulator:
 
 draw_present:
 	lda #$00
-	sta blitanim_loop_i
+	sta blitanim_loop_I
 @next_scroll:
 	lda #$00
-	sta blitanim_loop_j
+	sta blitanim_loop_J
 @next_row:
 	lda #$10
-	sta blitanim_loop_k
+	sta blitanim_loop_K
 @next_column:
-	lda blitanim_loop_k
+	lda blitanim_loop_K
 	sta src_column
 	sta dst_column
 	lda #$04
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sec
-	sbc blitanim_loop_i
+	sbc blitanim_loop_I
 	sta src_row
 	lda #$21
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sta dst_row
 	jsr blit_from_slowpaint
-	inc blitanim_loop_k
-	lda blitanim_loop_k
+	inc blitanim_loop_K
+	lda blitanim_loop_K
 	cmp #$18
 	bcc @next_column
 	beq @next_column
-	inc blitanim_loop_j
-	lda blitanim_loop_j
-	cmp blitanim_loop_i
+	inc blitanim_loop_J
+	lda blitanim_loop_J
+	cmp blitanim_loop_I
 	bcc @next_row
 	beq @next_row
 	lda #$c0
 	jsr short_pause
-	inc blitanim_loop_i
-	lda blitanim_loop_i
+	inc blitanim_loop_I
+	lda blitanim_loop_I
 	cmp #$04
 	bcc @next_scroll
 	beq @next_scroll
@@ -816,53 +558,53 @@ draw_quest_title:
 	lda #$5a
 	sta blit_page_offset
 	lda #$00
-	sta blitanim_loop_i
+	sta blitanim_loop_I
 @next_scroll:
 	lda #$00
-	sta blitanim_loop_j
+	sta blitanim_loop_J
 @next_row:
 	lda #$03
-	sta blitanim_loop_k
+	sta blitanim_loop_K
 @next_column:
-	lda blitanim_loop_k
+	lda blitanim_loop_K
 	sta src_column
 	sta dst_column
 	lda #$51
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sta src_row
 	lda #$56
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sec
-	sbc blitanim_loop_i
+	sbc blitanim_loop_I
 	sta dst_row
 	jsr blit_from_slowpaint
 	lda #$5c
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sec
-	sbc blitanim_loop_i
+	sbc blitanim_loop_I
 	sta src_row
 	lda #$57
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sta dst_row
 	jsr blit_from_slowpaint
-	inc blitanim_loop_k
-	lda blitanim_loop_k
+	inc blitanim_loop_K
+	lda blitanim_loop_K
 	cmp #$24
 	bcc @next_column
 	beq @next_column
-	inc blitanim_loop_j
-	lda blitanim_loop_j
-	cmp blitanim_loop_i
+	inc blitanim_loop_J
+	lda blitanim_loop_J
+	cmp blitanim_loop_I
 	bcc @next_row
 	beq @next_row
 	lda #$c0
 	jsr short_pause
-	inc blitanim_loop_i
-	lda blitanim_loop_i
+	inc blitanim_loop_I
+	lda blitanim_loop_I
 	cmp #$05
 	bcc @next_scroll
 	beq @next_scroll
@@ -872,38 +614,38 @@ draw_map_window:
 	lda #$5a
 	sta blit_page_offset
 	lda #$00
-	sta blitanim_loop_j
+	sta blitanim_loop_J
 @next_column:
 	lda #$60
-	sta blitanim_loop_k
+	sta blitanim_loop_K
 @next_row:
-	lda blitanim_loop_k
+	lda blitanim_loop_K
 	sta src_row
 	sta dst_row
 	lda #$13
 	sec
-	sbc blitanim_loop_j
+	sbc blitanim_loop_J
 	sta src_column
 	lda #$13
 	sec
-	sbc blitanim_loop_j
+	sbc blitanim_loop_J
 	sta dst_column
 	jsr blit_from_slowpaint
 	lda #$14
 	clc
-	adc blitanim_loop_j
+	adc blitanim_loop_J
 	sta src_column
 	sta dst_column
 	jsr blit_from_slowpaint
-	inc blitanim_loop_k
-	lda blitanim_loop_k
+	inc blitanim_loop_K
+	lda blitanim_loop_K
 	cmp #$bf
 	bcc @next_row
 	beq @next_row
 	lda #$c0
 	jsr short_pause
-	inc blitanim_loop_j
-	lda blitanim_loop_j
+	inc blitanim_loop_J
+	lda blitanim_loop_J
 	cmp #$13
 	bcc @next_column
 	beq @next_column
@@ -921,7 +663,7 @@ draw_captive_scroll:
 	jsr next_captive_frame
 	jsr update_attract
 	jsr update_attract
-	bit hw_keyboard
+	bit hw_KEYBOARD
 	bpl :+
 	rts
 :	inc plot_row
@@ -944,59 +686,59 @@ draw_captive_frame:
 	lda sheet_dragon_row,y
 	sta @dragon_sheet_y
 	lda #$00
-	sta blitanim_loop_i
+	sta blitanim_loop_I
 @next_row:
 	lda #$00
-	sta blitanim_loop_j
+	sta blitanim_loop_J
 @next_column:
-	lda blitanim_loop_j
+	lda blitanim_loop_J
 	clc
 @balron_sheet_x=*+$01
 	adc #$ff
 	sta src_column
-	lda blitanim_loop_j
+	lda blitanim_loop_J
 	sta dst_column
-	lda blitanim_loop_i
+	lda blitanim_loop_I
 	clc
 @balron_sheet_y=*+$01
 	adc #$ff
 	sta src_row
-	lda blitanim_loop_i
+	lda blitanim_loop_I
 	clc
 	adc plot_row
 	bmi @clip_balron
 	sta dst_row
 	jsr blit_from_animsheet
 @clip_balron:
-	lda blitanim_loop_j
+	lda blitanim_loop_J
 	clc
 @dragon_sheet_x=*+$01
 	adc #$ff
 	sta src_column
-	lda blitanim_loop_j
+	lda blitanim_loop_J
 	clc
 	adc #$22
 	cmp #$28
 	bcs @clip_dragon
 	sta dst_column
-	lda blitanim_loop_i
+	lda blitanim_loop_I
 	clc
 @dragon_sheet_y=*+$01
 	adc #$ff
 	sta src_row
-	lda blitanim_loop_i
+	lda blitanim_loop_I
 	clc
 	adc plot_row
 	bmi @clip_dragon
 	sta dst_row
 	jsr blit_from_animsheet
 @clip_dragon:
-	inc blitanim_loop_j
-	lda blitanim_loop_j
+	inc blitanim_loop_J
+	lda blitanim_loop_J
 	cmp #$07
 	bcc @next_column
-	inc blitanim_loop_i
-	lda blitanim_loop_i
+	inc blitanim_loop_I
+	lda blitanim_loop_I
 	cmp #$1f
 	bcc @next_row
 	rts
@@ -1017,18 +759,18 @@ mockingboard_active:
 
 start_attract_mode:
 	lda #$00
-	sta game_mode
-	sta currdisk_drive2
+	sta game_mode        ;mode_suspended
+	sta currdisk_drive2  ;disk_none
 	lda #$01
 	sta numdrives
-	sta currdisk_drive1
+	sta currdisk_drive1  ;disk_program
 	jsr return
 return_to_view:
 	jsr attract_loop
 	php
 	cli
-	lda mb_82
-	sta mb_81_type
+	lda tune_playing
+	sta tune_queue_next
 	plp
 menu_main:
 	jsr clear_window
@@ -1039,35 +781,35 @@ draw_menu:
 	sta cursor_x
 	ldx #$02
 	ldy #$0e
-	jsr j_primm_xy ;b'IN ANOTHER WORLD, IN A TIME TO COME.\x00'
+	jsr j_primm_xy
 	.byte "IN ANOTHER WORLD, IN A TIME TO COME.", 0
 	ldx #$0f
 	ldy #$10
-	jsr j_primm_xy ;b'OPTIONS:\x00'
+	jsr j_primm_xy
 	.byte "OPTIONS:", 0
 	ldx #$0b
 	ldy #$11
-	jsr j_primm_xy ;b'Return to the view\x00'
+	jsr j_primm_xy
 	.byte "Return to the view", 0
 	ldx #$0b
 	ldy #$12
-	jsr j_primm_xy ;b'Number of drives-1\x00'
+	jsr j_primm_xy
 	.byte "Number of drives-"
 num_drives:
 	.byte "1", 0
 	ldx #$0d
 	ldy #$13
-	jsr j_primm_xy ;b'Journey onward\x00'
+	jsr j_primm_xy
 	.byte "Journey onward", 0
 	ldx #$0b
 	ldy #$14
-	jsr j_primm_xy ;b'Initiate new game\x00'
+	jsr j_primm_xy
 	.byte "Initiate new game", 0
 	bit mockingboard_active
 	bmi @get_input
 	ldx #$09
 	ldy #$15
-	jsr j_primm_xy ;b'Activate Mockingboard\x00'
+	jsr j_primm_xy
 	.byte "Activate Mockingboard", 0
 @get_input:
 	jsr input_char
@@ -1111,36 +853,36 @@ num_drives:
 	bit mockingboard_active
 	bmi @get_input
 @activate_mockingboard:
-	lda #$00
+	lda #music_off
 	jsr load_music
-	lda hw_romin
+	lda hw_ROMIN
 	lda rom_signature
-	ldx rom_zidbyte
-	bit hw_lcbank1
-	bit hw_lcbank1
+	ldx rom_ZIDBYTE
+	bit hw_LCBANK1
+	bit hw_LCBANK1
 	cmp #$06     ;Apple //e
 	bne :+
 	cpx #$00
 	beq @get_input
 :	lda #$00
-	sta mb_80_slot
-	sta mb_81_type
-	sta mb_82
-	sta mb_83
+	sta mb_1_slot
+	sta mb_1_type
+	sta mb_2_slot
+	sta mb_2_type
 	inc cursor_x
 	jsr clear_window
 	ldx #$0f
 	ldy #$10
 how_many:
-	jsr j_primm_xy ;b'How many?\x00'
+	jsr j_primm_xy
 	.byte "How many?", 0
 	ldx #$0c
 	ldy #$12
-	jsr j_primm_xy ;b'One Mockingboard\x00'
+	jsr j_primm_xy
 	.byte "One Mockingboard", 0
 	ldx #$0c
 	ldy #$13
-	jsr j_primm_xy ;b'Two Mockingboards\x00'
+	jsr j_primm_xy
 	.byte "Two Mockingboards", 0
 @get_input:
 	jsr input_char
@@ -1163,19 +905,19 @@ menu_kind_mocking:
 	jsr print_mockboard_1_2
 	ldy #$10
 	ldx #$0d
-	jsr j_primm_xy ;b'Which kind?\x00'
+	jsr j_primm_xy
 	.byte "Which kind?", 0
 	ldy #$12
 	ldx #$0a
-	jsr j_primm_xy ;b'1- Sound 1\x00'
+	jsr j_primm_xy
 	.byte "1- Sound 1", 0
 	ldy #$13
 	ldx #$0a
-	jsr j_primm_xy ;b'2- Sound-Speech\x00'
+	jsr j_primm_xy
 	.byte "2- Sound-Speech", 0
 	ldy #$14
 	ldx #$0a
-	jsr j_primm_xy ;b'3- Mockingboard A or C\x00'
+	jsr j_primm_xy
 	.byte "3- Mockingboard A or C", 0
 @get_input:
 	jsr input_char
@@ -1188,22 +930,22 @@ menu_kind_mocking:
 	bcs @get_input
 @set_type:
 	sec
-	sbc #char_0
+	sbc #char_num_first
 	tay
 	lda mb_count
 	and #$02
 	tax
-	sty mb_81_type,x
+	sty mb_1_type,x
 menu_which_slot:
 	jsr clear_window
 	jsr print_mockboard_1_2
 	ldy #$10
 	ldx #$0d
-	jsr j_primm_xy ;b'Which slot?\x00'
+	jsr j_primm_xy
 	.byte "Which slot?", 0
 	ldy #$13
 	ldx #$0b
-	jsr j_primm_xy ;b'Enter a number 1-7\x00'
+	jsr j_primm_xy
 	.byte "Enter a number 1-7", 0
 @get_input:
 	jsr input_char
@@ -1216,12 +958,12 @@ menu_which_slot:
 	bcs @get_input
 @set_slot:
 	sec
-	sbc #char_0
+	sbc #char_num_first
 	tay
 	lda mb_count
 	and #$02
 	tax
-	sty mb_80_slot,x
+	sty mb_1_slot,x
 	bit mb_count
 	bpl load_sound_drivers
 @do_second_card:
@@ -1233,19 +975,19 @@ menu_which_slot:
 	jmp menu_kind_mocking
 
 load_sound_drivers:
-	jsr j_primm_cout ;b'\x04BLOAD M\x81BSM,A$F000\n\x04BLOAD M\x81BSI,A$8000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD M", $81, "BSM,A$F000", $8d
 	.byte $84,"BLOAD M", $81, "BSI,A$8000", $8d
 	.byte 0
 	jsr j_mbsi
 	bcc @skip
-	lda #$4c     ;JMP - reactivate SEL driver
+	lda #opcode_JMP ;reactivate SEL driver
 	sta music_ctl
-	lda #$00
-	sta mb_82
-	lda #char_T
+	lda #music_off
+	sta tune_playing
+	lda #music_Towne
 	jsr load_music
-	lda #$01
+	lda #music_explore
 	jsr load_music
 	dec mockingboard_active
 @skip:
@@ -1258,13 +1000,13 @@ print_mockboard_1_2:
 	bpl @no_key
 	and #$02
 	bne @odd
-	jsr j_primm_xy ;b'First Mockingboard:\x00'
+	jsr j_primm_xy
 	.byte "First Mockingboard:", 0
 @no_key:
 	rts
 
 @odd:
-	jsr j_primm_xy ;b'Second Mockingboard:\x00'
+	jsr j_primm_xy
 	.byte "Second Mockingboard:", 0
 	rts
 
@@ -1272,21 +1014,21 @@ load_music:
 	tax
 	bpl @digit
 	sta music_bank
-	ldx #$01
-	stx music_song
+	ldx #music_main
+	stx music_tune
 	jmp music_ctl
 
 @digit:
-	sta music_song
+	sta music_tune
 	jmp music_ctl
 
-music_song:
+music_tune:
 	.byte $ff
 music_bank:
 	.byte $ff
 music_bank_letter:
 	.byte "OTDCB", 0
-music_bank_songs:
+music_bank_tunes:
 	.byte $01,$02,$03,$00
 	.byte $01,$00,$00,$04
 	.byte $01,$00,$00,$00
@@ -1295,38 +1037,38 @@ music_bank_songs:
 	.byte $ff
 
 update_music:
-	lda mb_82
-	cmp mb_81_type
+	lda tune_playing
+	cmp tune_queue_next
 	beq :+
 	rts
-:	cmp #$00
+:	cmp #music_off
 	beq @get_bank_index
-	sta music_song
+	sta music_tune
 @get_bank_index:
 	ldx #$00
 	lda music_bank
 @next:
 	cmp music_bank_letter,x
-	beq @get_song_number
+	beq @get_tune_number
 	inx
-	bne @next    ;bug? meant to test (X) instead of X?
-@get_song_number:
+	bne @next    ;benign BUG: should test (X) instead of X
+@get_tune_number:
 	txa
 	asl
 	asl
 	clc
-	adc music_song
+	adc music_tune
 	tax
-@get_next_song:
-	lda music_bank_songs,x
+@get_next_tune:
+	lda music_bank_tunes,x
 	bne @check_eol
 	inx
-	bne @get_next_song
+	bne @get_next_tune
 @check_eol:
-	bpl @advance_demo_song
+	bpl @advance_demo_tune
 	ldx #$00
 	beq @check_eol ;not necessary
-@advance_demo_song:
+@advance_demo_tune:
 	txa
 	lsr
 	lsr
@@ -1334,15 +1076,15 @@ update_music:
 	lda music_bank_letter,y
 	cmp music_bank
 	beq @same_bank
-	ldy #$00
-	sty mb_81_type
-	ldy mb_82
+	ldy #music_off
+	sty tune_queue_next
+	ldy tune_playing
 	bne :+
 	jsr load_music
 :	rts
 @same_bank:
-	lda music_bank_songs,x
-	sta mb_81_type
+	lda music_bank_tunes,x
+	sta tune_queue_next
 	rts
 
 input_char:
@@ -1352,9 +1094,9 @@ input_char:
 	jsr update_captives
 	jsr j_rand   ;unused
 	jsr delay_96
-	lda hw_keyboard
+	lda hw_KEYBOARD
 	bpl input_char
-	bit hw_strobe
+	bit hw_STROBE
 	pha
 	jsr j_console_out
 	pla
@@ -1368,31 +1110,31 @@ journey_onward:
 	lda #$00
 	sta party_size
 	sta key_buf_len
-	lda #$00
+	lda #music_off
 	jsr load_music
-	jsr j_primm_cout ;b'\x04BRUN U\x81LT4,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BRUN U", $81, "LT4,A$4000", $8d
 	.byte 0
 
 init_new_game:
-	lda #$00
+	lda #music_off
 	jsr load_music
 	lda numdrives
 	cmp #$01
 	beq @ask_name
-	lda #$02
+	lda #disk_britannia
 	jsr insert_disk
-	lda #$01
-	sta diskid
+	lda #disk_program
+	sta disk_id
 @ask_name:
 	jsr clear_window
 	ldx #$04
 	ldy #$10
-	jsr j_primm_xy ;b'By what name shalt thou be known\x00'
+	jsr j_primm_xy
 	.byte "By what name shalt thou be known", 0
 	ldx #$04
 	ldy #$11
-	jsr j_primm_xy ;b'in this world and time? \x00'
+	jsr j_primm_xy
 	.byte "in this world and time? ", 0
 	lda #$13
 	sta console_ypos
@@ -1402,7 +1144,7 @@ init_new_game:
 	jsr clear_window
 	ldx #$04
 	ldy #$11
-	jsr j_primm_xy ;b'Art thou Male or Female? \x00'
+	jsr j_primm_xy
 	.byte "Art thou Male or Female? ", 0
 	lda console_xpos
 	sta cursor_x
@@ -1414,16 +1156,16 @@ init_new_game:
 	beq @male
 	cmp #char_F
 	bne @input_sex
-	lda #char_female
+	lda #glyph_female
 	bne @run_newgame
 @male:
-	lda #char_male
+	lda #glyph_male
 @run_newgame:
-	sta abc
+	sta gender_chosen
 	jsr clear_window
-	lda #$00
+	lda #music_off
 	jsr load_music
-	jsr j_primm_cout ;b'\x04BRUN N\x81EWGAME,A$6400,D1\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BRUN N", $81, "EWGAME,A$6400,D1", $8d
 	.byte 0
 return:
@@ -1432,9 +1174,9 @@ return:
 attract_loop:
 	jsr update_attract_and_captives
 	jsr update_music
-	lda hw_keyboard
+	lda hw_KEYBOARD
 	bpl attract_loop
-	bit hw_strobe
+	bit hw_STROBE
 	rts
 
 update_attract_and_captives:
@@ -1591,7 +1333,7 @@ draw_world_tiles:
 	ldx #$5e
 @copy_map:
 	lda attract_map,x
-	sta world_tiles,x
+	sta drawn_tiles,x
 	dex
 	bpl @copy_map
 	ldx #$00
@@ -1604,7 +1346,7 @@ draw_world_tiles:
 	adc object_xpos,x
 	tay
 	lda object_tile_sprite,x
-	sta world_tiles,y
+	sta drawn_tiles,y
 @skip:
 	inx
 	cpx #object_last
@@ -1616,10 +1358,10 @@ update_attract:
 	jsr j_animate_tiles
 	jsr draw_world_tiles
 	lda #$00
-	sta tilerow
+	sta current_draw_line
 	sta @tile_index
 @next_row:
-	ldy tilerow
+	ldy current_draw_line
 	lda bmplineaddr_lo + $68,y
 	sta @dst1_lo
 	sta @dst2_lo
@@ -1634,26 +1376,26 @@ update_attract:
 	ldx #$01
 @tile_index=*+$01
 @next_column:
-	ldy world_tiles
-	bit hw_lcbank1
+	ldy drawn_tiles
+	bit hw_LCBANK1
 @src1_hi=*+$02
-	lda $ff00,y
+	lda TMP_PAGE,y
 @dst1_lo=*+$01
 @dst1_hi=*+$02
-	sta $ffff,x
+	sta TMP_ADDR,x
 	inx
-	bit hw_lcbank2
+	bit hw_LCBANK2
 @src2_hi=*+$02
-	lda $ff00,y
+	lda TMP_PAGE,y
 @dst2_lo=*+$01
 @dst2_hi=*+$02
-	sta $ffff,x
+	sta TMP_ADDR,x
 	inc @tile_index
 	inx
 	cpx #$27     ;world width
 	bcc @next_column
-	inc tilerow
-	lda tilerow
+	inc current_draw_line
+	lda current_draw_line
 	cmp #$50
 	beq @done
 	and #$0f
@@ -1779,15 +1521,15 @@ input_text:
 @delay:
 	dey
 	bne @delay
-	lda hw_keyboard
+	lda hw_KEYBOARD
 	bpl @elapse_cursor
-	bit hw_strobe
+	bit hw_STROBE
 	cmp #char_DEL
 	bne :+
-	lda #char_backspace
+	lda #char_left_arrow
 :	cmp #char_enter
 	beq @enter
-	cmp #char_backspace
+	cmp #char_left_arrow
 	beq @backspace
 	cmp #char_space
 	bcc @elapse_cursor
@@ -1902,19 +1644,19 @@ insert_disk:
 	beq @have_disk
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'PLEASE PLACE THE\x00'
+	jsr j_primm_xy
 	.byte "PLEASE PLACE THE", 0
 	inc console_ypos
 	jsr print_disk_name
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'INTO DRIVE 1\x00'
+	jsr j_primm_xy
 	.byte "INTO DRIVE 1", 0
 @wait_key:
 	inc console_ypos
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'AND PRESS [ESC]\x00'
+	jsr j_primm_xy
 	.byte "AND PRESS [ESC]", 0
 	lda console_xpos
 	sta cursor_x
@@ -1937,28 +1679,28 @@ insert_disk:
 	beq @load_disk_id
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'PLEASE PLACE THE\x00'
+	jsr j_primm_xy
 	.byte "PLEASE PLACE THE", 0
 	inc console_ypos
 	jsr print_disk_name
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'INTO DRIVE 2\x00'
+	jsr j_primm_xy
 	.byte "INTO DRIVE 2", 0
 	jmp @wait_key
 
 @load_disk_id:
 	lda currdrive
 	clc
-	adc #char_0
+	adc #char_num_first
 	sta @drive_number
-	jsr j_primm_cout ;b'\x04BLOAD DISK,D1\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD DISK,D"
 @drive_number:
 	.byte "1", $8d
 	.byte 0
 	ldx currdrive
-	lda diskid
+	lda disk_id
 	sta numdrives,x
 	cmp reqdisk
 	beq @ok
@@ -1976,7 +1718,7 @@ print_disk_name:
 	bne @britannia
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'ULTIMA DISK\x00'
+	jsr j_primm_xy
 	.byte "ULTIMA DISK", 0
 	inc console_ypos
 	rts
@@ -1986,7 +1728,7 @@ print_disk_name:
 	bne @towne
 	ldy console_ypos
 	ldx #$0c
-	jsr j_primm_xy ;b'BRITANNIA DISK\x00'
+	jsr j_primm_xy
 	.byte "BRITANNIA DISK", 0
 	inc console_ypos
 	rts
@@ -1996,7 +1738,7 @@ print_disk_name:
 	bne @dungeon
 	ldy console_ypos
 	ldx #$0e
-	jsr j_primm_xy ;b'TOWN DISK\x00'
+	jsr j_primm_xy
 	.byte "TOWN DISK", 0
 	inc console_ypos
 	rts
@@ -2006,7 +1748,7 @@ print_disk_name:
 	bne @done
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'DUNGEON DISK\x00'
+	jsr j_primm_xy
 	.byte "DUNGEON DISK", 0
 	inc console_ypos
 @done:

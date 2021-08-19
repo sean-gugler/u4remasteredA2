@@ -15,9 +15,9 @@
 89E7-8A1A
 8A32-8A6C
 8AA1-8AD1
+8B66-8B86
 8C33-8C4F
 8C56-8C60
-8B66-8B86
 :WORDS
 :POINTERS
 8867-8877-0
@@ -25,18 +25,18 @@
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-8B86
 8877
+8B86
 :REMOVED BYTES
 :FULL COMMENTS
-8C56 junk. "WN\nTO US O"
 8B66 STON BELL BOOK CAND KEY  HORN WHEE SKUL
+8C56 junk. "WN\nTO US O"
 :SIDE COMMENTS
 8800 b'WHICH ITEM:\n\x00'
 8818 b'\nNOT USABLE ITEM!\n\x00'
 882F b'\nNONE OWNED!\n\x00'
 8841 b'\nHMM...NO EFFECT!\n\x00'
-8882 b'\nNO PLACE TO\nUSE THEM!\n\x00'
+887F b'\nNO PLACE TO\nUSE THEM!\n\x00'
 88BA b'\nTHE BELL RINGS\nON AND ON!\n\x00'
 8900 b'\nTHE WORDS\nRESONATE WITH\nTHE RINGING!\n\x00'
 8951 b'\nAS YOU LIGHT THE\nCANDLE THE EARTH\nTREMBLES!\n\x00'
@@ -44,23 +44,46 @@
 89E4 b'\nONCE MOUNTED,\nTHE WHEEL GLOWS\nWITH A BLUE\nLIGHT!\n\x00'
 8A2F b'\nYOU HOLD THE\nEVIL SKULL OF\nMONDAIN THE\nWIZARD ALOFT....\n\x00'
 8A9E b'\nYOU CAST THE\nSKULL OF MONDAIN\nINTO THE ABYSS!\n\x00'
-8C30 b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
-8B3D #char_enter
-8B33 #char_space
-8B27 #char_space
-8B09 #char_space
-8B05 #char_left_arrow
-8B01 #char_enter
-8ADA BUG: should be $ea not #$ea
-89BD #aura_horn
+889E #item_have_bell
+88A8 #xpos_abyss_entrance
+88B5 #item_used_bell
+88DD #item_have_book
+88E7 #xpos_abyss_entrance
+88F4 #item_used_bell
+88FB #item_used_book
+892E #item_have_candle
+8938 #xpos_abyss_entrance
 8945 #item_used_book
 894C #item_used_candle
-88FB #item_used_book
-88F4 #item_used_bell
-88B5 #item_used_bell
-889E #item_have_bell
-88DD #item_have_book
-892E #item_have_candle
+89BD #aura_horn
+89C1 10 turns
+89D0 #tile_ship_last
+89D9 #ship_hull_full
+89E0 #ship_hull_with_wheel
+8A25 #xpos_abyss_entrance
+8A7B #object_mobs_max
+8A8B #virtue_last - 1
+8AD6 #virtue_last - 1
+8ADA BUG: should be $ea not #$ea
+8AF5 #char_question
+8AFC $zp_input_index
+8B01 #char_enter
+8B05 #char_left_arrow
+8B09 #char_space
+8B0D $zp_input_index
+8B15 $zp_input_index
+8B17 $zp_input_index
+8B1F $zp_input_index
+8B23 $zp_input_index
+8B27 #char_space
+8B31 $zp_input_index
+8B33 #char_space
+8B3D #char_enter
+8B43 #keyword_last - 1
+8B86 #sound_damage
+8C1A $zp_save_reg
+8C30 b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
+8C51 $zp_save_reg
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -75,7 +98,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -98,8 +121,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -115,7 +137,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -124,27 +146,27 @@
 00D6 hexnum
 00D7 bcdnum
 00D8 zpD8
-00D9 zpD9
-00DA zpDA
+00D9 zp_inc_amount
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zpEA
+00EA zp_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -155,7 +177,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -164,7 +186,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -172,7 +194,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -224,11 +246,7 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
 B7B5 j_readblock
 B7EB RWTS_volume
@@ -251,7 +269,7 @@ E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
-EC00 music_init
+EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
 ED08 torches
@@ -292,7 +310,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -303,63 +321,63 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8C30 @lost_an_eighth
-8C21 @continue
-8C2B @store
-8C29 @underflow
-8C18 dec_virtue
-8C13 @store
-8C04 inc_virtue
-8BFE @skip
-8BEB @copy
-8BD5 @next
-8BD3 shake_up
-8BCF @skip
-8BBC @copy
-8BA6 @next
-8BA4 shake_down
-8B86 shake_screen
-8B66 keywords
-8B5F @nomatch
-8B47 @next
-8B4E @compare
-8B43 compare_keywords
-8B35 @pad_spaces
-8B31 @got_input
-8B1F @backspace
-8AFE @get_char
-8AF5 get_input
-8A9E use_skull_at_abyss
-8ADA @next_virtue
-8A8F @next_virtue
-8A7F @clear
-8A2F @not_at_abyss
-8A25 @have_skull
 882F print_none_owned
-8A1B use_skull
-89E0 @not_damaged
 8841 print_no_effect
-89D7 @ship
-89CE @have_wheel
-89C6 use_wheel
-8991 use_horn
-8999 @have_horn
-898E @no_effect
-8986 use_key
-8935 @no_effect
-8938 @have_candle
-892B use_candle
-88E7 @have_book
-88E4 @no_effect
-88DA use_book
-88A8 @have_bell
-88A5 @no_effect
-889B use_bell
-8877 use_stone
+8858 keyword_matched
 8867 keyword_handlers
 8868 keyword_handlers+1
+8877 use_stone
 887F @have_stone
-8858 keyword_matched
+889B use_bell
+88A5 @no_effect
+88A8 @have_bell
+88DA use_book
+88E4 @no_effect
+88E7 @have_book
+892B use_candle
+8935 @no_effect
+8938 @have_candle
+8986 use_key
+898E @no_effect
+8991 use_horn
+8999 @have_horn
+89C6 use_wheel
+89CE @have_wheel
+89D7 @ship
+89E0 @not_damaged
+8A1B use_skull
+8A25 @have_skull
+8A2F @not_at_abyss
+8A7F @clear
+8A8F @next_virtue
+8A9E use_skull_at_abyss
+8ADA @next_virtue
+8AF5 get_input
+8AFE @get_char
+8B1F @backspace
+8B31 @got_input
+8B35 @pad_spaces
+8B43 compare_keywords
+8B47 @start_keyword
+8B4E @next_char
+8B5F @next_keyword
+8B66 keywords
+8B86 shake_screen
+8BA4 shake_down
+8BA6 @next
+8BBC @copy
+8BCF @skip
+8BD3 shake_up
+8BD5 @next
+8BEB @copy
+8BFE @skip
+8C04 inc_virtue
+8C13 @set_value
+8C18 dec_virtue
+8C21 @continue
+8C29 @underflow
+8C2B @set_value
+8C30 @lost_an_eighth
 :DISABLED HILO LABELS
 89BD
 :USER HILO

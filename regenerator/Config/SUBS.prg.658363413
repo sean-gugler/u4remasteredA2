@@ -25,6 +25,7 @@
 167F-16AA
 16AD-16C7
 16CA-16E3
+16E6-1700
 1703-1711
 1714-1726
 1729-173B
@@ -41,7 +42,6 @@
 1B09-1F08
 1F51-1F5C
 1FF4-2000
-16E6-1700
 :WORDS
 1948-1962
 :POINTERS
@@ -51,95 +51,302 @@
 :BLANK LINES
 0ADC
 0B49
+0D0F
+0D77
+0EF7
+0F20
 107C
 118F
 1319
 157B
 1679
+1868
 1A81
 1F08
 1F5C
-0EF7
 :REMOVED BYTES
 :FULL COMMENTS
+1378 unused. Possibly intended for update_britannia and gettile_britannia
 1FF4 Junk from segment padding
-1378 unused?
 :SIDE COMMENTS
-0A9B  sector header marker for DATA
-0A9F RWTS_marker_byte_3
-0AA7 RWTS_param_LO
-0AA9 RWTS_param_HI
-1139 "F:"
-115F " G:"
-1179 " SHP:"
-11AC "WIND "
-11ED "DIR: "
-122F "NORTH"
-1239 "SOUTH"
-1243 " EAST"
-124D " WEST"
-187E "\nPLEASE PLACE THE\n"
-1897 " DISK\nINTO DRIVE "
-18B1 "\nAND PRESS [ESC]\n"
-18E9 "^dBLOADDISK,D1\n"
-190F "BRITANNIA"
-1920 "TOWNE"
-192A "UNDERWORLD"
-1F96 #mode_world
-1F9A #mode_towne
-1FCD #>towne_map
-1FDB #>dng_map
-1F48 #>world_map_nw
+089F #(xy_last_tile_cache - $08)
+08A6 #(xy_last_tile_cache - xy_center_screen)
+08CA #xy_center_screen
+08E6 #(xy_last_tile_cache - $08)
+08ED #(xy_last_tile_cache - xy_center_screen)
+0911 #xy_center_screen
+0970 #RWTS_command_read
+0981 #>world_map_NE
+0991 #>world_map_SE
+0998 #RWTS_command_read
+09A5 #>world_map_NW
+09B5 #>world_map_SW
+09BC #RWTS_command_read
+09CD #>world_map_SW
+09DD #>world_map_SE
+09E4 #RWTS_command_read
+09F1 #>world_map_NW
+0A01 #>world_map_NE
+0A44 #RWTS_command_read
+0A50 #>world_map_NW
+0A60 #>world_map_NE
+0A70 #>world_map_SE
+0A7B #>world_map_SW
+0A9B #RWTS_data_epilogue_byte3
+0A9D part of copy protection
+0AA2 restore normal decode value (presumed part of copy protect on disk 1)
+0AA7 #<RWTS_params
+0AA9 #>RWTS_params
+0AAB sets IOBP H/L to $YYAA
+0AB0 why clear this? protect against snooping?
+0AE2 #mode_world
+0AF0 #mode_towne
+0AF8 #mode_dungeon
+0B08 #mode_shrine
+0B1F #tile_balloon
+0B25 balloon_landed
+0B63 #foes_max
+0B7D #tile_monster_land
+0B93 #tile_mimic
+0B9A #tile_chest
+0BD4 #tile_human_prone
+0BD8 $curr_y
+0BE6 #tile_cursor
+0C19 #xy_center_screen
+0C1B $first_x
+0C20 #xy_center_screen
+0C22 $first_y
+0C2D $first_x
+0C31 $curr_x
 0C33 #xy_last_towne
+0C38 $first_y
+0C3C $curr_y
 0C3E #xy_last_towne
+0C4F $curr_x
+0C56 #>world_map_NW
 0C5F #tile_grass
 0C69 #xy_last_screen
 0C73 #xy_last_screen
 0C83 #xy_center_screen
+0C85 $first_x
 0C8A #xy_center_screen
-0C19 #xy_center_screen
-0C20 #xy_center_screen
+0C8C $first_y
+0C97 $first_x
+0C9B $curr_x
+0C9E $first_y
+0CA2 $curr_y
+0CA9 $curr_x
+0CB1 $curr_y
+0CB6 $curr_x
+0CBC #>world_map_NW
 0CCA #xy_last_screen
 0CD4 #xy_last_screen
-0CE8 #xy_last_screen
-0CF7 #xy_last_screen
+0CD8 #object_max
 0CE3 #xy_center_screen
+0CE8 #xy_last_screen
+0CEC $curr_x
 0CF2 #xy_center_screen
+0CF7 #xy_last_screen
+0CFB $curr_y
+0CFD $curr_y
+0D03 $curr_x
 0D16 #xy_center_screen
-0D24 #xy_center_screen
 0D1B #xy_last_screen
+0D1F $curr_x
+0D24 #xy_center_screen
 0D29 #xy_last_screen
+0D2D $curr_y
+0D2F $curr_y
+0D35 $curr_x
+0D5D occlusion_on
+0D5F #(xy_last_screen * xy_last_screen - 1)
+0D6D #(xy_last_screen * xy_last_screen - 1)
+0D6F #tile_blank
+0D77 #(xy_last_screen * xy_last_screen - 1)
+0D79 $los_candidate_idx
+0D7B #xy_last_screen - 1
+0D7D $los_candidate_x
+0D7F $los_candidate_y
+0D81 $los_candidate_x
+0D83 $los_probe_x
+0D85 $los_candidate_y
+0D87 $los_probe_y
+0D89 $los_candidate_idx
+0D8B $los_probe_idx
+0D8D $los_probe_x
+0D8F $los_probe_y
+0D91 $los_probe_idx
+0D9B #(xy_last_screen * (xy_center_screen) + xy_center_screen)
+0D9F $los_probe_idx
 0DA5 #tile_forest
 0DA9 #tile_mountain
 0DAD #tile_secret_panel
-0DB5 #tile_wall
 0DB1 #tile_blank
+0DB5 #tile_wall
+0DB9 $los_probe_x
+0DC0 $los_probe_x
+0DC2 $los_probe_y
+0DC9 $los_probe_y
+0DCE $los_candidate_idx
+0DD6 $los_candidate_idx
+0DD8 $los_candidate_x
+0DDC #xy_last_screen - 1
+0DDE $los_candidate_x
+0DE0 $los_candidate_y
+0DE4 #(xy_last_screen * xy_last_screen - 1)
+0DE6 $los_candidate_idx
+0DE8 #xy_last_screen - 1
+0DEA $los_candidate_x
+0DEC $los_candidate_y
+0DEE $los_candidate_x
+0DF0 $los_probe_x
+0DF2 $los_candidate_y
+0DF4 $los_probe_y
+0DF6 $los_candidate_idx
+0DF8 $los_probe_idx
+0DFE #tile_blank
+0E02 $los_probe_x
+0E04 $los_probe_y
+0E12 $los_probe_idx
+0E25 $los_probe_idx
+0E31 $los_probe_idx
+0E3A #(xy_last_screen * (xy_center_screen) + xy_center_screen)
+0E3E $los_probe_idx
+0E44 #tile_forest
+0E48 #tile_mountain
+0E4C #tile_secret_panel
 0E50 #tile_blank
 0E54 #tile_wall
-0E4C #tile_secret_panel
-0E48 #tile_mountain
-0E44 #tile_forest
-1FD1 #<towne_map
-09A5 #>world_map_nw
-09F1 #>world_map_nw
-0A50 #>world_map_nw
-0C56 #>world_map_nw
-0CBC #>world_map_nw
-1392 #>world_map_nw
-1F4C #<world_map_nw
-0981 #>world_map_ne
-0A01 #>world_map_ne
-0A60 #>world_map_ne
-09B5 #>world_map_sw
-09CD #>world_map_sw
-0A7B #>world_map_sw
-0991 #>world_map_se
-09DD #>world_map_se
-0A70 #>world_map_se
-1F62 #xy_center_screen
-1F70 #xy_center_screen
+0E5B $los_candidate_idx
+0E63 $los_candidate_idx
+0E65 $los_candidate_x
+0E69 #xy_last_screen - 1
+0E6B $los_candidate_x
+0E6D $los_candidate_y
+0E92 #>tilemap
+0EB6 #(xy_last_screen * 2) + 1
+0ECA #xy_last_screen
+0EF8 $los_probe_x
+0EFF $los_probe_x
+0F04 $los_probe_y
+0F0B $los_probe_y
+0F18 #tile_monster_land
+0F1C #tile_monster_water
+0F4F #tile_npc_first
+0F53 #tile_npc_last
+0F5A #tile_class_first
+0F5E #tile_class_last
+0F74 #object_last
+0FA9 #char_newline
+0FFF character output hook
+100C #>player_stats
+1016 $zp_name_count
+1018 $zp_name_count
+101E $zp_name_count
+1020 $zp_name_count
+1029 $zp_name_count
+1036 $zp_name_count
+1038 $zp_name_count
+1041 $zp_name_count
+1043 $zp_name_count
+104F $zp_name_count
+1051 $zp_name_count
+105A $zp_name_count
+105C $zp_name_count
+107C $zp_number
+1087 $zp_number
+10D6 #glyph_ankh
+10DA #glyph_virtues
+1139 "F:"
+113F #party_stat_food_hi
+1147 #party_stat_food_lo
+114F #char_space
+115B #tile_ship_last
+115F " G:"
+1166 #party_stat_gold_hi
+116E #party_stat_gold_lo
+1179 " SHP:"
+11AC "WIND "
+11DA #glyph_less_odd
+11ED "DIR: "
+121F #char_L
+122F "NORTH"
+1239 "SOUTH"
+1243 " EAST"
+124D " WEST"
+127F #char_num_first
+1281 10
+128F #char_enter
+1293 #char_left_arrow
+1298 #char_num_first
+129A 10
+12A6 #char_enter
+12AA #char_left_arrow
+12D0 #char_num_first
+12E3 #walkable_tiles_last
+1369 $zp_number
+1372 $zp_number
+1392 #>world_map_NW
+1397 #tile_water_deep
+139C #tile_water_coast
+13A1 #tile_water_shallow
+13A6 #tile_lava
+1428 #tile_field_poison
+142E #tile_field_fire
+1433 #tile_altar
+1437 #tile_camp_fire
+1443 #tile_field_lightning
+1449 #tile_field_sleep
+1452 #tile_field_poison
+1458 #tile_field_fire
+145D #tile_altar
+1461 #tile_camp_fire
+146D #tile_field_lightning
+1473 #tile_field_sleep
+1511 #char_space
+1515 space clears unprocessed inputs from buffer
+1519 #char_DEL
+151D #char_left_arrow
+15E0 #>font_data
+1822 $moongate_sprite
+1825 #tile_moongate
+182D $moongate_sprite
+1832 #tile_moongate
+1852 $moongate_sprite
+187E "\nPLEASE PLACE THE\n"
+1897 " DISK\nINTO DRIVE "
+18B1 "\nAND PRESS [ESC]\n"
+18C9 #char_ESC
+18E4 #char_num_first
+18E9 "^dBLOADDISK,D1\n"
+190F "BRITANNIA"
+1920 "TOWNE"
+192A "UNDERWORLD"
+1996 $zp_sfx_freq
+199E $zp_sfx_freq
+19A0 $zp_sfx_freq
+19EB $zp_sfx_freq
+19F3 $zp_sfx_freq
+19F5 $zp_sfx_freq
+19FA $zp_sfx_duration
+1A0B $zp_sfx_duration
+1A32 $zp_sfx_duration
+1A46 $zp_sfx_duration
+1A59 $zp_sfx_duration
+1A6D $zp_sfx_duration
 1F14 #xy_last_tile_cache
 1F24 #xy_last_tile_cache
+1F48 #>world_map_NW
+1F4C #<world_map_NW
+1F62 #xy_center_screen
+1F68 $zp_number
+1F70 #xy_center_screen
+1F73 $zp_number
+1F96 #mode_world
+1F9A #mode_towne
+1FCD #>towne_map
+1FD1 #<towne_map
+1FDB #>dng_map
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -147,59 +354,81 @@
 0003 tile_ypos
 0004 map_x
 0005 map_y
+0006 dest_x
+0007 dest_y
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
 0012 moon_phase_trammel
 0013 moon_phase_felucca
 001B ship_hull
+0036 zp_CSWL
+0048 RWTS_IOBPL
+004E DOS_data_prologue_3
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
+00BE char_bitmap_row
+00BF char_rows_left
+00C0 zpt_C0
+00C1 zpt_C1
+00C2 count_x
+00C3 count_y
+00C4 zpt_C4
+00C5 zpt_C5
 00C6 magic_aura
 00C8 tile_under_player
 00C9 tile_north
 00CA tile_south
 00CB tile_east
 00CC tile_west
+00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
-00D4 currplayer
+00D4 curr_player
 00D6 hexnum
 00D7 bcdnum
+00D8 zp_count
+00DA zpt_DA
 00DE reqdisk
 00DF currdrive
-00E0 lt_y
-00E1 lt_x
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F0 zpt_F0
+00F1 zpt_F1
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
+00FA temp_x
+00FB temp_y
 00FC ptr2
-00FD ptr2+1
+00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 currmap
-0280 tempmap
-02B1 tempmap+49
-02BB tempmap+59
-02BC tempmap+60
-02BD tempmap+61
-02C7 tempmap+71
+0200 drawn_tiles
+0280 world_tiles
+02B1 world_tiles+(xy_last_screen * (xy_center_screen - 1) + xy_center_screen)
+02BB world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen - 1)
+02BC world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen)
+02BD world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen + 1)
+02C7 world_tiles+(xy_last_screen * (xy_center_screen + 1) + xy_center_screen)
 0323 spin_drive_motor
+0326 err_resume_addr
+0327 err_resume_addr + 1
+0328 err_resume_stack
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -246,8 +475,8 @@
 0881 j_gettile_bounds
 0884 j_gettile_britannia
 0887 j_gettile_opposite
-088A j_gettile_currmap
-088D j_gettile_tempmap
+088A j_gettile_drawn_map
+088D j_gettile_actual_map
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
@@ -324,33 +553,42 @@
 0D0C @nomonster
 0D3D @skipmoongates
 0D61 @copy
-0D6D lineofsight
+0D6D line_of_sight
 0D71 @clear
-0D81 lospass1
-0D8D @nexttile
-0DCE @playertile
-0DD6 @blocking
-0DE4 lospass2
+0D81 los_pass1
+0D8D @next_probe
+0DCE @candidate_visible
+0DD6 @next_candidate
+0DE4 los_pass2
 0DEE @next
-0E02 @continue
+0E02 @next_probe
 0E12 @diagonal
 0E25 @horizontal
 0E31 @vertical
-0E3A @checkblock
-0E5B @playertile
-0E63 @blocking
+0E3A @check_blocked
+0E5B @candidate_visible
+0E63 @next_candidate
 0E74 drawview
+0E7B @next_line
+0E9C @next_col
+0E9D @src_tile
+0EA4 @src1_hi
+0EA6 @dst1_lo
+0EA7 @dst1_hi
+0EAE @src2_hi
+0EB0 @dst2_lo
+0EB1 @dst2_hi
 0ED5 @done
-0ED6 deltax
-0EE1 deltay
+0ED6 toward_center_1
+0EE1 toward_center_row
 0EEC distance
 0EF7 nexthoriz
 0F03 nextvert
 0F0F animate_tiles
 0F11 @animate_next
-0F20 @animate_seamonster
-0F37 @animate_monster
-0F4F @animate_nonmonster
+0F20 @animate_2_frames
+0F37 @animate_4_frames
+0F4F @animate_non_monster
 0F57 @animate_npc
 0F5A @animate_player
 0F65 @dontanim
@@ -452,7 +690,9 @@
 1377 @zero
 1397 scroll_tiles
 13AB @save_and_scroll
+13B5 @scroll_half
 1418 animate_fields
+141E @next_line
 147D animate_flags
 1491 @castle
 14A5 @shipwest
@@ -563,6 +803,9 @@
 19E9 sfx_flee
 19ED @delay
 19FA sfx_magic1
+19FC @1
+1A01 @2
+1A02 @3
 1A10 sfx_whirlpool
 1A12 @1
 1A14 @2
@@ -595,51 +838,89 @@
 1AEE @foundstr
 1AFD @lastchar
 1B02 nextstrchar
-1B08 @nomsb
+1B08 +
 1B09 strings
-2000 HGR
-B7B5 j_readblock
+1F08 gettile_bounds
+1F2B @out_of_bounds
+1F2E gettile_britannia
+1F51 mul_11
+1F5C gettile_opposite
+1F80 gettile_drawn_map
+1F8D gettile_actual_map
+1F94 get_player_tile
+1FA1 @world
+1FAC @towne
+1FB7 gettile_towne
+1FD6 gettile_dungeon
+2000 screen_HGR1
+200B trammel_line_0
+200C felucca_line_0
+240B trammel_line_1
+240C felucca_line_1
+280B trammel_line_2
+280C felucca_line_2
+2C0B trammel_line_3
+2C0C felucca_line_3
+300B trammel_line_4
+300C felucca_line_4
+340B trammel_line_5
+340C felucca_line_5
+380B trammel_line_6
+380C felucca_line_6
+3C0B trammel_line_7
+3C0C felucca_line_7
+8C03 j_dng_draw_items_monsters
+B7B5 RWTS_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
 B7ED RWTS_sector
 B7F0 RWTS_buf_LO
 B7F1 RWTS_buf_HI
 B7F4 RWTS_command
+BD5D RWTS_write_data_epilogue3
+BF2C DOS_NIBL+3
 C000 hw_KEYBOARD
 C010 hw_STROBE
-C030 togglesnd
+C030 hw_SPEAKER
+C083 hw_LCBANK2
+C08B hw_LCBANK1
+D000 tilemap
+D100 tilemap + $100
+D200 tilemap + $200
+D300 tilemap + $300
+D400 tilemap + $400
+D500 tilemap + $500
+D600 tilemap + $600
+D700 tilemap + $700
+D800 tilemap + $800
+D900 tilemap + $900
+DA00 tilemap + $a00
+DB00 tilemap + $b00
+DC00 tilemap + $c00
+DD00 tilemap + $d00
+DE00 tilemap + $e00
+DF00 tilemap + $f00
 E000 bmplineaddr_lo
-E008 bmplineaddr_lo+8
+E008 bmplineaddr_lo + 8
 E0C0 bmplineaddr_hi
-E0C8 bmplineaddr_hi+8
-ED00 virtues_and_stats
-EE00 map_status
+E0C8 bmplineaddr_hi + 8
+E400 font_data
+E800 world_map_NW
+E900 world_map_NE
+EA00 world_map_SW
+EB00 world_map_SE
+ED00 party_stats
+EE00 object_tile_sprite
 EE20 object_xpos
 EE40 object_ypos
-EE60 object_tile
-1F08 gettile_bounds
-1F2E gettile_britannia
-1F5C gettile_opposite
-1F80 gettile_currmap
-1F8D gettile_tempmap
-1F94 get_player_tile
-1FB7 gettile_towne
-1FD6 gettile_dungeon
-0007 dest_y
-0006 dest_x
-1F51 mul_11
-1FA1 @world
-1FAC @towne
-00FA temp_x
-00FB temp_y
-1F2B @out_of_bounds
+EE60 object_tile_type
 EF00 combat_foe_cur_x
 EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -650,16 +931,8 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-00C0 first_x
-00C1 first_y
-00C2 count_x
-00C3 count_y
-00C4 curr_x
-00C5 curr_y
-E800 world_map_NW
-E900 world_map_NE
-EA00 world_map_SW
-EB00 world_map_SE
+FF00 TMP_PAGE
+FFFF TMP_ADDR
 :DISABLED HILO LABELS
 11A4
 11E5

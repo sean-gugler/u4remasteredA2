@@ -3,7 +3,6 @@
 :CODE END
 99D0
 :DATA BYTES
-94CC-94DF
 8829-8841
 885E-887A
 888E-889B
@@ -50,6 +49,7 @@
 9357-93C8
 93CE-9440
 9449-94C1
+94CC-94DF
 94E5-9534
 953A-958E
 9594-95F7
@@ -78,10 +78,10 @@
 98F8
 :REMOVED BYTES
 :FULL COMMENTS
+8807 Entry point from ULT4, which uses BLOAD not BRUN
 996C unused
 99CF junk
 :SIDE COMMENTS
-94C9 b'\x04BRUN HELP,A$8800\n\x00'
 8826 b'THOU SHALT\nLIVE AGAIN!\n\x00'
 885B b'LORD BRITISH\nSAYS: WELCOME\n\x00'
 888B b'\nMY FRIEND!\n\x00'
@@ -92,7 +92,7 @@
 896C b'\nWHAT WOULD THOU\nASK OF ME?\n\x00'
 8994 b'\nWHAT ELSE?\n\x00'
 89AF b'I CANNOT HELP\nTHEE WITH THAT.\n\x00'
-8A1E b'\nLORD BRITISH\nSAYS: \n\x00'
+8A1B b'\nLORD BRITISH\nSAYS: \n\x00'
 8A35 b'\nHE SAYS:\n\x00'
 8A44 b'\nHE ASKS:\n\x00'
 8A66 b'\nYES OR NO:\n\x00'
@@ -128,6 +128,7 @@
 9354 b'\nIF BUT ONE SOUL\nCOULD COMPLETE\nTHE QUEST OF THE\nAVATAR, OUR\nPEOPLE WOULD\nHAVE A NEW HOPE,\nA NEW GOAL FOR\nLIFE.\n\x00'
 93CB b'\nTHERE WOULD BE A\nSHINING EXAMPLE\nTHAT THERE IS\nMORE TO LIFE\nTHAN THE ENDLESS\nSTRUGGLE FOR\nPOSSESSIONS\nAND GOLD!\n\x00'
 9446 b'THE ANKH IS THE\nSYMBOL OF ONE\nWHO STRIVES FOR\nVIRTUE, KEEP IT\nWITH THEE AT\nTIMES FOR BY\nTHIS MARK THOU\nSHALT BE KNOWN!\n\x00'
+94C9 b'\x04BRUN HELP,A$8800\n\x00'
 94E2 b'THE GREAT\nSTYGIAN ABYSS\nIS THE DARKEST\nPOCKET OF EVIL\nREMAINING IN\nBRITANNIA!\n\x00'
 9537 b'\nIT IS SAID THAT\nIN THE DEEPEST\nRECESSES OF THE\nABYSS IS THE\nCHAMBER OF THE\nCODEX!\n\x00'
 9591 b'\nIT IS ALSO SAID\nTHAT ONLY ONE OF\nHIGHEST VIRTUE\nMAY ENTER THIS\nCHAMBER, ONE\nSUCH AS AN\nAVATAR!!!\n\x00'
@@ -141,6 +142,7 @@
 9747 b'\nLORD BRITISH\nSITS AND SAYS:\nA NEW AGE IS\nUPON BRITANNIA.\nTHE GREAT EVIL\nLORDS ARE GONE\nBUT OUR PEOPLE\nLACK DIRECTION\nAND PURPOSE IN\nTHEIR LIVES...\x00'
 97E1 b'\n\nA CHAMPION OF\nVIRTUE IS CALLED\nFOR. THOU MAY BE\nTHIS CHAMPION,\nBUT ONLY TIME\nSHALL TELL. I\nWILL AID THEE\nANY WAY THAT I\nCAN!\n\x00'
 9867 b'\nHOW MAY I\nHELP THEE?\n\x00'
+8800 pop 2 frames left from entering by BRUN from HELP
 8817 BUG: should be #$12 - no idea where #$45 came from.
 881B #status_Dead
 881F #status_Good
@@ -148,15 +150,27 @@
 884B #sound_spell_effect
 88E7 #player_experience_hi
 88FA #player_max_hp_hi
+8902 $zp_level
+8904 #player_cur_hp_hi
 8910 #player_status
-8912 status_Good
+8912 #status_Good
 8916 #player_intelligence
+8922 #stat_max + 1
+8926 #stat_max
 892B #player_strength
+894D $zp_level
 8958 #sound_spell_effect
+898F #music_hail_britannia
+8A52 #char_enter
 8A5E #char_Y
 8A62 #char_N
-8BE3 #sound_spell_effect
 8BDB #sound_cast
+8BE3 #sound_spell_effect
+94C4 #music_off
+98FA $zp_index
+98FC $zp_index
+9913 $zp_index
+9916 $zp_index
 991E #char_question
 992A #char_enter
 992E #char_left_arrow
@@ -168,8 +182,8 @@
 99A1 #status_Dead
 99A5 #status_Good
 99A9 #player_max_hp_hi
-99B1 #player_max_hp_lo
 99AD #player_cur_hp_hi
+99B1 #player_max_hp_lo
 99B5 #player_cur_hp_lo
 :USER LABELS
 0000 player_xpos
@@ -185,7 +199,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -208,8 +222,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -225,7 +238,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -240,21 +253,21 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zp_level_or_index
+00EA zp_input_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
-00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F0 zp_mismatches
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -265,7 +278,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -274,7 +287,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -282,7 +295,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -334,11 +347,7 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
 B7B5 j_readblock
 B7EB RWTS_volume
@@ -402,7 +411,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -414,38 +423,32 @@ EFFD attack_sprite
 EFFE target_x
 EFFF target_y
 8810 @check_alive
-96D1 lb_intro
 885B @alive
-9996 restore_party_hp
 888B @alone
 889E @one_companion
 88BF @three_or_more
 88E0 check_xp
 88E4 @next
-99BE decode_bcd_value
 88F0 @log_2
 88F9 @check_level
-8965 @already_at_level
 8918 @inc_stat
-8928 @less_than_51
-8A52 print_newline
+8928 @set_stat
+8965 @already_at_level
 896C @ask_me
-89A4 input_word
 898F next_question
-991E get_input
-98F8 check_keyword
-89D4 jump_to_keyword
-8A35 print_he_says
-89E3 keyword_jumptable
-89E4 keyword_jumptable+1
+89A4 input_word
+89D4 @keyword_matched
+89E3 keyword_handlers
+89E4 keyword_handlers+1
 8A1B print_lb_says
+8A35 print_he_says
 8A44 print_he_asks
+8A52 print_newline
 8A58 ask_y_or_n
 8A7A @yes
 8A7D @no
 8A80 answer_bye
 8AAE @plural
-99CE exit_conversation
 8AB8 answer_name
 8AF7 answer_look
 8B28 answer_job
@@ -473,23 +476,29 @@ EFFF target_y
 9615 answer_minax
 962E answer_exodus
 9648 answer_virtue
+96D1 lb_intro
 9884 keywords
-98FC @check
-991B @nomatch
-9916 @next
-9903 @compare
-9927 @getkey
-995A @enter
+98F8 check_keywords
+98FC @start_keyword
+9903 @next_char
+9916 @next_keyword
+991B @not_found
+991E get_input
+9927 @get_char
 9948 @backspace
+995A @got_input
 995E @pad_spaces
-996C check_keyword_inline
-997F +
+996C match_input_inline
 9978 @next_char
-998D @done
+997F +
+998D @end
+9996 restore_party_hp
 999A @next
 99B9 @skip
-99CD @done
+99BE decode_bcd_value
 99C5 @inc
+99CD @done
+99CE exit_conversation
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

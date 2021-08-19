@@ -4,12 +4,11 @@
 9984
 :DATA BYTES
 8809-8820
-909E-90B2
-9173-9183
 8836-8887
 889D-88CA
 88D2-88F5
 88FD-8932
+8938-8942
 8955-8991
 89A8-89BE
 89C1-89DB
@@ -32,21 +31,22 @@
 8F23-8FA9
 8FAF-900A
 9026-9065
+9068-9069
 9094-9096
+909E-90B2
+90D6-90F0
 9109-9133
 913B-914D
+9173-9183
 9199-91AC
-8938-8942
-9264-9265
-921A-921C
 91DA-91DF
 91E0-9214
+921A-921C
+9264-9265
+940D-943A
 9556-9884
 9884-9983
 9983-9984
-90D6-90F0
-9068-9069
-940D-943A
 :WORDS
 :POINTERS
 953C-9556-0
@@ -54,24 +54,23 @@
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-9265
-921C
-9214
-90F0
 9069
+90F0
+9214
+921C
+9265
 943A
 :REMOVED BYTES
 :FULL COMMENTS
-9884 junk
 940D SUPER UNPACKER COPYRIGHT 1983 BY STEVEN MEUSE
+9884 junk - insights into SUPER UNPACKER source code!
 :SIDE COMMENTS
 8806 b'\x04BLOAD CSTRING,A$4000\n\x00'
-909B b'\x04BLOADU\x81LT4,A$4000\n\x00'
-9170 b'\x04BLOADD\x81ISK,D1\n\x00'
 8833 b'\n\n\nThere is a\nsudden darkness,\nand you find\nyourself alone\nin an empty\nchamber.\n\x00'
 889A b'\nThou dost not\nhave the key of\nthree parts.\n\x00'
 88CF b'\nYou use your\nkey of three\nparts.\n\x00'
 88FA b"\nA voice rings\nout, 'What is\nthe Word of\nPassage?'\n\n\x00"
+8935 b"VERAMOCOR\x00"
 8952 b'\nThou hast not\nproved thy\nleadership in\nall eight\nvirtues.\n\x00'
 89A5 b'\nThou art not\nready.\n\x00'
 89BE b'\nPassage is not\ngranted.\n\x00'
@@ -95,35 +94,42 @@
 8FAC b'\n\nCONGRATULATIONS!\n   Thou hast\n   completed\n   ULTIMA IV\n  Quest of the\n     AVATAR\n  in \x00'
 9023 b'\n turns! Report\n thy feat unto\nLord British at\nOrigin Systems!\x00'
 9091 b'\n\x00'
+909B b'\x04BLOADU\x81LT4,A$4000\n\x00'
 9106 b'\nPLEASE PLACE THE\nULTIMA DISK\nINTO DRIVE \x00'
 9138 b'\nAND PRESS [ESC]\n\x00'
+9170 b'\x04BLOADD\x81ISK,D1\n\x00'
 9196 b'\n\nThe voice asks:\n\x00'
 8829 #mode_suspended
-8935 b"VERAMOCOR\x00"
-92B5 #char_enter
+888C #spk_LOCK
+8894 #key3_have_all
+8896 #key3_have_all
+88CA abyss
+89DB abyss
+8B13 skip unused answer "SELF"
+8B54 castle Britannia
+8BCB #music_British
+8E32 #spk_WIN
+907D #char_space
+9085 #char_num_first
+9096 #disk_program
+90B2 #disk_britannia
+90C8 #loc_world
+90CC #mode_world
+90F4 #disk_britannia
+90F8 #disk_dungeon
+9150 #char_ESC
+916B #char_num_first
+91C3 #<answer_table
+91C7 #>answer_table
 9269 #char_question
 9271 #char_enter
 9275 #char_left_arrow
 9279 #char_space
 9294 #char_space
 929D #char_space
-91C3 #<answer_table
-91C7 #>answer_table
-9150 #char_ESC
-90F4 #disk_britannia
-90F8 #disk_dungeon
-916B #char_0
-9096 #disk_ultima
-90B2 #disk_britannia
-90C8 #loc_world
-90CC #mode_world
-907D #char_space
-9085 #char_0
+92B5 #char_enter
 936F left door edge
 9376 right door edge
-88CA abyss
-89DB abyss
-8B54 castle Britannia
 945E #max_spk_col
 9460 #max_spk_row
 9475 #min_spk_row
@@ -142,7 +148,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -164,9 +170,17 @@
 0046 kbd_buf_count
 00B0 spk_pattern_ptr
 00B1 spk_pattern_ptr+1
+00B2 spk_byte
+00B3 spk_pattern_length
+00B4 spk_repeat_code
+00B5 spk_pattern_code
+00B6 spk_row
+00B7 spk_repeat_count
 00B8 spk_repeat_flag
-00BD charptr
-00BE charptr+1
+00B9 spk_pattern_count
+00BA spk_pattern_flag
+00BB spk_pattern_len_cur
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -182,7 +196,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -197,21 +211,21 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zp_char_count
+00EA zp_input_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -222,7 +236,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -231,7 +245,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -239,7 +253,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -291,8 +305,122 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-2000 bitmap
+2000 screen_HGR1
+4000 cstring_addr
+4009 j_game_init
 8800 j_overlay_entry
+88CF @have_three_part_key
+8999 @check_virtues
+899B -
+89A5 @not_avatar
+89BE @denied
+89E0 @granted
+8A06 @ask_question
+8A38 @correct
+8AA9 @next_question
+8AB0 @ask_final_question
+8B59 game_over_win
+9065 halt
+9068 leading_spaces
+9069 print_bcd
+9074 print_digit
+9081 @end_spaces
+9084 @allow_zeroes
+9087 @print
+908B return_to_world
+90D6 world_location_x
+90E3 world_location_y
+90F0 insert_disk
+90F2 @check_disk
+90FC @drive1
+9106 @print_prompt
+914D -
+9156 @drive2
+9168 @load_disk_id
+9180 @drive_number
+9190 @ok
+9191 voice_asks
+91AC input_answer
+91CF @copy_keyword
+91DA keyword_compare
+91E0 answer_table
+9214 waitkey
+921A save_party_size
+921B question_number
+921C delay
+921E @count
+9220 @outer
+9222 @inner
+922F match_input_inline
+923E @next
+9246 +
+9248 @ptr
+9249 @ptr + 1
+9258 @done
+9264 @mismatch
+9265 get_input
+926E @get_char
+928E @backspace
+92A7 @got_input
+92AD @pad_zeroes
+92BB shake_screen
+92D4 shake_down
+92D6 @next
+92EC @copy
+92FF @skip
+9303 shake_up
+9305 @next
+931B @copy
+932E @skip
+9334 print_string
+933F @next_char
+9343 @next_string
+9349 @end_string
+934F @print_char
+935E @done
+935F inc_ptr
+9365 +
+9366 anim_open_door
+9368 @next_row
+937F begin_scroll
+938F @next_scroll
+9391 @next_row
+9398 @scroll_left_out
+93AB @scroll_right_out
+93C5 @delay
+93C7 -
+93DA end_scroll
+93DC @next_row
+93F7 next_ptr1
+9401 +
+9402 set_ptr2_line
+943A draw_spk
+9458 +
+9460 @next_col
+9464 @next_row
+947F spk_write_byte
+9489 @read_byte
+9491 @set_repeat
+9497 +
+94A1 +
+94AB +
+94B1 @check_pattern
+94B5 @set_pattern
+94BB +
+94C7 +
+94D1 +
+94DF @do_literal
+94EB @continue
+94EC @do_repeat
+9504 @do_pattern
+950C -
+950E @dead_code
+9518 @pattern_literal
+9522 @next_pattern
+9537 @pattern_done
+953C spk_addr_table
+953D spk_addr_table + 1
+9556 string_table
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -354,8 +482,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -366,129 +494,7 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-921A save_party_size
-88CF @have_three_part_key
-92A7 @got_input
-926E @get_char
-9214 waitkey
-928E @backspace
-9265 get_input
-92AD @pad_zeroes
-9248 @ptr
-9249 @ptr + 1
-923E @next
-922F check_inline_keyword
-9264 @mismatch
-9246 +
-9258 @done
-91E0 answer_table
-91DA keyword_compare
-91CF @copy_keyword
-9222 @inner
-9220 @outer
-921C delay
-921E @count
-92D4 shake_down
-92D6 @next
-92EC @copy
-92FF @skip
-9303 shake_up
-9305 @next
-931B @copy
-932E @skip
-92BB shake_screen
-9556 string_table
-933F @next_char
-9343 @next_string
-935F inc_ptr
-9349 @end_string
-934F @print_char
-935E @done
-9365 +
-9334 print_string
-9191 voice_asks
-921B question_number
-91AC input_answer
-90F0 insert_disk
-914D -
-9168 @load_disk_id
-9156 @drive2
-90FC @drive1
-9106 @print_prompt
-9180 @drive_number
-9190 @ok
-90F2 @check_disk
-90E3 world_location_y
-90D6 world_location_x
-4009 j_game_init
-908B return_to_world
-9065 halt
-8B59 game_over_win
-9068 leading_spaces
-9069 print_bcd
-9074 print_digit
-9087 @print
-9081 @end_spaces
-9084 @allow_zeroes
-8AB0 @ask_final_question
-9401 +
-9402 set_ptr2_line
-93F7 next_ptr1
-93DC @next_row
-93DA end_scroll
-9398 @scroll_left_out
-93AB @scroll_right_out
-9391 @next_row
-93C7 -
-93C5 @delay
-4000 cstring_gfx
-938F @next_scroll
-9368 @next_row
-9366 anim_open_door
-953D spk_addr_table + 1
-953C spk_addr_table
-89BE @denied
-89A5 @not_avatar
-899B -
-8999 @check_virtues
-89E0 @granted
-8A38 @correct
-8AA9 @next_question
-8A06 @ask_question
-943A draw_spk
-00BA spk_pattern_flag
-00BB spk_pattern_len_cur
-00B4 spk_repeat_code
-00B5 spk_pattern_code
-00B6 spk_row
-00B2 spk_byte
-00B7 spk_repeat_count
-00B3 spk_pattern_length
-00B9 spk_pattern_count
-9458 +
-9460 @next_col
-9464 @next_row
-947F spk_write_byte
-94EC @do_repeat
-9504 @do_pattern
-9489 @read_byte
-94B1 @check_pattern
-9491 @set_repeat
-9497 +
-94A1 +
-94AB +
-94DF @do_literal
-94B5 @set_pattern
-94BB +
-94C7 +
-94D1 +
-94EB @continue
-9522 @next_pattern
-9518 @pattern_literal
-950C -
-950E @dead_code
-9537 @pattern_done
-937F begin_scroll
+FFFF TMP_ADDR
 :DISABLED HILO LABELS
 90C8
 9387

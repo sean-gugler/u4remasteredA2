@@ -1,213 +1,37 @@
 	.include "uscii.i"
-	.include "SUBS.i"
 
-;
-; **** ZP FIELDS ****
-;
-numdrives = $d1
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-player_xpos = $00
-player_ypos = $01
-tile_xpos = $02
-tile_ypos = $03
-map_x = $04
-map_y = $05
-dest_x = $06
-dest_y = $07
-game_mode = $0b
-dungeon_level = $0c
-terrain_occlusion = $0d
-player_transport = $0e
-party_size = $0f
-dng_direction = $10
-moon_phase_trammel = $12
-moon_phase_felucca = $13
-ship_hull = $1b
-a48 = $48
-a4e = $4e
-key_buf = $b0
-key_buf_len = $b8
-charptr = $bd
-;charptr+1 = $be
-abf = $bf
-first_x = $c0
-first_y = $c1
-count_x = $c2
-count_y = $c3
-curr_x = $c4
-curr_y = $c5
-magic_aura = $c6
-tile_under_player = $c8
-tile_north = $c9
-tile_south = $ca
-tile_east = $cb
-tile_west = $cc
-acd = $cd
-console_xpos = $ce
-console_ypos = $cf
-diskid = $d0
-;numdrives = $d1
-currdisk_drive1 = $d2
-currdisk_drive2 = $d3
-currplayer = $d4
-hexnum = $d6
-bcdnum = $d7
-ad8 = $d8
-ada = $da
-reqdisk = $de
-currdrive = $df
-lt_y = $e0
-lt_x = $e1
-lt_rwflag = $e2
-lt_addr_hi = $e3
-moongate_tile = $ed
-moongate_xpos = $ee
-moongate_ypos = $ef
-af0 = $f0
-af1 = $f1
-tilerow = $f2
-balloon_movement = $f4
-direction = $f5
-temp_x = $fa
-temp_y = $fb
-ptr2 = $fc
-;ptr2+1 = $fd
-ptr1 = $fe
-;ptr1 + 1 = $ff
-;
-; **** ZP POINTERS ****
-;
-;ptr2 = $fc
-;ptr1 = $fe
-;
-; **** FIELDS ****
-;
-fd000 = $d000
-fd100 = $d100
-fd200 = $d200
-fd300 = $d300
-fd400 = $d400
-fd500 = $d500
-fd600 = $d600
-fd700 = $d700
-fd800 = $d800
-fd900 = $d900
-fda00 = $da00
-fdb00 = $db00
-fdc00 = $dc00
-fdd00 = $dd00
-fde00 = $de00
-fdf00 = $df00
-fff00 = $ff00
-fffff = $ffff
-;
-; **** ABSOLUTE ADRESSES ****
-;
-a200b = $200b
-a200c = $200c
-a240b = $240b
-a240c = $240c
-a280b = $280b
-a280c = $280c
-a2c0b = $2c0b
-a2c0c = $2c0c
-a300b = $300b
-a300c = $300c
-a340b = $340b
-a340c = $340c
-a380b = $380b
-a380c = $380c
-a3c0b = $3c0b
-a3c0c = $3c0c
-abd5d = $bd5d
-abf2c = $bf2c
-ac083 = $c083
-ac08b = $c08b
-ad10b = $d10b
-ad10e = $d10e
-ad20b = $d20b
-ad20e = $d20e
-ad210 = $d210
-ad212 = $d212
-ad30a = $d30a
-ad310 = $d310
-ad312 = $d312
-ad40a = $d40a
-;
-; **** POINTERS ****
-;
-pe400 = $e400
-;
-; **** EXTERNAL JUMPS ****
-;
-e8c03 = $8c03
-;
-; **** USER LABELS ****
-;
-CSWL = $0036
-;key_buf+1 = $00b1
-currmap = $0200
-tempmap = $0280
-;tempmap+49 = $02b1
-;tempmap+59 = $02bb
-;tempmap+60 = $02bc
-;tempmap+61 = $02bd
-;tempmap+71 = $02c7
-music_ctl = $0320
-spin_drive_motor = $0323
-err_resume_addr = $0326
-;err_resume_addr + 1 = $0327
-err_resume_stack = $0328
-hgr = $2000
-j_readblock = $b7b5
-rwts_volume = $b7eb
-rwts_track = $b7ec
-rwts_sector = $b7ed
-rwts_buf_lo = $b7f0
-rwts_buf_hi = $b7f1
-rwts_command = $b7f4
-hw_keyboard = $c000
-hw_strobe = $c010
-togglesnd = $c030
-bmplineaddr_lo = $e000
-;bmplineaddr_lo+8 = $e008
-bmplineaddr_hi = $e0c0
-;bmplineaddr_hi+8 = $e0c8
-towne_map = $e800
-dng_map = $e800
-world_map_nw = $e800
-world_map_ne = $e900
-world_map_sw = $ea00
-world_map_se = $eb00
-virtues_and_stats = $ed00
-map_status = $ee00
-object_xpos = $ee20
-object_ypos = $ee40
-object_tile = $ee60
-combat_foe_cur_x = $ef00
-combat_foe_cur_y = $ef10
-combat_foe_prev_x = $ef20
-combat_foe_prev_y = $ef30
-combat_foe_hp = $ef40
-combat_foe_tile = $ef50
-combat_foe_drawn_tile = $ef60
-combat_foe_slept = $ef70
-;combat_player_xpos-1 = $ef7f
-combat_player_xpos = $ef80
-;combat_player_ypos-1 = $ef8f
-combat_player_ypos = $ef90
-;combat_player_tile-1 = $ef9f
-combat_player_tile = $efa0
-attack_sprite = $effd
-target_x = $effe
-target_y = $efff
+	.include "apple.i"
+	.include "char.i"
+	.include "dos.i"
+	.include "jump_overlay.i"
+	.include "jump_system.i"
+	.include "map_objects.i"
+	.include "moons.i"
+	.include "tables.i"
+	.include "tiles.i"
+	.include "zp_main.i"
+	.include "zp_map_scroll.i"
+	.include "zp_line_of_sight.i"
 
-opcode_jsr = $20  ; JSR $hhll
-opcode_bit = $2c  ; BIT $hhll
-opcode_bcc = $90  ; BCC $rr
+	.include "PRTY.i"
+	.include "ROST.i"
 
+
+; Placeholder operands that get altered
+; by self-modifying code.
+
+TMP_PAGE = $ff00
+TMP_ADDR = $ffff
+
+
+; --- Custom use of Zero Page
+
+zp_count = $d8
+zp_name_count = $da
+zp_number = $da
+
+zp_sfx_freq = $da
+zp_sfx_duration = $f0
 
 
 	.segment "SUBS"
@@ -350,11 +174,11 @@ j_gettile_britannia:
 j_gettile_opposite:
 	jmp gettile_opposite
 
-j_gettile_currmap:
-	jmp gettile_currmap
+j_gettile_drawn_map:
+	jmp gettile_drawn_map
 
-j_gettile_tempmap:
-	jmp gettile_tempmap
+j_gettile_actual_map:
+	jmp gettile_actual_map
 
 j_get_player_tile:
 	jmp get_player_tile
@@ -365,15 +189,19 @@ j_gettile_towne:
 j_gettile_dungeon:
 	jmp gettile_dungeon
 
+;SIZE_OPT: exposed for ULT4 to re-use instead of having its own duplicate
+j_math_sign:
+	jmp getsign
+
 move_east:
 	inc player_xpos
 	inc tile_xpos
 	lda tile_xpos
-	cmp #$18
+	cmp #(xy_last_tile_cache - $08)
 	bcc @notileborder
 	jsr spin_drive_motor
 @notileborder:
-	cmp #$1b
+	cmp #(xy_last_tile_cache - xy_center_screen)
 	bcc movedone
 	and #$0f
 	sta tile_xpos
@@ -394,7 +222,7 @@ move_west:
 	bcs @notileborder
 	jsr spin_drive_motor
 @notileborder:
-	cmp #$05
+	cmp #xy_center_screen
 	bcs movedone
 	ora #$10
 	sta tile_xpos
@@ -409,11 +237,11 @@ move_south:
 	inc player_ypos
 	inc tile_ypos
 	lda tile_ypos
-	cmp #$18
+	cmp #(xy_last_tile_cache - $08)
 	bcc @notileborder
 	jsr spin_drive_motor
 @notileborder:
-	cmp #$1b
+	cmp #(xy_last_tile_cache - xy_center_screen)
 	bcc @done
 	and #$0f
 	sta tile_ypos
@@ -434,7 +262,7 @@ move_north:
 	bcs @notileborder
 	jsr spin_drive_motor
 @notileborder:
-	cmp #$05
+	cmp #xy_center_screen
 	bcs @done
 	ora #$10
 	sta tile_ypos
@@ -450,10 +278,10 @@ move_north:
 map_scroll_east:
 	ldx #$00
 @scroll:
-	lda world_map_ne,x
-	sta world_map_nw,x
-	lda world_map_se,x
-	sta world_map_sw,x
+	lda world_map_NE,x
+	sta world_map_NW,x
+	lda world_map_SE,x
+	sta world_map_SW,x
 	inx
 	bne @scroll
 	rts
@@ -461,10 +289,10 @@ map_scroll_east:
 map_scroll_west:
 	ldx #$00
 @scroll:
-	lda world_map_nw,x
-	sta world_map_ne,x
-	lda world_map_sw,x
-	sta world_map_se,x
+	lda world_map_NW,x
+	sta world_map_NE,x
+	lda world_map_SW,x
+	sta world_map_SE,x
 	inx
 	bne @scroll
 	rts
@@ -472,10 +300,10 @@ map_scroll_west:
 map_scroll_south:
 	ldx #$00
 @scroll:
-	lda world_map_sw,x
-	sta world_map_nw,x
-	lda world_map_se,x
-	sta world_map_ne,x
+	lda world_map_SW,x
+	sta world_map_NW,x
+	lda world_map_SE,x
+	sta world_map_NE,x
 	inx
 	bne @scroll
 	rts
@@ -483,96 +311,96 @@ map_scroll_south:
 map_scroll_north:
 	ldx #$00
 @scroll:
-	lda world_map_nw,x
-	sta world_map_sw,x
-	lda world_map_ne,x
-	sta world_map_se,x
+	lda world_map_NW,x
+	sta world_map_SW,x
+	lda world_map_NE,x
+	sta world_map_SE,x
 	inx
 	bne @scroll
 	rts
 
 loadtiles_east:
-	lda #$01
-	sta lt_rwflag
+	lda #RWTS_command_read
+	sta diskio_command
 	clc
 	lda map_x
 	adc #$01
 	and #$0f
-	sta lt_x
+	sta diskio_sector
 	lda map_y
-	sta lt_y
-	lda #>world_map_ne
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_NE
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_y
 	adc #$01
 	and #$0f
-	sta lt_y
-	lda #>world_map_se
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_SE
+	sta diskio_addr_hi
 	jmp loadsector
 
 loadtiles_west:
-	lda #$01
-	sta lt_rwflag
+	lda #RWTS_command_read
+	sta diskio_command
 	clc
 	lda map_x
-	sta lt_x
+	sta diskio_sector
 	lda map_y
-	sta lt_y
-	lda #>world_map_nw
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_NW
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_y
 	adc #$01
 	and #$0f
-	sta lt_y
-	lda #>world_map_sw
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_SW
+	sta diskio_addr_hi
 	jmp loadsector
 
 loadtiles_south:
-	lda #$01
-	sta lt_rwflag
+	lda #RWTS_command_read
+	sta diskio_command
 	clc
 	lda map_y
 	adc #$01
 	and #$0f
-	sta lt_y
+	sta diskio_track
 	lda map_x
-	sta lt_x
-	lda #>world_map_sw
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_SW
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_x
 	adc #$01
 	and #$0f
-	sta lt_x
-	lda #>world_map_se
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_SE
+	sta diskio_addr_hi
 	jmp loadsector
 
 loadtiles_north:
-	lda #$01
-	sta lt_rwflag
+	lda #RWTS_command_read
+	sta diskio_command
 	clc
 	lda map_y
-	sta lt_y
+	sta diskio_track
 	lda map_x
-	sta lt_x
-	lda #>world_map_nw
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_NW
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_x
 	adc #$01
 	and #$0f
-	sta lt_x
-	lda #>world_map_ne
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_NE
+	sta diskio_addr_hi
 	jmp loadsector
 
 player_teleport:
@@ -608,57 +436,57 @@ player_teleport:
 	and #$0f
 	sta map_y
 @southern:
-	lda #$01
-	sta lt_rwflag
+	lda #RWTS_command_read
+	sta diskio_command
 	lda map_x
-	sta lt_x
+	sta diskio_sector
 	lda map_y
-	sta lt_y
-	lda #>world_map_nw
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_NW
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_x
 	adc #$01
 	and #$0f
-	sta lt_x
-	lda #>world_map_ne
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_NE
+	sta diskio_addr_hi
 	jsr loadsector
 	clc
 	lda map_y
 	adc #$01
 	and #$0f
-	sta lt_y
-	lda #>world_map_se
-	sta lt_addr_hi
+	sta diskio_track
+	lda #>world_map_SE
+	sta diskio_addr_hi
 	jsr loadsector
 	lda map_x
-	sta lt_x
-	lda #>world_map_sw
-	sta lt_addr_hi
+	sta diskio_sector
+	lda #>world_map_SW
+	sta diskio_addr_hi
 loadsector:
 	lda #$00
-	sta rwts_volume
-	sta rwts_buf_lo
-	lda lt_y
-	sta rwts_track
-	lda lt_x
-	sta rwts_sector
-	lda lt_addr_hi
-	sta rwts_buf_hi
-	lda lt_rwflag
-	sta rwts_command
-	lda #$ad     ;sector header marker for DATA
-	sta a4e
-	sta abd5d    ;RWTS_marker_byte_3
-	lda #$9b
-	sta abf2c
-	lda #$e8     ;RWTS_param_LO
-	ldy #$b7     ;RWTS_param_HI
-	jsr j_readblock
+	sta RWTS_volume
+	sta RWTS_buf_LO
+	lda diskio_track
+	sta RWTS_track
+	lda diskio_sector
+	sta RWTS_sector
+	lda diskio_addr_hi
+	sta RWTS_buf_HI
+	lda diskio_command
+	sta RWTS_command
+	lda #RWTS_data_epilogue_byte3
+	sta DOS_data_prologue_3 ;part of copy protection
+	sta RWTS_write_data_epilogue3
+	lda #$9b     ;restore normal decode value (presumed part of copy protect on disk 1)
+	sta DOS_NIBL+3
+	lda #<RWTS_params
+	ldy #>RWTS_params
+	jsr RWTS_readblock ;sets IOBP H/L to $YYAA
 	lda #$00
-	sta a48
+	sta RWTS_IOBPL ;why clear this? protect against snooping?
 	bcs loadsector
 	rts
 
@@ -692,7 +520,7 @@ idle:
 	beq delay
 	bmi idle_other
 idle_britannia:
-	cmp #$01
+	cmp #mode_world
 	bne idle_towne
 	jsr update_wind
 	jsr update_balloon
@@ -700,22 +528,22 @@ idle_britannia:
 	rts
 
 idle_towne:
-	cmp #$02
+	cmp #mode_towne
 	bne idle_dungeon
 	jsr update_towne
 	rts
 
 idle_dungeon:
-	cmp #$03
+	cmp #mode_dungeon
 	bne idle_delay
 	jsr scroll_tiles
 	jsr animate_fields
-	jsr e8c03
+	jsr j_dng_draw_items_monsters
 idle_delay:
 	jmp delay
 
 idle_other:
-	cmp #$ff
+	cmp #mode_shrine
 	beq @animate
 	jmp idle_combat
 
@@ -734,40 +562,35 @@ delay:
 
 update_balloon:
 ; TRAINER: balloon_steer
-	.assert balloon_drift = 1, error, "Balloon trainer math will break"
 	lda balloon_movement
-	lsr
-	bcc @done
+	bpl @no_drift
 ; TRAINER END
+; retail logic
 ;	lda player_transport
 ;	cmp #tile_balloon
-;	bne @done
+;	bne @no_drift
 ;	lda balloon_movement
-;	beq @done
+;	beq @no_drift    ;balloon_landed
 
 	dec movement_counter
 	lda movement_counter
 	and #$03
-	bne @done
+	bne @no_drift
 @east:
-	ldx direction
+	ldx wind_direction
 	bne @south
 	jmp move_east
-
 @south:
 	dex
 	bne @west
 	jmp move_south
-
 @west:
 	dex
 	bne @north
 	jmp move_west
-
 @north:
 	jmp move_north
-
-@done:
+@no_drift:
 	rts
 
 movement_counter:
@@ -783,18 +606,18 @@ idle_combat:
 	jsr animate_fields
 	ldx #$7f
 @copy:
-	lda tempmap,x
-	sta currmap,x
+	lda world_tiles,x
+	sta drawn_tiles,x
 	dex
 	bpl @copy
-	ldx #$0f
+	ldx #foes_max
 @nextmonster:
 	ldy combat_foe_cur_y,x
 	lda mul_11,y
 	clc
 	adc combat_foe_cur_x,x
 	tay
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	beq @next
 	cmp #tile_anhk          ; BUGFIX
 	beq @dontanim           ; BUGFIX
@@ -802,39 +625,39 @@ idle_combat:
 	beq @dontanim           ; BUGFIX
 	lda combat_foe_slept,x
 	bne @dontanim
-	lda combat_foe_tile,x
-	cmp #$90
+	lda combat_foe_tile_type,x
+	cmp #tile_monster_land
 	bcs @checkmimic
 	jsr rand
 	and #$01
 @settile:
 	clc
-	adc combat_foe_tile,x
-	sta combat_foe_drawn_tile,x
-	sta currmap,y
+	adc combat_foe_tile_type,x
+	sta combat_foe_tile_sprite,x
+	sta drawn_tiles,y
 	jmp @next
 
 @checkmimic:
-	cmp #$ac
+	cmp #tile_mimic
 	bne @anim4
-	lda combat_foe_drawn_tile,x
-	cmp #$3c
+	lda combat_foe_tile_sprite,x
+	cmp #tile_chest
 	bne @anim4
-	sta currmap,y
+	sta drawn_tiles,y
 	jmp @next
 
 @anim4:
 	jsr rand
 	and #$01
 	beq @dontanim
-	inc combat_foe_drawn_tile,x
-	lda combat_foe_drawn_tile,x
+	inc combat_foe_tile_sprite,x
+	lda combat_foe_tile_sprite,x
 	and #$03
 	jmp @settile
 
 @dontanim:
-	lda combat_foe_drawn_tile,x
-	sta currmap,y
+	lda combat_foe_tile_sprite,x
+	sta drawn_tiles,y
 @next:
 	dex
 	bpl @nextmonster
@@ -849,7 +672,7 @@ animateplayers:
 	adc combat_player_xpos-1,x
 	tay
 	lda combat_player_tile-1,x
-	cmp #$38
+	cmp #tile_human_prone
 	beq @settile
 	cpx curr_y
 	bne @animate
@@ -857,7 +680,7 @@ animateplayers:
 	lda movement_counter
 	and #$03
 	bne @animate
-	lda #$7d
+	lda #tile_cursor
 	jmp @settile
 
 @animate:
@@ -866,7 +689,7 @@ animateplayers:
 	clc
 	adc combat_player_tile-1,x
 @settile:
-	sta currmap,y
+	sta drawn_tiles,y
 @next:
 	dex
 	bne @nextplayer
@@ -878,7 +701,7 @@ animateplayers:
 	adc target_x
 	tay
 	lda attack_sprite
-	sta currmap,y
+	sta drawn_tiles,y
 @done:
 	jmp drawview
 
@@ -910,27 +733,27 @@ update_towne:
 	sta curr_y
 	cmp #xy_last_towne
 	bcs @out_of_bounds
-	sta ptr2+1
+	sta ptr2 + 1
 	lda #$00
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
 	adc curr_x
 	sta ptr2
 	clc
-	lda ptr2+1
-	adc #>world_map_nw
-	sta ptr2+1
+	lda ptr2 + 1
+	adc #>world_map_NW
+	sta ptr2 + 1
 	lda (ptr2),y
 	jmp @settile
 
 @out_of_bounds:
 	lda #tile_grass
 @settile:
-	sta tempmap,x
+	sta world_tiles,x
 	inx
 	inc count_x
 	lda count_x
@@ -980,10 +803,10 @@ update_britannia:
 	ora curr_x
 	jsr div16
 	clc
-	adc #>world_map_nw
-	sta ptr2+1
+	adc #>world_map_NW
+	sta ptr2 + 1
 	lda (ptr2),y
-	sta tempmap,x
+	sta world_tiles,x
 	inx
 	inc count_x
 	lda count_x
@@ -995,9 +818,9 @@ update_britannia:
 	cmp #xy_last_screen
 	bne @copymap
 update_monsters:
-	ldx #$1f
+	ldx #object_max
 @nextmonster:
-	lda map_status,x
+	lda object_tile_sprite,x
 	beq @nomonster
 	lda object_xpos,x
 	clc
@@ -1020,11 +843,12 @@ update_monsters:
 	clc
 	adc curr_x
 	tay
-	lda map_status,x
-	sta tempmap,y
+	lda object_tile_sprite,x
+	sta world_tiles,y
 @nomonster:
 	dex
 	bpl @nextmonster
+
 	lda moongate_tile
 	beq @skipmoongates
 	lda moongate_xpos
@@ -1049,315 +873,317 @@ update_monsters:
 	adc curr_x
 	tay
 	lda moongate_tile
-	sta tempmap,y
+	sta world_tiles,y
 @skipmoongates:
-	lda tempmap+(xy_last_screen * (xy_center_screen - 1) + xy_center_screen)
+	lda world_tiles+(xy_last_screen * (xy_center_screen - 1) + xy_center_screen)
 	sta tile_north
-	lda tempmap+(xy_last_screen * (xy_center_screen + 1) + xy_center_screen)
+	lda world_tiles+(xy_last_screen * (xy_center_screen + 1) + xy_center_screen)
 	sta tile_south
-	lda tempmap+(xy_last_screen * (xy_center_screen) + xy_center_screen + 1)
+	lda world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen + 1)
 	sta tile_east
-	lda tempmap+(xy_last_screen * (xy_center_screen) + xy_center_screen - 1)
+	lda world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen - 1)
 	sta tile_west
-	lda tempmap+(xy_last_screen * (xy_center_screen) + xy_center_screen)
+	lda world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen)
 	sta tile_under_player
 	lda player_transport
-	sta tempmap+(xy_last_screen * (xy_center_screen) + xy_center_screen)
+	sta world_tiles+(xy_last_screen * (xy_center_screen) + xy_center_screen)
 	lda terrain_occlusion
-	beq lineofsight
+	beq line_of_sight    ;occlusion_on
 	ldx #(xy_last_screen * xy_last_screen - 1)
 @copy:
-	lda tempmap,x
-	sta currmap,x
+	lda world_tiles,x
+	sta drawn_tiles,x
 	dex
 	bpl @copy
 	jmp drawview
 
-lineofsight:
+line_of_sight:
 	ldx #(xy_last_screen * xy_last_screen - 1)
 	lda #tile_blank
 @clear:
-	sta currmap,x
+	sta drawn_tiles,x
 	dex
 	bpl @clear
-	lda #(xy_last_screen * xy_last_screen - 1)
-	sta af0
-	lda #$0a
-	sta curr_x
-	sta curr_y
-lospass1:
-	lda curr_x
-	sta first_x
-	lda curr_y
-	sta first_y
-	lda af0
-	sta af1
-@nexttile:
-	ldx first_x
-	ldy first_y
-	lda af1
-	clc
-	adc deltax,x
-	clc
-	adc deltay,y
-	cmp #$3c
-	beq @playertile
-	sta af1
-	tax
-	lda tempmap,x
-	cmp #tile_forest
-	beq @blocking
-	cmp #tile_mountain
-	beq @blocking
-	cmp #tile_secret_panel
-	beq @blocking
-	cmp #tile_blank
-	beq @blocking
-	cmp #tile_wall
-	beq @blocking
-	lda first_x
-	tax
-	clc
-	adc deltax,x
-	sta first_x
-	lda first_y
-	tax
-	clc
-	adc deltax,x
-	sta first_y
-	jmp @nexttile
 
-@playertile:
-	ldx af0
-	lda tempmap,x
-	sta currmap,x
-@blocking:
-	dec af0
-	dec curr_x
-	bpl lospass1
+	lda #(xy_last_screen * xy_last_screen - 1)
+	sta los_candidate_idx
 	lda #xy_last_screen - 1
-	sta curr_x
-	dec curr_y
-	bpl lospass1
-lospass2:
-	lda #$78
-	sta af0
-	lda #xy_last_screen - 1
-	sta curr_x
-	sta curr_y
-@next:
-	lda curr_x
-	sta first_x
-	lda curr_y
-	sta first_y
-	lda af0
-	sta af1
+	sta los_candidate_x
+	sta los_candidate_y
+los_pass1:
+	lda los_candidate_x
+	sta los_probe_x
+	lda los_candidate_y
+	sta los_probe_y
+	lda los_candidate_idx
+	sta los_probe_idx
+@next_probe:
+	ldx los_probe_x
+	ldy los_probe_y
+	lda los_probe_idx
+	clc
+	adc toward_center_1,x
+	clc
+	adc toward_center_row,y
+	cmp #(xy_last_screen * (xy_center_screen) + xy_center_screen)
+	beq @candidate_visible
+	sta los_probe_idx
 	tax
-	lda currmap,x
+	lda world_tiles,x
+	cmp #tile_forest
+	beq @next_candidate
+	cmp #tile_mountain
+	beq @next_candidate
+	cmp #tile_secret_panel
+	beq @next_candidate
 	cmp #tile_blank
-	bne @blocking
-@continue:
-	ldx first_x
-	ldy first_y
+	beq @next_candidate
+	cmp #tile_wall
+	beq @next_candidate
+	lda los_probe_x
+	tax
+	clc
+	adc toward_center_1,x
+	sta los_probe_x
+	lda los_probe_y
+	tax
+	clc
+	adc toward_center_1,x
+	sta los_probe_y
+	jmp @next_probe
+
+@candidate_visible:
+	ldx los_candidate_idx
+	lda world_tiles,x
+	sta drawn_tiles,x
+@next_candidate:
+	dec los_candidate_idx
+	dec los_candidate_x
+	bpl los_pass1
+	lda #xy_last_screen - 1
+	sta los_candidate_x
+	dec los_candidate_y
+	bpl los_pass1
+los_pass2:
+	lda #(xy_last_screen * xy_last_screen - 1)
+	sta los_candidate_idx
+	lda #xy_last_screen - 1
+	sta los_candidate_x
+	sta los_candidate_y
+@next:
+	lda los_candidate_x
+	sta los_probe_x
+	lda los_candidate_y
+	sta los_probe_y
+	lda los_candidate_idx
+	sta los_probe_idx
+	tax
+	lda drawn_tiles,x
+	cmp #tile_blank
+	bne @next_candidate
+@next_probe:
+	ldx los_probe_x
+	ldy los_probe_y
 	lda distance,x
 	cmp distance,y
 	beq @diagonal
 	bcc @vertical
 	bcs @horizontal
 @diagonal:
-	lda af1
+	lda los_probe_idx
 	clc
-	adc deltax,x
+	adc toward_center_1,x
 	clc
-	adc deltay,y
+	adc toward_center_row,y
 	jsr nexthoriz
 	jsr nextvert
-	jmp @checkblock
+	jmp @check_blocked
 
 @horizontal:
-	lda af1
+	lda los_probe_idx
 	clc
-	adc deltax,x
+	adc toward_center_1,x
 	jsr nexthoriz
-	jmp @checkblock
+	jmp @check_blocked
 
 @vertical:
-	lda af1
+	lda los_probe_idx
 	clc
-	adc deltay,y
+	adc toward_center_row,y
 	jsr nextvert
-@checkblock:
-	cmp #$3c
-	beq @playertile
-	sta af1
+@check_blocked:
+	cmp #(xy_last_screen * (xy_center_screen) + xy_center_screen)
+	beq @candidate_visible
+	sta los_probe_idx
 	tax
-	lda tempmap,x
+	lda world_tiles,x
 	cmp #tile_forest
-	beq @blocking
+	beq @next_candidate
 	cmp #tile_mountain
-	beq @blocking
+	beq @next_candidate
 	cmp #tile_secret_panel
-	beq @blocking
+	beq @next_candidate
 	cmp #tile_blank
-	beq @blocking
+	beq @next_candidate
 	cmp #tile_wall
-	beq @blocking
-	jmp @continue
+	beq @next_candidate
+	jmp @next_probe
 
-@playertile:
-	ldx af0
-	lda tempmap,x
-	sta currmap,x
-@blocking:
-	dec af0
-	dec curr_x
+@candidate_visible:
+	ldx los_candidate_idx
+	lda world_tiles,x
+	sta drawn_tiles,x
+@next_candidate:
+	dec los_candidate_idx
+	dec los_candidate_x
 	bpl @next
-	lda #$0a
-	sta curr_x
-	dec curr_y
+	lda #xy_last_screen - 1
+	sta los_candidate_x
+	dec los_candidate_y
 	bmi drawview
 	jmp @next
 
 drawview:
 	lda #$00
-	sta tilerow
-	sta a0e9d
-b0e7b:
-	ldy tilerow
-	lda bmplineaddr_lo+8,y
-	sta a0ea6
-	sta a0eb0
-	lda bmplineaddr_hi+8,y
-	sta a0ea7
-	sta a0eb1
+	sta current_draw_line
+	sta @src_tile
+@next_line:
+	ldy current_draw_line
+	lda bmplineaddr_lo + 8,y
+	sta @dst1_lo
+	sta @dst2_lo
+	lda bmplineaddr_hi + 8,y
+	sta @dst1_hi
+	sta @dst2_hi
 	tya
 	and #$0f
-	ora #$d0
-	sta a0ea4
-	sta a0eae
+	ora #>tilemap
+	sta @src1_hi
+	sta @src2_hi
 	ldx #$01
-a0e9d=*+$01
-b0e9c:
-	ldy currmap
-	bit ac08b
-a0ea4=*+$02
-	lda fff00,y
-a0ea6=*+$01
-a0ea7=*+$02
-	sta fffff,x
+@src_tile=*+$01
+@next_col:
+	ldy drawn_tiles
+	bit hw_LCBANK1
+@src1_hi=*+$02
+	lda TMP_PAGE,y
+@dst1_lo=*+$01
+@dst1_hi=*+$02
+	sta TMP_ADDR,x
 	inx
-	bit ac083
-a0eae=*+$02
-	lda fff00,y
-a0eb0=*+$01
-a0eb1=*+$02
-	sta fffff,x
-	inc a0e9d
+	bit hw_LCBANK2
+@src2_hi=*+$02
+	lda TMP_PAGE,y
+@dst2_lo=*+$01
+@dst2_hi=*+$02
+	sta TMP_ADDR,x
+	inc @src_tile
 	inx
-	cpx #$17
-	bcc b0e9c
-	inc tilerow
-	lda tilerow
+	cpx #(xy_last_screen * 2) + 1
+	bcc @next_col
+	inc current_draw_line
+	lda current_draw_line
 	cmp #$b0
 	beq @done
 	and #$0f
-	beq b0e7b
-	lda a0e9d
+	beq @next_line
+	lda @src_tile
 	sec
-	sbc #$0b
-	sta a0e9d
+	sbc #xy_last_screen
+	sta @src_tile
 	jsr scankey
-	jmp b0e7b
+	jmp @next_line
 
 @done:
 	rts
 
-deltax:
+toward_center_1:
 	.byte 1, 1, 1, 1, 1, 0, <-1, <-1, <-1, <-1, <-1
-deltay:
+toward_center_row:
 	.byte 11, 11, 11, 11, 11, 0, <-11, <-11, <-11, <-11, <-11
 distance:
 	.byte 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5
 
 nexthoriz:
 	pha
-	lda first_x
+	lda los_probe_x
 	tax
 	clc
-	adc deltax,x
-	sta first_x
+	adc toward_center_1,x
+	sta los_probe_x
 	pla
 	rts
 
 nextvert:
 	pha
-	lda first_y
+	lda los_probe_y
 	tax
 	clc
-	adc deltax,x
-	sta first_y
+	adc toward_center_1,x
+	sta los_probe_y
 	pla
 	rts
 
 animate_tiles:
 	ldx #$00
 @animate_next:
-	lda object_tile,x
+	lda object_tile_type,x
 	beq @animend
-	bpl @animate_nonmonster
-	cmp #$90
-	bcs @animate_monster
-	cmp #$80
+	bpl @animate_non_monster
+	cmp #tile_monster_land
+	bcs @animate_4_frames
+	cmp #tile_monster_water
 	beq @animdone
-@animate_seamonster:
+
+@animate_2_frames:
 	jsr fastrand
 	cmp #$c0
 	bcs @animdone
-	lda map_status,x
+	lda object_tile_sprite,x
 	eor #$01
 	and #$01
-	ora object_tile,x
-	sta map_status,x
+	ora object_tile_type,x
+	sta object_tile_sprite,x
 	jmp @animdone
 
-@animate_monster:
+@animate_4_frames:
 	jsr fastrand
 	cmp #$c0
 	bcs @animdone
-	lda map_status,x
+	lda object_tile_sprite,x
 	clc
 	adc #$01
 	and #$03
-	ora object_tile,x
-	sta map_status,x
+	ora object_tile_type,x
+	sta object_tile_sprite,x
 	jmp @animdone
 
-@animate_nonmonster:
-	cmp #$50
+@animate_non_monster:
+	cmp #tile_npc_first
 	bcc @animate_player
-	cmp #$60
+	cmp #tile_npc_last
 	bcs @dontanim
 @animate_npc:
-	jmp @animate_seamonster
+	jmp @animate_2_frames
 
 @animate_player:
-	cmp #$20
+	cmp #tile_class_first
 	bcc @dontanim
-	cmp #$30
+	cmp #tile_class_last
 	bcs @dontanim
-	jmp @animate_seamonster
+	jmp @animate_2_frames
 
 @dontanim:
-	lda object_tile,x
-	sta map_status,x
+	lda object_tile_type,x
+	sta object_tile_sprite,x
 	jmp @animdone
 
 @animend:
 	lda #$00
-	sta map_status,x
+	sta object_tile_sprite,x
 @animdone:
 	inx
-	cpx #$20
+	cpx #object_last
 	bcc @animate_next
 	jsr scroll_tiles
 	jsr animate_fields
@@ -1377,7 +1203,7 @@ primm:
 	inc @primmaddr + 1
 @primmaddr=*+$01
 @skip:
-	lda fffff
+	lda TMP_ADDR
 	beq @done
 	jsr console_out
 	jmp @next
@@ -1390,7 +1216,7 @@ primm:
 	rts
 
 console_out:
-	cmp #$8d
+	cmp #char_newline
 	beq console_newline
 	and #$7f
 	ldx console_xpos
@@ -1446,34 +1272,34 @@ primm_cout:
 	rts
 
 @cout:
-	jmp (CSWL)  ; character output hook
+	jmp (zp_CSWL) ;character output hook
 
 get_stats_ptr:
-	lda currplayer
+	lda curr_player
 	sec
 	sbc #$01
 	jsr mul32
 	sta ptr1
-	lda #$ec
+	lda #>player_stats
 	sta ptr1 + 1
 	rts
 
 centername:
 	jsr get_stats_ptr
 	lda #$00
-	sta ada
+	sta zp_name_count
 @count:
-	ldy ada
+	ldy zp_name_count
 	lda (ptr1),y
 	beq @gotlen
-	inc ada
-	lda ada
+	inc zp_name_count
+	lda zp_name_count
 	cmp #$0f
 	bcc @count
 @gotlen:
 	lda #$0f
 	sec
-	sbc ada
+	sbc zp_name_count
 	lsr
 	clc
 	adc console_xpos
@@ -1481,14 +1307,14 @@ centername:
 printname:
 	jsr get_stats_ptr
 	lda #$00
-	sta ada
+	sta zp_name_count
 @print:
-	ldy ada
+	ldy zp_name_count
 	lda (ptr1),y
 	beq @done
 	jsr console_out
-	inc ada
-	lda ada
+	inc zp_name_count
+	lda zp_name_count
 	cmp #$0f
 	bcc @print
 @done:
@@ -1497,14 +1323,14 @@ printname:
 printname8:
 	jsr get_stats_ptr
 	lda #$00
-	sta ada
+	sta zp_name_count
 @print:
-	ldy ada
+	ldy zp_name_count
 	lda (ptr1),y
 	beq @done
 	jsr console_out
-	inc ada
-	lda ada
+	inc zp_name_count
+	lda zp_name_count
 	cmp #$08
 	bcc @print
 @done:
@@ -1530,10 +1356,10 @@ cursor_ctr:
 	.byte 0
 
 printbcd:
-	sta ada
+	sta zp_number
 	jsr div16
-	jsr printdigit
-	lda ada
+	jsr printdigit    ;SIZE_OPT: duplicate code was inline here
+	lda zp_number
 	and #$0f
 printdigit:
 	clc
@@ -1564,21 +1390,21 @@ clearstatwindow:
 	rts
 
 update_status:
-	lda #>pe400
+	lda #>font_data
 	sta ptr1 + 1
-	lda #<pe400
+	lda #<font_data
 	sta ptr1
 	ldx #$00
 @next_virtue:
-	lda virtues_and_stats,x
+	lda party_stats,x
 	beq @partial_avatar
 	lda #$00
 	beq @not_avatar
 @partial_avatar:
-	ldy #$2f
+	ldy #glyph_ankh
 	lda (ptr1),y
 @not_avatar:
-	ldy #$25
+	ldy #glyph_virtues
 	sta (ptr1),y
 	clc
 	lda ptr1
@@ -1590,18 +1416,18 @@ update_status:
 	cpx #$08
 	bne @next_virtue
 	jsr stats_save_pos
-	lda currplayer
+	lda curr_player
 	pha
 	lda party_size
-	sta currplayer
+	sta curr_player
 @nextplayer:
-	ldx currplayer
+	ldx curr_player
 	jsr get_stats_ptr
-	lda currplayer
+	lda curr_player
 	sta console_ypos
 	lda #$18
 	sta console_xpos
-	lda currplayer
+	lda curr_player
 	jsr printdigit
 	lda #$ad
 	jsr console_out
@@ -1619,44 +1445,44 @@ update_status:
 	lda (ptr1),y
 	jsr console_out
 	jsr scankey
-	dec currplayer
+	dec curr_player
 	bne @nextplayer
 @printfood:
 	ldx #$18
 	ldy #$0a
-	jsr primm_xy ;"F:"
+	jsr primm_xy
 	.byte "F:", 0
-	ldy #$10
-	lda virtues_and_stats,y
+	ldy #party_stat_food_hi
+	lda party_stats,y
 	jsr printbcd
-	ldy #$11
-	lda virtues_and_stats,y
+	ldy #party_stat_food_lo
+	lda party_stats,y
 	jsr printbcd
-	lda #$a0
+	lda #char_space
 	jsr console_out
 	lda magic_aura
 	jsr console_out
 	lda player_transport
-	cmp #$14
+	cmp #tile_ship_last
 	bcc @ship
-	jsr primm    ;" G:"
+	jsr primm
 	.byte " G:", 0
-	ldy #$13
-	lda virtues_and_stats,y
+	ldy #party_stat_gold_hi
+	lda party_stats,y
 	jsr printbcd
-	ldy #$14
-	lda virtues_and_stats,y
+	ldy #party_stat_gold_lo
+	lda party_stats,y
 	jsr printbcd
 	jmp @done
 
 @ship:
-	jsr primm    ;" SHP:"
+	jsr primm
 	.byte " SHP:", 0
 	lda ship_hull
 	jsr printbcd
 @done:
 	pla
-	sta currplayer
+	sta curr_player
 	jmp stats_rest_pos
 
 stats_saved_xpos:
@@ -1668,29 +1494,20 @@ update_wind:
 	jsr rand
 	bne @nochange
 	jsr rand
-;	jsr getsign
-; SIZE_OPT inline "getsign" routine, no other callers
-	beq @zero
-	bmi @negative
-	lda #$01
-	.byte opcode_bit  ;skip next 2 bytes
-@negative:
-	lda #$ff
-@zero:
-; SIZE_OPT end
+	jsr getsign
 	clc
-	adc direction
+	adc wind_direction
 	and #$03
-	sta direction
+	sta wind_direction
 @nochange:
 	jsr stats_save_pos
 	lda #$17
 	sta console_ypos
 	lda #$06
 	sta console_xpos
-	jsr primm    ;"WIND "
-	.byte $1e,$d7,$c9,$ce,$c4,$a0,$00
-	ldx direction
+	jsr primm
+	.byte glyph_greater_even,"WIND ", 0
+	ldx wind_direction
 	beq @west
 	dex
 	beq @north
@@ -1714,7 +1531,7 @@ update_wind:
 @south:
 	jsr printsouth
 @done:
-	lda #$1d
+	lda #glyph_less_odd
 	jsr console_out
 	jmp stats_rest_pos
 
@@ -1724,7 +1541,7 @@ print_direction:
 	sta console_ypos
 	lda #$07
 	sta console_xpos
-	jsr primm    ;"DIR: "
+	jsr primm
 	.byte "DIR: ", 0
 	ldx dng_direction
 	beq @north
@@ -1752,7 +1569,7 @@ print_direction:
 	sta console_ypos
 	lda #$0b
 	sta console_xpos
-	lda #$cc
+	lda #char_L
 	jsr console_out
 	lda dungeon_level
 	clc
@@ -1761,36 +1578,35 @@ print_direction:
 	jmp stats_rest_pos
 
 printnorth:
-	jsr primm    ;"NORTH"
+	jsr primm
 	.byte "NORTH", 0
 	rts
 
 printsouth:
-	jsr primm    ;"SOUTH"
+	jsr primm
 	.byte "SOUTH", 0
 	rts
 
 printeast:
-	jsr primm    ;" EAST"
+	jsr primm
 	.byte " EAST", 0
 	rts
 
 printwest:
-	jsr primm    ;" WEST"
+	jsr primm
 	.byte " WEST", 0
 	rts
 
-;getsign:
-;	cmp #$00
-;	beq @zero
-;	bmi @negative
-;	lda #$01
-;	rts
-;
-;@negative:
-;	lda #$ff
-;@zero:
-;	rts
+getsign:
+	cmp #$00
+	beq @zero
+	bmi @negative
+	lda #$01
+	rts
+@negative:
+	lda #$ff
+@zero:
+	rts
 
 stats_save_pos:
 	lda console_xpos
@@ -1811,29 +1627,29 @@ getnumdel:
 getnumber:
 	jsr waitkey
 	sec
-	sbc #$b0
-	cmp #$0a
+	sbc #char_num_first
+	cmp #$0a     ;10
 	bcs getnumber
 	sta bcdnum
 	sta hexnum
 	jsr printdigit
 @seconddigit:
 	jsr waitkey
-	cmp #$8d
+	cmp #char_enter
 	beq @done
-	cmp #$88
+	cmp #char_left_arrow
 	beq getnumdel
 	sec
-	sbc #$b0
-	cmp #$0a
+	sbc #char_num_first
+	cmp #$0a     ;10
 	bcs @seconddigit
 	sta hexnum
 	jsr printdigit
 @notretordel:
 	jsr waitkey
-	cmp #$8d
+	cmp #char_enter
 	beq @convhex
-	cmp #$88
+	cmp #char_left_arrow
 	bne @notretordel
 	dec console_xpos
 	bpl @seconddigit
@@ -1860,29 +1676,33 @@ getplayernum:
 	jsr waitkey
 ;	beq @gotnum  ; SIZE_OPT, unnecessary
 	sec
-	sbc #$b0
+	sbc #char_num_first
 	cmp #$09
 	bcc @gotnum
 	lda #$00
 @gotnum:
-	sta currplayer
+	sta curr_player
 	jsr printdigit
 	jsr console_newline
-	lda currplayer
+	lda curr_player
 	rts
 
 ; INPUT: A = tile type to check
 ; OUTPUT: N = bmi blocked, bpl not
 ; AFFECTS: X
 blocked_tile:
-	ldx #$28
+	ldx #walkable_tiles_last
 @next:
 	dex
-	bmi @done
+	bmi @done    ;SIZE_OPT, was @blocked
 	cmp walkable_tiles,x
 	bne @next
 @done:
 	rts
+;SIZE_OPT: unnecessary, BMI already sets N flag
+;@blocked:
+;	lda #$ff
+;	rts
 
 walkable_tiles:
 	.byte $03,$04,$05,$06,$07,$09,$0a,$0b
@@ -1890,11 +1710,12 @@ walkable_tiles:
 	.byte $17,$18,$19,$1a,$1b,$1c,$1d,$1e
 	.byte $3c,$3e,$3f,$43,$44,$46,$47,$49
 	.byte $4a,$4c,$4c,$4c,$8c,$8d,$8e,$8f
+walkable_tiles_last = * - walkable_tiles
 
 clearbitmap:
-	lda #>hgr
+	lda #>screen_HGR1
 	sta ptr1 + 1
-	ldy #<hgr
+	ldy #<screen_HGR1
 	sty ptr1
 	lda #$80
 @clear:
@@ -1945,13 +1766,13 @@ invertview:
 	rts
 
 mulax:
-	sta ada
+	sta zp_number
 	lda #$00
 	cpx #$00
 	beq @zero
 @add:
 	clc
-	adc ada
+	adc zp_number
 	dex
 	bne @add
 @zero:
@@ -1972,166 +1793,152 @@ mulax:
 ;	ora tile_xpos
 ;	jsr div16
 ;	clc
-;	adc #>world_map_nw
-;	sta ptr2+1
+;	adc #>world_map_NW
+;	sta ptr2 + 1
 ;	rts
 
 scroll_tiles:
-	lda #$00
+	lda #tile_water_deep
 	jsr @save_and_scroll
-	lda #$01
+	lda #tile_water_coast
 	jsr @save_and_scroll
-	lda #$02
+	lda #tile_water_shallow
 	jsr @save_and_scroll
-	lda #$4c
+	lda #tile_lava
 	jmp @save_and_scroll
 
 @save_and_scroll:
 	tay
-	bit ac083
-	jsr s13b5
-	bit ac08b
-s13b5:
-	lda fdf00,y
+	bit hw_LCBANK2
+	jsr @scroll_half
+	bit hw_LCBANK1
+@scroll_half:
+	lda tilemap + $f00,y
 	pha
-	lda fde00,y
-	sta fdf00,y
-	lda fdd00,y
-	sta fde00,y
-	lda fdc00,y
-	sta fdd00,y
-	lda fdb00,y
-	sta fdc00,y
-	lda fda00,y
-	sta fdb00,y
-	lda fd900,y
-	sta fda00,y
-	lda fd800,y
-	sta fd900,y
-	lda fd700,y
-	sta fd800,y
-	lda fd600,y
-	sta fd700,y
-	lda fd500,y
-	sta fd600,y
-	lda fd400,y
-	sta fd500,y
-	lda fd300,y
-	sta fd400,y
-	lda fd200,y
-	sta fd300,y
-	lda fd100,y
-	sta fd200,y
-	lda fd000,y
-	sta fd100,y
+	lda tilemap + $e00,y
+	sta tilemap + $f00,y
+	lda tilemap + $d00,y
+	sta tilemap + $e00,y
+	lda tilemap + $c00,y
+	sta tilemap + $d00,y
+	lda tilemap + $b00,y
+	sta tilemap + $c00,y
+	lda tilemap + $a00,y
+	sta tilemap + $b00,y
+	lda tilemap + $900,y
+	sta tilemap + $a00,y
+	lda tilemap + $800,y
+	sta tilemap + $900,y
+	lda tilemap + $700,y
+	sta tilemap + $800,y
+	lda tilemap + $600,y
+	sta tilemap + $700,y
+	lda tilemap + $500,y
+	sta tilemap + $600,y
+	lda tilemap + $400,y
+	sta tilemap + $500,y
+	lda tilemap + $300,y
+	sta tilemap + $400,y
+	lda tilemap + $200,y
+	sta tilemap + $300,y
+	lda tilemap + $100,y
+	sta tilemap + $200,y
+	lda tilemap,y
+	sta tilemap + $100,y
 	pla
-	sta fd000,y
+	sta tilemap,y
 	rts
 
 animate_fields:
-	ldx #>fd000
-	lda #<fd000
+	ldx #>tilemap
+	lda #<tilemap
 	sta ptr1
-b141e:
+@next_line:
 	stx ptr1 + 1
 	jsr fastrand
 	and #$55
-	bit ac08b
-	ldy #$44
+	bit hw_LCBANK1
+	ldy #tile_field_poison
 	sta (ptr1),y
 	ora #$80
-	ldy #$46
+	ldy #tile_field_fire
 	sta (ptr1),y
 	pha
-	ldy #$4a
+	ldy #tile_altar
 	and (ptr1),y
-	ldy #$4b
+	ldy #tile_camp_fire
 	eor (ptr1),y
 	ora #$80
 	sta (ptr1),y
 	pla
-	bit ac083
-	ldy #$45
+	bit hw_LCBANK2
+	ldy #tile_field_lightning
 	sta (ptr1),y
 	and #$7f
-	ldy #$47
+	ldy #tile_field_sleep
 	sta (ptr1),y
 	jsr fastrand
 	and #$2a
-	ldy #$44
+	ldy #tile_field_poison
 	sta (ptr1),y
 	ora #$80
-	ldy #$46
+	ldy #tile_field_fire
 	sta (ptr1),y
 	pha
-	ldy #$4a
+	ldy #tile_altar
 	and (ptr1),y
-	ldy #$4b
+	ldy #tile_camp_fire
 	eor (ptr1),y
 	ora #$80
 	sta (ptr1),y
 	pla
-	bit ac08b
-	ldy #$45
+	bit hw_LCBANK1
+	ldy #tile_field_lightning
 	sta (ptr1),y
 	and #$7f
-	ldy #$47
+	ldy #tile_field_sleep
 	sta (ptr1),y
 	inx
 	cpx #$e0
-	bcc b141e
+	bcc @next_line
 	rts
+
+.macro SpriteSwapLines Line1, Line2, Tile
+	ldx tilemap + ($100 * Line1) + Tile
+	ldy tilemap + ($100 * Line2) + Tile
+	sty tilemap + ($100 * Line1) + Tile
+	stx tilemap + ($100 * Line2) + Tile
+.endmacro
 
 animate_flags:
 	jsr fastrand
 	bmi @castle
-	bit ac08b
-	ldx ad30a
-	ldy ad40a
-	sty ad30a
-	stx ad40a
+	bit hw_LCBANK1
+	SpriteSwapLines 3, 4, tile_towne
 @castle:
 	jsr fastrand
 	bmi @shipwest
-	bit ac083
-	ldx ad10b
-	ldy ad20b
-	sty ad10b
-	stx ad20b
+	bit hw_LCBANK2
+	SpriteSwapLines 1, 2, tile_castle
 @shipwest:
 	jsr fastrand
 	bmi @shipeast
-	bit ac08b
-	ldx ad212
-	ldy ad312
-	sty ad212
-	stx ad312
-	bit ac083
-	ldx ad212
-	ldy ad312
-	sty ad212
-	stx ad312
+	bit hw_LCBANK1
+	SpriteSwapLines 2, 3, tile_ship_east
+	bit hw_LCBANK2
+	SpriteSwapLines 2, 3, tile_ship_east
 @shipeast:
 	jsr fastrand
 	bmi @lbcastle
-	bit ac08b
-	ldx ad210
-	ldy ad310
-	sty ad210
-	stx ad310
-	bit ac083
-	ldx ad210
-	ldy ad310
-	sty ad210
-	stx ad310
+	bit hw_LCBANK1
+	SpriteSwapLines 2, 3, tile_ship_west
+	bit hw_LCBANK2
+	SpriteSwapLines 2, 3, tile_ship_west
 @lbcastle:
 	jsr fastrand
 	bmi @flagsdone
-	bit ac08b
-	ldx ad10e
-	ldy ad20e
-	sty ad10e
-	stx ad20e
+	bit hw_LCBANK1
+	SpriteSwapLines 1, 2, tile_castle_center
 @flagsdone:
 	rts
 
@@ -2154,23 +1961,23 @@ mul16:
 	rts
 
 scankey:
-	lda hw_keyboard
+	lda hw_KEYBOARD
 	bpl @done
-	cmp #$a0
+	cmp #char_space
 	bne @notspace
-	ldy #$00
+	ldy #$00     ;space clears unprocessed inputs from buffer
 	sty key_buf_len
 @notspace:
-	cmp #$ff
+	cmp #char_DEL
 	bne @notdel
-	lda #$88
+	lda #char_left_arrow
 @notdel:
 	ldy key_buf_len
 	cpy #$08
 	bcs @done
 	sta key_buf,y
 	inc key_buf_len
-	bit hw_strobe
+	bit hw_STROBE
 @done:
 	rts
 
@@ -2248,15 +2055,15 @@ doscroll:
 	sta @scrolldst
 	lda bmplineaddr_hi,x
 	sta @scrolldst+1
-	lda bmplineaddr_lo+8,x
+	lda bmplineaddr_lo + 8,x
 	sta @scrollsrc
-	lda bmplineaddr_hi+8,x
+	lda bmplineaddr_hi + 8,x
 	sta @scrollsrc+1
 @scrollsrc=*+$01
 @scroll:
-	lda fffff,y
+	lda TMP_ADDR,y
 @scrolldst=*+$01
-	sta fffff,y
+	sta TMP_ADDR,y
 	iny
 	cpy #$28
 	bcc @scroll
@@ -2270,36 +2077,36 @@ doscroll:
 	rts
 
 drawchar:
-	sta charptr
+	sta char_glyph
 	lda console_ypos
 	asl
 	asl
 	asl
-	sta charptr+1
-	lda #$e4
+	sta char_bitmap_row
+	lda #>font_data
 	sta @charsrc+1
 	lda #$08
-	sta abf
+	sta char_rows_left
 	ldy console_xpos
 @drawchar:
-	ldx charptr+1
+	ldx char_bitmap_row
 	lda bmplineaddr_lo,x
 	sta @chardst
 	lda bmplineaddr_hi,x
 	sta @chardst+1
-	ldx charptr
+	ldx char_glyph
 @charsrc=*+$01
-	lda fff00,x
+	lda TMP_PAGE,x
 @chardst=*+$01
-	sta fffff,y
+	sta TMP_ADDR,y
 	clc
 	lda @charsrc
 	adc #$80
 	sta @charsrc
 	bcc :+
 	inc @charsrc+1
-:	inc charptr+1
-	dec abf
+:	inc char_bitmap_row
+	dec char_rows_left
 	bne @drawchar
 	ldy #$00
 	rts
@@ -2320,7 +2127,7 @@ dodrawvh:
 	pla
 	sta ptr2
 	pla
-	sta ptr2+1
+	sta ptr2 + 1
 	jsr @next
 	ldy #$00
 	lda (ptr2),y
@@ -2343,7 +2150,7 @@ dodrawvh:
 	jmp @draw
 
 @drawdone:
-	lda ptr2+1
+	lda ptr2 + 1
 	pha
 	lda ptr2
 	pha
@@ -2356,7 +2163,7 @@ dodrawvh:
 @next:
 	inc ptr2
 	bne @gotnext
-	inc ptr2+1
+	inc ptr2 + 1
 @gotnext:
 	rts
 
@@ -2427,21 +2234,21 @@ update_moons:
 	lsr
 	tay
 	lda moon_gfx,y
-	sta a200b
+	sta_trammel_line 0
 	lda moon_gfx+1,y
-	sta a240b
+	sta_trammel_line 1
 	lda moon_gfx+2,y
-	sta a280b
+	sta_trammel_line 2
 	lda moon_gfx+3,y
-	sta a2c0b
+	sta_trammel_line 3
 	lda moon_gfx+4,y
-	sta a300b
+	sta_trammel_line 4
 	lda moon_gfx+5,y
-	sta a340b
+	sta_trammel_line 5
 	lda moon_gfx+6,y
-	sta a380b
+	sta_trammel_line 6
 	lda moon_gfx+7,y
-	sta a3c0b
+	sta_trammel_line 7
 	clc
 	lda moon_ctr_felucca
 	adc #$06
@@ -2451,21 +2258,21 @@ update_moons:
 	lsr
 	tay
 	lda moon_gfx,y
-	sta a200c
+	sta_felucca_line 0
 	lda moon_gfx+1,y
-	sta a240c
+	sta_felucca_line 1
 	lda moon_gfx+2,y
-	sta a280c
+	sta_felucca_line 2
 	lda moon_gfx+3,y
-	sta a2c0c
+	sta_felucca_line 3
 	lda moon_gfx+4,y
-	sta a300c
+	sta_felucca_line 4
 	lda moon_gfx+5,y
-	sta a340c
+	sta_felucca_line 5
 	lda moon_gfx+6,y
-	sta a380c
+	sta_felucca_line 6
 	lda moon_gfx+7,y
-	sta a3c0c
+	sta_felucca_line 7
 @noupdate:
 	lda moon_ctr_trammel
 	jsr div32
@@ -2482,18 +2289,18 @@ update_moons:
 
 @moongate_appears:
 	jsr moongate_update
-	lda af1
+	lda moongate_sprite
 	clc
-	adc #$40
+	adc #tile_moongate
 	sta moongate_tile
 	rts
 
 @moongate_disappears:
 	jsr moongate_update
-	lda af1
+	lda moongate_sprite
 	eor #$03
 	clc
-	adc #$40
+	adc #tile_moongate
 	sta moongate_tile
 	rts
 
@@ -2511,7 +2318,7 @@ moongate_update:
 	rol
 	rol
 	rol
-	sta af1
+	sta moongate_sprite
 	rts
 
 moon_counter:
@@ -2540,23 +2347,23 @@ request_disk:
 	cmp currdisk_drive1
 	beq @checkdisk
 @askchange:
-	jsr primm    ;"\nPLEASE PLACE THE\n"
+	jsr primm
 	.byte $8d
 	.byte "PLEASE PLACE THE", $8d
 	.byte 0
 	jsr askdisk
-	jsr primm    ;" DISK\nINTO DRIVE "
+	jsr primm
 	.byte " DISK", $8d
 	.byte "INTO DRIVE ", 0
 	lda currdrive
 	jsr printdigit
-	jsr primm    ;"\nAND PRESS [ESC]\n"
+	jsr primm
 	.byte $8d
 	.byte "AND PRESS [ESC]", $8d
 	.byte 0
 @wait:
 	jsr waitkey
-	cmp #$9b
+	cmp #char_ESC
 	bne @wait
 	beq @checkdisk
 @twodrives:
@@ -2572,15 +2379,15 @@ request_disk:
 @checkdisk:
 	lda currdrive
 	clc
-	adc #$b0
+	adc #char_num_first
 	sta @file_char_drive
-	jsr primm_cout ;"^dBLOADDISK,D1\n"
+	jsr primm_cout
 	.byte $84, "BLOADDISK,D"
 @file_char_drive:
 	.byte "1", $8d
 	.byte 0
 	ldx currdrive
-	lda diskid
+	lda disk_id
 	sta numdrives,x
 	cmp reqdisk
 	beq @done
@@ -2594,26 +2401,26 @@ askdisk:
 	dex
 	dex
 	bne @towne
-	jsr primm    ;"BRITANNIA"
+	jsr primm
 	.byte "BRITANNIA", 0
 	rts
 
 @towne:
 	dex
 	bne @underworld
-	jsr primm    ;"TOWNE"
+	jsr primm
 	.byte "TOWNE", 0
 	rts
 
 @underworld:
-	jsr primm    ;"UNDERWORLD"
+	jsr primm
 	.byte "UNDERWORLD", 0
 	rts
 
 playsfx:
 	asl
 	tay
-	lda acd
+	lda sfx_volume
 	beq @done
 	lda sfxtab+1,y
 	pha
@@ -2623,19 +2430,19 @@ playsfx:
 	rts
 
 sfxtab:
-	.word sfx_walk-1
-	.word sfx_error2-1
-	.word sfx_error1-1
-	.word sfx_ship_fire-1
-	.word sfx_attack-1
-	.word sfx_unknown-1
-	.word sfx_player_hits-1
-	.word sfx_monster_hits-1
-	.word sfx_flee-1
-	.word sfx_magic2-1
-	.word sfx_magic1-1
-	.word sfx_whirlpool-1
-	.word sfx_storm-1
+	.addr sfx_walk-1
+	.addr sfx_error2-1
+	.addr sfx_error1-1
+	.addr sfx_ship_fire-1
+	.addr sfx_attack-1
+	.addr sfx_unknown-1
+	.addr sfx_player_hits-1
+	.addr sfx_monster_hits-1
+	.addr sfx_flee-1
+	.addr sfx_magic2-1
+	.addr sfx_magic1-1
+	.addr sfx_whirlpool-1
+	.addr sfx_storm-1
 
 sfx_walk:
 	ldy #$06
@@ -2647,7 +2454,7 @@ sfx_walk:
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @repeat
 	rts
@@ -2659,7 +2466,7 @@ sfx_error2:
 	pla
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @delay
 	rts
@@ -2671,20 +2478,20 @@ sfx_error1:
 	nop
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @delay
 	jmp sfx_error2
 
 sfx_ship_fire:
 	ldx #$00
-	stx ada
+	stx zp_sfx_freq
 @delay:
 	inx
 	bne @delay
-	bit togglesnd
-	dec ada
-	ldx ada
+	bit hw_SPEAKER
+	dec zp_sfx_freq
+	ldx zp_sfx_freq
 	bne @delay
 	rts
 
@@ -2695,7 +2502,7 @@ sfx_attack:
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	tya
 	tax
@@ -2709,7 +2516,7 @@ sfx_unknown:
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	iny
 	tya
 	tax
@@ -2725,7 +2532,7 @@ sfx_player_hits:
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @repeat
 	rts
@@ -2739,38 +2546,38 @@ sfx_monster_hits:
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @repeat
 	rts
 
 sfx_flee:
 	ldx #$7f
-	stx ada
+	stx zp_sfx_freq
 @delay:
 	dex
 	bne @delay
-	bit togglesnd
-	dec ada
-	ldx ada
+	bit hw_SPEAKER
+	dec zp_sfx_freq
+	ldx zp_sfx_freq
 	bne @delay
 	rts
 
 sfx_magic1:
-	stx af0
-b19fc:
+	stx zp_sfx_duration
+@1:
 	jsr rand
 	ldx #$28
-b1a01:
+@2:
 	tay
-b1a02:
+@3:
 	dey
-	bne b1a02
-	bit togglesnd
+	bne @3
+	bit hw_SPEAKER
 	dex
-	bne b1a01
-	dec af0
-	bne b19fc
+	bne @2
+	dec zp_sfx_duration
+	bne @1
 	rts
 
 sfx_whirlpool:
@@ -2784,7 +2591,7 @@ sfx_whirlpool:
 	pla
 	dex
 	bne @3
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @2
 	clc
@@ -2799,19 +2606,19 @@ sfx_magic2:
 	sta sfx_m2_ctr1
 @1:
 	lda #$30
-	sta af0
+	sta zp_sfx_duration
 @2:
 	ldx sfx_m2_ctr2
 @3:
 	dex
 	bne @3
-	bit togglesnd
+	bit hw_SPEAKER
 	ldx sfx_m2_ctr1
 @4:
 	dex
 	bne @4
-	bit togglesnd
-	dec af0
+	bit hw_SPEAKER
+	dec zp_sfx_duration
 	bne @2
 	dec sfx_m2_ctr2
 	inc sfx_m2_ctr1
@@ -2820,19 +2627,19 @@ sfx_magic2:
 	bne @1
 @5:
 	lda #$30
-	sta af0
+	sta zp_sfx_duration
 @6:
 	ldx sfx_m2_ctr2
 @7:
 	dex
 	bne @7
-	bit togglesnd
+	bit hw_SPEAKER
 	ldx sfx_m2_ctr1
 @8:
 	dex
 	bne @8
-	bit togglesnd
-	dec af0
+	bit hw_SPEAKER
+	dec zp_sfx_duration
 	bne @6
 	dec sfx_m2_ctr1
 	inc sfx_m2_ctr2
@@ -2857,7 +2664,7 @@ sfx_storm:
 	pla
 	dex
 	bne @3
-	bit togglesnd
+	bit hw_SPEAKER
 	dey
 	bne @2
 	sec
@@ -2874,7 +2681,7 @@ centerstring:
 	lda #>strings
 	sta ptr1 + 1
 	ldx #$00
-	stx ad8
+	stx zp_count
 @checkeos:
 	lda (ptr1,x)
 	bpl @endofstr
@@ -2892,14 +2699,14 @@ centerstring:
 	ldx #$00
 	lda (ptr1,x)
 	bpl @lastchar
-	inc ad8
+	inc zp_count
 	jmp @foundstr
 
 @lastchar:
-	inc ad8
+	inc zp_count
 	lda #$0f
 	sec
-	sbc ad8
+	sbc zp_count
 	lsr
 	clc
 	adc console_xpos
@@ -2938,10 +2745,9 @@ printstring:
 
 nextstrchar:
 	inc ptr1
-	bne @nomsb
+	bne :+
 	inc ptr1 + 1
-@nomsb:
-	rts
+:	rts
 
 ; String terminated by most significant bit in last character.
   .macro msbstring str
@@ -3113,6 +2919,11 @@ strings:
 	msbstring "HONOR"
 	msbstring "SPIRITUALITY"
 	msbstring "HUMILITY"
+	; BUGFIX: added for special NPCs so they're not "phantoms"
+	msbstring "WATER"
+	msbstring "HORSE"
+	msbstring "ANKH"
+	msbstring "CAMPFIRE"
 
 gettile_bounds:
 	lda map_x
@@ -3151,9 +2962,9 @@ gettile_britannia:
 	ora dest_x
 	jsr div16
 	clc
-	adc #>world_map_nw
-	sta ptr2+1
-	ldy #<world_map_nw
+	adc #>world_map_NW
+	sta ptr2 + 1
+	ldy #<world_map_NW
 	lda (ptr2),y
 	rts
 
@@ -3169,14 +2980,14 @@ gettile_opposite:
 	adc #xy_center_screen
 	tay
 	lda mul_11,y
-	sta ada
+	sta zp_number
 	sec
 	lda temp_x
 	sbc player_xpos
 	clc
 	adc #xy_center_screen
 	clc
-	adc ada
+	adc zp_number
 	sta ptr1
 	lda #$02
 	sta ptr1 + 1
@@ -3184,18 +2995,18 @@ gettile_opposite:
 	lda (ptr1),y
 	rts
 
-gettile_currmap:
+gettile_drawn_map:
 	ldy dest_y
 	lda mul_11,y
 	clc
 	adc dest_x
 	tay
-	lda currmap,y
+	lda drawn_tiles,y
 	rts
 
-gettile_tempmap:
-	jsr gettile_currmap
-	lda tempmap,y
+gettile_actual_map:
+	jsr gettile_drawn_map
+	lda world_tiles,y
 	rts
 
 get_player_tile:
@@ -3223,20 +3034,20 @@ get_player_tile:
 
 gettile_towne:
 	lda temp_y
-	sta ptr2+1
+	sta ptr2 + 1
 	lda #$00
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
-	lsr ptr2+1
+	lsr ptr2 + 1
 	ror
 	adc temp_x
 	sta ptr2
 	clc
-	lda ptr2+1
+	lda ptr2 + 1
 	adc #>towne_map
-	sta ptr2+1
+	sta ptr2 + 1
 	ldy #<towne_map
 	lda (ptr2),y
 	rts
@@ -3262,3 +3073,7 @@ gettile_dungeon:
 	ldy #$00
 	lda (ptr1),y
 	rts
+
+; Junk from segment padding
+;	.byte $30,$41,$30,$41,$30,$41,$30,$41
+;	.byte $30,$41,$30,$41

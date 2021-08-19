@@ -38,7 +38,7 @@ def main(argv):
     src = iter(src[2:])
 
     # Write into an initially-empty screen, with proper HGR memory placement.
-    image = [bytearray(0x2000), bytearray(0x2000)]
+    image = [bytearray(0x2000 - 8), bytearray(0x2000 - 8)]
 
     for card in range(8):
         X,Y = card % 4, card // 4
@@ -48,7 +48,7 @@ def main(argv):
                 image[Y][i] = next(src)
 
     for i,data in enumerate(image):
-        with open(output / f'cards{i}.prg', 'wb') as out:
+        with open(output / f'CARDS{i}.prg', 'wb') as out:
             load_addr = b'\x00\x40'  # lo+hi
             out.write(load_addr + data)
 

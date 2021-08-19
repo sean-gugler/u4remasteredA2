@@ -3,7 +3,6 @@
 :CODE END
 8C50
 :DATA BYTES
-8BBA-8BC6
 8803-8833
 8856-8869
 8874-888B
@@ -14,13 +13,14 @@
 89B7-89C8
 89DC-89ED
 8A05-8A1B
+8A1C-8A39
+8A81-8BAD
+8BBA-8BC6
 8BD7-8BE0
 8BF1-8BF7
 8C08-8C0E
 8C21-8C2B
 8C45-8C47
-8A81-8BAD
-8A1C-8A39
 :WORDS
 :POINTERS
 :HILOLOOKUP
@@ -32,7 +32,6 @@
 :FULL COMMENTS
 8C47 junk
 :SIDE COMMENTS
-8BB7 b'>EQUIPMENT<\x00'
 8800 b"\nAVAST YE MATE\nSHURE YE WISHES\nTO BUY FROM OL'\n\x00"
 8853 b'\nSAYS: WELCOME TO\n\x00'
 8871 b'\nLIKE TO SEE MY\nGOODS?\x00'
@@ -43,20 +42,21 @@
 89B4 b'\nFINE...FINE...\n\x00'
 89D9 b'\nSAYS: SEE MORE?\x00'
 8A02 b'\nSAYS: SEE YA\nMATIE!\n\x00'
+8BB7 b'>EQUIPMENT<\x00'
 8BD4 b'-TORCHES\x00'
 8BEE b'-GEMS\x00'
 8C05 b'-KEYS\x00'
 8C1E b'-SEXTANTS\x00'
+888E #char_Y
+8904 #char_alpha_first
+8930 #char_Y
+89F0 #char_Y
+8A42 #char_enter
+8A49 #char_enter
 8BCC #party_stat_torches
 8BE6 #party_stat_gems
 8BFD #party_stat_keys
 8C14 #party_stat_sextant
-8A49 #char_enter
-8A42 #char_enter
-89F0 #char_Y
-8930 #char_Y
-8904 #char_A
-888E #char_Y
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -71,7 +71,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -94,8 +94,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -111,7 +110,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -126,10 +125,10 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -138,9 +137,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -151,7 +150,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -160,7 +159,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -168,7 +167,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -220,12 +219,37 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+8895 menu
+890D ask_buy
+894C try_spend
+89A2 @paid
+89B0 +
+89CE ask_more
+89F7 bye
+8A1C item_number
+8A1D location_table
+8A2D price_hi
+8A2E price_lo
+8A35 item_count
+8A39 input_char
+8A49 print_newline
+8A4F print_string
+8A5A @next_char
+8A5E @next_string
+8A64 @end_string
+8A6A @print_char
+8A79 @done
+8A7A inc_ptr
+8A80 +
+8A81 string_table
+8BAD display_owned
+8C2B @done
+8C2F save_cursor
+8C3A restore_cursor
+8C45 prev_cursor_x
+8C46 prev_cursor_y
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -287,8 +311,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -299,35 +323,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8C2F save_cursor
-8C45 prev_cursor_x
-8C46 prev_cursor_y
-8C3A restore_cursor
-8BAD display_owned
-8C2B @done
-8A81 string_table
-8A7A inc_ptr
-8A80 +
-8A79 @done
-8A6A @print_char
-8A5E @next_string
-8A64 @end_string
-8A5A @next_char
-8A4F print_string
-8A49 print_newline
-8A39 input_char
-89F7 bye
-8895 menu
-89CE ask_more
-89B0 +
-8A2E price_lo
-8A2D price_hi
-89A2 @paid
-894C try_spend
-8A1C item_number
-8A35 item_count
-890D ask_buy
-8A1D location_table
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

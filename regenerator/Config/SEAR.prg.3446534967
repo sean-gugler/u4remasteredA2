@@ -3,15 +3,15 @@
 :CODE END
 8AA0
 :DATA BYTES
-8931-8945
-894B-895F
-896D-8981
 880D-881C
 8851-885E
 8869-886C
 888A-889E
 88BC-88D1
 88DA-8911
+8931-8945
+894B-895F
+896D-8981
 89C2-89D2
 89FC-8A0D
 8A1B-8A28
@@ -28,23 +28,34 @@
 8A84
 :REMOVED BYTES
 :FULL COMMENTS
+8A9F junk
 :SIDE COMMENTS
-892E b'\x04BLOAD MAP@,A$8B00\r\x00'
-8948 b'\x04BLOAD TMAP,A$9000\r\x00'
-896A b'\x04BLOAD MAPB,A$8B00\r\x00'
 880A b'NOTHING HERE!\r\x00'
 884E b'THE RUNE OF\r\x00'
 8866 b'!\r\x00'
 8887 b'THE BOOK\rOF TRUTH!\r\x00'
 88B9 b'THE CANDLE\rOF LOVE!\r\x00'
 88D7 b'YOU SEE A KNOB\rON THE TELESCOPE\rMARKED A-P\rYOU SELECT:\x00'
+892E b'\x04BLOAD MAP@,A$8B00\r\x00'
+8948 b'\x04BLOAD TMAP,A$9000\r\x00'
+896A b'\x04BLOAD MAPB,A$8B00\r\x00'
 89BF b'MYSTIC ARMOUR!\r\x00'
 89F9 b'MYSTIC WEAPONS!\r\x00'
 8A18 b'YOU FIND...\r\x00'
+8800 #item_last - 1
 8861 #string_virtues
+8875 #item_have_book
+887F #item_have_book
+88A7 #item_have_candle
+88B1 #item_have_candle
 891A #char_enter
 8920 #char_A
-8924 #char_Q
+8924 #char_P + 1
+895F #mode_suspended
+8966 #mode_towne
+89A3 #virtue_last - 1
+89DD #virtue_last - 1
+8A8C #player_experience_hi
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -52,64 +63,64 @@
 000B game_mode
 00D4 curr_player
 00D8 zp_index
+00FE ptr1
 0800 j_waitkey
-081B j_primm_exact
+081B j_primm_cout
 0821 j_primm
 0824 j_console_out
 082D j_get_stats_ptr
 087E j_printstring
-8B00 map_buf
-ED00 party_stats
-ED0D runes
-ED0E bell_book_candle
-ED1F mystic_armour
-ED2F mystic_weapons
-8800 search
+8800 j_overlay_entry
 8802 @next
-8A42 compare_position
+880A print_nothing_here
 881D item_at_coordinate
+882E @check_armour
+8835 @check_weapons
 8838 find_rune
 8872 find_book
-88A4 find_candle
-882E @check_armour
-88D7 find_telescope
-8835 @check_weapons
-89A3 find_mystic_armour
-89DD find_mystic_weapons
-8A3A bit_msb
-880A print_nothing_here
-8A18 print_you_find
-8A84 add_xp100
 887C @found
+88A4 find_candle
 88AE @found
+88D7 find_telescope
 8911 @waitkey
 8928 @nothing_here
 892B @view_location
 893B file_char_map
 8985 copymap
 8987 @copy
-E800 gem_buf
-8C00 map_buf+$100
-E900 gem_buf+$100
-8D00 map_buf+$200
-EA00 gem_buf+$200
-8E00 map_buf+$300
-EB00 gem_buf+$300
-9000 j_viewmap
+89A3 find_mystic_armour
 89A7 @next_virtue
 89B4 @avatar
 89BC @found
+89DD find_mystic_weapons
 89E1 @next_virtue
 89EE @avatar
 89F6 @found
-ED05 party_stats + virtue_honor
-8A35 @overflow
-8A5D item_xpos
+8A18 print_you_find
+8A35 @set_value
+8A3A bit_msb
+8A42 compare_position
 8A5A @nothing_here
+8A5D item_xpos
 8A6A item_ypos
 8A77 item_location
-8A9B @overflow
-00FE ptr1
+8A84 add_xp100
+8A9B @set_value
+8B00 load_buf
+8C00 load_buf+$100
+8D00 load_buf+$200
+8E00 load_buf+$300
+9000 j_viewmap
+E800 view_buf
+E900 view_buf+$100
+EA00 view_buf+$200
+EB00 view_buf+$300
+ED00 party_stats
+ED05 party_stats + virtue_honor
+ED0D runes
+ED0E bell_book_candle
+ED1F armour_mystic
+ED2F weapon_mystic
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

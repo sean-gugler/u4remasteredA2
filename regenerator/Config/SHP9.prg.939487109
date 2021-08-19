@@ -10,15 +10,16 @@
 887B-88E5
 88EB-8919
 891F-894F
+8955-895A
+895F-8963
+8968-896D
 8977-89AB
 89B4-8A02
 8A29-8A81
 8AB6-8AE8
-8955-895A
-895F-8963
-8968-896D
 8AEE-8B12
-8BEB-9770
+8BEB-9768
+9768-9770
 :WORDS
 :POINTERS
 :HILOLOOKUP
@@ -28,6 +29,7 @@
 8B12
 :REMOVED BYTES
 :FULL COMMENTS
+9768 junk:  ,"HINT O
 :SIDE COMMENTS
 8813 b'\nTHE SEER SAYS:\nI WILL SPEAK\nONLY WITH\n\x00'
 8841 b'\nRETURN WHEN\n\x00'
@@ -43,11 +45,27 @@
 8807 #player_status
 880B #status_Good
 880F #status_Poison
+8A1F $zp_index
+8A84 $zp_index
+8AA5 $zp_index
+8AAA $zp_index
+8B14 $zp_index
+8B16 $zp_index
+8B2D $zp_index
+8B30 $zp_index
+8B37 $zp_index
 8B3A #char_question
+8B41 $zp_input_index
 8B46 #char_enter
 8B4A #char_left_arrow
 8B4E #char_space
+8B52 $zp_input_index
+8B5A $zp_input_index
+8B5C $zp_input_index
+8B64 $zp_input_index
+8B68 $zp_input_index
 8B6C #char_space
+8B76 $zp_input_index
 8B78 #char_space
 8B82 #char_enter
 8BB3 #char_enter
@@ -65,7 +83,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -88,8 +106,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -105,7 +122,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -120,21 +137,21 @@
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zp_index
+00EA zp_input_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zp_mismatches
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -145,7 +162,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -154,7 +171,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -162,7 +179,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -214,12 +231,45 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+8867 welcome
+891C ask_again
+894F input_word
+89AE @keyword_matched
+89B1 @bye
+8A17 @skip
+8A1B @done
+8A1C check_avatar
+8A84 lookup_advice
+8AA4 print_advice
+8AEB @done
+8AEE keywords
+8B12 compare_keywords
+8B16 @start_keyword
+8B1D @next_char
+8B30 @next_keyword
+8B35 @not_found
+8B3A get_input
+8B43 @get_char
+8B64 @backspace
+8B76 @got_input
+8B7A @pad_spaces
+8B88 match_input_inline
+8B94 @next_char
+8B9B +
+8BA9 @end
+8BB2 unused
+8BB3 print_newline
+8BB9 print_string
+8BC4 @next_char
+8BC8 @next_string
+8BCE @end_string
+8BD4 @print_char
+8BE3 @done
+8BE4 inc_ptr
+8BEA +
+8BEB string_table
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -244,6 +294,7 @@ E0CA bmplineaddr_hi + 10
 EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
+ED06 party_stats + virtue_spirituality
 ED08 torches
 ED09 gems
 ED0A keys
@@ -281,8 +332,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -293,43 +344,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8867 welcome
-891C ask_again
-894F input_word
-8B3A get_input
-8B88 check_inline_keyword
-89B1 @bye
-8B12 find_token
-89AE @found
-8A1C check_avatar
-8A1B @done
-ED06 virtue_spirituality
-8A17 @skip
-8BB3 print_newline
-8A84 lookup_advice
-8AA4 print_advice
-8BB9 print_string
-8AEB @done
-8AEE tokens
-8B16 @compare_token
-8B1D @next_char
-8B35 @not_found
-8B30 @next_token
-8B43 @get_char
-8B76 @got_input
-8B64 @backspace
-8B7A @pad_spaces
-8B94 @next
-8B9B +
-8BA9 @done
-8BEB string_table
-8BC4 @next_char
-8BCE @end_string
-8BE4 inc_ptr
-8BC8 @next_string
-8BD4 @print_char
-8BE3 @done
-8BEA +
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

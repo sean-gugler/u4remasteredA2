@@ -3,7 +3,6 @@
 :CODE END
 8DD0
 :DATA BYTES
-8CCA-8CD5
 8803-8835
 8845-884D
 8858-8876
@@ -22,24 +21,26 @@
 8ADA-8AE7
 8AF0-8AFF
 8B0C-8B48
+8B49-8B8E
+8BFE-8CA2
+8CB8-8CB9
+8CB9-8CBA
+8CCA-8CD5
 8D87-8DA3
 8DC5-8DD0
-8BFE-8CA2
-8B49-8B8E
 :WORDS
 :POINTERS
 :HILOLOOKUP
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-8CBA
-8CA2
 8B8E
+8CA2
+8CBA
 :REMOVED BYTES
 :FULL COMMENTS
 8DC5 junk
 :SIDE COMMENTS
-8CC7 b'>REAGENTS<\x00'
 8800 b'\nA BLIND WOMAN\nTURNS TO YOU AND\nSAYS: WELCOME TO\n\x00'
 8842 b'\n\nI AM \x00'
 8855 b'\nARE YOU IN NEED\nOF REAGENTS?\x00'
@@ -58,13 +59,14 @@
 8AD7 b'\nVERY GOOD,\n\x00'
 8AED b'ANYTHING ELSE?\x00'
 8B09 b'\nSHE SAYS:\nPERHAPS ANOTHER\nTIME.... AND\nSLOWLY TURNS\nAWAY.\n\x00'
+8CC7 b'>REAGENTS<\x00'
 8D84 b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
 8DBC #char_enter
-8DB0 #char_0
-8D2A #party_stat_gold
+8DB0 #char_num_first
+8D2A #party_stat_gold_hi
 8D0B #char_hyphen
 8CFA #char_hyphen
-8CEE #char_A
+8CEE #char_alpha_first
 8BC6 #char_enter
 8B97 #char_enter
 8B02 #char_Y
@@ -74,8 +76,13 @@
 8A6A #virtue_honesty
 8A71 #virtue_justice
 8A78 #virtue_honor
-8953 #char_A
+8953 #char_alpha_first
 8879 #char_Y
+8D58 $zp_inc_amount
+8D61 $zp_inc_amount
+8D1F #reagent_max
+8CD9 #party_stat_reagents
+8BA2 99
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -90,7 +97,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -113,8 +120,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -130,7 +136,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -138,17 +144,17 @@
 00D5 target_player
 00D6 hexnum
 00D7 bcdnum
-00D8 zpD8
-00D9 zpD9
-00DA zpDA
+00D8 zp_amount
+00D9 zp_save_reg
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -157,9 +163,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -170,7 +176,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -179,7 +185,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -187,7 +193,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -239,12 +245,64 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+88CF buy_menu
+895C @print_price
+89E5 @print_cost
+8A21 @make_offer
+8A6A @penalty
+8A7F @spend
+8AAE @do_spend
+8AD3 @set_value
+8AEA more
+8B09 bye
+8B49 location_table
+8B59 unused_stock_table
+8B69 price_table
+8B89 reagent_price
+8B8A reagent_type
+8B8B reagent_amount
+8B8C reagent_to_buy
+8B8D how_many
+8B8E input_char
+8B9E encode_bcd_value
+8BAA @dec
+8BB2 @max
+8BB4 @done
+8BB6 decode_bcd_value
+8BBD @inc
+8BC5 @done
+8BC6 print_newline
+8BCC print_string
+8BD7 @next_char
+8BDB @next_string
+8BE1 @end_string
+8BE7 @print_char
+8BF6 @done
+8BF7 inc_ptr
+8BFD +
+8BFE string_table
+8CA2 save_cursor
+8CAD restore_cursor
+8CB8 saved_cursor_x
+8CB9 saved_cursor_y
+8CBA display_owned
+8CD5 @next
+8D08 @two_digit
+8D0B +
+8D19 @skip
+8D27 try_spend
+8D54 @paid
+8D58 inc_virtue
+8D67 @set_value
+8D6C dec_virtue
+8D75 @continue
+8D7D @underflow
+8D7F @set_value
+8D84 @lost_an_eighth
+8DAA input_digit
+8DB8 +
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -306,8 +364,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -318,62 +376,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8DB8 +
-8DAA input_digit
-8D75 @continue
-8D84 @lost_an_eighth
-8D7F @store
-8D7D @underflow
-8D6C dec_virtue
-8D67 @store
-8D58 inc_virtue
-8D54 @paid
-8D27 try_spend
-8D08 @two_digit
-8D0B +
-8B8A reagent_type
-8BCC print_string
-8D19 @skip
-8CD5 @next
-8CAD restore_cursor
-8B8B reagent_amount
-8CBA display_owned
-8CA2 save_cursor
-8CB9 saved_cursor_y
-8CB8 saved_cursor_x
-8BFE string_table
-8BFD +
-8BF7 inc_ptr
-8BF6 @done
-8BE7 @print_char
-8BDB @next_string
-8BE1 @end_string
-8BD7 @next_char
-8BC6 print_newline
-8BC5 @done
-8BBD @inc
-8BB6 decode_bcd_value
-8BB4 @done
-8BB2 @max
-8BAA @dec
-8B9E encode_bcd_value
-8B8E input_char
-8B8D how_many
-8B8C reagent_to_buy
-8B89 reagent_price
-8B49 location_table
-8B69 price_table
-8B59 unused_stock_table
-8B09 bye
-88CF buy_menu
-8AEA more
-8AD3 @overflow
-8AAE @do_spend
-8A7F @spend
-8A6A @penalty
-8A21 @make_offer
-89E5 @print_cost
-895C @print_price
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

@@ -9,8 +9,8 @@
 8844-8857
 8882-889A
 88F0-892A
-8A9B-8AB7
 89E2-8A02
+8A9B-8AB7
 8ABE-8AC0
 :WORDS
 :POINTERS
@@ -19,8 +19,10 @@
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-8A02
 8877
+894C
+895E
+8A02
 :REMOVED BYTES
 :FULL COMMENTS
 8ABE junk
@@ -32,16 +34,28 @@
 887F b'\rNO PLACE TO\rUSE THEM!\r\x00'
 88ED b'\rYOU HOLD THE\rEVIL SKULL OF\rMONDAIN THE\rWIZARD ALOFT....\r\x00'
 8A98 b'\rTHOU HAST LOST\rAN EIGHTH!\r\x00'
-89B9 #char_enter
-89AF #char_space
-89A3 #char_space
-8985 #char_space
-8981 #char_left_arrow
-897D #char_enter
-8931 #tile_lord_british
 889E #item_have_bell
 88AB #item_have_book
 88B8 #item_have_candle
+892A #object_max
+8931 #tile_lord_british
+895E #virtue_last - 1
+8971 #char_question
+8978 $zp_input_index
+897D #char_enter
+8981 #char_left_arrow
+8985 #char_space
+8989 $zp_input_index
+8991 $zp_input_index
+8993 $zp_input_index
+899B $zp_input_index
+899F $zp_input_index
+89A3 #char_space
+89AD $zp_input_index
+89AF #char_space
+89B9 #char_enter
+89BF #keyword_last - 1
+8A02 #sound_damage
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -56,7 +70,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -79,8 +93,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -96,7 +109,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -105,27 +118,27 @@
 00D6 hexnum
 00D7 bcdnum
 00D8 zpD8
-00D9 zpD9
-00DA zpDA
+00D9 zp_save_reg
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zpEA
+00EA zp_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -136,7 +149,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -145,7 +158,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -153,7 +166,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -205,8 +218,57 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+882F print_none_owned
+8841 print_no_effect
+8858 keyword_matched
+8867 keyword_handlers
+8868 keyword_handlers+1
+8877 use_stone
+887F @have_stone
+889B use_bell
+88A5 @have_bell
+88A8 use_book
+88B2 @have_book
+88B5 use_candle
+88BF @have_candle
+88C2 use_key
+88CA @no_effect
+88CD use_horn
+88D5 @have_horn
+88D8 use_wheel
+88E0 @have_wheel
+88E3 use_skull
+88ED @have_skull
+892C @clear
+8944 @lord_british
+8949 @next_object
+8962 @next_virtue
+8971 get_input
+897A @get_char
+899B @backspace
+89AD @got_input
+89B1 @pad_spaces
+89BF compare_keywords
+89C3 @start_keyword
+89CA @next_char
+89DB @next_keyword
+89E2 keywords
+8A02 shake_screen
+8A20 shake_down
+8A22 @next
+8A38 @copy
+8A4B @skip
+8A4F shake_up
+8A51 @next
+8A67 @copy
+8A7A @skip
+8A80 dec_virtue
+8A89 @continue
+8A91 @underflow
+8A93 @set_value
+8A98 @lost_an_eighth
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -269,7 +331,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -280,55 +342,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8A89 @continue
-8A98 @lost_an_eighth
-8A93 @store
-8A91 @underflow
-8A80 dec_virtue
-8A7A @skip
-8A67 @copy
-8A51 @next
-8A4F shake_up
-8A22 @next
-8A4B @skip
-8A38 @copy
-8A20 shake_down
-8A02 shake_screen
-89E2 keywords
-89C3 @next
-89DB @nomatch
-89CA @compare
-89BF compare_keywords
-89B1 @pad_spaces
-89AD @got_input
-897A @get_char
-899B @backspace
-892C @clear
-8949 @next_object
-8944 @lord_british
-8962 @next_virtue
-8971 get_input
-882F print_none_owned
-88E0 @have_wheel
-88D5 @have_horn
-8841 print_no_effect
-8858 keyword_matched
-8867 keyword_handlers
-8868 keyword_handlers+1
-8877 use_stone
-887F @have_stone
-889B use_bell
-88A5 @have_bell
-88A8 use_book
-88B2 @have_book
-88B5 use_candle
-88BF @have_candle
-88C2 use_key
-88CA @no_effect
-88CD use_horn
-88D8 use_wheel
-88E3 use_skull
-88ED @have_skull
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

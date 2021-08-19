@@ -31,6 +31,8 @@ def usage(argv):
 # Byte offsets to scan lines (bitmap rows) in Apple II HGR memory, in vertical order
 screen = [i + j + k  for i in range(0, 0x80, 0x28) for j in range(0, 0x400, 0x80) for k in range(0, 0x2000, 0x400)]
 
+SCREEN_BYTES = 0x2000 - 8
+
 def main(argv):
     args = usage(argv)
     output = pathlib.Path(args.output)
@@ -42,7 +44,7 @@ def main(argv):
     src = iter(src[2:])
 
     # Write data into an initially-empty screen, with proper HGR memory placement.
-    data = bytearray(0x2000)
+    data = bytearray(SCREEN_BYTES)
 
     LEFT = reversed(range(1, 12))
     RIGHT = range(12, 23)
@@ -53,39 +55,33 @@ def main(argv):
                 i = screen[row] + col
                 data[i] = next(src)
 
-    with open(output / 'end_axiom.prg', 'wb') as out:
+    with open(output / 'END_AXIOM.prg', 'wb') as out:
         load_addr = b'\x00\x40'  # lo+hi
         out.write(load_addr + data)
 
+    skip = list(islice(src, 22))
 
-    # Write data into initially-empty screens, with proper HGR memory placement.
-    overlay = bytearray(0x2000)
-    data = [overlay] * 13
-    data[11] = bytearray(0x2000)
-    data[12] = bytearray(0x2000)
-
-    skip = spk.take(22, src)
-
-    for layer in range(13):
-        decode = spk.decode_file(src)
-        for col in reversed(range(1, 23)):
-            for row in reversed(range(8, 184)):
-                i = screen[row] + col
-                data[layer][i] |= next(decode)
-
-    with open(output / 'end_key.prg', 'wb') as out:
-        load_addr = b'\x00\x40'  # lo+hi
-        out.write(load_addr + data[12])
-
-    with open(output / 'end_quiz.prg', 'wb') as out:
-        load_addr = b'\x00\x40'  # lo+hi
-        out.write(load_addr + data[10])
-
-    with open(output / 'end_win.prg', 'wb') as out:
-        load_addr = b'\x00\x40'  # lo+hi
-        out.write(load_addr + data[11])
+    # Now write SPK-compressed slides
+    data = bytearray(SCREEN_BYTES)
+    for layer in range(11):
+        decode_spk(src, data, output / f'END_QUIZ_{layer:02}.prg')
+    decode_spk(src, bytearray(SCREEN_BYTES), output / 'END_WIN.prg')
+    decode_spk(src, bytearray(SCREEN_BYTES), output / 'END_KEY.prg')
 
     return 0
+
+
+def decode_spk(src, overlay, filename):
+    decode = spk.decode_file(src)
+    for col in reversed(range(1, 23)):
+        for row in reversed(range(8, 184)):
+            i = screen[row] + col
+            overlay[i] |= next(decode)
+
+    with open(filename, 'wb') as out:
+        load_addr = b'\x00\x40'  # lo+hi
+        out.write(load_addr + overlay)
+
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

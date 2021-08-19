@@ -3,8 +3,8 @@
 :CODE END
 96F0
 :DATA BYTES
-8861-8874
 8814-885B
+8861-8874
 888E-88EF
 88FA-8916
 8946-8959
@@ -16,13 +16,13 @@
 8B33-8B4F
 8B59-8B92
 8BBB-8BD8
-8D09-946F
+8C01-8C0D
+8C0D-8C1F
 8C97-8CD7
+8D09-946F
+957C-95A9
 95BB-95CB
 95DB-96F0
-957C-95A9
-8C0D-8C1F
-8C01-8C0D
 :WORDS
 :POINTERS
 95CB-95DB-0
@@ -30,18 +30,23 @@
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-8CD7
-95A9
 8C1F
+8CD7
 946F
+9477
+9483
+948B
+9495
+949B
+95A9
 :REMOVED BYTES
 :FULL COMMENTS
+8A63 unused
 8C97 HONE COMP VALO JUST SACR HONO SPIR HUMI AHM MU RA BEH CAH SUMM OM LUM
 957C SUPER UNPACKER COPYRIGHT 1983 BY STEVEN MEUSE
-8A63 unused
 :SIDE COMMENTS
-885E b'\x04BLOAD SHRI,A$280\n\x00'
 8811 b'\nTHOU DOST NOT\nBEAR THE RUNE\nOF ENTRY! A\nSTRANGE FORCE\nKEEPS YOU OUT!\n\x00'
+885E b'\x04BLOAD SHRI,A$280\n\x00'
 888B b'\nYOU ENTER THE\nANCIENT SHRINE\nAND SIT BEFORE\nTHE ALTAR...\n\nUPON WHAT VIRTUE\nDOST THOU\nMEDITATE?\n\x00'
 88F7 b'\nFOR HOW MANY\nCYCLES (0-3):\x00'
 8943 b'\nBEGIN MEDITATION\n\x00'
@@ -53,27 +58,38 @@
 8B30 b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
 8B56 b'\nTHOU HAST\nACHIEVED PARTIAL\nAVATARHOOD IN\nTHE VIRTUE OF\n\x00'
 8BB8 b'\nTHOU ART GRANTED\nA VISION!\n\x00'
-8C6E #char_enter
-8C53 #char_space
-8C35 @char_space
-8C31 #char_left_arrow
-8C2D #char_enter
-8BFA #char_enter
-8BEE #char_0
-8BA8 #char_enter
-8B9E #sound_spell_effect
-8A52 #char_enter
-8A5B #mode_world
-8A57 #loc_world
-8A37 #char_enter
-8960 #char_period
-8886 #music_shrine
 8803 #loc_shrine_first
-949D #max_spk_row
+887F #mode_shrine
+8886 #music_shrine
+8960 #char_period
 896E $key_buf_len
+89D3 #virtue_spirituality
+8A28 #virtue_spirituality
+8A37 #char_enter
+8A52 #char_enter
+8A57 #loc_world
+8A5B #mode_world
+8B04 $zp_inc_amount
+8B0D $zp_inc_amount
+8BA0 #sound_spell_effect
+8BA8 #char_enter
+8BD8 #mode_suspended
+8BEE #char_num_first
+8BF0 10
+8BFA #char_enter
+8C1F #char_question
+8C2D #char_enter
+8C31 #char_left_arrow
+8C35 #char_space
+8C53 #char_space
+8C64 #char_space
+8C6E #char_enter
+949B #max_spk_col
+949D #max_spk_row
 94B2 #min_spk_row
 94B7 #min_spk_col
-949B #max_spk_col
+95AB $key_buf,x
+95B1 $key_buf,x
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -88,7 +104,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -111,8 +127,7 @@
 00B0 spk_pattern_ptr
 00B1 spk_pattern_ptr+1
 00B8 spk_repeat_flag
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -128,7 +143,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -137,27 +152,27 @@
 00D6 hexnum
 00D7 bcdnum
 00D8 zpD8
-00D9 zpD9
-00DA zpDA
+00D9 zp_save_reg
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zpEA
+00EA zp_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
-00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F0 zp_count
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -168,7 +183,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 currmap
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -177,7 +192,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -185,7 +200,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -237,11 +252,7 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
 B7B5 j_readblock
 B7EB RWTS_volume
@@ -264,7 +275,7 @@ E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
-EC00 music_init
+EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
 ED08 torches
@@ -305,7 +316,7 @@ EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
 EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -316,109 +327,109 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-8D02 @incptr
-8D08 +
-8D01 @done
-8CF2 @gotstring
-8CE6 @wrongstring
-8CEC @possiblestring
-8CE2 @checknext
-8C97 virtues_and_mantras
-8CD7 print_hint
-8D09 string_table
-946F draw_rune
-95A9 swap_buf
-95AB -
-95BB key_buf_tmp
-95DB rune_i
-95F8 rune_n
-9633 rune_f
-9671 rune_t
-969E rune_y
-95CB rune_addr
-95CC rune_addr + 1
-8C90 @differ
-8C78 @nextstring
-8C7F @compare
-8C74 compare_string
-8C66 @clearend
-8C62 @done
-8C2D @checkkey
-8C02 num_cycles
-8C5D @timeout
-8C28 @waitkey
-8C4B @del
-8C1F get_string
-8C17 bit_msb
-8C01 shrine_num
-8C03 cycle_ctr
-8C04 unused
-8C05 shrine_msg_idx
-8C0D shrine_msg_per_cycle
-8BF6 @ok
-8BE8 get_number
+00B2 spk_byte
+00B3 spk_pattern_length
+00B4 spk_repeat_code
+00B5 spk_pattern_code
+00B6 spk_row
+00B7 spk_repeat_count
+00B9 spk_pattern_count
+00BA spk_pattern_flag
+00BB spk_pattern_len_cur
+885E @haverune
+8876 @copymap
+88F7 @askcycles
+8928 +
+8938 @virtue_shrine_match
+8941 @begin
+8959 @slowdots
+895D @print
+898C @correctmantra
+8994 @wrongmantra
+89DD @checkresult
+89F1 @vision
 8A52 exit_shrine
-8B56 partial_avatar
-8B21 @subtract
-8B30 @lost_an_eighth
-8B2B @positive
-8B29 +
-8B18 decrease_virtue
-8B04 increase_virtue
-8B13 @nooverflow
-8AC7 still_weary
-8A85 no_focus
 8A63 longdelay
 8A65 -
 8A6C delay
 8A6E -
 8A75 short_delay
-8A79 @inner
 8A77 @outer
-89F1 @vision
-89DD @checkresult
-8994 @wrongmantra
-898C @correctmantra
-8959 @slowdots
-895D @print
-8941 @begin
-8938 @virtue_shrine_match
-88F7 @askcycles
-8928 +
-8876 @copymap
-885E @haverune
-94A1 @next_row
-00B6 spk_row
-94BF spk_write_byte
-949D @next_col
+8A79 @inner
+8A85 no_focus
+8AC7 still_weary
+8B04 inc_virtue
+8B13 @set_value
+8B18 dec_virtue
+8B21 @continue
+8B29 @underflow
+8B2B @set_value
+8B30 @lost_an_eighth
+8B56 partial_avatar
+8BE8 get_number
+8BF6 @ok
+8C01 shrine_num
+8C02 num_cycles
+8C03 cycle_ctr
+8C04 unused
+8C05 shrine_msg_idx
+8C0D shrine_msg_per_cycle
+8C17 bit_msb
+8C1F get_string
+8C28 @waitkey
+8C2D @checkkey
+8C4B @del
+8C5D @timeout
+8C62 @done
+8C66 @clearend
+8C74 compare_string
+8C78 @nextstring
+8C7F @compare
+8C90 @differ
+8C97 virtues_and_mantras
+8CD7 print_hint
+8CE2 @checknext
+8CE6 @wrongstring
+8CEC @possiblestring
+8CF2 @gotstring
+8D01 @done
+8D02 @incptr
+8D08 +
+8D09 string_table
+946F draw_rune
 9495 +
-952C @do_repeat
-00BA spk_pattern_flag
-9544 @do_pattern
+949D @next_col
+94A1 @next_row
+94BF spk_write_byte
 94C9 @read_byte
-00B2 spk_byte
-00B4 spk_repeat_code
-94F1 @check_pattern
 94D1 @set_repeat
 94D7 +
-00B7 spk_repeat_count
 94E1 +
 94EB +
-00B5 spk_pattern_code
-951F @do_literal
-94FB +
+94F1 @check_pattern
 94F5 @set_pattern
-00B3 spk_pattern_length
-00BB spk_pattern_len_cur
+94FB +
 9507 +
-00B9 spk_pattern_count
 9511 +
+951F @do_literal
 952B @continue
-9562 @next_pattern
-9558 @pattern_literal
+952C @do_repeat
+9544 @do_pattern
 954C -
 954E @dead_code
+9558 @pattern_literal
+9562 @next_pattern
 9577 @pattern_done
+95A9 swap_buf
+95AB -
+95BB key_buf_tmp
+95CB rune_addr
+95CC rune_addr + 1
+95DB rune_i
+95F8 rune_n
+9633 rune_f
+9671 rune_t
+969E rune_y
 :DISABLED HILO LABELS
 8A57
 :USER HILO

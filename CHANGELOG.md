@@ -6,13 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
-## [Unreleased]
+## [1.2.0] - 2021-08-19
+
+### Fixed
+- [Issue 5] Trainer for fair price buy-back was broken since 1.1.0
+- Trainer for teleport could spawn unwanted phantom monsters.
+- Trainer menu was missing item for towne exit.
+- Trainer menu allows up and down arrow keys for machines that have them.
+- Trainer menu clears selection indicator when leaving the menu to start the game.
+- Music initialization clears all channel data, not just first 3.
+- Saved game compatibility fixed for balloon flying state.
 
 ### Added
 - Slideshow disk of in-game artwork, including tile sets.
+- Ability to build with Docker.
+- Proper descriptions for non-human NPCs instead of "phantom".
+- Campfire NPC remains stationary in combat and spits fire.
+- Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
 
 ### Changed
-- Cleaned up some source code. No change to build result.
+- Cleaned up some source code, finished symbolicating all of it.
+- Moved built disk images into 'output' folder.
 
 
 ## [1.1.0] - 2021-07-03

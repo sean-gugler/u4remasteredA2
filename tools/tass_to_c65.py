@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -25,6 +25,7 @@ data   = re.compile(r'.BYTE ([^;]*)\n')
 branch = re.compile(r'([BJ]..) ([+-].*)')
 literal = re.compile(r'(.*)(\$.*);#([^;]+)(;.*)?')
 zp = re.compile(r'([^ ]*)(.*);\$(\w+_\w+)(\s*;.*)?')
+oper = re.compile(r'([^ ]* *)([^;]*)?(;[^;]+)?(;.*)?')
 
 def hex8(char):
     int8 = ord(char) | 0x80
@@ -51,6 +52,8 @@ def main(argv):
                    help="Verbose output.")
     p.add_argument("-c", "--case", action="store_true",
                    help="Convert strings to upper-case.")
+    p.add_argument("-s", "--strings", action="store_true",
+                   help="Generate string comments.")
     p.add_argument("input", help="TASS file, as saved by Regenerator")
     p.add_argument("outsrc", help="Where to generate .s file")
     p.add_argument("outinc", help="Where to generate .i file")
@@ -94,7 +97,8 @@ def main(argv):
             # Symbol Definitions
             elif m := define.match(line):
                 name, value = m.groups()
-                out = line.lower()
+                #out = line.lower()
+                out = f'{name} = {value.lower()}'
                 if name in Syms:
                     assert(Syms[name] == value)
                     out = ';' + out
@@ -111,7 +115,8 @@ def main(argv):
                 if code.startswith('='):
                     if not '+' in label:
                         flush_bytes()
-                        f.write(label.lower().strip() + code)
+                        #f.write(label.lower().strip() + code)
+                        f.write(label.strip() + code)
                     continue
 
                 # Write label on separate line, but
@@ -121,10 +126,10 @@ def main(argv):
                         out = ':' + out
                     else:
                         flush_bytes()
-                        label = label.lower().strip()
+                        #label = label.lower().strip()
+                        label = label.strip()
                         f.write(f'{label}:\n')
-                        if label == 'string_table':
-                            st_count = 0
+                        st_count = 0 if label == 'string_table' else None
 
                 # JSR j_primm  ;b'left\n\x00'
                 # .BYTE $EC,$E5,$E6,$F4,$8D,$00
@@ -162,6 +167,34 @@ def main(argv):
                     op, label = m.groups()
                     out += f'{op.lower()} :{label}\n'
 
+                elif m := oper.match(code):
+                    op, value, expr, comment = m.groups('')
+                    if '$' in value:
+                        value = value.lower()
+                    if expr.startswith(';#'):
+                        expr = expr[2:]
+                        if expr == '-\n':
+                            comment = ''
+                        elif expr.startswith(' '):
+                            comment = ';' + expr[1:] + comment
+                        else:
+                            Values.append((value[1:].strip(), expr.strip()))
+                            value = '#' + expr
+                    elif expr.startswith(';$'):
+                        Values.append((value.strip(), expr.strip()))
+                        value = expr[2:]
+                    elif (expr.startswith(";b'") or
+                          expr.startswith(';b"') ) and not args.strings:
+                        comment = ''
+                    else:
+                        comment = expr + comment
+                    value = value.replace( ',X' , ',x' )
+                    value = value.replace( ',Y' , ',y' )
+
+                    out += f'{op.lower()}{value}{comment}'
+                else:
+                    raise Exception
+                """
                 # Replace literal values with symbols
                 elif m := literal.match(code):
                     op, value, expr, comment = m.groups()
@@ -200,6 +233,7 @@ def main(argv):
                 # All other statements verbatim
                 else:
                     out += code.lower()
+                """
             else:
                 out = line
 
@@ -212,7 +246,11 @@ def main(argv):
         # Write definitions
         def rekey(item):
             value,symbol = item
-            prefix,suffix = symbol.split('_', 1)
+            if '_' in symbol:
+                prefix,suffix = symbol.split('_', 1)
+                suffix = '_' + suffix
+            else:
+                prefix,suffix = '', symbol
             return (prefix,value,suffix)
 
         def unique(it):
@@ -228,11 +266,12 @@ def main(argv):
             if prefix != prev:
                 print('', file=f)
             prev = prefix
-            if any(c in suffix for c in ' +-'):
-                prefix = ';' + prefix
+
             if value.startswith('zp'):
                 value = '$' + value[2:4].lower()
-            print(f'{prefix}_{suffix} = {value}', file=f)
+            symbol = prefix + suffix
+            comment = ';' if any(c in symbol for c in ' +-<>') else ''
+            print(f'{comment}{symbol} = {value}', file=f)
 
     return 0
 

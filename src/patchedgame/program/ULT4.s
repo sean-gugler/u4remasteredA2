@@ -1,339 +1,109 @@
 	.include "uscii.i"
-	.include "ULT4.i"
 
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-player_xpos = $00
-player_ypos = $01
-tile_xpos = $02
-tile_ypos = $03
-map_x = $04
-map_y = $05
-dest_x = $06
-dest_y = $07
-britannia_x = $08
-britannia_y = $09
-current_location = $0a
-game_mode = $0b
-dungeon_level = $0c
-terrain_occlusion = $0d
-player_transport = $0e
-party_size = $0f
-dng_direction = $10
-light_duration = $11
-moon_phase_trammel = $12
-moon_phase_felucca = $13
-horse_mode = $14
-altar_room_principle = $18
-ship_hull = $1b
-move_counter = $1c
-;move_counter + 1 = $1d
-;move_counter + 2 = $1e
-;move_counter + 3 = $1f
-key_buf_len = $b8
-foe_type_encountered = $c0
-pre_combat_x = $c1
-pre_combat_y = $c2
-pre_combat_tile = $c3
-curr_player_turn = $c5
-magic_aura = $c6
-aura_duration = $c7
-tile_under_player = $c8
-tile_north = $c9
-tile_south = $ca
-tile_east = $cb
-tile_west = $cc
-music_volume = $cd
-console_xpos = $ce
-console_ypos = $cf
-curr_player = $d4
-target_player = $d5
+	.include "apple.i"
+	.include "arenas.i"
+	.include "char.i"
+	.include "disks.i"
+	.include "dos.i"
+	.include "dungeon.i"
+	.include "jump_overlay.i"
+	.include "jump_subs.i"
+	.include "jump_system.i"
+	.include "jump_trainers.i"
+	.include "map_objects.i"
+	.include "music.i"
+	.include "music_state.i"
+	.include "places.i"
+	.include "sound.i"
+	.include "strings.i"
+	.include "tables.i"
+	.include "tiles.i"
+	.include "trainers.i"
+	.include "view_map.i"
+	.include "zp_combat.i"
+	.include "zp_main.i"
+
+	.include "PRTY.i"
+	.include "ROST.i"
+
+
+animation_mask = $fc
+
+chance_2 = $01
+chance_4 = $03
+chance_8 = $07
+chance_16 = $0f
+
+hp_fleeing = $17
+
+range_missile_travel = $03  ;how far can a ranged attack fly
+range_missile_attack = $05  ;how far away will a foe decide to range attack anyway
+
+shop_horse = $08
+shop_hawkwind = $09
+
+trap_acid   = $00
+trap_sleep  = $01
+trap_poison = $02
+trap_bomb   = $03
+
+
+; --- Custom use of Zero Page
+
+zp_index1 = $d8
+zp_index2 = $ea
+
+zp_number1 = $d8
+zp_number2 = $d9
+
+zp_amount = $da
+zp_count = $ea
+
+zp_save_reg1 = $d8
+zp_save_reg2 = $d9
+
+; for consistency these should have been the same
+zp_dec_amount = $da
+zp_inc_amount = $d9
+
+
+zp_cur_mob_index = $d8
+zp_target_index = $d9
+
+zp_dist = $da
+zp_nearest_dist = $db
+zp_cur_foe_index = $ea
+zp_foe_attempts = $f0
+
+zp_percent_75 = $d8
+zp_percent_50 = $d9
+zp_percent_25 = $da
+
+zp_tile_type = $da
+zp_trap_type = $da
+
+zp_inventory_index = $d8
+zp_display_line = $d9
+
+zp_item_flags = $d8
+
+zp_mp_max = $d8
+zp_mp_class = $d8
+
+zp_reagent_count = $ea
+zp_reagent_index = $f0
+
+zp_transport = $d8
+zp_sound = $db
+zp_field_type = $ea
+zp_missile_travel = $ea
+zp_selected = $ea
+zp_attempts = $f0
+zp_invert_line = $f0
+
 zp_trainer_avoid = $d8
-zpd8 = $d8
-zpd9 = $d9
-zpda = $da
-zpdb = $db
-damage = $dc
-lt_track = $e0
-lt_sector = $e1
-lt_rwflag = $e2
-lt_addr_hi = $e3
-foe_type_combat = $e6
-game_mode_pre_combat = $e8
-turn_counter = $e9
-zpea = $ea
-zpf0 = $f0
 modulus = $f1
-balloon_movement = $f4
-direction = $f5
-temp2_x = $f6
-temp2_y = $f7
-delta_x = $f8
-delta_y = $f9
-temp_x = $fa
-temp_y = $fb
-ptr2 = $fc
-;ptr2 + 1 = $fd
-ptr1 = $fe
-;ptr1 + 1 = $ff
-;
-; **** ZP POINTERS ****
-;
-;ptr2 = $fc
-;ptr1 = $fe
-;
-; **** USER LABELS ****
-;
-player_has_spoken_to_lb = $0015
-last_sleep = $0016
-last_humility_check = $0017
-last_meditated = $0019
-last_found_reagent = $001a
-kbd_buf_count = $0046
-key_buf = $00b0
-charptr = $00bd
-diskid = $00d0
-numdrives = $00d1
-currdisk_drive1 = $00d2
-currdisk_drive2 = $00d3
-hexnum = $00d6
-bcdnum = $00d7
-reqdisk = $00de
-currdrive = $00df
-moongate_tile = $00ed
-moongate_xpos = $00ee
-moongate_ypos = $00ef
-tilerow = $00f2
-room_start_triggers = $0200
-room_start_foe_type = $0210
-room_start_foe_x = $0220
-room_start_foe_y = $0230
-map_start_foe_x = $0240
-room_start_player_y = $0248
-map_start_foe_y = $0250
-map_start_player_x = $0260
-map_start_player_y = $0268
-kbd_buffer = $0277
-tempmap = $0280
-kernal_color = $0286
-inbuffer = $0300
-dng_trigger_new_tile = $0310
-dng_trigger_pos = $0311
-dng_trigger_new_pos1 = $0312
-dng_trigger_new_pos2 = $0313
-music_ctl = $0320
-spin_drive_motor = $0323
-screen = $0400
-j_waitkey = $0800
-j_player_teleport = $0803
-j_move_east = $0806
-j_move_west = $0809
-j_move_south = $080c
-j_move_north = $080f
-j_drawinterface = $0812
-j_drawview = $0815
-j_update_britannia = $0818
-j_primm_cout = $081b
-j_primm_xy = $081e
-j_primm = $0821
-j_console_out = $0824
-j_clearbitmap = $0827
-j_mulax = $082a
-j_get_stats_ptr = $082d
-j_printname = $0830
-j_printbcd = $0833
-j_drawcursor = $0836
-j_drawcursor_xy = $0839
-j_drawvert = $083c
-j_drawhoriz = $083f
-j_request_disk = $0842
-j_update_status = $0845
-j_blocked_tile = $0848
-j_update_view = $084b
-j_rand = $084e
-j_loadsector = $0851
-j_playsfx = $0854
-j_update_view_combat = $0857
-j_getnumber = $085a
-j_getplayernum = $085d
-j_update_wind = $0860
-j_animate_view = $0863
-j_printdigit = $0866
-j_clearstatwindow = $0869
-j_animate_creatures = $086c
-j_centername = $086f
-j_print_direction = $0872
-j_clearview = $0875
-j_invertview = $0878
-j_centerstring = $087b
-j_printstring = $087e
-j_gettile_bounds = $0881
-j_gettile_britannia = $0884
-j_gettile_opposite = $0887
-j_gettile_currmap = $088a
-j_gettile_tempmap = $088d
-j_get_player_tile = $0890
-j_gettile_towne = $0893
-j_gettile_dungeon = $0896
-bitmap = $2000
-j_overlay_entry = $8800
-talk_lord_british = $8807
-file_buf = $8b00
-j_dng_check_update = $8c00
-j_dng_neighbor_tiles = $8c06
-;file_buf+$200 = $8d00
-;file_buf+$300 = $8e00
-;file_buf+$400 = $8f00
-j_peer = $9000
-trainer_magic = $9a90
-trainer_food = $9a91
-trainer_torch = $9a92
-trainer_jimmy = $9a93
-trainer_peer = $9a94
-trainer_avoid = $9a95
-trainer_balloon = $9a96
-trainer_travel = $9a97
-trainer_pass = $9a98
-trainer_exit = $9a99
-trainer_price = $9a9a
-j_fileio = $a100
-j_readblock = $a103
-j_loadtitle = $a106
-j_togglesnd = $a109
-j_kernalin = $a10c
-j_setirqv = $a10f
-j_clearkbd = $a112
-j_irqhandler = $a115
-j_init_tempmap_cache = $a118
-j_flush_tempmap_cache = $a11b
-j_save_7e_7f = $a11e
-tilecolors1 = $a800
-tilecolors2 = $a900
-hw_strobe = $c010
-hw_speaker = $c030
-hw_lcbank1 = $c08b
-vic_bordercol = $d020
-vic_screencol = $d021
-sid_start = $d400
-sid_volume = $d418
-bmplineaddr_lo = $e000
-;bmplineaddr_lo + 7 = $e007
-;bmplineaddr_lo + 8 = $e008
-;bmplineaddr_lo + 9 = $e009
-;bmplineaddr_lo + 10 = $e00a
-bmplineaddr_hi = $e0c0
-;bmplineaddr_hi + 7 = $e0c7
-;bmplineaddr_hi + 8 = $e0c8
-;bmplineaddr_hi + 9 = $e0c9
-;bmplineaddr_hi + 10 = $e0ca
-chrlineaddr_lo = $e180
-chrlineaddr_hi = $e198
-tilecolors0 = $e1b0
-towne_map = $e800
-;towne_map+$100 = $e900
-;towne_map+$200 = $ea00
-;towne_map+$300 = $eb00
-player_stats = $ec00
-party_stats = $ed00
-torches = $ed08
-gems = $ed09
-keys = $ed0a
-sextant = $ed0b
-stones = $ed0c
-runes = $ed0d
-bell_book_candle = $ed0e
-threepartkey = $ed0f
-food_hi = $ed10
-food_lo = $ed11
-food_frac = $ed12
-gold_hi = $ed13
-gold_lo = $ed14
-horn = $ed15
-wheel = $ed16
-skull = $ed17
-armour = $ed18
-weapons = $ed20
-reagents = $ed38
-mixtures = $ed40
-object_tile_sprite = $ee00
-;object_tile_sprite + object_max = $ee1f
-object_xpos = $ee20
-;object_xpos + object_max = $ee3f
-object_ypos = $ee40
-;object_ypos + object_max = $ee5f
-object_tile_type = $ee60
-;object_tile_type + object_max = $ee7f
-object_xpos_prev = $ee80
-object_ypos_prev = $eea0
-object_dng_level = $eec0
-npc_dialogue = $eee0
-combat_foe_cur_x = $ef00
-combat_foe_cur_y = $ef10
-combat_foe_prev_x = $ef20
-combat_foe_prev_y = $ef30
-combat_foe_hp = $ef40
-combat_foe_tile = $ef50
-combat_foe_drawn_tile = $ef60
-combat_foe_slept = $ef70
-;combat_player_xpos-1 = $ef7f
-combat_player_xpos = $ef80
-;combat_player_ypos-1 = $ef8f
-combat_player_ypos = $ef90
-;combat_player_tile-1 = $ef9f
-combat_player_tile = $efa0
-attack_sprite = $effd
-target_x = $effe
-target_y = $efff
-tilecolors3 = $f300
-kernal_cint = $ff81
-kernal_ioinit = $ff84
-kernal_ramtas = $ff87
-kernal_restor = $ff8a
-kernal_vector = $ff8d
-kernal_setmsg = $ff90
-kernal_second = $ff93
-kernal_tksa = $ff96
-kernal_memtop = $ff99
-kernal_membot = $ff9c
-kernal_scnkey = $ff9f
-kernal_settmo = $ffa2
-kernal_acptr = $ffa5
-kernal_ciout = $ffa8
-kernal_untlk = $ffab
-kernal_unlsn = $ffae
-kernal_listen = $ffb1
-kernal_talk = $ffb4
-kernal_readst = $ffb7
-kernal_setlfs = $ffba
-kernal_setnam = $ffbd
-kernal_open = $ffc0
-kernal_close = $ffc3
-kernal_chkin = $ffc6
-kernal_ckout = $ffc9
-kernal_clrch = $ffcc
-kernal_basin = $ffcf
-kernal_bsout = $ffd2
-kernal_load = $ffd5
-kernal_save = $ffd8
-kernal_settim = $ffdb
-kernal_rdtim = $ffde
-kernal_stop = $ffe1
-kernal_getin = $ffe4
-kernal_clall = $ffe7
-kernal_udtim = $ffea
-kernal_scrorg = $ffed
-kernal_plot = $fff0
-kernal_iobase = $fff3
-
-j_trainer_teleport = $fb00
-j_trainer_board = $fb03
-j_active_char_combat_start = $fb06
-j_active_char_player_turn = $fb09
-j_active_char_check = $fb0c
-j_active_char_check_command = $fb0f
-j_fixed_getkey = $fb12
-j_dirkey_trans_tab = $fb15
+movement_mode = $f4
 
 
 	.segment "MAIN"
@@ -348,16 +118,14 @@ j_dirkey_trans_tab = $fb15
 game_init:
 	lda #music_off
 	jsr music_ctl
-	lda #$ff
-	sta music_volume
-	bit hw_lcbank1
-	bit hw_lcbank1
+	bit hw_LCBANK1
+	bit hw_LCBANK1
 	jsr j_drawinterface
 	lda #$0d
 	sta console_ypos
 	lda #$18
 	sta console_xpos
-	lda #mode_loading
+	lda #mode_suspended
 	sta game_mode
 	lda #aura_none
 	sta magic_aura
@@ -368,12 +136,12 @@ game_init:
 	jmp game_start
 
 load_saved_game:
-	jsr j_primm_cout ;b'\x84BLOAD PRTY,A$0\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD PRTY,A$0", $8d
 	.byte 0
 	lda party_size
 	bne load_saved_map
-	jsr j_primm  ;b'\nNO ACTIVE GAME!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "NO ACTIVE GAME!", $8d
 	.byte 0
@@ -381,40 +149,51 @@ halt:
 	jmp halt
 
 load_saved_map:
-	jsr j_primm_cout ;b'\x84BLOAD LIST,A$EE00\n\x84BLOAD ROST,A$EC00\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD LIST,A$EE00", $8d
 	.byte $84,"BLOAD ROST,A$EC00", $8d
 	.byte 0
-;ENHANCEMENT: allow save in dungeon
-	lda game_mode
-	cmp #mode_dungeon
-	bne game_start
-	lda #0
-	sta game_mode  ;mode_loading
-	sta direction  ;wind_dir_west
-	jsr load_dungeon
-	jmp cmd_done
-;ENHANCEMENT END
 
 game_start:
 ; BUGFIX: don't let players cheat by quitting
 ; BUGFIX: over unlandable terrain and rebooting!
-	lda terrain_occlusion
+;      TRAINER logic:
+;      $00 occlude_on  => $01 landed
+;      $ff occlude_off:
+;      $01 trainer_on  => $00 steer
+;      $00 trainer_off => $ff drift
+	ldx terrain_occlusion
+	inx
+	bne :+
 	ldx trainer_balloon
-	beq :+
-	asl   ; TRAINER: balloon_steer
-:	sta balloon_movement
+	dex
+:	stx balloon_movement
 ; BUGFIX END
+	lda #volume_on      ;SIZE_OPT: moved here instead of repeating
+	sta sfx_volume      ;SIZE_OPT: inside ENHANCEMENT
+;ENHANCEMENT: allow save in dungeon
+	lda game_mode
+	cmp #mode_dungeon
+	bne @start_in_world
+	lda #0
+	sta game_mode       ;mode_loading
+	sta wind_direction  ;wind_dir_west
+	jsr load_dungeon
+	jmp cmd_done
+@start_in_world:
+;ENHANCEMENT END
 	lda #$00
-;	sta terrain_occlusion   ; BUGFIX
-;	sta balloon_movement    ; BUGFIX
-	sta current_location
-	sta horse_mode
-	lda #1
-	sta game_mode  ;mode_world
-	sta direction  ;wind_dir_north
+;	sta terrain_occlusion ;occlusion_on    BUGFIX
+;	sta balloon_movement  ;balloon_landed  BUGFIX
+	sta current_location  ;loc_world
+	sta horse_mode        ;horse_walk
+	lda #$01
+	sta game_mode         ;mode_world
+	sta wind_direction    ;wind_dir_north
 	jsr j_update_status
 	jsr j_player_teleport
+;	lda #volume_on      ;SIZE_OPT: moved earlier instead of repeating
+;	sta sfx_volume      ;SIZE_OPT: inside ENHANCEMENT
 	lda #music_Overworld
 	jsr music_ctl
 next_turn:
@@ -425,8 +204,8 @@ next_turn:
 	jmp cmd_timeout
 
 @prompt:
-	jsr j_primm  ;b'\n>\x00'
-	.byte $8d,$1e,$00
+	jsr j_primm
+	.byte $8d,glyph_greater_even,$00   ;'>'
 :	jsr j_waitkey
 	cmp #char_none
 	bne :+
@@ -462,19 +241,24 @@ next_turn:
 	bne :+
 	jmp cmd_direction_right
 
+;ENHANCEMENT for music_mute
+:	cmp #char_ctrl_V
+	bne :+
+	jmp cmd_music
+
 :	cmp #char_ctrl_S
 	bne check_cmd_alpha
 
 ; debug print virtue levels
 	jsr print_newline
 	lda #$00
-	sta zpea
+	sta zp_index2
 @next:
-	ldx zpea
+	ldx zp_index2
 	lda party_stats,x
 	jsr j_printbcd
-	inc zpea
-	lda zpea
+	inc zp_index2
+	lda zp_index2
 	cmp #virtue_last
 	bcc @next
 	jsr print_newline
@@ -496,19 +280,20 @@ check_cmd_alpha:
 	jmp (ptr1)
 
 cmd_timeout:
-	jsr j_primm  ;b'\n>Zzzzz\n\x00'
-	.byte $8d,$1e,"Zzzzz", $8d
+	jsr j_primm
+	.byte $8d, glyph_greater_even
+	.byte "Zzzzz", $8d
 	.byte 0
 	jmp cmd_done
 
 done_pass:
-	jsr j_primm  ;b'Pass\n\x00'
+	jsr j_primm
 	.byte "Pass", $8d
 	.byte 0
 	jmp cmd_done
 
 done_what:
-	jsr j_primm  ;b'WHAT?\n\x00'
+	jsr j_primm
 	.byte "WHAT?", $8d
 	.byte 0
 done_sound_deny:
@@ -517,69 +302,69 @@ done_sound_deny:
 	jmp cmd_done
 
 done_not_a_player:
-	jsr j_primm  ;b'NOT A PLAYER!\n\x00'
+	jsr j_primm
 	.byte "NOT A PLAYER!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_only_on_foot:
-	jsr j_primm  ;b'ONLY ON FOOT!\n\x00'
+	jsr j_primm
 	.byte "ONLY ON FOOT!", $8d
 	.byte 0
 	jmp done_sound_deny
 
-; back-ported from C64
+; ENHANCEMENT back-ported from C64
 done_nothing_there:
-	jsr j_primm  ;b'NOTHING THERE!\n\x00'
+	jsr j_primm
 	.byte "NOTHING THERE!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_slow_progress:
-	jsr j_primm  ;b'SLOW PROGRESS!\n\x00'
+	jsr j_primm
 	.byte "SLOW PROGRESS!", $8d
 	.byte 0
 	rts
 
 done_not_here:
-	jsr j_primm  ;b'NOT HERE!\n\x00'
+	jsr j_primm
 	.byte "NOT HERE!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_cant:
-	jsr j_primm  ;b"CAN'T!\n\x00"
+	jsr j_primm
 	.byte "CAN'T!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_aborted:
-	jsr j_primm  ;b'ABORTED!\n\x00'
+	jsr j_primm
 	.byte "ABORTED!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_done:
 	jsr j_update_status
-	jsr j_primm  ;b'DONE.\n\x00'
+	jsr j_primm
 	.byte "DONE.", $8d
 	.byte 0
 	jmp cmd_done
 
 done_have_none:
-	jsr j_primm  ;b'YOU HAVE NONE!\n\x00'
+	jsr j_primm
 	.byte "YOU HAVE NONE!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_disabled:
-	jsr j_primm  ;b'DISABLED!\n\x00'
+	jsr j_primm
 	.byte "DISABLED!", $8d
 	.byte 0
 	jmp cmd_done
 
 done_blocked:
-	jsr j_primm  ;b'BLOCKED!\n\x00'
+	jsr j_primm
 	.byte "BLOCKED!", $8d
 	.byte 0
 	lda #sound_blocked
@@ -589,38 +374,38 @@ done_blocked:
 	jmp cmd_done
 
 done_drift_only:
-	jsr j_primm  ;b'DRIFT ONLY!\n\x00'
+	jsr j_primm
 	.byte "DRIFT ONLY!", $8d
 	.byte 0
 	jmp cmd_done
 
 cmd_table:
-	.word cmd_attack
-	.word cmd_board
-	.word cmd_cast
-	.word cmd_descend
-	.word cmd_enter
-	.word cmd_fire
-	.word cmd_get_chest
-	.word cmd_hole_up
-	.word cmd_ignite
-	.word cmd_jimmy_lock
-	.word cmd_klimb
-	.word cmd_locate
-	.word cmd_mix_reagents
-	.word cmd_new_order
-	.word cmd_open_door
-	.word cmd_peer_gem
-	.word cmd_quit
-	.word cmd_ready_weapon
-	.word cmd_search
-	.word cmd_talk
-	.word cmd_use_item
-	.word cmd_volume
-	.word cmd_wear_armour
-	.word cmd_x_it
-	.word cmd_yell_horse
-	.word cmd_ztats
+	.addr cmd_attack
+	.addr cmd_board
+	.addr cmd_cast
+	.addr cmd_descend
+	.addr cmd_enter
+	.addr cmd_fire
+	.addr cmd_get_chest
+	.addr cmd_hole_up
+	.addr cmd_ignite
+	.addr cmd_jimmy_lock
+	.addr cmd_klimb
+	.addr cmd_locate
+	.addr cmd_mix_reagents
+	.addr cmd_new_order
+	.addr cmd_open_door
+	.addr cmd_peer_gem
+	.addr cmd_quit
+	.addr cmd_ready_weapon
+	.addr cmd_search
+	.addr cmd_talk
+	.addr cmd_use_item
+	.addr cmd_volume
+	.addr cmd_wear_armour
+	.addr cmd_x_it
+	.addr cmd_yell_horse
+	.addr cmd_ztats
 
 cmd_direction_up:
 	lda game_mode
@@ -634,8 +419,7 @@ cmd_direction_up:
 	bne @check_ship
 ; TRAINER: balloon_steer
 	lda balloon_movement
-	lsr
-	beq @not_steering
+	bne @not_steering
 	jsr print_north
 	jsr j_move_north
 	jmp cmd_done
@@ -658,7 +442,7 @@ cmd_direction_up:
 	jsr j_playsfx
 	jsr print_north
 	lda horse_mode
-	beq :+
+	beq :+        ;horse_walk
 	jsr @try_move
 	jsr j_update_view
 :	jsr @try_move
@@ -712,7 +496,7 @@ cmd_direction_up:
 	jmp try_walk
 
 @dng_try_advance:
-	jsr j_primm  ;b'Advance\n\x00'
+	jsr j_primm
 	.byte "Advance", $8d
 	.byte 0
 	lda tile_north
@@ -725,12 +509,12 @@ dng_move:
 	clc
 	lda player_xpos
 	adc dng_dir_delta_x,x
-	and #$07     ;modulo
+	and #xy_max_dungeon
 	sta player_xpos
 	clc
 	lda player_ypos
 	adc dng_dir_delta_y,x
-	and #$07     ;modulo
+	and #xy_max_dungeon
 	sta player_ypos
 	jmp cmd_done
 
@@ -743,7 +527,7 @@ cmd_direction_down:
 	lda game_mode
 	cmp #mode_dungeon
 	bne @check_transport
-	jsr j_primm  ;b'Retreat\n\x00'
+	jsr j_primm
 	.byte "Retreat", $8d
 	.byte 0
 	lda tile_west
@@ -762,8 +546,7 @@ cmd_direction_down:
 	bne @check_ship
 ; TRAINER: balloon_steer
 	lda balloon_movement
-	lsr
-	beq @not_steering
+	bne @not_steering
 	jsr print_south
 	jsr j_move_south
 	jmp cmd_done
@@ -786,23 +569,22 @@ cmd_direction_down:
 	jsr j_playsfx
 	jsr print_south
 	lda horse_mode
-	beq :+
+	beq :+        ;horse_walk
 	jsr @try_move
 	jsr j_update_view
 :	jsr @try_move
 @check_shrine_humility:
 	lda player_xpos
-	cmp #$e5
+	cmp #xpos_abyss_shrine_min
 	bcc @cmd_done
-	cmp #$ea
+	cmp #xpos_abyss_shrine_max
 	bcs @cmd_done
 	lda player_ypos
-	cmp #$d4
+	cmp #ypos_abyss_shrine_min
 	bcc @cmd_done
-	cmp #$d9
+	cmp #ypos_abyss_shrine_max
 	bcs @cmd_done
 	jmp spawn_daemon_guard
-
 @cmd_done:
 	jmp cmd_done
 
@@ -851,7 +633,7 @@ cmd_direction_left:
 	cmp #mode_dungeon
 	bne @check_transport
 	jsr print_turn
-	jsr j_primm  ;b'left\n\x00'
+	jsr j_primm
 	.byte "left", $8d
 	.byte 0
 	sec
@@ -869,8 +651,7 @@ cmd_direction_left:
 	bne @check_ship
 ; TRAINER: balloon_steer
 	lda balloon_movement
-	lsr
-	beq @not_steering
+	bne @not_steering
 	jsr print_west
 	jsr j_move_west
 	jmp cmd_done
@@ -897,7 +678,7 @@ cmd_direction_left:
 	jsr j_playsfx
 	jsr print_west
 	lda horse_mode
-	beq :+
+	beq :+        ;horse_walk
 	jsr @try_move
 	jsr j_update_view
 :	jsr @try_move
@@ -948,7 +729,7 @@ cmd_direction_right:
 	cmp #mode_dungeon
 	bne @check_transport
 	jsr print_turn
-	jsr j_primm  ;b'right\n\x00'
+	jsr j_primm
 	.byte "right", $8d
 	.byte 0
 	clc
@@ -966,8 +747,7 @@ cmd_direction_right:
 	bne @check_ship
 ; TRAINER: balloon_steer
 	lda balloon_movement
-	lsr
-	beq @not_steering
+	bne @not_steering
 	jsr print_east
 	jsr j_move_east
 	jmp cmd_done
@@ -994,7 +774,7 @@ cmd_direction_right:
 	jsr j_playsfx
 	jsr print_east
 	lda horse_mode
-	beq :+
+	beq :+        ;horse_walk
 	jsr @try_move
 	jsr j_update_view
 :	jsr @try_move
@@ -1024,10 +804,10 @@ cmd_direction_right:
 :	jsr j_move_east
 @check_abyss_cove:
 	lda player_xpos
-	cmp #$dd
+	cmp #xpos_abyss_cove_mouth
 	bne @cmd_done
 	lda player_ypos
-	cmp #$e0
+	cmp #ypos_abyss_cove_mouth
 	bne @cmd_done
 	jmp spawn_pirate_fleet
 
@@ -1053,7 +833,7 @@ cmd_direction_right:
 ; SIZE_OPT to fit trainer
 ; INPUT: A = dest tile  X,Y = dest location
 try_walk:
-	sta zpd8
+	sta zp_save_reg1
 	stx try_walk_x
 	sty try_walk_y
 	jsr check_slow_terrain
@@ -1066,7 +846,7 @@ try_walk:
 	bne try_walk_towne
 try_walk_handler = * + 1
 	jsr j_move_north
-	lda zpd8
+	lda zp_save_reg1
 	jmp check_enter_moongate
 
 try_walk_towne:
@@ -1101,17 +881,17 @@ try_walk_exit:
 	jmp leave_to_world
 
 print_turn:
-	jsr j_primm  ;b'Turn \x00'
+	jsr j_primm
 	.byte "Turn ", 0
 	rts
 
 print_sail:
-	jsr j_primm  ;b'Sail \x00'
+	jsr j_primm
 	.byte "Sail ", 0
 	rts
 
 spawn_pirate_fleet:
-	ldy #$07
+	ldy #pirate_fleet_count - 1
 @next:
 	lda pirate_fleet_x,y
 	sta object_xpos,y
@@ -1131,6 +911,7 @@ pirate_fleet_y:
 	.byte $dc,$e4,$dc,$e4,$e3,$e1,$df,$de
 pirate_fleet_sprite:
 	.byte $82,$82,$82,$82,$83,$83,$81,$81
+pirate_fleet_count = * - pirate_fleet_sprite
 
 spawn_daemon_guard:
 	lda magic_aura
@@ -1155,15 +936,15 @@ spawn_daemon_guard:
 leave_to_world:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm  ;b'LEAVING...\n\x00'
+	jsr j_primm
 	.byte "LEAVING...", $8d
 	.byte 0
-	bit hw_strobe
-	lda #mode_loading
+	bit hw_STROBE
+	lda #mode_suspended
 	sta game_mode
 	lda #disk_britannia
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BLOAD TLST\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TLST", $8d
 	.byte 0
 	lda britannia_x
@@ -1177,18 +958,18 @@ leave_to_world:
 	sta current_location
 @check_exit_hythloth:
 	lda player_xpos
-	cmp #$ef
+	cmp #xpos_hythloth
 	bne @done
 	lda player_ypos
-	cmp #$f0
+	cmp #ypos_hythloth
 	bne @done
 @spawn_balloon:
 	lda #tile_balloon
 	sta object_tile_type + object_max
 	sta object_tile_sprite + object_max
-	lda #$e9
+	lda #xpos_balloon_spawn
 	sta object_xpos + object_max
-	lda #$f2
+	lda #ypos_balloon_spawn
 	sta object_ypos + object_max
 @done:
 	jsr j_update_britannia
@@ -1198,6 +979,7 @@ leave_to_world:
 	sta key_buf_len
 	jmp cmd_done
 
+; SIZE_OPT to fit trainers. Moved return value from A 00/ff to Z 1/0.
 ; INPUT: A = tile type to check
 ; OUTPUT: Z = slow
 ; AFFECTS: A,Y
@@ -1215,16 +997,16 @@ check_slow_terrain:
 	rts  ; Z flag will be false, meaning "not slowed"
 @tile_type:
 	.byte tile_swamp
-	.byte tile_bushes
+	.byte tile_brush
 	.byte tile_forest
 	.byte tile_hills
 	.byte tile_field_fire
 @slow_chance:
-	.byte $03
-	.byte $07
-	.byte $03
-	.byte $01
-	.byte $01
+	.byte chance_4
+	.byte chance_8
+	.byte chance_4
+	.byte chance_2
+	.byte chance_2
 
 ; INPUT: A = tile type
 ; OUTPUT: C set = cannot move here
@@ -1234,11 +1016,11 @@ can_ship_move_here:
 	cmp #tile_water_shallow
 	rts
 @high:
-	cmp #tile_monster
+	cmp #tile_monster_land
 	rts
 
 cmd_attack:
-	jsr j_primm  ;b'Attack-\x00'
+	jsr j_primm
 	.byte "Attack-", 0
 	lda game_mode
 	cmp #mode_dungeon
@@ -1258,9 +1040,9 @@ cmd_attack:
 	bpl :+
 @nothing_there:
 ;	jmp done_what
-	jmp done_nothing_there   ; back-ported from C64
+	jmp done_nothing_there   ; ENHANCEMENT back-ported from C64
 
-:	stx zp_index
+:	stx zp_index1
 	lda object_tile_type,x
 	cmp #tile_chest     ; BUGFIX
 	beq @nothing_there  ; BUGFIX
@@ -1279,8 +1061,8 @@ cmd_attack:
 	cmp #tile_lord_british
 	bne @skip
 @hostile:
-	lda #$ff
-	sta object_dng_level,x
+	lda #ai_hostile
+	sta npc_movement_ai,x
 	lda #$00
 	sta npc_dialogue,x
 @skip:
@@ -1290,7 +1072,7 @@ cmd_attack:
 	lda game_mode
 	cmp #mode_towne
 	beq @penalty
-	ldx zp_index
+	ldx zp_index1
 	lda object_tile_type,x
 	jsr is_evil
 	bmi do_attack
@@ -1306,18 +1088,26 @@ cmd_attack:
 	jsr dec_virtue
 	jsr j_update_status   ; BUGFIX: if lost eighth, show that in status icon
 do_attack:
-	ldx zp_index
+	ldx zp_index1
 	lda object_tile_type,x
 ; BUGFIX: bad animations if you attack towne characters of these types.
+
 	cmp #tile_human_prone
 	bne :+
 	lda #tile_beggar
+
 :	cmp #tile_water_shallow
 	bne :+
 	lda #tile_water_coast
+
 :	cmp #tile_walk
 	bne :+
-	lda #tile_human_paladin
+	lda #tile_class_paladin
+
+:	cmp #tile_horse_east
+	bne :+
+	lda #tile_horse_west
+
 : ;BUGFIX end
 	sta foe_type_encountered
 	lda object_xpos,x
@@ -1338,17 +1128,17 @@ do_attack:
 	sta pre_combat_tile
 @init_foe:
 	lda #$00
-	ldx zp_index
+	ldx zp_index1
 	sta object_tile_type,x
 	sta object_tile_sprite,x
-	sta object_dng_level,x
+	sta npc_movement_ai,x
 	jmp init_combat
 
 cmd_board:
 	lda player_transport
 	cmp #tile_walk
 	beq @on_foot
-	jsr j_primm  ;b'Board <-\x00'
+	jsr j_primm
 	.byte "Board <-", 0
 	jmp done_cant
 
@@ -1358,7 +1148,7 @@ cmd_board:
 	beq board_horse
 	cmp #tile_horse_east
 	beq board_horse
-	jsr j_primm  ;b'Board \x00'
+	jsr j_primm
 	.byte "Board ", 0
 	lda tile_under_player
 	cmp #tile_ship_west
@@ -1384,7 +1174,7 @@ cmd_board:
 	bne @nothing_boardable  ; BUGFIX: so only board ships on surface, not in dungeon
 	lda #tile_ship_first
 	jsr do_board
-	jsr j_primm  ;b'frigate!\n\x00'
+	jsr j_primm
 	.byte "frigate!", $8d
 	.byte 0
 	lda player_xpos
@@ -1396,7 +1186,7 @@ cmd_board:
 	jmp cmd_done
 
 @new_ship:
-	lda #$50
+	lda #ship_hull_full
 	sta ship_hull
 	jmp cmd_done
 
@@ -1407,7 +1197,7 @@ last_ship_y:
 board_horse:
 	lda #tile_horse_west
 	jsr do_board
-	jsr j_primm  ;b'Mount horse!\n\x00'
+	jsr j_primm
 	.byte "Mount horse!", $8d
 	.byte 0
 	jmp cmd_done
@@ -1415,11 +1205,11 @@ board_horse:
 board_balloon:
 	lda #tile_balloon
 	jsr do_board
-	jsr j_primm  ;b'balloon\n\x00'
+	jsr j_primm
 	.byte "balloon", $8d
 	.byte 0
-;	lda #balloon_landed
-;	sta balloon_movement
+;	lda #balloon_landed    ;SIZE_OPT removed, unnecessary
+;	sta balloon_movement   ;SIZE_OPT removed, unnecessary
 	jmp cmd_done
 
 do_board:
@@ -1451,7 +1241,7 @@ do_board:
 	rts
 
 cmd_cast:
-	jsr j_primm  ;b'Cast spell:\nplayer-\x00'
+	jsr j_primm
 	.byte "Cast spell:", $8d
 	.byte "player-", 0
 	jsr j_getplayernum
@@ -1469,7 +1259,7 @@ cmd_cast:
 
 choose_spell:
 	jsr display_spells
-	jsr j_primm  ;b'SPELL-\x00'
+	jsr j_primm
 	.byte "SPELL-", 0
 	jsr input_char
 	pha
@@ -1482,7 +1272,7 @@ choose_spell:
 	pla
 	sec
 	sbc #char_alpha_first
-	cmp #$1a     ;26, A-Z spells
+	cmp #spells_max
 	bcc :+
 	jmp done_what
 
@@ -1490,7 +1280,7 @@ choose_spell:
 	clc
 	adc #string_spells
 	jsr j_printstring
-	jsr j_primm  ;b'!\n\x00'
+	jsr j_primm
 	.byte "!", $8d
 	.byte 0
 	lda trainer_magic   ;TRAINER: free mixtures
@@ -1513,13 +1303,13 @@ choose_spell:
 	sec
 	sbc spell_mp_cost,x
 	cld
-	bcs @deduct_mp
-	jsr j_primm  ;b'M.P. TOO LOW!\n\x00'
+	bcs @dec_mp
+	jsr j_primm
 	.byte "M.P. TOO LOW!", $8d
 	.byte 0
 	jmp failed
 
-@deduct_mp:
+@dec_mp:
 	sta (ptr1),y
 @trainer_magic:
 	lda current_spell
@@ -1534,32 +1324,32 @@ choose_spell:
 current_spell:
 	.byte 0
 spell_jump_table:
-	.word spell_awake
-	.word spell_blink
-	.word spell_cure
-	.word spell_dispel_field
-	.word spell_energy_field
-	.word spell_fireball
-	.word spell_gate
-	.word spell_heal
-	.word spell_iceball
-	.word spell_jinx
-	.word spell_kill
-	.word spell_light
-	.word spell_missile
-	.word spell_negate
-	.word spell_open_chest
-	.word spell_protect
-	.word spell_quickness
-	.word spell_resurrect
-	.word spell_sleep
-	.word spell_tremor
-	.word spell_undead
-	.word spell_view
-	.word spell_wind
-	.word spell_x_it
-	.word spell_y_up
-	.word spell_z_down
+	.addr spell_awake
+	.addr spell_blink
+	.addr spell_cure
+	.addr spell_dispel_field
+	.addr spell_energy_field
+	.addr spell_fireball
+	.addr spell_gate
+	.addr spell_heal
+	.addr spell_iceball
+	.addr spell_jinx
+	.addr spell_kill
+	.addr spell_light
+	.addr spell_missile
+	.addr spell_negate
+	.addr spell_open_chest
+	.addr spell_protect
+	.addr spell_quickness
+	.addr spell_resurrect
+	.addr spell_sleep
+	.addr spell_tremor
+	.addr spell_undead
+	.addr spell_view
+	.addr spell_wind
+	.addr spell_x_it
+	.addr spell_y_up
+	.addr spell_z_down
 spell_mp_cost:
 	.byte $05  ; awake
 	.byte $15  ; blink
@@ -1589,7 +1379,7 @@ spell_mp_cost:
 	.byte $05  ; z_down
 
 spell_awake:
-	jsr j_primm  ;b'WHO-\x00'
+	jsr j_primm
 	.byte "WHO-", 0
 	jsr j_getplayernum
 	bne :+
@@ -1673,7 +1463,7 @@ sub_delta:
 	rts
 
 spell_cure:
-	jsr j_primm  ;b'WHO-\x00'
+	jsr j_primm
 	.byte "WHO-", 0
 	jsr j_getplayernum
 	bne :+
@@ -1728,7 +1518,7 @@ spell_dispel_field:
 	jsr input_target_xy
 	beq @fail
 	jsr spell_effect
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	sta tile_under_player
 	clc
 	lda dest_x
@@ -1738,13 +1528,13 @@ spell_dispel_field:
 	lda dest_y
 	adc delta_y
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	cmp #tile_field_first
 	bcc @fail
 	cmp #tile_field_last
 	bcs @fail
 	lda tile_under_player
-	sta tempmap,y
+	sta world_tiles,y
 	jmp done_done
 
 @dungeon:
@@ -1767,7 +1557,7 @@ spell_dispel_field:
 	jmp done_done
 
 spell_energy_field:
-	jsr j_primm  ;b'TYPE-\x00'
+	jsr j_primm
 	.byte "TYPE-", 0
 	jsr input_char
 	ldx #tile_field_first
@@ -1805,7 +1595,7 @@ spell_energy_field:
 	jsr j_gettile_dungeon
 	bne @fail
 	lda zp_field_type
-	and #$03
+	and #dng_tile_field_mask
 	ora #dng_tile_field
 	sta (ptr1),y
 	jmp done_done
@@ -1827,11 +1617,11 @@ spell_energy_field:
 	cmp #xy_last_screen
 	bcs @fail
 	jsr spell_effect
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	jsr j_blocked_tile
 	bmi @fail
 	lda zp_field_type
-	sta tempmap,y
+	sta world_tiles,y
 	jmp done_done
 
 spell_fireball:
@@ -1903,7 +1693,7 @@ spell_gate:
 	beq :+
 	jmp outdoors_only
 
-:	jsr j_primm  ;b'TO PHASE-\x00'
+:	jsr j_primm
 	.byte "TO PHASE-", 0
 	jsr input_char
 	sec
@@ -1913,9 +1703,9 @@ spell_gate:
 @fail:
 	jmp failed
 
-:	sta zpea
+:	sta zp_index2
 	jsr spell_effect
-	ldx zpea
+	ldx zp_index2
 	lda moongate_x,x
 	sta player_xpos
 	lda moongate_y,x
@@ -1930,7 +1720,7 @@ moongate_y:
 	.byte $85,$66,$e0,$25,$13,$c2,$7e,$a7
 
 spell_heal:
-	jsr j_primm  ;b'WHO-\x00'
+	jsr j_primm
 	.byte "WHO-", 0
 	jsr j_getplayernum
 	bne :+
@@ -1943,7 +1733,7 @@ spell_heal:
 	lda #$19
 	jsr rand_modulo
 	clc
-	adc #$4b     ;75 - 99 pts
+	adc #$4b     ;75-99 pts
 	jsr encode_bcd_value
 	jsr inc_player_hp
 	jmp done_done
@@ -1965,7 +1755,7 @@ spell_jinx:
 	lda #aura_jinx
 set_spell_aura:
 	sta magic_aura
-	lda #$0a
+	lda #$0a     ;10 turns
 	sta aura_duration
 	jmp done_done
 
@@ -1983,7 +1773,7 @@ spell_kill:
 
 spell_light:
 	jsr spell_effect
-	lda #$64
+	lda #$64     ;100
 	sta light_duration
 	lda game_mode
 	cmp #mode_dungeon
@@ -2035,7 +1825,7 @@ res_view_fail:
 	jmp failed
 
 try_resurrect:
-	jsr j_primm  ;b'WHO-\x00'
+	jsr j_primm
 	.byte "WHO-", 0
 	jsr j_getplayernum
 	bne :+
@@ -2058,7 +1848,7 @@ spell_sleep:
 	jsr spell_effect
 	ldx #foes_max
 @next:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	beq @skip
 	jsr is_undead
 	beq @skip
@@ -2080,7 +1870,7 @@ spell_tremor:
 	jsr shake_screen
 	ldx #foes_max
 @next:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	beq @skip
 	cmp #tile_lord_british
 	beq @skip
@@ -2088,15 +1878,15 @@ spell_tremor:
 	cmp #$c0     ;192+ hp == immune!
 	bcs @skip
 	jsr j_rand
-	bmi @hit     ;2/4 chance
-	and #$01     ;1/4 chance
+	bmi @hit     ;2/4 chance kill
+	and #$01     ;1/4 chance frighten
 	bne @skip
 	lda #hp_fleeing
 	sta combat_foe_hp,x
 	jmp @skip
 
 @hit:
-	stx zpea
+	stx zp_index2
 	lda combat_foe_cur_x,x
 	sta target_x
 	lda combat_foe_cur_y,x
@@ -2111,7 +1901,7 @@ spell_tremor:
 	lda #$ff
 	sta damage
 	jsr inflict_damage
-	ldx zpea
+	ldx zp_index2
 @skip:
 	dex
 	bpl @next
@@ -2122,7 +1912,7 @@ spell_undead:
 	jsr spell_effect
 	ldx #foes_max
 @next:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr is_undead
 	bne @skip
 	jsr j_rand
@@ -2170,7 +1960,7 @@ spell_wind:
 @east:
 	lda #wind_dir_east
 @done:
-	sta direction
+	sta wind_direction
 	jmp done_done
 
 spell_x_it:
@@ -2190,10 +1980,10 @@ spell_y_up:
 	sta zp_attempts
 @try_random:
 	jsr j_rand
-	and #$07
+	and #xy_max_dungeon
 	sta dest_x
 	jsr j_rand
-	and #$07
+	and #xy_max_dungeon
 	sta dest_y
 	jsr j_gettile_dungeon
 	beq @ok
@@ -2222,10 +2012,10 @@ spell_z_down:
 	sta zp_attempts
 @try_random:
 	jsr j_rand
-	and #$07
+	and #xy_max_dungeon
 	sta dest_x
 	jsr j_rand
-	and #$07
+	and #xy_max_dungeon
 	sta dest_y
 	jsr j_gettile_dungeon
 	beq @ok
@@ -2256,7 +2046,7 @@ dungeon_only:
 	lda game_mode
 	cmp #mode_dungeon
 	beq @ok
-	jsr j_primm  ;b'DUNGEON ONLY!\n\x00'
+	jsr j_primm
 	.byte "DUNGEON ONLY!", $8d
 	.byte 0
 	pla
@@ -2269,7 +2059,7 @@ dungeon_only:
 combat_only:
 	lda game_mode
 	bmi @ok
-	jsr j_primm  ;b'COMBAT ONLY!\n\x00'
+	jsr j_primm
 	.byte "COMBAT ONLY!", $8d
 	.byte 0
 	pla
@@ -2283,7 +2073,7 @@ outdoors_only:
 	lda game_mode
 	cmp #mode_world
 	beq @ok
-	jsr j_primm  ;b'OUTDOORS ONLY!\n\x00'
+	jsr j_primm
 	.byte "OUTDOORS ONLY!", $8d
 	.byte 0
 	pla
@@ -2317,7 +2107,7 @@ spell_effect:
 	rts
 
 failed:
-	jsr j_primm  ;b'FAILED!\n\x00'
+	jsr j_primm
 	.byte "FAILED!", $8d
 	.byte 0
 	lda #sound_alert
@@ -2342,12 +2132,13 @@ is_undead:
 	rts
 
 prompt_direction:
-	jsr j_primm  ;b'DIRECTION-\x00'
+	jsr j_primm
 	.byte "DIRECTION-", 0
 	rts
 
+; Refactored extraction for TRAINER: balloon_steer
 print_descend:
-	jsr j_primm  ;b'Descend \x00'
+	jsr j_primm
 	.byte "Descend ", 0
 	rts
 
@@ -2374,7 +2165,7 @@ cmd_descend:
 	jmp done_what
 
 :	inc dungeon_level
-	jsr j_primm  ;b'down!\nTo level \x00'
+	jsr j_primm
 	.byte "down!", $8d
 	.byte "To level ", 0
 	clc
@@ -2387,17 +2178,20 @@ cmd_descend:
 @balloon:
 	lda balloon_movement
 ; TRAINER: balloon_steer
+;      $ff drift && $01 trainer_on => $00 steer
+;      $00 steer  => regular game logic
+;      $01 landed => regular game logic
+	lsr
 	and trainer_balloon
 	beq @try_land
-	asl
-	sta balloon_movement
+	inc balloon_movement
 	jsr print_descend
 	jsr print_newline
 @done:
 	jmp cmd_done
 ; TRAINER end
 @try_land:
-	jsr j_primm  ;b'Land Balloon\n\x00'
+	jsr j_primm
 	.byte "Land Balloon", $8d
 	.byte 0
 	lda tile_under_player
@@ -2405,10 +2199,9 @@ cmd_descend:
 	bne @not_here
 	lda #balloon_landed
 	sta balloon_movement
+	lda #occlusion_on
 	sta terrain_occlusion
-	beq @done  ; always
-	.assert balloon_landed = 0, error, "Balloon trainer math will break"
-
+	beq @done  ; always  (SIZE_OPT, replace JMP)
 @not_here:
 	jmp done_not_here
 
@@ -2427,7 +2220,7 @@ cmd_descend:
 	lda player_ypos
 	cmp #$02
 	beq @to_dungeon
-	jsr j_primm  ;b'to\nfirst floor!\n\x00'
+	jsr j_primm
 	.byte "to", $8d
 	.byte "first floor!", $8d
 	.byte 0
@@ -2435,28 +2228,28 @@ cmd_descend:
 	jsr music_ctl
 	lda #char_A
 	jsr load_letter_location
-	lda #music_explore
+	lda #music_castle
 	jsr music_ctl
 	jmp cmd_done
 
 @to_dungeon:
-	jsr j_primm  ;b'into\nthe depths!\n\x00'
+	jsr j_primm
 	.byte "into", $8d
 	.byte "the depths!", $8d
 	.byte 0
 	lda #$05     ;start in the middle, not usual 1,1
 	sta temp_x
 	sta temp_y
-	lda #$ef     ;hythloth longitude
+	lda #xpos_hythloth
 	sta britannia_x
-	lda #$f0     ;hythloth latitude
+	lda #ypos_hythloth
 	sta britannia_y
 	lda #loc_dng_hythloth
 	sta current_location
 	jmp begin_dng_load
 
 cmd_enter:
-	jsr j_primm  ;b'Enter \x00'
+	jsr j_primm
 	.byte "Enter ", 0
 	lda current_location
 	bne @not_allowed        ;only in world
@@ -2513,15 +2306,15 @@ cmd_enter:
 
 :	cmp #tile_field_fire
 	beq try_enter_abyss
-	lda #location_world
+	lda #loc_world
 	sta current_location
 	jmp done_what
 
 try_enter_abyss:
 	lda bell_book_candle
-	cmp #$77
+	cmp #items_opened_abyss
 	beq :+
-	lda #location_world
+	lda #loc_world
 	sta current_location
 	jmp done_cant
 
@@ -2529,7 +2322,7 @@ try_enter_abyss:
 	jmp check_on_foot
 
 try_enter_dungeon:
-	jsr j_primm  ;b'dungeon!\n\x00'
+	jsr j_primm
 	.byte "dungeon!", $8d
 	.byte 0
 	jsr print_location_name
@@ -2537,7 +2330,7 @@ check_on_foot:
 	lda player_transport
 	cmp #tile_walk
 	beq :+
-	lda #$00
+	lda #loc_world
 	sta current_location
 	jmp done_only_on_foot
 
@@ -2548,7 +2341,7 @@ check_on_foot:
 	jsr music_ctl
 	jsr file_write_temp_map
 begin_dng_load:
-	jsr load_dungeon
+	jsr load_dungeon    ;refactored for ENHANCEMENT
 	lda #dng_dir_east
 	sta dng_direction
 	lda temp_x
@@ -2559,12 +2352,13 @@ begin_dng_load:
 	sta dungeon_level
 	jmp cmd_done
 
+;Refactored extraction for ENHANCEMENT: allow save in dungon
 load_dungeon:
 	lda #music_off
 	jsr music_ctl
 	lda #disk_dungeon
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BLOAD DNGD,A$8C00\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD DNGD,A$8C00", $8d
 	.byte 0
 	jsr load_dungeon_map
@@ -2577,9 +2371,9 @@ load_dungeon:
 load_dungeon_map:
 	clc
 	lda current_location
-	adc #char_0 - loc_dng_first
+	adc #char_num_first - loc_dng_first
 	sta @file_char_dungeon
-	jsr j_primm_cout ;b'\x84BLOAD DNG@,A$E800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD DNG"
 @file_char_dungeon:
 	.byte "@,A$E800", $8d
@@ -2593,13 +2387,13 @@ load_dungeon_map:
 	rts
 
 print_ruin:
-	jsr j_primm  ;b'ruin!\n\x00'
+	jsr j_primm
 	.byte "ruin!", $8d
 	.byte 0
 	jmp enter_towne
 
 print_towne:
-	jsr j_primm  ;b'towne!\n\x00'
+	jsr j_primm
 	.byte "towne!", $8d
 	.byte 0
 enter_towne:
@@ -2613,10 +2407,10 @@ enter_towne:
 	sta player_xpos
 	lda current_location
 	sec
-	sbc #towne_first
+	sbc #loc_towne_first
 	cmp #num_townes
 	bcs @play_towne_music
-	sta zp_index
+	sta zp_index1
 	lda party_size
 	sta curr_player
 @check_npc_joined:
@@ -2626,7 +2420,7 @@ enter_towne:
 	jsr j_get_stats_ptr
 	ldy #player_class_index
 	lda (ptr1),y
-	cmp zp_index
+	cmp zp_index1
 	beq @remove_joinable_npc
 	dec curr_player
 	jmp @check_npc_joined
@@ -2636,14 +2430,14 @@ enter_towne:
 	ldx #object_max
 	sta object_tile_type,x
 	sta object_tile_sprite,x
-	sta object_dng_level,x
+	sta npc_movement_ai,x
 @play_towne_music:
 	lda #music_Towne
 	jsr music_ctl
 	jmp cmd_done
 
 print_village:
-	jsr j_primm  ;b'village!\n\x00'
+	jsr j_primm
 	.byte "village!", $8d
 	.byte 0
 	jmp enter_towne
@@ -2651,7 +2445,7 @@ print_village:
 print_castle:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm  ;b'castle!\n\x00'
+	jsr j_primm
 	.byte "castle!", $8d
 	.byte 0
 	jsr print_location_name
@@ -2667,7 +2461,7 @@ print_castle:
 	jmp cmd_done
 
 print_shrine:
-	jsr j_primm  ;b'the\nshrine of\n\x00'
+	jsr j_primm
 	.byte "the", $8d
 	.byte "shrine of", $8d
 	.byte 0
@@ -2679,11 +2473,11 @@ print_shrine:
 load_shrine:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD SHRN,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SHRN,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
-	lda #music_explore
+	lda #music_adventure
 	jsr music_ctl
 	jmp cmd_done
 
@@ -2710,7 +2504,7 @@ print_location_name:
 file_write_temp_map:
 	lda #disk_britannia
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BSAVE TLST,A$EE00,L$100\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BSAVE TLST,A$EE00,L$100", $8d
 	.byte 0
 	rts
@@ -2724,22 +2518,22 @@ load_towne:
 	adc #char_at_sign
 load_letter_location:
 	sta @map_number
-	jsr j_primm_cout ;b'\n\x84BLOAD MAP@,A$8B00\n\x00'
+	jsr j_primm_cout
 	.byte $8d,$84,"BLOAD MAP"
 @map_number:
 	.byte "@,A$8B00", $8d
 	.byte 0
 	ldx #$00
 @copy_map:
-	lda file_buf,x
+	lda load_buf,x
 	sta towne_map,x
-	lda file_buf+$100,x
+	lda load_buf+$100,x
 	sta towne_map+$100,x
-	lda file_buf+$200,x
+	lda load_buf+$200,x
 	sta towne_map+$200,x
-	lda file_buf+$300,x
+	lda load_buf+$300,x
 	sta towne_map+$300,x
-	lda file_buf+$400,x
+	lda load_buf+$400,x
 	sta object_tile_sprite,x
 	inx
 	bne @copy_map
@@ -2751,7 +2545,7 @@ fire_at_what:
 	jmp done_what
 
 cmd_fire:
-	jsr j_primm  ;b'Fire-\x00'
+	jsr j_primm
 	.byte "Fire-", 0
 	lda player_transport
 	cmp #tile_ship_first
@@ -2770,7 +2564,7 @@ cmd_fire:
 	cmp #tile_ship_south
 	beq @do_fire
 @only_broadsides:
-	jsr j_primm  ;b'ONLY BROADSIDES!\n\x00'
+	jsr j_primm
 	.byte "ONLY BROADSIDES!", $8d
 	.byte 0
 	lda #sound_what
@@ -2789,7 +2583,7 @@ cmd_fire:
 	lda #sound_cannon
 	jsr j_playsfx
 	lda #range_missile_travel
-	sta zpea
+	sta zp_count
 @next:
 	jsr any_obj_at_temp_xy
 	bpl @cannon_hit
@@ -2809,12 +2603,12 @@ cmd_fire:
 	lda temp_y
 	adc delta_y
 	sta temp_y
-	dec zpea
+	dec zp_count
 	bne @next
 	jmp cmd_done
 
 @cannon_hit:
-	stx zpd9
+	stx zp_target_index
 	jsr j_gettile_opposite
 	pha
 	lda #tile_attack_red
@@ -2825,15 +2619,15 @@ cmd_fire:
 	jsr j_gettile_opposite
 	pla
 	sta (ptr1),y
-	lda zpd9
-	cmp #$08     ;characters roll chance, objects instant obliterate
+	lda zp_target_index
+	cmp #object_inanimate_first     ;mobs roll chance, objects instant obliterate
 	bcs @destroyed
 	jsr j_rand
-	and #$03     ;1/4 chance
+	and #chance_4
 	bne @done
 @destroyed:
 	lda #$00
-	ldx zpd9
+	ldx zp_target_index
 	ldy object_tile_type,x
 	cpy #tile_lord_british
 	beq @done
@@ -2843,7 +2637,7 @@ cmd_fire:
 	jmp cmd_done
 
 cmd_get_chest:
-	jsr j_primm  ;b'Get chest, who\nwill open-\x00'
+	jsr j_primm
 	.byte "Get chest, who", $8d
 	.byte "will open-", 0
 	jsr j_getplayernum
@@ -2934,26 +2728,26 @@ do_get_chest:
 	and zp_trap_type
 	sta zp_trap_type
 	bne :+
-	jsr j_primm  ;b'ACID\x00'
+	jsr j_primm
 	.byte "ACID", 0
 	jmp @try_evade
 
 :	cmp #trap_sleep
 	bne :+
-	jsr j_primm  ;b'SLEEP\x00'
+	jsr j_primm
 	.byte "SLEEP", 0
 	jmp @try_evade
 
 :	cmp #trap_poison
 	bne :+
-	jsr j_primm  ;b'POISON\x00'
+	jsr j_primm
 	.byte "POISON", 0
 	jmp @try_evade
 
-:	jsr j_primm  ;b'BOMB\x00'
+:	jsr j_primm
 	.byte "BOMB", 0
 @try_evade:
-	jsr j_primm  ;b' TRAP!\n\x00'
+	jsr j_primm
 	.byte " TRAP!", $8d
 	.byte 0
 	lda curr_player
@@ -2963,14 +2757,14 @@ do_get_chest:
 	lda (ptr1),y
 	jsr decode_bcd_value
 	clc
-	adc #$19     ;DEX + 25
-	sta zpd9
+	adc #$19     ;evade if DEX + 25 > rand(100)
+	sta zp_number2
 	lda #$64
 	jsr rand_modulo
-	cmp zpd9
+	cmp zp_number2
 	bcs check_acid
 trap_evaded:
-	jsr j_primm  ;b'EVADED!\n\x00'
+	jsr j_primm
 	.byte "EVADED!", $8d
 	.byte 0
 	lda #sound_alert
@@ -3012,22 +2806,22 @@ check_bomb:
 	jsr damage_party
 
 collect_gold:
-	jsr j_primm  ;b'THE CHEST HOLDS:\n\x00'
+	jsr j_primm
 	.byte "THE CHEST HOLDS:", $8d
 	.byte 0
-	lda #$64
+	lda #$64     ;100
 	jsr rand_modulo
 	jsr encode_bcd_value
 	jsr inc_party_gold
 	lda zp_amount
 	jsr j_printbcd
-	jsr j_primm  ;b' GOLD!\n\x00'
+	jsr j_primm
 	.byte " GOLD!", $8d
 	.byte 0
 	jmp cmd_done
 
 cmd_hole_up:
-	jsr j_primm  ;b'Hole up & camp\n\x00'
+	jsr j_primm
 	.byte "Hole up & camp", $8d
 	.byte 0
 	lda current_location
@@ -3041,7 +2835,7 @@ cmd_hole_up:
 	lda player_transport
 	cmp #tile_walk
 	beq @load_file_camp
-	jsr j_primm  ;b'MUST BE ON FOOT!\n\x00'
+	jsr j_primm
 	.byte "MUST BE ON FOOT!", $8d
 	.byte 0
 	jmp cmd_done
@@ -3049,12 +2843,12 @@ cmd_hole_up:
 @load_file_camp:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD HOLE,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD HOLE,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
 	jsr j_update_status
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 	lda game_mode
 	cmp #mode_dungeon
@@ -3063,7 +2857,7 @@ cmd_hole_up:
 :	jmp cmd_done
 
 cmd_ignite:
-	jsr j_primm  ;b'Ignite torch!\n\x00'
+	jsr j_primm
 	.byte "Ignite torch!", $8d
 	.byte 0
 	lda trainer_torch  ;TRAINER: free torches
@@ -3073,7 +2867,7 @@ cmd_ignite:
 	bcs :+
 	jmp done_have_none
 
-:	lda #$64
+:	lda #$64     ;100
 	sta light_duration
 	lda game_mode
 	cmp #mode_dungeon
@@ -3082,7 +2876,7 @@ cmd_ignite:
 :	jmp cmd_done
 
 cmd_jimmy_lock:
-	jsr j_primm  ;b'Jimmy lock-\x00'
+	jsr j_primm
 	.byte "Jimmy lock-", 0
 	jsr input_direction
 	lda game_mode
@@ -3108,7 +2902,7 @@ cmd_jimmy_lock:
 	jmp done_done
 
 cmd_klimb:
-	jsr j_primm  ;b'Klimb \x00'
+	jsr j_primm
 	.byte "Klimb ", 0
 	lda current_location
 	beq @world
@@ -3127,14 +2921,14 @@ cmd_klimb:
 	beq :+
 	cmp #dng_tile_ladder_du
 	bne @deny
-:	jsr j_primm  ;b'up!\n\x00'
+:	jsr j_primm
 	.byte "up!", $8d
 	.byte 0
 	dec dungeon_level
 	bpl :+
 	jmp leave_to_world
 
-:	jsr j_primm  ;b'To level \x00'
+:	jsr j_primm
 	.byte "To level ", 0
 	clc
 	lda dungeon_level
@@ -3149,19 +2943,24 @@ cmd_klimb:
 	bne @deny
 
 ; TRAINER: balloon_steer
-	lda terrain_occlusion
-	eor #1
-	and trainer_balloon
-	sta balloon_movement
-	inc balloon_movement
-	.assert balloon_drift = 1, error, "Balloon trainer math will break"
+;      $ff occlude_off => $ff drift
+;      $00 occlude_on:
+;      $00 trainer_off => $ff drift
+;      $01 trainer_on  => $00 steer
+	ldx terrain_occlusion
+	bne :+
+	dec terrain_occlusion
+	ldx trainer_balloon
+	dex
+:	stx balloon_movement
 ; TRAINER end
-	lda #balloon_drift
-;	sta balloon_movement  ; replaced by TRAINER above
-	sta terrain_occlusion
-	jsr j_primm  ;b'altitude\n\x00'
+	jsr j_primm
 	.byte "altitude", $8d
 	.byte 0
+;replaced by TRAINER above
+;	lda #$ff
+;	sta balloon_movement    ;balloon_aloft
+;	sta terrain_occlusion   ;occlusion_off
 	jmp cmd_done
 
 @castle_britannia:
@@ -3174,7 +2973,7 @@ cmd_klimb:
 	jsr print_newline
 	jmp done_only_on_foot
 
-:	jsr j_primm  ;b'to\nsecond floor!\n\x00'
+:	jsr j_primm
 	.byte "to", $8d
 	.byte "second floor!", $8d
 	.byte 0
@@ -3182,22 +2981,22 @@ cmd_klimb:
 	jsr music_ctl
 	lda #$c0     ;second floor of castle britannia
 	jsr load_letter_location
-	lda #music_explore
+	lda #music_castle
 	jsr music_ctl
 	jmp cmd_done
 
 cmd_locate:
-	jsr j_primm  ;b'Locate position\n\x00'
+	jsr j_primm
 	.byte "Locate position", $8d
 	.byte 0
 	lda sextant
 	bne @have_sextant
-	jsr j_primm  ;b'WITH \x00'
+	jsr j_primm
 	.byte "WITH ", 0
 	jmp done_what
 
 @have_sextant:
-	jsr j_primm  ;b'with sextant:\n\n latitude:\x00'
+	jsr j_primm
 	.byte "with sextant:", $8d
 	.byte $8d
 	.byte " latitude:", 0
@@ -3209,15 +3008,15 @@ cmd_locate:
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
-	lda #$a7
+	lda #char_single_quote
 	jsr j_console_out
 	lda player_ypos
 	and #$0f
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
-	jsr j_primm  ;b'"\nlongitude:\x00'
-	.byte $a2, $8d  ; double-quote (")
+	jsr j_primm
+	.byte char_double_quote, $8d
 	.byte "longitude:", 0
 	lda player_xpos
 	lsr
@@ -3227,35 +3026,35 @@ cmd_locate:
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
-	lda #$a7
+	lda #char_single_quote
 	jsr j_console_out
 	lda player_xpos
 	and #$0f
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
-	lda #$a2
+	lda #char_double_quote
 	jsr j_console_out
 	jsr print_newline
 	jmp cmd_done
 
 cmd_mix_reagents:
 	jsr display_spells
-	jsr j_primm  ;b'Mix reagents\n\x00'
+	jsr j_primm
 	.byte "Mix reagents", $8d
 	.byte 0
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD MIX,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD MIX,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 	jmp cmd_done
 
 cmd_new_order:
-	jsr j_primm  ;b'New order:\nexchange #\x00'
+	jsr j_primm
 	.byte "New order:", $8d
 	.byte "exchange #", 0
 	jsr j_getplayernum
@@ -3275,7 +3074,7 @@ cmd_new_order:
 	sta new_order_stat_ptr
 	lda ptr1 + 1
 	sta new_order_stat_ptr+1
-	jsr j_primm  ;b'    with #\x00'
+	jsr j_primm
 	.byte "    with #", 0
 	jsr j_getplayernum
 	bne :+
@@ -3313,7 +3112,7 @@ cmd_new_order:
 
 you_must_lead:
 	jsr j_printname
-	jsr j_primm  ;b'\nYOU MUST LEAD!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "YOU MUST LEAD!", $8d
 	.byte 0
@@ -3327,7 +3126,7 @@ cmd_open_door:
 	jsr close_open_door
 	lda door_open_countdown
 	bne cmd_open_door
-	jsr j_primm  ;b'Open-\x00'
+	jsr j_primm
 	.byte "Open-", 0
 	jsr input_direction
 	lda game_mode
@@ -3351,13 +3150,13 @@ cmd_open_door:
 	sta door_open_countdown
 	lda #tile_floor_brick
 	sta (ptr2),y
-	jsr j_primm  ;b'OPENED!\n\x00'
+	jsr j_primm
 	.byte "OPENED!", $8d
 	.byte 0
 	jmp cmd_done
 
 cmd_peer_gem:
-	jsr j_primm  ;b'Peer at \x00'
+	jsr j_primm
 	.byte "Peer at ", 0
 	lda trainer_peer   ;TRAINER: free gems
 	bne :+             ;TRAINER
@@ -3366,7 +3165,7 @@ cmd_peer_gem:
 	bcs :+
 	jmp done_what
 
-:	jsr j_primm  ;b'a gem!\n\x00'
+:	jsr j_primm
 	.byte "a gem!", $8d
 	.byte 0
 	jsr do_view
@@ -3375,34 +3174,34 @@ cmd_peer_gem:
 do_view:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD TMAP,A$9000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TMAP,A$9000", $8d
 	.byte 0
 	lda #music_peer
 	jsr music_ctl
-	jsr j_peer
+	jsr j_viewmap
 	lda game_mode
 	cmp #mode_dungeon
 	bne @skip
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD DNGD,A$8C00\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD DNGD,A$8C00", $8d
 	.byte 0
 @skip:
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 	rts
 
 cmd_quit:
-	jsr j_primm  ;b'Quit & save...\n\x00'
+	jsr j_primm
 	.byte "Quit & save...", $8d
 	.byte 0
 	jsr @print_move_count
 ;ENHANCEMENT: allow save in dungeon
 	lda game_mode
-	sta zpd8
-	inc zpd8    ; disk# = game_mode + 1
+	sta zp_save_reg1
+	inc zp_save_reg1    ; disk# = game_mode + 1
 	cmp #mode_dungeon
 	beq :+
 ;ENHANCEMENT END
@@ -3414,14 +3213,14 @@ cmd_quit:
 	jsr music_ctl
 	lda #disk_britannia
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BSAVE LIST,A$EE00,L$100\n\x84BSAVE ROST,A$EC00,L$200\n\x84BSAVE PRTY,A$0,L$20\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BSAVE LIST,A$EE00,L$100", $8d
 	.byte $84,"BSAVE ROST,A$EC00,L$200", $8d
 	.byte $84,"BSAVE PRTY,A$0,L$20", $8d
 	.byte 0
-	lda zpd8            ;ENHANCEMENT: allow save in dungeon
+	lda zp_save_reg1    ;ENHANCEMENT: allow save in dungeon
 	jsr j_request_disk  ;ENHANCEMENT
-	lda #music_explore
+	lda #music_adventure
 	jsr music_ctl
 	jmp cmd_done
 
@@ -3470,7 +3269,7 @@ cmd_quit:
 @digits_1:
 	lda move_counter + 3
 	jsr @print_lo_bcd
-	jsr j_primm  ;b' moves!\n\x00'
+	jsr j_primm
 	.byte " moves!", $8d
 	.byte 0
 	rts
@@ -3489,7 +3288,7 @@ cmd_quit:
 	rts
 
 cmd_ready_weapon:
-	jsr j_primm  ;b'Ready a weapon\nfor player-\x00'
+	jsr j_primm
 	.byte "Ready a weapon", $8d
 	.byte "for player-", 0
 	jsr j_getplayernum
@@ -3501,7 +3300,7 @@ cmd_ready_weapon:
 
 ask_weapon:
 	jsr ztats_1_weapons
-	jsr j_primm  ;b'Weapon:\x00'
+	jsr j_primm
 	.byte "Weapon:", 0
 	jsr input_char
 	pha
@@ -3568,7 +3367,7 @@ weapon_class_masks:
 
 weap_arm_disallowed:
 	jsr print_newline
-	jsr j_primm  ;b'A \x00'
+	jsr j_primm
 	.byte "A ", 0
 	jsr j_get_stats_ptr
 	ldy #player_class_index
@@ -3576,7 +3375,7 @@ weap_arm_disallowed:
 	clc
 	adc #string_class_first
 	jsr j_printstring
-	jsr j_primm  ;b'\nMAY NOT USE A\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "MAY NOT USE A", $8d
 	.byte 0
@@ -3588,22 +3387,22 @@ weap_arm_disallowed:
 	jmp done_aborted
 
 cmd_search:
-	jsr j_primm  ;b'Search...\n\x00'
+	jsr j_primm
 	.byte "Search...", $8d
 	.byte 0
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD SEAR,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SEAR,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 	jmp cmd_done
 
 cmd_talk:
 	jsr j_trainer_teleport   ; TRAINER: teleport anywhere
-;	jsr j_primm  ;b'Talk-\x00'
+	jsr j_primm
 	.byte "Talk-", 0
 	jsr input_direction
 	bne check_through_sign
@@ -3633,38 +3432,38 @@ check_through_sign:
 check_direct:
 	jsr get_mob_at_temp_xy
 	bmi no_response
-	stx zpea
+	stx zp_index2
 	lda current_location
 	beq no_response
 	cmp #loc_dng_first
 	bcc :+
 no_response:
-	jsr j_primm  ;b'FUNNY, NO\nRESPONSE!\n\x00'
+	jsr j_primm
 	.byte "FUNNY, NO", $8d
 	.byte "RESPONSE!", $8d
 	.byte 0
 	jmp cmd_done
 
-:	sta lt_track
-	dec lt_track
-	ldx zpea
+:	sta diskio_track
+	dec diskio_track
+	ldx zp_index2
 	lda npc_dialogue,x
-	sta lt_sector
+	sta diskio_sector
 	beq no_response
-	dec lt_sector
-	lda #lt_rwflag_read
-	sta lt_rwflag
-	lda #$ef
-	sta lt_addr_hi
+	dec diskio_sector
+	lda #RWTS_command_read
+	sta diskio_command
+	lda #$ef     ;>__DIALOG_RUN__
+	sta diskio_addr_hi
 	lda #music_off
 	jsr music_ctl
-	ldx zpea
+	ldx zp_index2
 	lda object_tile_type,x
 	cmp #tile_lord_british
 	bne @talk_non_british
 	lda #disk_britannia
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BLOAD LORD,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD LORD,A$8800", $8d
 	.byte 0
 	lda #music_British
@@ -3680,7 +3479,7 @@ no_response:
 
 @talk_non_british:
 	jsr j_loadsector
-	jsr j_primm_cout ;b'\x84BLOAD TALK,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TALK,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
@@ -3692,7 +3491,7 @@ no_response:
 check_shop:
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD SHPS,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SHPS,A$8800", $8d
 	.byte 0
 	lda #$88
@@ -3704,7 +3503,9 @@ check_shop:
 	asl
 	asl
 	sta ptr1
-	ldy #$07     ;try 8 types of shop
+
+; try standard shop types 0-7
+	ldy #$07
 @next:
 	lda (ptr1),y
 	cmp dest_y
@@ -3712,6 +3513,8 @@ check_shop:
 	dey
 	bpl @next
 	lda dest_y
+
+; try unique shop type 8
 	cmp #$18     ;row 24
 	bne :+
 	lda current_location
@@ -3719,6 +3522,8 @@ check_shop:
 	bne :+
 	ldy #shop_horse
 	bne load_shop
+
+; try unique shop type 9
 :	lda dest_y
 	cmp #$19     ;row 25
 	bne @no_response
@@ -3734,9 +3539,9 @@ check_shop:
 load_shop:
 	tya
 	clc
-	adc #char_0
+	adc #char_num_first
 	sta @file_char_shop
-	jsr j_primm_cout ;b'\x84BLOAD SHP@,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SHP"
 @file_char_shop:
 	.byte "@,A$8800", $8d
@@ -3749,18 +3554,18 @@ load_shop:
 	jmp cmd_done
 
 cmd_use_item:
-	jsr j_primm  ;b'Use...\n\x00'
+	jsr j_primm
 	.byte "Use...", $8d
 	.byte 0
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD USE,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD USE,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
 	lda game_mode
 	bmi @combat
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 	jmp cmd_done
 
@@ -3770,27 +3575,39 @@ cmd_use_item:
 	jmp cmd_done
 
 cmd_volume:
-	jsr j_primm  ;b'Volume \x00'
+	jsr j_primm
 	.byte "Volume ", 0
-	lda music_volume
-	bne @off
-	lda #$ff
-	sta music_volume
-	jsr j_primm  ;b'ON\n\x00'
+	lda sfx_volume
+	eor #$ff          ;adjusted to accommodate music_mute ENHANCEMENT
+	sta sfx_volume    ;adjusted to accommodate music_mute ENHANCEMENT
+	beq print_off
+print_on:
+;	lda #volume_on    ;adjusted to accommodate music_mute ENHANCEMENT
+;	sta sfx_volume    ;adjusted to accommodate music_mute ENHANCEMENT
+	jsr j_primm
 	.byte "ON", $8d
 	.byte 0
 	jmp cmd_done
-
-@off:
-	lda #$00
-	sta music_volume
-	jsr j_primm  ;b'OFF\n\x00'
+print_off:
+;	lda #volume_off   ;adjusted to accommodate music_mute ENHANCEMENT
+;	sta sfx_volume    ;adjusted to accommodate music_mute ENHANCEMENT
+	jsr j_primm
 	.byte "OFF", $8d
 	.byte 0
 	jmp cmd_done
 
+;ENHANCEMENT for music_mute
+cmd_music:
+	jsr j_primm
+	.byte "Music ", 0
+	lda music_mute
+	eor #$ff
+	sta music_mute
+	bpl print_off
+	bmi print_on
+
 cmd_wear_armour:
-	jsr j_primm  ;b'Wear armour\nfor player-\x00'
+	jsr j_primm
 	.byte "Wear armour", $8d
 	.byte "for player-", 0
 	jsr j_getplayernum
@@ -3802,7 +3619,7 @@ cmd_wear_armour:
 
 ask_armour:
 	jsr display_armour
-	jsr j_primm  ;b'Armour:\x00'
+	jsr j_primm
 	.byte "Armour:", 0
 	jsr input_char
 	pha
@@ -3845,12 +3662,12 @@ ask_armour:
 @unequip_current:
 	ldy #player_armour
 	lda (ptr1),y
-	beq @eqiup_new
+	beq @equip_new
 	clc
 	adc #party_stat_armour
 	tay
 	jsr inc_stat
-@eqiup_new:
+@equip_new:
 	ldy #player_armour
 	lda zp_selected
 	sta (ptr1),y
@@ -3871,7 +3688,7 @@ armour_class_masks:
 	.byte $ff,$ff,$7f,$2c,$2c,$24,$04,$ff
 
 cmd_x_it:
-	jsr j_primm  ;b'X-it \x00'
+	jsr j_primm
 	.byte "X-it ", 0
 	lda player_transport
 	cmp #tile_ship_first
@@ -3893,12 +3710,12 @@ cmd_x_it:
 	jmp @find_empty_slot
 
 @horse:
-	lda #$00
+	lda #horse_walk
 	sta horse_mode
 	jmp @find_empty_slot    ; back-ported from C64. Probably unnecessary.
 
 @balloon:
-	lda balloon_movement
+	lda terrain_occlusion   ; TRAINER: balloon_steer
 	beq @find_empty_slot
 	jmp done_not_here
 
@@ -3923,7 +3740,7 @@ cmd_x_it:
 	lda player_ypos
 	sta object_ypos,x
 	lda #$00
-	sta object_dng_level,x
+	sta npc_movement_ai,x
 	sta npc_dialogue,x
 	lda #tile_walk
 	sta player_transport
@@ -3931,7 +3748,7 @@ cmd_x_it:
 	jmp cmd_done
 
 cmd_yell_horse:
-	jsr j_primm  ;b'Yell \x00'
+	jsr j_primm
 	.byte "Yell ", 0
 	lda player_transport
 	cmp #tile_horse_west
@@ -3941,21 +3758,21 @@ cmd_yell_horse:
 	jmp done_what
 
 :	lda horse_mode
-	eor #$ff
+	eor #$ff     ;toggle horse_walk / horse_gallop
 	sta horse_mode
 	bmi :+
-	jsr j_primm  ;b'whoa!\n\x00'
+	jsr j_primm
 	.byte "whoa!", $8d
 	.byte 0
 	jmp cmd_done
 
-:	jsr j_primm  ;b'giddyup!\n\x00'
+:	jsr j_primm
 	.byte "giddyup!", $8d
 	.byte 0
 	jmp cmd_done
 
 cmd_ztats:
-	jsr j_primm  ;b'Ztats for-\x00'
+	jsr j_primm
 	.byte "Ztats for-", 0
 	jsr j_getplayernum
 	bne @check_valid_player
@@ -3972,11 +3789,12 @@ zstats_for_player:
 	jsr save_cursor
 	ldx #$1c
 	ldy #$00
-	jsr j_primm_xy ;b'>PLR-\x00'
-	.byte $1e,"PLR-", 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "PLR-", 0
 	lda curr_player
 	jsr j_printdigit
-	lda #char_less
+	lda #glyph_less_even
 	jsr j_console_out
 	ldx #$18
 	stx console_xpos
@@ -4009,7 +3827,7 @@ zstats_for_player:
 	jsr j_console_out
 	ldx #$19
 	ldy #$03
-	jsr j_primm_xy ;b'MP:\x00'
+	jsr j_primm_xy
 	.byte "MP:", 0
 	jsr j_get_stats_ptr
 	ldy #player_magic_points
@@ -4017,7 +3835,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$20
 	ldy #$03
-	jsr j_primm_xy ;b'LV:\x00'
+	jsr j_primm_xy
 	.byte "LV:", 0
 	jsr j_get_stats_ptr
 	ldy #player_max_hp_hi
@@ -4025,7 +3843,7 @@ zstats_for_player:
 	jsr j_printdigit
 	ldx #$18
 	ldy #$04
-	jsr j_primm_xy ;b'STR:\x00'
+	jsr j_primm_xy
 	.byte "STR:", 0
 	jsr j_get_stats_ptr
 	ldy #player_strength
@@ -4033,7 +3851,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$18
 	ldy #$05
-	jsr j_primm_xy ;b'DEX:\x00'
+	jsr j_primm_xy
 	.byte "DEX:", 0
 	jsr j_get_stats_ptr
 	ldy #player_dexterity
@@ -4041,7 +3859,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$18
 	ldy #$06
-	jsr j_primm_xy ;b'INT:\x00'
+	jsr j_primm_xy
 	.byte "INT:", 0
 	jsr j_get_stats_ptr
 	ldy #player_intelligence
@@ -4049,7 +3867,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$20
 	ldy #$04
-	jsr j_primm_xy ;b'HP:\x00'
+	jsr j_primm_xy
 	.byte "HP:", 0
 	jsr j_get_stats_ptr
 	ldy #player_cur_hp_hi
@@ -4060,7 +3878,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$20
 	ldy #$05
-	jsr j_primm_xy ;b'HM:\x00'
+	jsr j_primm_xy
 	.byte "HM:", 0
 	jsr j_get_stats_ptr
 	ldy #player_max_hp_hi
@@ -4071,7 +3889,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$20
 	ldy #$06
-	jsr j_primm_xy ;b'EX:\x00'
+	jsr j_primm_xy
 	.byte "EX:", 0
 	jsr j_get_stats_ptr
 	ldy #player_experience_hi
@@ -4082,7 +3900,7 @@ zstats_for_player:
 	jsr j_printbcd
 	ldx #$18
 	ldy #$07
-	jsr j_primm_xy ;b'W:\x00'
+	jsr j_primm_xy
 	.byte "W:", 0
 	jsr j_get_stats_ptr
 	ldy #player_weapon
@@ -4092,7 +3910,7 @@ zstats_for_player:
 	jsr j_printstring
 	ldx #$18
 	ldy #$08
-	jsr j_primm_xy ;b'A:\x00'
+	jsr j_primm_xy
 	.byte "A:", 0
 	jsr j_get_stats_ptr
 	ldy #player_armour
@@ -4187,10 +4005,12 @@ ztats_1_weapons:
 	jsr save_cursor
 	ldx #$1b
 	ldy #$00
-	sty zp_index
+	sty zp_inventory_index
 	sty zp_display_line
-	jsr j_primm_xy ;b'>WEAPONS<\x00'
-	.byte $1f,"WEAPONS",$1d, 0
+	jsr j_primm_xy
+	.byte glyph_greater_odd
+	.byte "WEAPONS"
+	.byte glyph_less_odd, 0
 @next:
 	lda zp_display_line
 	and #$08
@@ -4201,7 +4021,7 @@ ztats_1_weapons:
 	and #$07
 	sta console_ypos
 	inc console_ypos
-	lda zp_index
+	lda zp_inventory_index
 	beq @nothing
 	clc
 	adc #party_stat_weapons
@@ -4209,7 +4029,7 @@ ztats_1_weapons:
 	lda party_stats,y
 	beq @skip
 	pha
-	lda zp_index
+	lda zp_inventory_index
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
@@ -4227,21 +4047,21 @@ ztats_1_weapons:
 	jsr j_printbcd
 :	lda #char_hyphen
 	jsr j_console_out
-	lda zp_index
+	lda zp_inventory_index
 	clc
 	adc #string_weapons_short
 	jsr j_printstring
 	inc zp_display_line
 @skip:
-	inc zp_index
-	lda zp_index
-	cmp #$10
+	inc zp_inventory_index
+	lda zp_inventory_index
+	cmp #weapon_last
 	bcc @next
 	jsr restore_cursor
 	rts
 
 @nothing:
-	jsr j_primm  ;b'A-HANDS\x00'
+	jsr j_primm
 	.byte "A-HANDS", 0
 	inc zp_display_line
 	jmp @skip
@@ -4251,25 +4071,27 @@ display_armour:
 	jsr save_cursor
 	ldx #$1b
 	ldy #$00
-	sty zp_index
+	sty zp_inventory_index
 	sty zp_display_line
-	jsr j_primm_xy ;b'>ARMOUR<\x00'
-	.byte $1f,"ARMOUR",$1c, 0
+	jsr j_primm_xy
+	.byte glyph_greater_odd
+	.byte "ARMOUR"
+	.byte glyph_less_even, 0
 @next:
 	lda #$18
 	sta console_xpos
 	lda zp_display_line
 	sta console_ypos
 	inc console_ypos
-	lda zp_index
+	lda zp_inventory_index
 	beq @no_armour
 	clc
-	adc #$18
+	adc #party_stat_armour
 	tay
 	lda party_stats,y
 	beq @skip
 	pha
-	lda zp_index
+	lda zp_inventory_index
 	clc
 	adc #char_alpha_first
 	jsr j_console_out
@@ -4287,21 +4109,21 @@ display_armour:
 	jsr j_printbcd
 :	lda #char_hyphen
 	jsr j_console_out
-	lda zp_index
+	lda zp_inventory_index
 	clc
 	adc #string_armour
 	jsr j_printstring
 	inc zp_display_line
 @skip:
-	inc zp_index
-	lda zp_index
-	cmp #$08
+	inc zp_inventory_index
+	lda zp_inventory_index
+	cmp #armour_last
 	bcc @next
 	jsr restore_cursor
 	rts
 
 @no_armour:
-	jsr j_primm  ;b'A-NO ARMOUR\x00'
+	jsr j_primm
 	.byte "A-NO ARMOUR", 0
 	inc zp_display_line
 	jmp @skip
@@ -4311,32 +4133,34 @@ display_tools:
 	jsr save_cursor
 	ldx #$1a
 	ldy #$00
-	jsr j_primm_xy ;b'>EQUIPMENT<\x00'
-	.byte $1e,"EQUIPMENT",$1c, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "EQUIPMENT"
+	.byte glyph_less_even, 0
 	jsr next_line
 	ldy #party_stat_torches
 	lda party_stats,y
 	jsr j_printbcd
-	jsr j_primm  ;b'-TORCHES\x00'
+	jsr j_primm
 	.byte "-TORCHES", 0
 	jsr next_line
 	ldy #party_stat_gems
 	lda party_stats,y
 	jsr j_printbcd
-	jsr j_primm  ;b'-GEMS\x00'
+	jsr j_primm
 	.byte "-GEMS", 0
 	jsr next_line
 	ldy #party_stat_keys
 	lda party_stats,y
 	jsr j_printbcd
-	jsr j_primm  ;b'-KEYS\x00'
+	jsr j_primm
 	.byte "-KEYS", 0
 	jsr next_line
 	ldy #party_stat_sextant
 	lda party_stats,y
 	beq :+
 	jsr j_printbcd
-	jsr j_primm  ;b'-SEXTANTS\x00'
+	jsr j_primm
 	.byte "-SEXTANTS", 0
 :	jsr restore_cursor
 	rts
@@ -4346,24 +4170,26 @@ display_quests:
 	jsr save_cursor
 	ldx #$1c
 	ldy #$00
-	jsr j_primm_xy ;b'>ITEMS<\x00'
-	.byte $1e,"ITEMS",$1c, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "ITEMS"
+	.byte glyph_less_even, 0
 	lda #$00
 	sta console_ypos
 	lda stones
 	beq display_runes
 	sta zp_item_flags
 	jsr next_line
-	jsr j_primm  ;b'STONES:\x00'
+	jsr j_primm
 	.byte "STONES:", 0
 	ldy #$07
 @next:
 	rol zp_item_flags
 	bcc @skip
-	sty zpd9
+	sty zp_save_reg2
 	lda stone_sym,y
 	jsr j_console_out
-	ldy zpd9
+	ldy zp_save_reg2
 @skip:
 	dey
 	bpl @next
@@ -4372,16 +4198,16 @@ display_runes:
 	beq display_items
 	sta zp_item_flags
 	jsr next_line
-	jsr j_primm  ;b'RUNES:\x00'
+	jsr j_primm
 	.byte "RUNES:", 0
 	ldy #$07
 @next:
 	rol zp_item_flags
 	bcc @skip
-	sty zpd9
+	sty zp_save_reg2
 	lda rune_sym,y
 	jsr j_console_out
-	ldy zpd9
+	ldy zp_save_reg2
 @skip:
 	dey
 	bpl @next
@@ -4390,38 +4216,38 @@ display_items:
 	beq display_3_part_key
 	jsr next_line
 	lda bell_book_candle
-	and #item_flag_bell
+	and #item_have_bell
 	beq :+
-	jsr j_primm  ;b'BELL \x00'
+	jsr j_primm
 	.byte "BELL ", 0
 :	lda bell_book_candle
-	and #item_flag_book
+	and #item_have_book
 	beq :+
-	jsr j_primm  ;b'BOOK \x00'
+	jsr j_primm
 	.byte "BOOK ", 0
 :	lda bell_book_candle
-	and #item_flag_candle
+	and #item_have_candle
 	beq display_3_part_key    ; BUGFIX: was :+
-	jsr j_primm  ;b'CANDL\x00'
+	jsr j_primm
 	.byte "CANDL", 0
 display_3_part_key:
 	lda threepartkey
 	beq display_horn_etc
 	jsr next_line
-	jsr j_primm  ;b'3 PART KEY:\x00'
+	jsr j_primm
 	.byte "3 PART KEY:", 0
 	lda threepartkey
-	and #key3_flag_truth
+	and #key3_have_truth
 	beq :+
 	lda #char_T
 	jsr j_console_out
 :	lda threepartkey
-	and #key3_flag_love
+	and #key3_have_love
 	beq :+
 	lda #char_L
 	jsr j_console_out
 :	lda threepartkey
-	and #key3_flag_courage
+	and #key3_have_courage
 	beq display_horn_etc
 	lda #char_C
 	jsr j_console_out
@@ -4429,18 +4255,18 @@ display_horn_etc:
 	lda horn
 	beq :+
 	jsr next_line
-	jsr j_primm  ;b'HORN\x00'
+	jsr j_primm
 	.byte "HORN", 0
 :	lda wheel
 	beq :+
 	jsr next_line
-	jsr j_primm  ;b'WHEEL\x00'
+	jsr j_primm
 	.byte "WHEEL", 0
 :	lda skull
 	beq :+
 	bmi :+
 	jsr next_line
-	jsr j_primm  ;b'SKULL\x00'
+	jsr j_primm
 	.byte "SKULL", 0
 :	jsr restore_cursor
 	rts
@@ -4462,8 +4288,10 @@ display_reagents:
 	ldx #$1a
 	ldy #$00
 	sty zp_reagent_index
-	jsr j_primm_xy ;b'>REAGENTS<\x00'
-	.byte $1e,"REAGENTS",$1d, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "REAGENTS"
+	.byte glyph_less_odd, 0
 @next:
 	clc
 	lda zp_reagent_index
@@ -4475,7 +4303,7 @@ display_reagents:
 	jsr next_line
 	clc
 	lda zp_reagent_index
-	adc #char_A
+	adc #char_alpha_first
 	jsr j_console_out
 	lda zp_reagent_count
 	cmp #$10
@@ -4497,7 +4325,7 @@ display_reagents:
 @skip:
 	inc zp_reagent_index
 	lda zp_reagent_index
-	cmp #$08
+	cmp #reagent_max
 	bcc @next
 	jsr restore_cursor
 	rts
@@ -4507,10 +4335,12 @@ display_spells:
 	jsr save_cursor
 	ldx #$1a
 	ldy #$00
-	sty zp_index
+	sty zp_inventory_index
 	sty zp_display_line
-	jsr j_primm_xy ;b'>MIXTURES<\x00'
-	.byte $1e,"MIXTURES",$1d, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "MIXTURES"
+	.byte glyph_less_odd, 0
 @next:
 	lda zp_display_line
 	lsr
@@ -4527,23 +4357,23 @@ display_spells:
 	and #$07     ;wrap after 8 rows
 	sta console_ypos
 	inc console_ypos
-	ldy zp_index
+	ldy zp_inventory_index
 	lda mixtures,y
 	beq @skip
-	lda zp_index
+	lda zp_inventory_index
 	clc
-	adc #char_A
+	adc #char_alpha_first
 	jsr j_console_out
 	lda #char_hyphen
 	jsr j_console_out
-	ldy zp_index
+	ldy zp_inventory_index
 	lda mixtures,y
 	jsr j_printbcd
 	inc zp_display_line
 @skip:
-	inc zp_index
-	lda zp_index
-	cmp #$1a     ;26, A-Z spells
+	inc zp_inventory_index
+	lda zp_inventory_index
+	cmp #spells_max
 	bcc @next
 	jsr restore_cursor
 	rts
@@ -4574,10 +4404,10 @@ cmd_done:
 	jmp combat_cmd_done
 
 :	lda ship_hull
-	cmp #$50     ;full hull strength
+	cmp #ship_hull_full
 	bcs update_player_health
 	jsr j_rand
-	and #$03     ;1/4 chance
+	and #chance_4
 	bne update_player_health
 	lda ship_hull
 	sed
@@ -4595,7 +4425,7 @@ update_player_health:
 	cmp #status_Sleep
 	bne @check_poison
 	jsr j_rand
-	and #$07     ;1/8 chance
+	and #chance_8
 	bne @player_done
 	lda #status_Good
 	sta (ptr1),y ;wake up
@@ -4618,8 +4448,8 @@ update_player_health:
 	bcs :+
 	jsr starving
 :	jsr recover_mp
-	lda balloon_movement
-	bne @update_dungeon
+	lda terrain_occlusion ; TRAINER: balloon_steer
+	bmi @update_dungeon   ; skip if aloft
 	jsr check_water_hazards
 	jsr spawn_monsters
 	jsr mobs_act
@@ -4645,7 +4475,12 @@ update_player_health:
 :	jmp end_turn
 
 tile_effect:
-	lda game_mode
+	;BUGFIX: this check moved here from @no_trolls
+	lda terrain_occlusion ; TRAINER: balloon_steer
+	bpl :+
+	rts          ;airborne
+
+:	lda game_mode
 	cmp #mode_world
 	bne @no_trolls
 	lda tile_under_player
@@ -4654,7 +4489,7 @@ tile_effect:
 	jsr j_rand
 	and #chance_8
 	bne @no_trolls
-	jsr j_primm  ;b'\nBRIDGE TROLLS!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "BRIDGE TROLLS!", $8d
 	.byte 0
@@ -4674,11 +4509,7 @@ tile_effect:
 	jmp init_combat
 
 @no_trolls:
-	lda balloon_movement
-	beq :+
-	rts          ;airborne
-
-:	lda game_mode
+	lda game_mode
 	bmi @in_combat
 	cmp #mode_dungeon
 	beq @in_dungeon
@@ -4693,7 +4524,7 @@ tile_effect:
 	sta dest_x
 	lda combat_player_ypos-1,x
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	cmp #tile_swamp
 	beq @poison1
 	cmp #tile_field_poison
@@ -4738,11 +4569,11 @@ tile_effect:
 	cmp #dng_tile_field
 	bne @check_trap
 	lda tile_under_player
-	and #$03
+	and #dng_tile_field_mask
 	beq @poison_all
-	cmp #$02
+	cmp #dng_field_fire
 	beq @damage_all
-	cmp #$03
+	cmp #dng_field_sleep
 	bne @field_done
 	jmp @sleep_all
 
@@ -4750,13 +4581,13 @@ tile_effect:
 	cmp #dng_tile_trap
 	bne @field_done
 	lda tile_under_player
-	and #$0f
+	and #dng_tile_trap_mask
 	beq @winds
 	cmp #$08
 	bcc @falling_rocks
 	bcs @pit
 @winds:
-	jsr j_primm  ;b'\nWINDS!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "WINDS!", $8d
 	.byte 0
@@ -4765,14 +4596,14 @@ tile_effect:
 	jmp @field_done
 
 @falling_rocks:
-	jsr j_primm  ;b'\nFALLING ROCKS!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "FALLING ROCKS!", $8d
 	.byte 0
 	jmp @damage_all
 
 @pit:
-	jsr j_primm  ;b'\nPIT!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "PIT!", $8d
 	.byte 0
@@ -4838,7 +4669,7 @@ tile_effect:
 	rts
 
 starving:
-	jsr j_primm  ;b'\nSTARVING!!!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "STARVING!!!", $8d
 	.byte 0
@@ -4865,44 +4696,44 @@ recover_mp:
 	bmi @skip
 	ldy #player_class_index
 	lda (ptr1),y
-	sta zp_index
+	sta zp_mp_class
 	ldy #player_intelligence
 	lda (ptr1),y
 	jsr decode_bcd_value
-	asl
-	ldx zp_index ;mage
-	beq @mp_4_of_4
+	asl          ;INT * 2
+
+	ldx zp_mp_class ;mage
+	beq @4_of_4
 	dex          ;bard
-	beq @mp_2_of_4
+	beq @2_of_4
 	dex          ;fighter
-	beq @mp_0
+	beq @0_of_4
 	dex          ;druid
-	beq @mp_3_of_4
+	beq @3_of_4
 	dex          ;tinker
-	beq @mp_1_of_4
+	beq @1_of_4
 	dex          ;paladin
-	beq @mp_2_of_4
+	beq @2_of_4
 	dex          ;ranger
-	beq @mp_2_of_4
-@mp_0:
+	beq @2_of_4
+@0_of_4:
 	lda #$00     ;shepherd
-	jmp @mp_4_of_4
+	jmp @add_mp
+@1_of_4:
+	lsr
+	lsr
+	jmp @add_mp
+@2_of_4:
+	lsr
+	jmp @add_mp
+@3_of_4:
+	lsr
+	sta zp_number1
+	lsr
+	adc zp_number1
+@4_of_4:
 
-@mp_1_of_4:
-	lsr
-	lsr
-	jmp @mp_4_of_4
-
-@mp_2_of_4:
-	lsr
-	jmp @mp_4_of_4
-
-@mp_3_of_4:
-	lsr
-	sta zpd8
-	lsr
-	adc zpd8
-@mp_4_of_4:
+@add_mp:
 	jsr encode_bcd_value
 	sta zp_mp_max
 	ldy #player_magic_points
@@ -4920,13 +4751,13 @@ recover_mp:
 	rts
 
 eat_food:
-	sta zpd8
+	sta zp_number1
 	sed
 	sec
 	lda trainer_food   ;TRAINER: free food
 	bne @done          ;TRAINER
 	lda food_frac
-	sbc zpd8
+	sbc zp_number1
 	sta food_frac
 	bcs @done
 	lda food_lo
@@ -5021,33 +4852,36 @@ spawn_world:
 
 ; Set difficulty based on how long you've been playing
 	lda move_counter
-	bne @foes_hard ;moves >= 1,000,000
+	bne @foes_hard      ;moves >= 1,000,000
 	lda move_counter + 1
-	cmp #$01
-	bcc @foes_easy ;moves < 10,000
-	beq @foes_medium ;moves < 20,000
+
+;SIZE_OPT replace this:
+;	cmp #$01
+;	bcc @foes_easy
+;	beq @foes_medium
+;SIZE_OPT with this:
+	beq @foes_easy      ;moves < 10,000
+
 	cmp #$03
-	bcs @foes_hard ;moves >= 30,000
+	bcs @foes_hard      ;moves >= 30,000
 @foes_medium:
 	lda #$07     ;mask, orc - wisp
-	jmp @choose_monster
-
+	bne @choose_monster    ;SIZE_OPT one byte smaller but one CPU cycle longer than JMP
 @foes_easy:
 	lda #$03     ;mask, orc - snake
-	jmp @choose_monster
-
+	bne @choose_monster    ;SIZE_OPT one byte smaller but one CPU cycle longer than JMP
 @foes_hard:
 	lda #$0f     ;mask, orc - balron
 @choose_monster:
-	sta zpd8
+	sta zp_number1
 	jsr j_rand
-	and zpd8
-	sta zpd8
+	and zp_number1
+	sta zp_number1
 	jsr j_rand
-	and zpd8     ;rand AND rand => each bit has 1/4 chance of being set
+	and zp_number1    ;rand AND rand => each bit has 1/4 chance of being set
 	asl
 	asl
-	adc #tile_monster_land
+	adc #tile_monster_world
 	sta object_tile_type,x
 	sta object_tile_sprite,x
 @no_spawn:
@@ -5091,7 +4925,7 @@ spawn_dungeon:
 @try_spawn:
 	lda object_tile_type,x
 	bne @next_spawn_slot
-	stx zp_index
+	stx zp_index1
 	jsr j_rand
 	and #xy_max_dungeon
 	sta dest_x
@@ -5111,9 +4945,9 @@ spawn_dungeon:
 	asl
 	asl
 	adc #tile_monster_dungeon
-	cmp #tile_monster_mimic
+	cmp #tile_mimic
 	beq @next_spawn_slot
-	ldx zp_index
+	ldx zp_index1
 	sta object_tile_type,x
 	lda dest_x
 	sta object_xpos,x
@@ -5174,16 +5008,16 @@ mobs_act_world:
 	sec
 	lda object_xpos,x
 	sbc temp2_x
-	cmp #$20
+	cmp #xy_last_tile_cache
 	bcs @out_of_range
 	sec
 	lda object_ypos,x
 	sbc temp2_y
-	cmp #$20
+	cmp #xy_last_tile_cache
 	bcs @out_of_range
-	stx zp_index
+	stx zp_cur_mob_index
 	jsr mob_world_take_turn
-	ldx zp_index
+	ldx zp_cur_mob_index
 	jmp @skip
 
 @out_of_range:
@@ -5207,22 +5041,22 @@ mob_world_take_turn:
 player_attacked:
 	jsr j_update_view
 ;SIZE_OPT to fit 'check_avoid' trainer
-	ldx zp_index
+	ldx zp_cur_mob_index
 	lda object_tile_type,x
 	sta foe_type_encountered
 	jsr attacked_by
-	bne :+           ; TRAINER
-	ldx zp_index     ; TRAINER
-	rts              ; TRAINER
+	bne :+                   ; TRAINER
+	ldx zp_cur_mob_index     ; TRAINER
+	rts                      ; TRAINER
 ;SIZE_OPT end
-:	ldx zp_index
+:	ldx zp_cur_mob_index
 	lda object_xpos,x
 	sta temp_x
 	lda object_ypos,x
 	sta temp_y
-	pla    ; not returning from "jsr mob_world_take_turn" in "mobs_act"
+	pla          ;not returning from "jsr mob_world_take_turn" in "mobs_act"
 	pla
-	pla    ; BUGFIX: not returning from "jsr mobs_act" in "cmd_done" either
+	pla          ;BUGFIX: not returning from "jsr mobs_act" in "cmd_done" either
 	pla
 	jmp do_attack
 
@@ -5282,13 +5116,13 @@ check_range:
 	lda delta_y
 	beq @turn_or_sail
 	bpl @try_sail_n_s
-;	bmi @turn_or_sail
+;	bmi @turn_or_sail    ;SIZE_OPT unnecessary
 @turn_or_sail:
 	jsr manhattan_dist
 	cmp #$06
 	bcs @turn_ship
 	jsr j_rand
-	and #$03     ;chance_4
+	and #chance_4
 	beq @turn_ship
 	lda object_tile_sprite,x
 	cmp #tile_pirate_west
@@ -5380,7 +5214,7 @@ check_range:
 
 @turn_ship_random:
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	clc
 	adc object_tile_sprite,x
 	and #$03
@@ -5409,7 +5243,7 @@ check_range:
 	jsr j_rand
 	bmi @try_move
 	jsr fire_red_missile
-	ldx zp_index
+	ldx zp_cur_mob_index
 @try_move:
 	lda #$02
 	sta zp_attempts
@@ -5463,10 +5297,10 @@ check_range:
 	bcc @do_move
 @try_random:
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
 	dec zp_attempts
 	bne @x_or_y
@@ -5494,17 +5328,17 @@ mobs_act_towne:
 	sta zp_attempts
 	lda object_tile_type,x
 	beq @no_move
-	lda object_dng_level,x
+	lda npc_movement_ai,x
 	beq @no_move
 	bmi @toward_player
 	jsr j_rand
 	bmi @no_move
 @try_random:
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
 	jmp @x_or_y
 
@@ -5512,10 +5346,10 @@ mobs_act_towne:
 	jsr manhattan_dist
 	cmp #$02
 	bcs @x_or_y
-	lda object_dng_level,x
-	cmp #$ff
+	lda npc_movement_ai,x
+	cmp #ai_hostile
 	bne @x_or_y
-	stx zp_index
+	stx zp_cur_mob_index
 	jsr player_attacked
 @no_move:
 	jmp @skip
@@ -5556,7 +5390,7 @@ mobs_act_towne:
 	jsr j_gettile_towne
 	jsr legal_move_world_twn
 	bcc @do_move
-	lda object_dng_level,x
+	lda npc_movement_ai,x
 	cmp #ai_toward_only
 	beq @skip
 	dec zp_attempts
@@ -5615,10 +5449,10 @@ mobs_act_dungeon:
 	beq @skip
 @try_random:
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
 	jsr j_rand
 	bmi @try_y
@@ -5706,12 +5540,17 @@ tile_to_monster_num:
 ;	.byte $00,$ff,$00,$01
 
 is_wind_favorable:
-	cmp direction
+	cmp wind_direction
 	beq @upwind
-	clc
-	adc #$02     ;opposite
-	and #$03     ;modulo
-	cmp direction
+
+;SIZE_OPT replace this:
+;	clc
+;	adc #$02     ;opposite
+;	and #$03     ;modulo
+;SIZE_OPT with this:
+	eor $02      ;opposite
+
+	cmp wind_direction
 	bne @yes
 @downwind:
 	lda turn_counter
@@ -5762,8 +5601,8 @@ check_water_hazards:
 @check_objects:
 	ldy #object_max
 @next_victim:
-	stx zp_index
-	cpy zp_index
+	stx zp_index1
+	cpy zp_index1
 	beq @skip    ;doesn't affect itself
 	lda object_tile_type,y
 	beq @skip    ;nothing there
@@ -5776,13 +5615,13 @@ check_water_hazards:
 	lda #$00     ;destroy what's there
 	sta object_tile_type,y
 	sta object_tile_sprite,y
-	stx zp_index
-	sty zpd9
+	stx zp_save_reg1
+	sty zp_save_reg2
 	jsr j_update_view
 	lda zp_sound
 	jsr j_playsfx
-	ldx zp_index
-	ldy zpd9
+	ldx zp_save_reg1
+	ldy zp_save_reg2
 @skip:
 	dey
 	bpl @next_victim
@@ -5801,7 +5640,7 @@ check_water_hazards:
 	jmp @check_objects
 
 enter_whirlpool:
-	stx zpd8
+	stx zp_save_reg1
 	jsr j_update_view
 	lda #tile_whirlpool
 	sta player_transport
@@ -5813,14 +5652,14 @@ enter_whirlpool:
 	lda #sound_drown
 	jsr j_playsfx
 	jsr damage_party
-	ldx zpd8
+	ldx zp_save_reg1
 	lda #tile_ship_west
 	sta player_transport
 	jsr j_player_teleport
 	rts
 
 enter_twister:
-	stx zpd8
+	stx zp_save_reg1
 	lda player_transport
 	pha
 	lda #tile_twister
@@ -5834,7 +5673,7 @@ enter_twister:
 	jsr damage_party
 	pla
 	sta player_transport
-	ldx zpd8
+	ldx zp_save_reg1
 	rts
 
 fire_cannon_pirate:
@@ -5917,11 +5756,11 @@ fire_world_missile:
 	rts
 
 @missile_impact:
-	stx zpd9
+	stx zp_save_reg2
 	lda #sound_damage
 	jsr j_playsfx
-	ldx zpd9
-	cpx #$08     ;characters roll chance, objects instant obliterate
+	ldx zp_save_reg2
+	cpx #object_inanimate_first     ;mobs roll chance, objects instant obliterate
 	bcs @destroyed
 	jsr j_rand
 	and #chance_4
@@ -5939,22 +5778,22 @@ manhattan_dist:
 	lda player_xpos
 	sbc object_xpos,x
 	sta temp_x
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	sec
 	lda player_ypos
 	sbc object_ypos,x
 	sta temp_y
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
 	lda temp_x
 	jsr math_abs
-	sta zpd9
+	sta zp_number2
 	lda temp_y
 	jsr math_abs
 	clc
-	adc zpd9
-	sta zpd9
+	adc zp_number2
+	sta zp_number2
 	rts
 
 end_turn:
@@ -5986,7 +5825,7 @@ end_turn:
 	bne @update
 	lda light_duration
 	bne @update
-	jsr j_primm  ;b"IT'S DARK!\n\x00"
+	jsr j_primm
 	.byte "IT'S DARK!", $8d
 	.byte 0
 @update:
@@ -6014,7 +5853,7 @@ inn_combat:
 
 dng_check_attacked:
 	lda tile_under_player
-	and #$0f
+	and #dng_tile_foe_mask
 	beq @nope
 	lda tile_under_player
 	and #dng_tile_type_mask
@@ -6029,7 +5868,7 @@ dng_check_attacked:
 	cmp #dng_tile_wall
 	beq @nope
 	lda tile_under_player
-	and #$0f
+	and #dng_tile_foe_mask
 	asl
 	asl
 	adc #tile_monster_dungeon - 4
@@ -6114,21 +5953,21 @@ do_dungeon_room:
 	sec
 	lda current_location
 	sbc #loc_dng_first
-	sta lt_track ;up to 16 rooms per dungeon
-	cmp #$07     ;except abyss, 16 rooms per 2 levels
+	sta diskio_track ;up to 16 rooms per dungeon
+	cmp #dng_abyss   ;except abyss, 16 rooms per 2 levels
 	bne :+
 	lda dungeon_level
 	lsr
 	clc
-	adc lt_track
-	sta lt_track
+	adc diskio_track
+	sta diskio_track
 :	lda tile_under_player
-	and #$0f
-	sta lt_sector
-	lda #lt_rwflag_read
-	sta lt_rwflag
-	lda #$02
-	sta lt_addr_hi
+	and #dng_tile_room_mask
+	sta diskio_sector
+	lda #RWTS_command_read
+	sta diskio_command
+	lda #>room_load_addr
+	sta diskio_addr_hi
 	jsr j_loadsector
 	lda game_mode
 	sta game_mode_pre_combat
@@ -6137,34 +5976,34 @@ do_dungeon_room:
 	lda #$00
 	sta flee_x
 	sta flee_y
-	ldx #$ff
-	lda lt_sector
-	cmp #$0f     ;room index "altar"
+	ldx #principle_none
+	lda diskio_sector
+	cmp #$0f        ;room index "altar" ...
 	bne @init_arena
-	lda lt_track
-	cmp #$07     ;except in abyss
+	lda diskio_track
+	cmp #dng_abyss  ;... except in abyss
 	bcs @init_arena
-	jsr j_primm  ;b'\nTHE ALTAR ROOM\nOF \x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THE ALTAR ROOM", $8d
 	.byte "OF ", 0
 	lda player_xpos
-	cmp #$03
+	cmp #$03     ;clever! maps authored so X coords always: T<3, L=3, C>3
 	beq @love
 	bcs @courage
-	jsr j_primm  ;b'TRUTH\n\x00'
+	jsr j_primm
 	.byte "TRUTH", $8d
 	.byte 0
 	ldx #principle_truth
 	beq @init_arena
 @love:
-	jsr j_primm  ;b'LOVE\n\x00'
+	jsr j_primm
 	.byte "LOVE", $8d
 	.byte 0
 	ldx #principle_love
 	bne @init_arena
 @courage:
-	jsr j_primm  ;b'COURAGE\n\x00'
+	jsr j_primm
 	.byte "COURAGE", $8d
 	.byte 0
 	ldx #principle_courage
@@ -6186,7 +6025,7 @@ do_dungeon_room:
 	asl
 	asl
 	asl
-	sta zpd8     ;00 south  10 west  20 north  30 east
+	sta zp_number1    ;00 south  10 west  20 north  30 east
 	lda party_size
 	sta curr_player
 @next_player:
@@ -6195,14 +6034,14 @@ do_dungeon_room:
 	pha
 	clc
 	lda curr_player
-	adc zpd8
+	adc zp_number1
 	tay
 	dey
 	pla
 	ldx curr_player
 	dex
 	sta combat_player_tile,x
-	lda map_start_foe_x,y
+	lda room_start_player_x,y
 	sta combat_player_xpos,x
 	lda room_start_player_y,y
 	sta combat_player_ypos,x
@@ -6218,33 +6057,33 @@ do_dungeon_room:
 @next_foe:
 	lda room_start_foe_type,x
 	beq @skip_foe
-	sta combat_foe_tile,x
-	sta combat_foe_drawn_tile,x
+	sta combat_foe_tile_type,x
+	sta combat_foe_tile_sprite,x
 	lda room_start_foe_x,x
 	sta combat_foe_cur_x,x
 	lda room_start_foe_y,x
 	sta combat_foe_cur_y,x
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr foe_index_from_tile
 	tay
 	lda foe_power_table,y ;HP = P/2 | rand(P)
-	sta zpd8
+	sta zp_number1
 	jsr rand_modulo
-	lsr zpd8
-	ora zpd8
+	lsr zp_number1
+	ora zp_number1
 	sta combat_foe_hp,x
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_mimic
 	bne @skip_foe
 	lda #tile_chest
-	sta combat_foe_drawn_tile,x
+	sta combat_foe_tile_sprite,x
 @skip_foe:
 	dex
 	bpl @next_foe
 	jmp begin_combat
 
 init_combat:
-	jsr j_primm  ;b'\n\n**** COMBAT ****\n\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte $8d
 	.byte "**** COMBAT ****", $8d
@@ -6350,7 +6189,7 @@ load_arena:
 	sta @file_char_arena
 	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x84BLOAD CON@,A$240\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD CON"
 @file_char_arena:
 	.byte "@,A$240", $8d
@@ -6384,9 +6223,9 @@ initialize_arena:
 
 set_foe_count:
 	lda foe_type_combat
-	bmi @lookup_max_foes ;Dead code? Never encounter characters outside a towne.
+	bmi @lookup_max_foes ;Dead code? Never encounter NPCs outside a towne.
 	jsr j_rand
-	and #$07     ;2-8 character foes
+	and #$07     ;2-8 NPC foes
 	bne clamp_foe_count ;idx 0 overruns table[24], previous foe_count as new max (BUG?)
 @lookup_max_foes:
 	jsr foe_index_from_tile
@@ -6446,15 +6285,15 @@ clamp_foe_count:
 	tay
 	lda foe_companion_table,y
 @commit_foe:
-	sta combat_foe_tile,x
-	sta combat_foe_drawn_tile,x
+	sta combat_foe_tile_type,x
+	sta combat_foe_tile_sprite,x
 	jsr foe_index_from_tile
 	tay
 	lda foe_power_table,y ;HP = P/2 | rand(P)
-	sta zpd8
+	sta zp_number1
 	jsr rand_modulo
-	lsr zpd8
-	ora zpd8
+	lsr zp_number1
+	ora zp_number1
 	sta combat_foe_hp,x
 	dec zp_cur_foe_index
 	bpl @choose_foe_slot
@@ -6487,7 +6326,7 @@ begin_combat:
 	lda #music_combat
 	jsr music_ctl
 	jsr j_active_char_combat_start  ; ENHANCEMENT
-	bit hw_strobe
+	bit hw_STROBE
 	lda #$00
 	sta key_buf_len
 start_players_turn:
@@ -6517,7 +6356,7 @@ combat_take_turn:
 	jsr invert_player_name
 	jsr print_newline
 	jsr j_printname
-	jsr j_primm  ;b'\nW:\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "W:", 0
 	jsr j_get_stats_ptr
@@ -6527,8 +6366,8 @@ combat_take_turn:
 	clc
 	adc #string_weapon_first
 	jsr j_printstring
-	jsr j_primm  ;b'\n>\x00'
-	.byte $8d,$1e,$00
+	jsr j_primm
+	.byte $8d,glyph_greater_even,$00   ;'>'
 :	jsr j_waitkey
 	bne :+
 	lda trainer_pass    ; TRAINER: no idle pass
@@ -6601,7 +6440,7 @@ combat_end_turn:
 	cmp #status_Sleep
 	bne @end_wake_up
 	jsr j_rand
-	and #$07     ;1/8 chance
+	and #chance_8
 	bne @end_wake_up
 	lda #status_Good
 	sta (ptr1),y
@@ -6629,14 +6468,14 @@ combat_end_turn:
 	sta zp_cur_foe_index
 foe_take_turn:
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	bne :+
 	jmp next_foe
 
 :	lda combat_foe_slept,x
 	beq @check_zorn
 	jsr j_rand
-	and #$07     ;1/8 chance
+	and #chance_8
 	beq @wake_up
 	jmp check_tile_effect
 
@@ -6644,7 +6483,7 @@ foe_take_turn:
 	lda #$00
 	sta combat_foe_slept,x
 @check_zorn:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_zorn
 	bne @check_wisp
 	lda #aura_negate
@@ -6666,7 +6505,7 @@ foe_take_turn:
 	lda #xy_last_screen
 	jsr rand_modulo
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	jsr legal_move_combat
 	bcs @wisp_teleport
 	ldx zp_cur_foe_index
@@ -6724,29 +6563,29 @@ calc_direction:
 	sec
 	lda combat_player_xpos,x
 	sbc temp_x
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	sec
 	lda combat_player_ypos,x
 	sbc temp_y
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_mimic
 	bne calc_attack_type
 	lda #tile_chest
-	sta combat_foe_drawn_tile,x
+	sta combat_foe_tile_sprite,x
 	lda zp_nearest_dist
-	cmp #$05
+	cmp #range_missile_attack
 	bcs no_range_attack
 	lda #tile_mimic
-	sta combat_foe_drawn_tile,x
+	sta combat_foe_tile_sprite,x
 calc_attack_type:
 	jsr j_rand
 	and #chance_4
 	bne no_range_attack
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr get_rangeattack_type
 	beq no_range_attack
 	cmp #tile_attack_blue
@@ -6764,7 +6603,7 @@ no_range_attack:
 	and #chance_4
 	bne @check_flee
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_balron
 	beq @cast_sleep
 	cmp #tile_reaper
@@ -6820,7 +6659,7 @@ no_range_attack:
 	cmp #$02
 	bcs @try_foe_move
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_gremlin
 	bne @check_rogue
 	jsr steal_food
@@ -6834,7 +6673,7 @@ no_range_attack:
 
 @try_foe_move:
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_mimic
 	bne :+
 	jmp check_tile_effect
@@ -6843,8 +6682,12 @@ no_range_attack:
 	bne :+
 	jmp check_tile_effect
 
+:	cmp #tile_camp_fire   ;ENHANCEMENT: camp fire is immobile, too
+	bne :+                ;ENHANCEMENT
+	jmp check_tile_effect ;ENHANCEMENT
+
 :	lda #$02
-	sta zp_attempts
+	sta zp_foe_attempts
 @x_or_y:
 	jsr j_rand
 	bmi @try_y
@@ -6856,7 +6699,7 @@ no_range_attack:
 	lda temp_y
 	sta dest_y
 	jsr do_jinx
-	jsr j_gettile_currmap
+	jsr j_gettile_drawn_map
 	jsr legal_move_combat
 	bcc do_foe_move
 @try_y:
@@ -6868,7 +6711,7 @@ no_range_attack:
 	lda temp_x
 	sta dest_x
 	jsr do_jinx
-	jsr j_gettile_currmap
+	jsr j_gettile_drawn_map
 	jsr legal_move_combat
 	bcc do_foe_move
 @try_x:
@@ -6880,17 +6723,17 @@ no_range_attack:
 	lda temp_y
 	sta dest_y
 	jsr do_jinx
-	jsr j_gettile_currmap
+	jsr j_gettile_drawn_map
 	jsr legal_move_combat
 	bcc do_foe_move
 @try_random:
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_x
 	jsr j_rand
-	jsr math_sign
+	jsr j_math_sign
 	sta delta_y
-	dec zp_attempts
+	dec zp_foe_attempts
 	bne @x_or_y
 	lda zp_nearest_dist
 	cmp #$02
@@ -6920,7 +6763,7 @@ check_tile_effect:
 	sta dest_x
 	lda combat_foe_cur_y,x
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	ldx zp_cur_foe_index
 	cmp #tile_field_poison
 	beq @effect_poison
@@ -6932,7 +6775,7 @@ check_tile_effect:
 	beq @effect_fire
 	bne next_foe
 @effect_sleep:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr is_undead
 	beq next_foe
 	jsr j_rand
@@ -6945,14 +6788,14 @@ check_tile_effect:
 	jmp next_foe
 
 @effect_fire:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_lava_lizard
 	beq next_foe
 	cmp #tile_daemon
 	bcs next_foe
 @effect_poison:
 	jsr j_rand
-	and #$7f     ;0..127
+	and #$7f     ;0-127
 	sta damage
 	lda #sound_damage
 	jsr j_playsfx
@@ -6967,13 +6810,13 @@ next_foe:
 fleeing:
 	jsr print_newline
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr print_target_name
-	jsr j_primm  ;b'FLEES!\n\x00'
+	jsr j_primm
 	.byte "FLEES!", $8d
 	.byte 0
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr is_evil
 	bmi @fled
 	ldy #virtue_compassion
@@ -6985,7 +6828,7 @@ fleeing:
 @fled:
 	lda #$00
 	ldx zp_cur_foe_index
-	sta combat_foe_tile,x
+	sta combat_foe_tile_type,x
 	sta combat_foe_hp,x
 	lda #sound_alert
 	jsr j_playsfx
@@ -7014,7 +6857,7 @@ do_jinx:
 	sta attack_sprite
 	sta curr_player
 	jsr j_rand
-	and #$3f
+	and #$3f     ;0-63
 	sta damage
 	jsr inflict_damage
 	jsr j_update_view_combat
@@ -7056,13 +6899,13 @@ try_steal_gold:
 	and #chance_4
 	bne @done
 	jsr j_rand
-	and #$3f
+	and #$3f     ;0-63
 	jsr encode_bcd_value
-	sta zpd8
+	sta zp_number1
 	sed
 	sec
 	lda gold_lo
-	sbc zpd8
+	sbc zp_number1
 	sta gold_lo
 	lda gold_hi
 	sbc #$00
@@ -7083,7 +6926,7 @@ check_scene_over:
 	cmp #mode_combat_dng_room
 	beq check_players_gone
 	ldx #foes_max
-:	lda combat_foe_tile,x
+:	lda combat_foe_tile_type,x
 	bne check_players_gone
 	dex
 	bpl :-
@@ -7112,7 +6955,7 @@ combat_players_fled:
 	lda foe_type_encountered
 	jsr is_evil
 	bpl @not_evil
-	jsr j_primm  ;b'\nBATTLE IS LOST!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "BATTLE IS LOST!", $8d
 	.byte 0
@@ -7131,7 +6974,7 @@ combat_players_fled:
 	jmp combat_over
 
 combat_exit_room:
-	jsr j_primm  ;b'\nLEAVE ROOM!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "LEAVE ROOM!", $8d
 	.byte 0
@@ -7158,7 +7001,7 @@ do_exit_room:
 	sta dng_direction
 	lda game_mode_pre_combat
 	sta game_mode
-	lda altar_room_principle ;T,L,C == 0,1,2
+	lda altar_room_principle ;T,L,C == 0,1,2  None = -1
 	bmi @dungeon
 	asl
 	asl
@@ -7176,13 +7019,13 @@ do_exit_room:
 	lda #music_off
 	jsr music_ctl
 	jsr load_dungeon_map
-	jsr j_primm  ;b'INTO DUNGEON\n\x00'
+	jsr j_primm
 	.byte "INTO DUNGEON", $8d
 	.byte 0
 	jsr print_location_name
 @dungeon:
 	jsr print_newline
-	lda #music_explore
+	lda #music_dungeon
 	jsr music_ctl
 	lda dng_direction
 	tax
@@ -7205,7 +7048,7 @@ altar_room_exits:
 	.byte $16    ;West  of Courage is Shame
 
 foes_vanquished:
-	jsr j_primm  ;b'\nVICTORY!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "VICTORY!", $8d
 	.byte 0
@@ -7214,7 +7057,7 @@ foes_vanquished:
 	bpl :+
 	ldy #virtue_valor
 	jsr j_rand
-	and #$01     ;0-1
+	and #$01     ;range 0-1
 	jsr inc_virtue
 :	lda game_mode
 	cmp #mode_combat_inn
@@ -7227,20 +7070,21 @@ foes_vanquished:
 
 ; town or world
 	lda foe_type_encountered
-	cmp #tile_monster
-	bcs @monster
+	cmp #tile_monster_land
+	bcs @check_type
 	cmp #tile_pirate
 	beq @pirate
-	cmp #$20     ;20 <= n < 30  or  50 <= n < 60  then monster
+	;Player-class and NPC foes will also drop loot
+	cmp #tile_class_first
 	bcc @done
-	cmp #$60
+	cmp #tile_npc_last
 	bcs @done
-	cmp #$30
-	bcc @monster
-	cmp #$50
-	bcs @monster
+	cmp #tile_class_last
+	bcc @check_type
+	cmp #tile_npc_first
+	bcs @check_type ;redundant
 	bcc @done
-@monster:
+@check_type:
 	cmp #tile_bat
 	beq @done
 	cmp #tile_slime
@@ -7326,7 +7170,7 @@ combat_over:
 	cmp #mode_dungeon
 	bne :+
 	jsr j_dng_neighbor_tiles
-:	lda #music_explore
+:	lda #music_main
 	jsr music_ctl
 	lda #$00
 	sta key_buf_len
@@ -7363,9 +7207,9 @@ do_foe_melee_attack:
 	lda (ptr1),y
 	tax
 	lda armour_table,x
-	sta zpda
+	sta zp_amount
 	jsr j_rand
-	cmp zpda
+	cmp zp_amount
 	bcs @yes_damage
 @no_damage:
 	jsr j_update_view_combat
@@ -7386,7 +7230,7 @@ player_injured:
 	sta attack_sprite
 	jsr j_update_view_combat
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr foe_index_from_tile
 	tax
 	lda foe_power_table,x ;Attack = rand(P/4)
@@ -7397,7 +7241,7 @@ player_injured:
 	jsr dec_player_hp
 	bne @done
 	jsr j_printname
-	jsr j_primm  ;b'\nIS KILLED!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "IS KILLED!", $8d
 	.byte 0
@@ -7410,35 +7254,35 @@ player_injured:
 	rts
 
 combat_cmd_table:
-	.word combat_cmd_attack
-	.word done_what ;b
-	.word combat_cmd_cast
-	.word done_what ;d
-	.word done_what ;e
-	.word done_what ;f
-	.word combat_cmd_get
-	.word done_what ;h
-	.word done_what ;i
-	.word done_what ;j
-	.word done_what ;k
-	.word done_what ;l
-	.word done_what ;m
-	.word done_what ;n
-	.word done_what ;o
-	.word done_what ;p
-	.word done_what ;q
-	.word combat_cmd_ready
-	.word done_what ;s
-	.word done_what ;t
-	.word cmd_use_item
-	.word cmd_volume
-	.word done_what ;w
-	.word done_what ;x
-	.word done_what ;y
-	.word combat_cmd_ztats
+	.addr combat_cmd_attack
+	.addr done_what ;b
+	.addr combat_cmd_cast
+	.addr done_what ;d
+	.addr done_what ;e
+	.addr done_what ;f
+	.addr combat_cmd_get
+	.addr done_what ;h
+	.addr done_what ;i
+	.addr done_what ;j
+	.addr done_what ;k
+	.addr done_what ;l
+	.addr done_what ;m
+	.addr done_what ;n
+	.addr done_what ;o
+	.addr done_what ;p
+	.addr done_what ;q
+	.addr combat_cmd_ready
+	.addr done_what ;s
+	.addr done_what ;t
+	.addr cmd_use_item
+	.addr cmd_volume
+	.addr done_what ;w
+	.addr done_what ;x
+	.addr done_what ;y
+	.addr combat_cmd_ztats
 
 combat_move_up:
-	jsr j_primm  ;b'North\n\x00'
+	jsr j_primm
 	.byte "North", $8d
 	.byte 0
 	ldx curr_player
@@ -7451,7 +7295,7 @@ combat_move_up:
 	jmp try_move
 
 combat_move_down:
-	jsr j_primm  ;b'South\n\x00'
+	jsr j_primm
 	.byte "South", $8d
 	.byte 0
 	ldx curr_player
@@ -7464,7 +7308,7 @@ combat_move_down:
 	jmp try_move
 
 combat_move_right:
-	jsr j_primm  ;b'East\n\x00'
+	jsr j_primm
 	.byte "East", $8d
 	.byte 0
 	ldx curr_player
@@ -7477,7 +7321,7 @@ combat_move_right:
 	jmp try_move
 
 combat_move_left:
-	jsr j_primm  ;b'West\n\x00'
+	jsr j_primm
 	.byte "West", $8d
 	.byte 0
 	ldx curr_player
@@ -7502,12 +7346,12 @@ try_move:
 	bcc :+
 	jmp try_flee
 
-:	jsr j_gettile_currmap
+:	jsr j_gettile_drawn_map
 	jsr j_blocked_tile
 	bpl :+
 	jmp done_blocked
 
-:	jsr j_gettile_currmap
+:	jsr j_gettile_drawn_map
 	jsr check_slow_terrain
 	bne :+
 	jsr done_slow_progress
@@ -7526,7 +7370,7 @@ try_move:
 	bne @cmd_done
 @floor_triggers:
 	ldx #$00
-	stx zp_index
+	stx zp_index1
 @next:
 	lda dng_trigger_new_tile,x
 	beq @skip
@@ -7546,36 +7390,38 @@ try_move:
 	beq :+
 	jsr xy_to_offset
 	lda dng_trigger_new_tile,x
-	sta tempmap,y
+	sta world_tiles,y
 :	lda dng_trigger_new_pos2,x
 	beq @skip
 	jsr xy_to_offset
 	lda dng_trigger_new_tile,x
-	sta tempmap,y
+	sta world_tiles,y
 @skip:
-	lda zp_index
+	lda zp_index1
 	clc
 	adc #$04
-	sta zp_index
+	sta zp_index1
 	tax
-	cmp #$10     ;up to 4 triggers
+	cmp #$10     ;up to 4 triggers ($04 * 4)
 	bcc @next
 @cmd_done:
 	jmp combat_cmd_done
 
+; INPUT A = x,y coord (4 bits each)
+; OUTPUT A = index into flattened 11x11 array
 xy_to_offset:
 	pha
 	lsr
 	lsr
 	lsr
 	lsr
-	sta zpd9
+	sta zp_number2
 	pla
 	and #$0f
 	tay
 	lda mult_by_11,y
 	clc
-	adc zpd9
+	adc zp_number2
 	tay
 	rts
 
@@ -7610,9 +7456,9 @@ try_flee:
 	beq do_flee
 	bne @cannot_split_party
 @cannot_split_party:
-;	pla    BUGFIX: not entered via JSR,
-;	pla    BUGFIX: nothing on stack to pop
-	jsr j_primm  ;b'ALL MUST USE\nTHE SAME EXIT!\n\x00'
+;	pla        BUGFIX: not entered via JSR,
+;	pla        BUGFIX: nothing on stack to pop
+	jsr j_primm
 	.byte "ALL MUST USE", $8d
 	.byte "THE SAME EXIT!", $8d
 	.byte 0
@@ -7659,7 +7505,7 @@ flee_y:
 combat_cmd_attack:
 	lda #$00
 	sta missile_traveled
-	jsr j_primm  ;b'Attack-\x00'
+	jsr j_primm
 	.byte "Attack-", 0
 	jsr input_target_xy
 	bne :+
@@ -7714,7 +7560,7 @@ ranged_attack:
 	lda current_weapon
 	cmp #weapon_flaming_oil
 	bne use_weapon
-	jsr j_primm  ;b'RANGE-\x00'
+	jsr j_primm
 	.byte "RANGE-", 0
 	jsr input_char
 	sec
@@ -7728,10 +7574,10 @@ ranged_attack:
 use_weapon:
 	lda current_weapon
 	cmp #weapon_dagger
-	beq @deduct_thrown
+	beq @dec_thrown
 	cmp #weapon_flaming_oil
 	bne check_target
-@deduct_thrown:
+@dec_thrown:
 	clc
 	adc #party_stat_weapons
 	tay
@@ -7746,7 +7592,7 @@ last_one:
 	ldy #player_weapon
 	lda #weapon_none
 	sta (ptr1),y
-	jsr j_primm  ;b'LAST ONE!\n\x00'
+	jsr j_primm
 	.byte "LAST ONE!", $8d
 	.byte 0
 check_target:
@@ -7788,11 +7634,11 @@ target_hit:
 	lda current_weapon
 	cmp #weapon_flaming_oil
 	bne @no_oil_fire
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	cmp #tile_water_last
 	bcc @no_oil_fire
 	lda #tile_field_fire
-	sta tempmap,y
+	sta world_tiles,y
 @no_oil_fire:
 	lda #tile_attack_red
 	sta attack_sprite
@@ -7809,9 +7655,9 @@ target_hit:
 	clc
 	adc #$80     ;hit chance = (128 + DEX * 2) / 255
 	bcs @calc_damage
-	sta zpda
+	sta zp_amount
 	jsr j_rand
-	cmp zpda
+	cmp zp_amount
 	bcc @calc_damage
 	jmp missed
 
@@ -7838,11 +7684,11 @@ target_hit:
 inflict_damage:
 	jsr print_newline
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	sta foe_type_combat
 	jsr print_target_name
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	cmp #tile_lord_british
 	bne :+
 	jmp still_alive
@@ -7854,8 +7700,8 @@ inflict_damage:
 	bcs still_alive
 	lda #$00
 	sta combat_foe_hp,x
-	sta combat_foe_tile,x
-	jsr j_primm  ;b'KILLED!\n\x00'
+	sta combat_foe_tile_type,x
+	jsr j_primm
 	.byte "KILLED!", $8d
 	.byte 0
 	lda curr_player
@@ -7872,9 +7718,9 @@ inflict_damage:
 	adc #$01
 	jsr encode_bcd_value
 	jsr inc_player_exp
-	jsr j_primm  ;b'EXP.+\x00'
+	jsr j_primm
 	.byte "EXP.+", 0
-	lda zp_amount
+	lda zp_number1
 	cmp #$10
 	bcs :+
 	jsr j_printdigit
@@ -7887,7 +7733,7 @@ inflict_damage:
 
 still_alive:
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	jsr foe_index_from_tile
 	tax
 	lda foe_power_table,x ;calc percentages
@@ -7902,7 +7748,7 @@ still_alive:
 	lda combat_foe_hp,x
 	cmp #hp_fleeing + 1
 	bcs @percent_25
-	jsr j_primm  ;b'FLEEING!\n\x00'
+	jsr j_primm
 	.byte "FLEEING!", $8d
 	.byte 0
 	jmp @done
@@ -7910,7 +7756,7 @@ still_alive:
 @percent_25:
 	cmp zp_percent_25
 	bcs @percent_50
-	jsr j_primm  ;b'CRITICAL!\n\x00'
+	jsr j_primm
 	.byte "CRITICAL!", $8d
 	.byte 0
 	jmp @done
@@ -7918,22 +7764,22 @@ still_alive:
 @percent_50:
 	cmp zp_percent_50
 	bcs @percent_75
-	jsr j_primm  ;b'HEAVILY\x00'
+	jsr j_primm
 	.byte "HEAVILY", 0
 	jmp @wounded
 
 @percent_75:
 	cmp zp_percent_75
-	bcs @percent_hi
-	jsr j_primm  ;b'LIGHTLY\x00'
+	bcs @percent_HI
+	jsr j_primm
 	.byte "LIGHTLY", 0
 	jmp @wounded
 
-@percent_hi:
-	jsr j_primm  ;b'BARELY\x00'
+@percent_HI:
+	jsr j_primm
 	.byte "BARELY", 0
 @wounded:
-	jsr j_primm  ;b' WOUNDED!\n\x00'
+	jsr j_primm
 	.byte " WOUNDED!", $8d
 	.byte 0
 @done:
@@ -7946,7 +7792,7 @@ missed:
 	jsr j_playsfx
 :	lda #$00
 	sta attack_sprite
-	jsr j_primm  ;b'MISSED!\n\x00'
+	jsr j_primm
 	.byte "MISSED!", $8d
 	.byte 0
 	lda current_weapon
@@ -7960,11 +7806,11 @@ missed:
 	cmp #xy_last_screen
 	bcs @end_attack
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	cmp #tile_water_last
 	bcc @end_attack
 	lda #tile_field_fire
-	sta tempmap,y
+	sta world_tiles,y
 @end_attack:
 	jmp end_attack
 
@@ -8001,12 +7847,12 @@ missile_traveled:
 	.byte 0
 
 combat_cmd_cast:
-	jsr j_primm  ;b'Cast, \x00'
+	jsr j_primm
 	.byte "Cast, ", 0
 	jmp choose_spell
 
 combat_cmd_get:
-	jsr j_primm  ;b'Get chest!\n\x00'
+	jsr j_primm
 	.byte "Get chest!", $8d
 	.byte 0
 try_get_chest_combat:
@@ -8016,13 +7862,13 @@ try_get_chest_combat:
 	sta dest_x
 	lda combat_player_ypos,x
 	sta dest_y
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	cmp #tile_chest
 	beq :+
 	jmp done_not_here
 
 :	lda #tile_floor_stone
-	sta tempmap,y
+	sta world_tiles,y
 	lda game_mode_pre_combat
 	cmp #mode_dungeon
 	bne @skip
@@ -8039,13 +7885,13 @@ try_get_chest_combat:
 	jmp do_get_chest
 
 combat_cmd_ready:
-	jsr j_primm  ;b'Ready weapon:\n\x00'
+	jsr j_primm
 	.byte "Ready weapon:", $8d
 	.byte 0
 	jmp ask_weapon
 
 combat_cmd_ztats:
-	jsr j_primm  ;b'Ztats\n\x00'
+	jsr j_primm
 	.byte "Ztats", $8d
 	.byte 0
 	jmp zstats_for_player    ;BUGFIX: was JSR
@@ -8089,15 +7935,15 @@ foe_index_from_tile:
 	bpl @not_monster
 	and #$7f
 	lsr
-	cmp #$08     ;1000NNNx
+	cmp #$08     ;%1000NNNx
 	bcc @done
-	lsr          ;1NNNNNxx + 4
+	lsr          ;%1NNNNNxx + 4
 	clc
 	adc #$04
 @done:
 	rts
 @not_monster:
-	and #$1e     ;000NNNNx + 24  (BUGFIX: was 1f, 000NNNNN)
+	and #$1e     ;%000NNNNx + 24  (BUGFIX: was 1f, %000NNNNN)
 	lsr          ;BUGFIX: was clc
 	adc #$24
 	rts
@@ -8153,7 +7999,7 @@ get_player_sprite:
 	ldy #player_class_index
 	lda (ptr1),y
 	asl
-	adc #tile_human_class
+	adc #tile_class_first
 	rts          ;tile(humans + class * 2)
 
 @dead:
@@ -8168,18 +8014,19 @@ rand_modulo:
 @subtract:
 	cmp modulus
 	bcc @clear_flags
-;	sec
+;	sec          ;SIZE_OPT unnecessary, implied by BCC
 	sbc modulus
 	jmp @subtract
 
 @clear_flags:
-;	cmp #$00
+;	cmp #$00     ;SIZE_OPT unnecessary
 @done:
 	rts
 
 ;modulus:
-;	.byte 0
+;	.byte 0      ;SIZE_OPT moved to Zero Page temporary variable
 
+; SIZE_OPT to fit trainers. Moved return value from A 00/ff to C 0/1.
 ; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_world_twn:
 	sta zp_tile_type
@@ -8232,9 +8079,9 @@ legal_move_world_twn:
 	bne deny_move
 @check_terrain:
 	lda object_tile_type,x
-	stx zp_save_xreg
+	stx zp_save_reg2
 	jsr collide_terrain
-	ldx zp_save_xreg
+	ldx zp_save_reg2
 @return:
 	rts
 
@@ -8242,6 +8089,7 @@ deny_move:
 	sec
 	rts
 
+; SIZE_OPT to fit trainers. Moved return value from A 00/ff to C 0/1.
 ; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_combat:
 	sta zp_tile_type
@@ -8273,7 +8121,7 @@ legal_move_combat:
 @collide_other_foe:
 	ldx #foes_max
 @next:
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	beq @collide_player
 	lda combat_foe_cur_x,x
 	cmp dest_x
@@ -8296,9 +8144,10 @@ legal_move_combat:
 	dex
 	bpl @next
 	ldx zp_cur_foe_index
-	lda combat_foe_tile,x
+	lda combat_foe_tile_type,x
 	; continue
 
+; SIZE_OPT to fit trainers. Extracted common code from legal_move_world_twn and legal_move_combat.
 ; OUTPUT: C = movement barred. bcc = no, bcs = yes
 collide_terrain:
 	bpl @land
@@ -8347,6 +8196,7 @@ collide_terrain:
 	rts
 
 
+; SIZE_OPT to fit trainers. Moved return value from A 00/ff to C 0/1.
 ; OUTPUT: C = movement barred. bcc = no, bcs = yes
 legal_move_dungeon:
 	pha
@@ -8383,7 +8233,7 @@ legal_move_dungeon:
 	rts
 
 dng_can_advance:
-	sta zpd8
+	sta zp_save_reg1
 	and #dng_tile_type_mask
 	cmp #dng_tile_door
 	beq adv_retreat_yes
@@ -8391,9 +8241,9 @@ dng_can_advance:
 	beq adv_retreat_yes
 	cmp #dng_tile_room
 	beq adv_retreat_yes
-	lda zpd8
+	lda zp_save_reg1
 dng_can_retreat:
-	cmp #$a1
+	cmp #(dng_tile_field + dng_field_lightning)
 	beq adv_retreat_no
 	cmp #dng_tile_door ; or higher
 	bcs adv_retreat_no
@@ -8439,93 +8289,77 @@ door_open_y:
 door_open_countdown:
 	.byte 0
 
+
+;SIZE_OPT: re-written to be more compact
+; (safe to use Y)
+
 get_rangeattack_type:
-	cmp #tile_class_mage
-	beq @attack_blue
-	cmp #tile_lord_british
-	beq @attack_blue
-	cmp #tile_nixie
-	beq @attack_small
-	cmp #tile_squid
-	beq @lightning
-	cmp #tile_serpent
-	beq @attack_red
-	cmp #tile_seahorse
-	beq @attack_blue
-	cmp #tile_spider
-	beq @poison
-	cmp #tile_troll
-	beq @attack_small
-	cmp #tile_mimic
-	beq @poison
-	cmp #tile_gazer
-	beq @sleep
-	cmp #tile_python
-	beq @poison
-	cmp #tile_ettin
-	beq @boulder
-	cmp #tile_cyclops
-	beq @boulder
-	cmp #tile_mage
-	beq @attack_blue
-	cmp #tile_liche
-	beq @attack_blue
-	cmp #tile_lava_lizard
-	beq @lava
-	cmp #tile_daemon
-	beq @attack_blue
-	cmp #tile_hydra
-	bcs @attack_red
-	cmp #tile_dragon
-	beq @attack_red
-	cmp #tile_reaper
-	beq @rand_field
-	cmp #tile_balron
-	beq @rand_field
-	lda #$00
-	rts
-
-@poison:
-	lda #tile_field_poison
-	rts
-
-@lightning:
-	lda #tile_field_lightning
-	rts
-
-	lda #tile_field_fire
-	rts
-
-@sleep:
-	lda #tile_field_sleep
-	rts
-
-@boulder:
-	lda #tile_boulder
-	rts
-
-@attack_blue:
-	lda #tile_attack_blue
-	rts
-
-@attack_red:
-	lda #tile_attack_red
-	rts
-
-@lava:
-	lda #tile_lava
-	rts
-
-@attack_small:
-	lda #tile_attack_small
-	rts
-
+	ldy #range_table_size - 1
+@next:
+	cmp range_foe,y
+	beq @found
+	dey
+	bne @next
+@found:
+	lda range_sprite,y
+	bpl @done
 @rand_field:
 	jsr j_rand
-	and #$03
+	and #num_fields - 1
 	clc
 	adc #tile_field_first
+@done:
 	rts
+
+range_foe:
+	.byte 0
+	.byte tile_class_mage
+	.byte tile_camp_fire    ;ENHANCEMENT: camp fire spits fire
+	.byte tile_lord_british
+	.byte tile_nixie
+	.byte tile_squid
+	.byte tile_serpent
+	.byte tile_seahorse
+	.byte tile_spider
+	.byte tile_troll
+	.byte tile_mimic
+	.byte tile_gazer
+	.byte tile_python
+	.byte tile_ettin
+	.byte tile_cyclops
+	.byte tile_mage
+	.byte tile_liche
+	.byte tile_lava_lizard
+	.byte tile_daemon
+	.byte tile_hydra
+	.byte tile_dragon
+	.byte tile_reaper
+	.byte tile_balron
+range_sprite:
+	.byte 0
+	.byte tile_attack_blue
+	.byte tile_field_fire    ;ENHANCEMENT: camp fire spits fire
+	.byte tile_attack_blue
+	.byte tile_attack_small
+	.byte tile_field_lightning
+	.byte tile_attack_red
+	.byte tile_attack_blue
+	.byte tile_field_poison
+	.byte tile_attack_small
+	.byte tile_field_poison
+	.byte tile_field_sleep
+	.byte tile_field_poison
+	.byte tile_boulder
+	.byte tile_boulder
+	.byte tile_attack_blue
+	.byte tile_attack_blue
+	.byte tile_lava
+	.byte tile_attack_blue
+	.byte tile_attack_red
+	.byte tile_attack_red
+	.byte $ff
+	.byte $ff
+range_table_size = * - range_sprite
 
 do_foe_range_attack:
 	sta attack_sprite
@@ -8556,9 +8390,9 @@ do_foe_range_attack:
 	sta dest_x
 	lda target_y
 	sta dest_y
-	jsr j_gettile_currmap
+	jsr j_gettile_drawn_map
 	lda #tile_lava
-	sta tempmap,y
+	sta world_tiles,y
 	rts
 
 hit_player:
@@ -8568,7 +8402,7 @@ hit_player:
 	lda attack_sprite
 	cmp #tile_field_poison
 	bne @check_lightning
-	jsr j_primm  ;b'POISONED!\n\x00'
+	jsr j_primm
 	.byte "POISONED!", $8d
 	.byte 0
 	jsr effect_poison_sleep
@@ -8586,7 +8420,7 @@ hit_player:
 @check_lightning:
 	cmp #tile_field_lightning
 	bne @check_fire
-	jsr j_primm  ;b'ELECTRIFIED!\n\x00'
+	jsr j_primm
 	.byte "ELECTRIFIED!", $8d
 	.byte 0
 	jsr player_injured
@@ -8595,21 +8429,21 @@ hit_player:
 @check_fire:
 	cmp #tile_field_fire
 	bne @check_sleep
-	jsr j_primm  ;b'FIERY \x00'
+	jsr j_primm
 	.byte "FIERY ", 0
 	jmp @hit
 
 @check_sleep:
 	cmp #tile_field_sleep
 	bne @check_lava
-	jsr j_primm  ;b'SLEPT!\n\x00'
+	jsr j_primm
 	.byte "SLEPT!", $8d
 	.byte 0
 	jsr effect_poison_sleep
 	jsr j_rand
 	bmi :+
 @fail:
-	jsr j_primm  ;b'FAILED.\n\x00'
+	jsr j_primm
 	.byte "FAILED.", $8d
 	.byte 0
 	rts
@@ -8629,19 +8463,19 @@ hit_player:
 @check_lava:
 	cmp #tile_lava
 	bne @check_magic
-	jsr j_primm  ;b'LAVA \x00'
+	jsr j_primm
 	.byte "LAVA ", 0
 	jmp @hit
 
 @check_magic:
 	cmp #tile_attack_blue
 	bne @hit
-	jsr j_primm  ;b'MAGICAL \x00'
+	jsr j_primm
 	.byte "MAGICAL ", 0
 	jmp @hit
 
 @hit:
-	jsr j_primm  ;b'HIT!\n\x00'
+	jsr j_primm
 	.byte "HIT!", $8d
 	.byte 0
 	jsr player_injured
@@ -8686,7 +8520,7 @@ check_hit_player:
 check_hit_foe:
 	ldy #foes_max
 @next:
-	lda combat_foe_tile,y
+	lda combat_foe_tile_type,y
 	beq @skip
 	lda combat_foe_cur_x,y
 	cmp dest_x
@@ -8718,7 +8552,7 @@ next_arena_tile:
 	lda dest_y
 	cmp #xy_last_screen
 	bcs @fail
-	jsr j_gettile_tempmap
+	jsr j_gettile_actual_map
 	bmi @ok
 	cmp #tile_water_last
 	bcc @ok
@@ -8745,27 +8579,27 @@ next_arena_tile:
 	lda #$ff
 	rts
 
-math_sign:
-	cmp #$00
-	beq @done
-	bmi :+
-	lda #$01
-	rts
-
-:	lda #$ff
-@done:
-	rts
+;SIZE_OPT: redundant with routine in SUBS
+;math_sign:
+;	cmp #$00
+;	beq @done
+;	bmi :+
+;	lda #$01
+;	rts
+;
+;:	lda #$ff
+;@done:
+;	rts
 
 math_abs:
-	cmp #$00
-	bmi @negate
+;	cmp #$00    ;SIZE_OPT: A is always set right before calling
+	bmi math_negate
 	rts
-
-@negate:
-	eor #$ff
-	clc
-	adc #$01
-	rts
+;@negate:        ;SIZE_OPT: redundant.
+;	eor #$ff
+;	clc
+;	adc #$01
+;	rts
 
 math_negate:
 	eor #$ff
@@ -8854,25 +8688,25 @@ input_direction:
 	rts
 
 print_north:
-	jsr j_primm  ;b'North\n\x00'
+	jsr j_primm
 	.byte "North", $8d
 	.byte 0
 	rts
 
 print_south:
-	jsr j_primm  ;b'South\n\x00'
+	jsr j_primm
 	.byte "South", $8d
 	.byte 0
 	rts
 
 print_east:
-	jsr j_primm  ;b'East\n\x00'
+	jsr j_primm
 	.byte "East", $8d
 	.byte 0
 	rts
 
 print_west:
-	jsr j_primm  ;b'West\n\x00'
+	jsr j_primm
 	.byte "West", $8d
 	.byte 0
 	rts
@@ -8907,6 +8741,7 @@ temp_xy_none:
 	lda #$ff
 	rts
 
+;TRAINER refactor, replaces 'print_attacker_name'
 attacked_by:
 	jsr j_primm
 	.byte $8d, "ATTACKED BY", $8d, 0
@@ -8919,49 +8754,71 @@ print_target_name:
 	bpl @non_monster
 	sec
 	sbc #tile_monster_first
-	cmp #monster_water_last
+	cmp #num_water_monsters
 	bcs @monster_non_water
-	lsr          ;1000NNNx  print(N+1)
+	lsr          ;%1000NNNx  print(N)
 @print:
 	clc
-	adc #$01
+	adc #$01     ;N=0 begins at string 1
 	jsr j_printstring
 	lda #char_newline
 	jsr j_console_out
 	rts
 
 @monster_non_water:
-	lsr
+	lsr          ;%1NNNNNxx  print(N+4)
 	lsr
 	clc
 	adc #$04
 	jmp @print
 
 @non_monster:
-	cmp #$20     ;20 <= n < 30  or  50 <= n < 60
+	cmp #tile_class_first
 	bcc @inanimate
-	cmp #$60
+	cmp #tile_npc_last
 	bcs @inanimate
-	cmp #$30
+	cmp #tile_class_last
 	bcc @npc
-	cmp #$50
+	cmp #tile_npc_first
 	bcc @inanimate
 @npc:
-	and #$1f     ;0xxNNNNx
+	and #$1e     ;%0xxNNNNx
 	lsr
-	clc
-	adc #$4c     ;print(N + 4D)
+;	clc          ;SIZE_OPT: redundant, changed 'and' operand from $1f to $1e
+	adc #$4c     ;print(N + 4C)
 	jmp @print
 
 @inanimate:
-	lda #$13     ;phantom
+; BUGFIX: added for special NPCs so they're not "phantoms"
+	ldx #4
+:	cmp special_type,x
+	beq :+
+	dex
+	bne :-
+:	lda special_string,x
+; BUGFIX end
+;	lda #string_phantom
 	jmp @print
 
+special_type:
+	.byte 0
+	.byte tile_water_coast
+	.byte tile_horse_west
+	.byte tile_anhk
+	.byte tile_camp_fire
+special_string:
+	.byte string_phantom
+	.byte string_water
+	.byte string_horse
+	.byte string_ankh
+	.byte string_camp_fire
+
 ;TRAINER: avoid combat
+;OUTPUT: BEQ for avoided, BNE for allowed
 check_avoid:
 	ldx trainer_avoid
-	dex  ; return Z=0 to avoid
-	bne :+
+	dex
+	bne :+  ;-1 means no trainer, allow without prompt
 	jsr j_primm
 	.byte "Avoid? ", 0
 	jsr input_char
@@ -9005,11 +8862,11 @@ run_file_dead:
 	jsr music_ctl
 	lda #disk_britannia
 	jsr j_request_disk
-	jsr j_primm_cout ;b'\x84BLOAD SAVE,A$8800\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD SAVE,A$8800", $8d
 	.byte 0
 	jsr j_overlay_entry
-	lda #music_explore
+	lda #music_main
 	jsr music_ctl
 ; BUGFIX
 ; Reset stack. Impossible to know if we should pop 1, 3, or 4 frames
@@ -9041,7 +8898,7 @@ invert_player_name:
 	asl
 	tax
 	lda #$08
-	sta zpf0
+	sta zp_invert_line
 @next_row:
 	lda bmplineaddr_lo,x
 	sta ptr1
@@ -9056,14 +8913,14 @@ invert_player_name:
 	cpy #$18     ;column END
 	bcs @next_col
 	inx
-	dec zpf0
+	dec zp_invert_line
 	bne @next_row
 	rts
 
 encode_bcd_value:
 	cmp #$00
 	beq @done
-	cmp #$63
+	cmp #$63     ;99
 	bcs @max
 	sed
 	tax
@@ -9116,43 +8973,44 @@ dec_stat:
 	rts
 
 inc_virtue:
-	sta zpd9
+	sta zp_inc_amount
 	sed
 	clc
 	lda party_stats,y
-	beq @done    ;00 == Avatar
-	adc zpd9
-	bcc @done
+	beq @set_value ;00 == Avatar
+	adc zp_inc_amount
+	bcc @set_value
 	lda #$99     ;99 == clamp max
-@done:
+@set_value:
 	sta party_stats,y
 	cld
 	rts
 
 dec_virtue:
-	sta zp_amount
-	sty zpd9
+	sta zp_dec_amount
+	sty zp_save_reg2
 	lda party_stats,y
 	beq @lost_eighth
 @lost_eighth_rts:
 	sed
 	sec
-	sbc zp_amount
+	sbc zp_dec_amount
 	beq @underflow
-	bcs :+
+	bcs @set_value
 @underflow:
 	lda #$01     ;01 == clamp min
-:	sta party_stats,y
+@set_value:
+	sta party_stats,y
 	cld
 	rts
 
 @lost_eighth:
-	jsr j_primm  ;b'\nTHOU HAST LOST\nAN EIGHTH!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THOU HAST LOST", $8d
 	.byte "AN EIGHTH!", $8d
 	.byte 0
-	ldy zpd9
+	ldy zp_save_reg2
 	lda #$99
 	jmp @lost_eighth_rts
 
@@ -9229,21 +9087,23 @@ inc_player_hp:
 
 inc_party_gold:
 	sta zp_amount
+	ldy #party_stat_gold_lo
+;SIZE_OPT: duplicate code was inline here, hard-coded for 'party_stats,y' instead of '(ptr1),y'
 	lda #<party_stats
 	sta ptr1
 	lda #>party_stats
 	sta ptr1 + 1
-	ldy #party_stat_gold_lo
 	bne inc_4_digit   ; always
+;SIZE_OPT end
 inc_player_exp:
-	sta zp_amount
+	sta zp_number1
 	jsr j_get_stats_ptr
 	ldy #player_experience_lo
 inc_4_digit:
 	sed
 	clc
 	lda (ptr1),y
-	adc zp_amount
+	adc zp_number1
 	sta (ptr1),y
 	dey
 	lda (ptr1),y
@@ -9260,7 +9120,7 @@ inc_4_digit:
 
 burn_player:
 	jsr hilight_damaged_plr
-	lda #$1e     ;0 - 29
+	lda #$1e     ;0-29
 	jsr rand_modulo
 	jsr encode_bcd_value
 	jsr dec_player_hp
@@ -9286,7 +9146,7 @@ damage_party:
 	sta ship_hull
 	jsr invert_all_players
 	jsr j_update_status
-	jsr j_primm  ;b'\nTHY SHIP SINKS!\n\x00'
+	jsr j_primm
 	.byte $8d
 	.byte "THY SHIP SINKS!", $8d
 	.byte 0
@@ -9308,7 +9168,7 @@ damage_party:
 	lda combat_player_tile-1,x
 	beq @skip
 @damage_player:
-	lda #$19     ;0-25 damage
+	lda #$19     ;0-24 damage
 	jsr rand_modulo
 	jsr encode_bcd_value
 	jsr dec_player_hp
@@ -9359,11 +9219,11 @@ move_view_down:
 	sta (ptr1),y
 	dey
 	bne @next_y
-	bit music_volume
+	bit sfx_volume
 	bpl :+
 	jsr j_rand
 	bmi :+
-	bit hw_speaker
+	bit hw_SPEAKER
 :	dex
 	bne @next_x
 	rts
@@ -9385,11 +9245,11 @@ move_view_up:
 	sta (ptr1),y
 	dey
 	bne @next_y
-	bit music_volume
+	bit sfx_volume
 	bpl :+
 	jsr j_rand
 	bmi :+
-	bit hw_speaker
+	bit hw_SPEAKER
 :	inx
 	cpx #$ae
 	bcc @next_x
@@ -9471,3 +9331,7 @@ is_evil:
 	lda #$00
 	rts
 
+; junk:  ON OF\nVIRTUE IS CA
+;	.byte $cf,$ce,$a0,$cf,$c6,$8d,$d6,$c9
+;	.byte $d2,$d4,$d5,$c5,$a0,$c9,$d3,$a0
+;	.byte $c3,$c1

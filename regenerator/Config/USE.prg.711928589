@@ -3,19 +3,23 @@
 :CODE END
 8DF8
 :DATA BYTES
-889A-88A0
-8A61-8A75
 8810-881D
 8828-8836
 883C-884A
 8850-8863
+888C-889A
+889A-88A0
+88AA-88AB
 88D6-8903
 896B-899C
 89B2-89CA
 89D2-89FB
 8A34-8A5B
+8A61-8A75
 8AC0-8AE2
+8B8E-8BEE
 8C87-8C99
+8CA0-8CAE
 8CBA-8CEA
 8CF1-8CF9
 8D02-8D09
@@ -25,11 +29,8 @@
 8D5B-8D6F
 8D78-8D92
 8D98-8DE9
-888C-889A
-88AA-88AB
-8B8E-8BEE
-8CA0-8CAE
-8DF5-8DF8
+8DF5-8DF6
+8DF6-8DF8
 :WORDS
 :POINTERS
 8879-8889-0
@@ -41,24 +42,27 @@
 88AB
 8A73
 8A75
+8A7E
+8A85
 8A94
 8BEE
 8CAE
 8DE9
 :REMOVED BYTES
 :FULL COMMENTS
+8DF6 junk
 :SIDE COMMENTS
-8889 b'\x04BLOAD DNGD,A$8C00\n\x00'
-8A5E b'\x04BRUN END,A$8800\n\x00'
 880D b'WHICH ITEM:\n\x00'
 8825 b'\nNOT USABLE!\n\x00'
 8839 b'\nNONE OWNED!\n\x00'
 884D b'\nHMM...NO EFFECT!\n\x00'
+8889 b'\x04BLOAD DNGD,A$8C00\n\x00'
 88D3 b'\nTHERE ARE HOLES\nFOR 4 STONES,\nWHAT COLORS:\n\x00'
 8968 b'THOU DOTH FIND\nONE THIRD OF THE\nTHREE PART KEY!\n\x00'
 89AF b'\nAS THOU\nDOTH APPROACH\n\x00'
 89CF b'\nTHE VOICE SAYS:\nUSE THY STONE.\n\nCOLOR:\n\x00'
 8A31 b'\nTHE ALTER\nCHANGES BEFORE\nTHYNE EYES!\n\x00'
+8A5E b'\x04BRUN END,A$8800\n\x00'
 8ABD b'\nHOLDING THE EVIL\nSKULL ALOFT...\n\x00'
 8C84 b'\nAN EIGHTH LOST!\n\x00'
 8CB7 b'\nA VOICE RINGS\nOUT: WHAT VIRTUE\nDOST STEM FROM\n\x00'
@@ -70,23 +74,36 @@
 8D58 b'COURAGE AND\nTRUTH?\n\x00'
 8D75 b'TRUTH, LOVE\nAND COURAGE?\n\x00'
 8D95 b'A VOICE RINGS\nOUT: WHAT\nVIRTUE EXISTS\nINDEPENDENTLY OF\nTRUTH, LOVE AND\nCOURAGE!\n\x00'
-8809 #mode_loading
+8802 #mode_dungeon
+8809 #mode_suspended
+8866 #keyword_item_last
 88A3 #mode_dungeon
 88B5 #loc_dng_abyss
 88BE #mode_combat_dng_room
 89A2 #mode_dungeon
 89AB #dng_tile_altar
 8A2D #dng_tile_ladder_d
-8A8E #item_flag_candle
-8A81 #item_flag_book
-8A78 #item_flag_bell
+8A78 #item_have_bell
+8A81 #item_have_book
+8A8E #item_have_candle
+8AF1 #object_max
+8B01 #virtue_last - 1
 8B16 #char_question
+8B1D $zp_input_index
 8B22 #char_enter
 8B26 #char_left_arrow
 8B2A #char_space
+8B2E $zp_input_index
+8B36 $zp_input_index
+8B38 $zp_input_index
+8B40 $zp_input_index
+8B44 $zp_input_index
 8B48 #char_space
+8B52 $zp_input_index
 8B54 #char_space
 8B5E #char_enter
+8B64 #keyword_color_last - 1
+8B6B #keyword_virtue_last - 1
 8BEE #sound_damage
 :USER LABELS
 0000 player_xpos
@@ -102,7 +119,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -125,8 +142,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -142,7 +158,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -151,27 +167,27 @@
 00D6 hexnum
 00D7 bcdnum
 00D8 zpD8
-00D9 zpD9
-00DA zpDA
+00D9 zp_save_reg
+00DA zp_dec_amount
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
-00EA zpEA
+00EA zp_index
 00ED moongate_tile
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zpF0
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -182,7 +198,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -191,7 +207,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -199,7 +215,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -251,12 +267,87 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+880D @ask_which
+8825 print_not_usable
+8839 print_none_owned
+884D print_no_effect
+8866 keyword_matched
+8879 keyword_handlers
+887A keyword_handlers+1
+8889 return_to_dungeon
+88A9 @skip
+88AA saved_game_mode
+88AB use_stone
+88B3 @have_stone
+88BC @regular_dungeon
+88C2 @no_effect
+88C5 @check_center
+890D @next_stone
+8945 @none_owned
+8948 @check_stones
+8952 @already_have_keypart
+8955 @all_stones_match
+899F use_stone_in_abyss
+89A6 @no_effect
+89A9 @check_for_altar
+8A17 @have_stone
+8A5E @load_end_game
+8A73 placed_stone_mask
+8A74 placed_stone_counter
+8A75 use_bell
+8A7E use_book
+8A85 use_none_owned
+8A88 use_no_effect
+8A8B use_candle
+8A94 use_key
+8A9C use_horn
+8AA4 use_wheel
+8AAC j_print_no_effect
+8AAF use_skull
+8AB9 @have_skull
+8AF5 @clear
+8B05 @next_virtue
+8B16 get_input
+8B1F @get_char
+8B40 @backspace
+8B52 @got_input
+8B56 @pad_spaces
+8B64 compare_keywords_colors
+8B6B compare_keywords_all
+8B6F start_keyword
+8B76 @next_char
+8B87 @next_keyword
+8B8E keywords
+8BEE shake_screen
+8C0C shake_down
+8C0E @next
+8C24 @copy
+8C37 @skip
+8C3B shake_up
+8C3D @next
+8C53 @copy
+8C66 @skip
+8C6C dec_virtue
+8C75 @continue
+8C7D @underflow
+8C7F @set_value
+8C84 @lost_an_eighth
+8CA0 bit_msb
+8CA8 principle_keypart
+8CAB principle_colors
+8CAE ask_virtue
+8CB7 @level1
+8CFC @level2
+8D0C @level3
+8D1F @level4
+8D39 @level5
+8D55 @level6
+8D72 @level7
+8D95 @level8
+8DE9 @get_reply
+8DF5 abyss_altar_stone_used
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -318,8 +409,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -330,85 +421,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-880D @ask_which
-88AA saved_game_mode
-8B16 get_input
-8B6B compare_keywords_all
-8866 keyword_matched
-8825 print_not_usable
-8889 return_to_dungeon
-8839 print_none_owned
-884D print_no_effect
-8879 keyword_handlers
-887A keyword_handlers+1
-88A9 @skip
-88AB use_stone
-88B3 @have_stone
-88BC @regular_dungeon
-899F use_stone_in_abyss
-88C5 @check_center
-88C2 @no_effect
-8A73 placed_stone_mask
-8A74 placed_stone_counter
-890D @next_stone
-8B64 compare_keywd_color
-8945 @none_owned
-8CA0 bit_msb
-8948 @check_stones
-8CAB principle_colors
-8955 @all_stones_match
-8952 @already_have_keypar
-8CA8 principle_keypart
-89A9 @check_for_altar
-89A6 @no_effect
-8CAE ask_virtue
-8DF5 abyss_stone_used
-8A17 @have_stone
-8A5E @load_end_game
-8A75 use_bell
-8A7E use_book
-8A88 use_no_effect
-8A85 use_none_owned
-8A8B use_candle
-8A94 use_key
-8A9C use_horn
-8AAC j_print_no_effect
-8AA4 use_wheel
-8AAF use_skull
-8AB9 @have_skull
-8BEE shake_screen
-8AF5 @clear
-8B05 @next_virtue
-8C6C dec_virtue
-8B1F @get_char
-8B52 @got_input
-8B40 @backspace
-8B56 @pad_spaces
-8B6F check_keyword
-8B76 @compare
-8B8E keywords
-8B87 @nomatch
-8C3B shake_up
-8C0C shake_down
-8C0E @next
-8C24 @copy
-8C37 @skip
-8C3D @next
-8C53 @copy
-8C66 @skip
-8C84 @lost_an_eighth
-8C7D @underflow
-8C75 @continue
-8C7F @store
-8CB7 @level1
-8D95 @level8
-8CFC @level2
-8DE9 @get_reply
-8D0C @level3
-8D1F @level4
-8D39 @level5
-8D55 @level6
-8D72 @level7
 :DISABLED HILO LABELS
 8903
 :USER HILO

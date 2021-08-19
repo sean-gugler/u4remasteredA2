@@ -12,7 +12,13 @@ If you are running the pre-built disk images, or have built your own from the `f
 
 * During the initial loading screen, press 'T' to see the "Trainer" menu and enable cheat codes.
 * When asked "Art thou Male or Female?" you can answer 'N' (for "no" or "non-binary"). Your character's gender symbol will be a neutral circle in the "Ztats" screen.
+* In dungeon rooms (and any combat), press digit keys 1 through 8 to make that player active. The others will auto-pass their turns. Press 0 to return to all-party mode.
+* Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
 
+### Trainers
+* When "Control Balloon" is active, [K]limb a second time to drift normally. [D]escend back to steering height, then again to land.
+* When using "Teleport" with "Ingame Keys", specify a Towne, Dungeon, or Shrine with a letter A-P (just like the observatory).
+* The "Fair Resell Price" makes buy-pack prices for all weapons and armor exactly half the purchase price.
 
 FIXES MADE
 ----------
@@ -37,23 +43,24 @@ KEY:
 - (M) Some dungeon rooms lack proper entry placements and/or triggers.
 - (M) Boarding a ladder-up spawns a frigate on the surface.
 - (M) Entering towne while in a balloon should not be allowed.
-- (M) Combat animations are erratic for ankh, campfire, prone human, water, walking party sprite.
 - (M) Lord British "HELP" repeats early-game text every 10,000 moves.
 - (M) Thevel behaves as a regular "Joe", his valuable hints are inaccessible.
 - (M) Shrines never give the 2- and 3-cycle hints.
 - (M) Gate guards at Serpent's Hold behave as if they were Baron Sentri.
 - (G) Cannot talk to the healer in Serpent's Hold castle.
 - (G) Enemy strength for non-monsters was calculated wrong.
-- (G) Completion of skull quest grants awards to wrong area of memory.
 - (G) NPC questions worded as humility tests were not flagged to affect virtue: Browning, Aristotle, Santayana, Slysam.
 - (G) Following advice from cycle 1 at shrine of sacrifice mistakenly awards honor points.
 - (G) Balloon can land on illegal terrain by quitting game and rebooting.
+- (G) Player can be attacked by bridge trolls while drifting across in the balloon.
+- (G) Completion of skull quest grants awards to wrong area of memory.
 - (G) Using skull in dungeon only immobilizes wandering monsters, doesn't kill them.
 - (G) Skull use in battlefield should affect combatants, not clear outer world of wandering monsters.
 - (G) Skull cannot be used in *any* dungeon rooms; fixed to behave normally except in abyss, where it is disallowed entirely.
 - (G) Shrine image corrupted if compressed data happens to align on page boundary (did not occur with retail alignment).
 
 ### Cosmetic Mistakes
+- (M) Combat animations are erratic for certain types of foe.
 - (M) Spelling, capitalization, and grammar.
 - (G) Katrina prints both excuses if virtue is too low ("Thou art not humbleexperienced enough").
 - (G) Ztats display of 3-part key is truncated if you have bell or book but not candle.
@@ -62,9 +69,13 @@ KEY:
 ### Enhancements
 - (M) Allow quit-&-save in dungeon.
 - (M) Select an active character in combat for faster exploration in dungeon rooms.
+- (M) Trainer menu to optionally enable cheat codes.
 - (G) Buy-back weapon at half price doesn't carry the hundreds place (optional fix with trainer).
 - (G) Library shelf lettering makes one puzzle somewhat awkward.
 - (G) Gender question did not support non-binary; add a neutral symbol.
+- (G) Proper descriptions for non-human NPCs instead of "phantom".
+- (G) Campfire NPC remains stationary in combat and spits fire.
+- (G) Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
 
 
 Source Code
@@ -153,9 +164,8 @@ This project was inspired by the C64 Remaster done by MagerValp. Some of those e
 * Replace "new game" slide show with artwork by Mermaid
 
 Other personal goals include:
-* Finish symbolicating all disassembled source
-* Generate a slideshow disk of game artwork sources
-* Run on 128K machines with less disk access.
+* Run on 128K machines with less disk access
+* Run within a ProDOS folder
 
 Credits and License
 -------------------

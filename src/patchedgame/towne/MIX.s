@@ -1,37 +1,19 @@
 	.include "uscii.i"
-	.include "MIX.i"
 
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-console_xpos = $ce
-console_ypos = $cf
+	.include "char.i"
+	.include "strings.i"
+	.include "jump_subs.i"
+	.include "zp_main.i"
+
+	.include "ROST.i"
+
+
+; --- Custom use of Zero Page
+
 zp_index = $d8
 zp_display_line = $d9
 zp_reagent_count = $ea
 zp_reagent_index = $f0
-;
-; **** USER LABELS ****
-;
-tile_xpos = $0002
-dest_x = $0006
-j_waitkey = $0800
-j_primm_xy = $081e
-j_primm = $0821
-j_console_out = $0824
-j_mulax = $082a
-j_printbcd = $0833
-j_update_status = $0845
-j_printdigit = $0866
-j_clearstatwindow = $0869
-j_printstring = $087e
-party_stats = $ed00
-;party_stats + reag = $ed38
-;party_stats + spells = $ed40
-
-;party_stat_reagents = $38
-party_stat_spells = $40
-
 
 
 	.segment "OVERLAY"
@@ -40,18 +22,18 @@ party_stat_spells = $40
 
 prompt_mix:
 	jsr display_spells
-	jsr j_primm  ;b'Mix reagents\r\x00'
+	jsr j_primm
 	.byte "Mix reagents", $8d
 	.byte 0
 prompt_spell:
-	jsr j_primm  ;b'For spell:\x00'
+	jsr j_primm
 	.byte "For spell:", 0
 	jsr input_char
 	sec
-	sbc #char_A
-	cmp #$1a     ;spell_max
+	sbc #char_alpha_first
+	cmp #spells_max
 	bcc @set_spell
-	jsr j_primm  ;b'NONE!\r\x00'
+	jsr j_primm
 	.byte "NONE!", $8d
 	.byte 0
 	jsr j_clearstatwindow
@@ -70,21 +52,21 @@ prompt_spell:
 	sta mixture
 prompt_reagents:
 	jsr display_reagents
-	jsr j_primm  ;b'REAGENT:\x00'
+	jsr j_primm
 	.byte "REAGENT:", 0
 :	jsr input_char
 	beq :-
 	cmp #char_enter
 	beq @do_mix
 	sec
-	sbc #char_A
+	sbc #char_alpha_first
 	cmp #reagent_max
 	bcs @none_owned
 	tay
 	lda party_stats + party_stat_reagents,y
 	bne @use_reagent
 @none_owned:
-	jsr j_primm  ;b'NONE OWNED!\r\x00'
+	jsr j_primm
 	.byte "NONE OWNED!", $8d
 	.byte 0
 	jmp prompt_reagents
@@ -101,7 +83,7 @@ prompt_reagents:
 	jmp prompt_reagents
 
 @do_mix:
-	jsr j_primm  ;b'YOU MIX THE\rREAGENTS AND...\r\x00'
+	jsr j_primm
 	.byte "YOU MIX THE", $8d
 	.byte "REAGENTS AND...", $8d
 	.byte 0
@@ -110,14 +92,14 @@ prompt_reagents:
 	cmp mixture
 	beq @success
 @failure:
-	jsr j_primm  ;b'IT FIZZLES!\r\x00'
+	jsr j_primm
 	.byte "IT FIZZLES!", $8d
 	.byte 0
 	jsr print_newline
 	jmp prompt_mix
 
 @success:
-	jsr j_primm  ;b'SUCCESS!\r\x00'
+	jsr j_primm
 	.byte "SUCCESS!", $8d
 	.byte 0
 	ldy spell
@@ -147,7 +129,7 @@ input_char:
 	rts
 
 print_newline:
-	lda #$8d
+	lda #char_enter
 	jsr j_console_out
 	rts
 
@@ -157,8 +139,10 @@ display_reagents:
 	ldx #$1a
 	ldy #$00
 	sty zp_reagent_index
-	jsr j_primm_xy ;b'\x1eREAGENTS\x1d\x00'
-	.byte $1e,"REAGENTS",$1d, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "REAGENTS"
+	.byte glyph_less_odd, 0
 @next:
 	clc
 	lda zp_reagent_index
@@ -170,7 +154,7 @@ display_reagents:
 	jsr next_line
 	clc
 	lda zp_reagent_index
-	adc #char_A
+	adc #char_alpha_first
 	jsr j_console_out
 	lda zp_reagent_count
 	cmp #$10
@@ -204,8 +188,10 @@ display_spells:
 	ldy #$00
 	sty zp_index
 	sty zp_display_line
-	jsr j_primm_xy ;b'\x1eMIXTURES\x1d\x00'
-	.byte $1e,"MIXTURES",$1d, 0
+	jsr j_primm_xy
+	.byte glyph_greater_even
+	.byte "MIXTURES"
+	.byte glyph_less_odd, 0
 @next:
 	lda zp_display_line
 	lsr
@@ -227,7 +213,7 @@ display_spells:
 	beq @skip
 	lda zp_index
 	clc
-	adc #char_A
+	adc #char_alpha_first
 	jsr j_console_out
 	lda #char_hyphen
 	jsr j_console_out

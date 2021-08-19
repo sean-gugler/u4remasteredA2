@@ -1,38 +1,32 @@
 	.include "uscii.i"
-	.include "SEL.i"
-
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-a80 = $80
-a81 = $81
-a82 = $82
-a84 = $84
-a85 = $85
-diskid = $d0
-e0400 = $0400
-;
-; **** USER LABELS ****
-;
-j_primm_cout = $081b
-disk_slot = $b7e9   ; IBSLOT: CONTROLLER SLOT NO. in DOS IOB (I/O Block) N * $10
-drive_motor_off = $c088
-drive_motor_on = $c089
-music_header = $f000
+	
+	.include "apple.i"
+	.include "char.i"
+	.include "disks.i"
+	.include "dos.i"
+	.include "music.i"
+	.include "music_state.i"
+	.include "jump_subs.i"
+;	.include "jump_system.i"
+	.include "zp_main.i"
+	.include "zp_music.i"
 
 
 
 	.segment "MAIN"
 
+j_music_ctl:
 	jmp music_ctl
 
+j_spin_drive_motor:
 	jmp spin_drive_motor
 
+
 err_resume_addr:
-	.byte 0, 0
+	.addr $0000
 err_resume_stack:
 	.byte 0
-on_cout_error:
+on_dos_error:
 	ldx err_resume_stack
 	txs
 	lda err_resume_addr + 1
@@ -44,38 +38,38 @@ on_cout_error:
 music_ctl:
 	tax
 	bmi load_music
-	cmp music_header
+	cmp music_data
 	bcs @done
-	sta a80
-	sta a81
-	cmp #$00
+	sta tune_req_now
+	sta tune_queue_next ;By default, loop same tune. Demo changes this value.
+	cmp #music_off
 	bne play_tune
 @wait:
-	lda a82
+	lda tune_playing
 	bne @wait
 @done:
 	rts
 
 play_tune:
-	lda a82
+	lda tune_playing
 	bne @done
-	lda #<music_header
-	sta a84
-	lda #>music_header
-	sta a85
-	jsr e0400
+	lda #<music_data
+	sta mus_ptr
+	lda #>music_data
+	sta mus_ptr + 1
+	jsr music_start
 @done:
 	rts
 
 load_music:
 	sta file_char_music
-;	lda diskid
-;	cmp #$01
+;	lda disk_id
+;	cmp #disk_program
 ;	bne @normal_filename
 ;@cryptic_filename:
 ;	lda #char_M
 ;	sta file_char_first
-;	lda #$81     ;magic hidden file char on Disk 1
+;	lda #$81     ;magic hidden file char on Program Disk
 ;	sta file_char_second
 ;	bne @load_file
 ;@normal_filename:
@@ -84,9 +78,9 @@ load_music:
 ;	lda #char_M
 ;	sta file_char_second
 ;@load_file:
-	lda #$00
+	lda #music_off    ;stop current music before replacing data
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x04BLOAD MUSA,A$F000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD"
 file_char_first:
 	.byte " "
@@ -95,12 +89,12 @@ file_char_second:
 file_char_music:
 	.byte "A,A$F000", $8d
 	.byte 0
-	lda #$01
+	lda #music_main
 	bne music_ctl
 
 spin_drive_motor:
 	pha
-	ldx disk_slot
+	ldx RWTS_slot
 	lda drive_motor_on,x
 	ldx #$05
 @delay:
@@ -109,7 +103,7 @@ spin_drive_motor:
 	bne :-
 	dex
 	bne @delay
-	ldx disk_slot
+	ldx RWTS_slot
 	lda drive_motor_off,x
 	pla
 	rts

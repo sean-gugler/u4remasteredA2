@@ -1,6 +1,15 @@
 	.include "uscii.i"
 ;	.include "u4loader.i"
 
+	.include "jump_subs.i"
+	.include "map_objects.i"
+	.include "tiles.i"
+	.include "trainers.i"
+	.include "zp_main.i"
+
+	.include "PRTY.i"
+
+
 	.import done_what
 	.import done_only_on_foot
 	.import done_not_here
@@ -21,75 +30,9 @@
 ;	.export j_dirkey_trans_tab
 
 
-player_xpos		= $00
-player_ypos		= $01
-current_location	= $0a
-game_mode		= $0b
-terrain_occlusion	= $0d
-player_transport	= $0e
-party_size		= $0f
-attacking_monster_type	= $c0
-tile_north		= $c9
-tile_south		= $ca
-tile_east		= $cb
-tile_west		= $cc
-currplayer		= $d4
+; --- Custom use of Zero Page
+
 zp_teleport_index = $d8
-balloon_movement	= $f4
-direction = $f5
-temp_x = $fa
-temp_y = $fb
-
-j_waitkey		= $0800
-j_player_teleport	= $0803
-j_move_east		= $0806
-j_move_west		= $0809
-j_move_south		= $080c
-j_move_north		= $080f
-j_primm			= $0821
-j_console_out		= $0824
-j_get_stats_ptr		= $082d
-j_printname		= $0830
-j_request_disk		= $0842
-j_update_status		= $0845
-j_update_view		= $084b
-
-map_status		= $ee00
-object_tile		= $ee60
-
-monster_sleep		= $ef70
-player_tile		= $efa0
-
-music_ctl = $0320
-hw_strobe = $c010
-
-balloon_landed = $00
-balloon_drift = $01
-balloon_steer = $02
-mode_world = $01
-mode_dungeon = $03
-tile_water_shallow = $02
-tile_ship_first = $10
-tile_ship_last = $14
-tile_horse_west = $14
-tile_balloon = $18
-tile_walk = $1f
-tile_human_prone = $38
-tile_monster_dungeon = $90
-tile_troll = $a4
-xy_last_towne = $20
-
-trainer_magic = $9a90
-trainer_food = $9a91
-trainer_torch = $9a92
-trainer_jimmy = $9a93
-trainer_peer = $9a94
-trainer_avoid = $9a95
-trainer_balloon = $9a96
-trainer_travel = $9a97
-trainer_pass = $9a98
-trainer_exit = $9a99
-trainer_price = $9a9a
 
 
 	.segment "TRAINERS"
@@ -128,7 +71,7 @@ trainer_teleport:
 	cmp #mode_world
 	beq :+
 @abort:
-	jmp j_primm			; nope, continue talk command
+	rts				; nope, continue talk command
 :
 	pla				; pull return address
 	pla
@@ -230,8 +173,8 @@ teleport:
 	sta player_xpos
 	sty player_ypos
 	ldx #7
-	txa
-:	sta object_tile,x
+	lda #$00
+:	sta object_tile_type,x
 	dex
 	bpl :-
 	jsr j_player_teleport
@@ -376,11 +319,11 @@ trainer_board:
 @balloon:
 	cmp #'B'
 	bne @none
-	lda #balloon_drift
+	lda #occlusion_off
 	sta terrain_occlusion
-	ldx trainer_balloon
-	beq :+
-	asl ; balloon_steer
+;	lda #balloon_drift    ;same value
+	clc
+	adc trainer_balloon   ;balloon_steer
 :	sta balloon_movement
 	ldx #tile_balloon
 @none:
@@ -416,13 +359,13 @@ active_char_player_turn:
 	lda #0
 	sta combat_active_char
 	lda #1
-	sta currplayer
+	sta curr_player
 	rts
 @selected:
-	sta currplayer
+	sta curr_player
 	jsr active_char_check_awake
 	bne @return_no_active
-	lda currplayer
+	lda curr_player
 	rts
 
 
@@ -430,7 +373,7 @@ active_char_check:
 	lda combat_active_char
 	beq @play_turn
 
-	cmp currplayer
+	cmp curr_player
 	beq @play_turn
 
 	jsr active_char_check_awake
@@ -485,20 +428,20 @@ active_char_check_command:
 
 
 active_char_check_awake:
-	ldx currplayer
+	ldx curr_player
 	stx @restoreplayer
-	sta currplayer
+	sta curr_player
 	jsr is_awake
 	sta @result
-	ldx currplayer
-	lda player_tile - 1,x
+	ldx curr_player
+	lda combat_player_tile - 1,x
 	beq @exited
 	cmp #tile_human_prone
 	beq @asleep
 @done:
 @restoreplayer = * + 1
 	ldx #$00
-	stx currplayer
+	stx curr_player
 @result = * + 1
 	lda #$00
 	rts

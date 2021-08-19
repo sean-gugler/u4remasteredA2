@@ -20,6 +20,12 @@
 8A27-8A61
 8A6A-8A9B
 8AAB-8ACC
+8AD2-8AD7
+8ADC-8AE1
+8AE6-8AEB
+8AF0-8AF5
+8AFA-8AFF
+8B04-8B09
 8B0E-8B35
 8B6C-8BB5
 8BB8-8BC3
@@ -28,26 +34,21 @@
 8C2D-8C4F
 8C55-8C65
 8C89-8CB8
-90F7-90F8
-8D49-904E
 8CB9-8CD9
-8AD2-8AD7
-8ADC-8AE1
-8AE6-8AEB
-8AF0-8AF5
-8AFA-8AFF
-8B04-8B09
+8D49-904E
+90F7-90F8
 :WORDS
 :POINTERS
 :HILOLOOKUP
 :LOHILOOKUP
 :DATA TEXT
 :BLANK LINES
-904E
 8CD9
+904E
 :REMOVED BYTES
 :FULL COMMENTS
 8CE9 unused
+90F7 junk
 :SIDE COMMENTS
 8810 b' SAYS:\nWELCOME MATE TO\n\x00'
 8841 b' SAYS:\x00'
@@ -74,26 +75,36 @@
 8C2A b'\nSORRY, I COULD\nNOT HEP YA MATE!\n\x00'
 8C52 b"\nANYTHIN' ELSE?\x00"
 8C86 b' SAYS:\nSORRY, YOU SEEM\nTO HAVE TOO\nMANY, BYE!\n\x00'
-90C9 #party_stat_gold
-908C #char_space
-9096 #char_enter
+8871 #char_F
+8875 #char_A
+88F6 #party_stat_gold_hi
+890C #party_stat_food_lo
+8956 #char_Y
+8ACF "BLAC"
+8AD9 "SEXT"
+8AE3 "WHIT"
+8AED "MAND"
+8AF7 "SKUL"
+8B01 "NIGH"
+8C68 #char_Y
+8C6C #char_N
+8CE2 #char_enter
+8CED 99
+8D11 #char_enter
+904E #char_question
 905A #char_enter
 905E #char_left_arrow
 9062 #char_space
 9080 #char_space
-8D11 #char_enter
-8C68 #char_Y
-8C6C #char_N
-8871 #char_F
-8875 #char_A
-8956 #char_Y
-88F6 #party_stat_gold
-8ACF "BLAC"
-8AD9 "SEXT"
-8AE3 "WHIT"
-8AF7 "SKUL"
-8B01 "NIGH"
-8AED "MAND"
+908C #char_space
+9096 #char_enter
+90A4 $zp_mismatches
+90B8 $zp_mismatches
+90C3 $zp_mismatches
+90C6 $zp_amount
+90C9 #party_stat_gold_hi
+90CF $zp_amount
+90E2 $zp_amount
 :USER LABELS
 0000 player_xpos
 0001 player_ypos
@@ -108,7 +119,7 @@
 000A current_location
 000B game_mode
 000C dungeon_level
-000D balloon_flying
+000D terrain_occlusion
 000E player_transport
 000F party_size
 0010 dng_direction
@@ -131,8 +142,7 @@
 00B0 key_buf
 00B1 key_buf+1
 00B8 key_buf_len
-00BD charptr
-00BE charptr+1
+00BD char_glyph
 00C0 foe_type_encountered
 00C1 pre_combat_x
 00C2 pre_combat_y
@@ -148,7 +158,7 @@
 00CD music_volume
 00CE console_xpos
 00CF console_ypos
-00D0 diskid
+00D0 disk_id
 00D1 numdrives
 00D2 currdisk_drive1
 00D3 currdisk_drive2
@@ -156,17 +166,17 @@
 00D5 target_player
 00D6 hexnum
 00D7 bcdnum
-00D8 zpD8
+00D8 zp_input_index
 00D9 zpD9
 00DA zpDA
 00DB zpDB
 00DC damage
 00DE reqdisk
 00DF currdrive
-00E0 lt_track
-00E1 lt_sector
-00E2 lt_rwflag
-00E3 lt_addr_hi
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
 00E6 foe_type_combat
 00E8 game_mode_pre_combat
 00E9 turn_counter
@@ -175,9 +185,9 @@
 00EE moongate_xpos
 00EF moongate_ypos
 00F0 zp_count
-00F2 tilerow
-00F4 movement_mode
-00F5 direction
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
 00F6 temp2_x
 00F7 temp2_y
 00F8 delta_x
@@ -188,7 +198,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 draw_stack
+0200 drawn_tiles
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -197,7 +207,7 @@
 0250 map_start_foe_y
 0260 map_start_player_x
 0268 map_start_player_y
-0280 tempmap
+0280 world_tiles
 0300 inbuffer
 0310 dng_trigger_new_tile
 0311 dng_trigger_pos
@@ -205,7 +215,7 @@
 0313 dng_trigger_new_pos2
 0320 music_ctl
 0323 spin_drive_motor
-0400 screen
+0400 screen_TEXT
 0800 j_waitkey
 0803 j_player_teleport
 0806 j_move_east
@@ -257,12 +267,77 @@
 0890 j_get_player_tile
 0893 j_gettile_towne
 0896 j_gettile_dungeon
-1572 div32
-1573 div16
-1578 mul32
-1579 mul16
-2000 bitmap
+2000 screen_HGR1
 8800 j_overlay_entry
+8839 ask_again
+884B ask_food_or_ale
+885E @prompt
+887C buy_food
+88F6 @try_spend
+892A @skip_overflow
+8931 ask_more
+8960 bye
+8973 cannot_afford
+89A7 @partial_afford
+89D4 buy_ale
+89DE +
+8A62 @fair_offer
+8A9C @paid
+8AA8 @ask_rumor
+8B0B @cant_help
+8B38 @black_stone
+8B3D @sextant
+8B42 @white_stone
+8B47 @mandrake
+8B4C @skull
+8B51 @nightshade
+8B53 @check_location
+8B5C @check_bribe
+8B69 @price_not_met
+8BF4 @paid_more
+8BFF @set_value
+8C06 print_rumor
+8C2A bribe_not_met
+8C52 anything_else
+8C72 @yes
+8C78 @no
+8C7B drunk
+8CB9 price_current
+8CBA unused
+8CBB count_drinks
+8CBC paid_rumor
+8CBD location_table
+8CCD price_food
+8CD3 price_rumor
+8CD9 input_char
+8CE9 encode_bcd_value
+8CF5 @dec
+8CFD @max
+8CFF @done
+8D01 decode_bcd_value
+8D08 @inc
+8D10 @done
+8D11 print_newline
+8D17 print_string
+8D22 @next_char
+8D26 @next_string
+8D2C @end_string
+8D32 @print_char
+8D41 @done
+8D42 inc_ptr
+8D48 +
+8D49 string_table
+904E get_input
+9057 @get_char
+9078 @backspace
+908A @got_input
+908E @pad_spaces
+909C match_input_inline
+90A8 @next_char
+90AF +
+90BD @end
+90C6 try_spend
+90F3 @paid_ok
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -324,8 +399,8 @@ EF10 combat_foe_cur_y
 EF20 combat_foe_prev_x
 EF30 combat_foe_prev_y
 EF40 combat_foe_hp
-EF50 combat_foe_tile
-EF60 combat_foe_drawn_tile
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
 EF70 combat_foe_slept
 EF7F combat_player_xpos-1
 EF80 combat_player_xpos
@@ -336,74 +411,6 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
-90F3 @paid_ok
-90C6 try_spend
-90BD @end
-90AF +
-90A8 @next_char
-909C check_input_inline
-908A @got_input
-908E @pad_spaces
-904E get_input
-9057 @get_char
-9078 @backspace
-8D49 string_table
-8D42 inc_ptr
-8D48 +
-8D41 @done
-8D32 @print_char
-8D26 @next_string
-8D2C @end_string
-8D22 @next_char
-8D17 print_string
-8D11 print_newline
-8CE9 encode_bcd_value
-8CFF @done
-8CFD @max
-8CF5 @dec
-8D01 decode_bcd_value
-8D10 @done
-8D08 @inc
-8CD9 input_char
-8CBD location_table
-8CCD price_food
-8CD3 price_rumor
-8839 ask_again
-884B ask_food_or_ale
-885E @prompt
-887C buy_food
-89D4 buy_ale
-8CB9 price_current
-8960 bye
-8973 cannot_afford
-89A7 @partial_afford
-8931 ask_more
-88F6 @try_spend
-892A @skip_overflow
-8C7B drunk
-89DE +
-8CBB count_drinks
-8A62 @fair_offer
-8A9C @paid
-8AA8 @ask_rumor
-8B38 @black_stone
-8B3D @sextant
-8B42 @white_stone
-8B47 @mandrake
-8B4C @skull
-8B51 @nightshade
-8B53 @check_location
-8B0B @cant_help
-8CBC paid_rumor
-8B69 @price_not_met
-8C06 print_rumor
-8BFF @overflow
-8B5C @check_bribe
-8BF4 @paid_more
-8C2A bribe_not_met
-8C52 anything_else
-8C72 @yes
-8C78 @no
 :DISABLED HILO LABELS
 :USER HILO
 :TAB SIZE

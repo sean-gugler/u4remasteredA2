@@ -1,304 +1,57 @@
 	.include "uscii.i"
-	.include "NEWGAME.i"
 
-;
-; **** ZP FIELDS ****
-;
-numdrives = $d1
-;
-; **** ZP ABSOLUTE ADRESSES ****
-;
-player_xpos = $00
-player_ypos = $01
-game_mode = $0b
-party_size = $0f
-spk_pattern_ptr = $b0
-;spk_pattern_ptr+1 = $b1
-spk_byte = $b2
-spk_pattern_length = $b3
-spk_repeat_code = $b4
-spk_pattern_code = $b5
-spk_row = $b6
-spk_repeat_count = $b7
-spk_repeat_flag = $b8
-spk_pattern_count = $b9
-spk_pattern_flag = $ba
-spk_pattern_len_cur = $bb
-gender_chosen = $bc
-draw_col = $c0
-draw_row = $c1
-draw_ptr = $c2
-;draw_ptr + 1 = $c3
-col_count = $c4
-console_xpos = $ce
-console_ypos = $cf
-diskid = $d0
-;numdrives = $d1
-currdisk_drive1 = $d2
-currdisk_drive2 = $d3
-curr_player = $d4
-reqdisk = $de
-currdrive = $df
-game_mode_pre_combat = $e8
-temp_y = $fb
-ptr2 = $fc
-;ptr2 + 1 = $fd
-ptr1 = $fe
-;ptr1 + 1 = $ff
-;
-; **** ZP POINTERS ****
-;
-;draw_ptr = $c2
-;ptr2 = $fc
-;ptr1 = $fe
-;
-; **** FIELDS ****
-;
-;fffff = $ffff
-;
-; **** ABSOLUTE ADRESSES ****
-;
-card_honesty = $4000
-card_compassion = $4460
-card_valor = $48c0
-card_justice = $4d20
-card_sacrifice = $5180
-card_honor = $55e0
-card_spirituality = $5a40
-card_humility = $5ea0
-;
-; **** USER LABELS ****
-;
-tile_xpos = $0002
-tile_ypos = $0003
-map_x = $0004
-map_y = $0005
-dest_x = $0006
-dest_y = $0007
-britannia_x = $0008
-britannia_y = $0009
-current_location = $000a
-dungeon_level = $000c
-balloon_flying = $000d
-player_transport = $000e
-dng_direction = $0010
-light_duration = $0011
-moon_phase_trammel = $0012
-moon_phase_felucca = $0013
-horse_mode = $0014
-player_has_spoken_to_lb = $0015
-last_sleep = $0016
-last_humility_check = $0017
-altar_room_principle = $0018
-last_meditated = $0019
-last_found_reagent = $001a
-ship_hull = $001b
-move_counter = $001c
-;move_counter + 1 = $001d
-;move_counter + 2 = $001e
-;move_counter + 3 = $001f
-kbd_buf_count = $0046
-charptr = $00bd
-;charptr+1 = $00be
-curr_player_turn = $00c5
-magic_aura = $00c6
-aura_duration = $00c7
-tile_under_player = $00c8
-tile_north = $00c9
-tile_south = $00ca
-tile_east = $00cb
-tile_west = $00cc
-music_volume = $00cd
-target_player = $00d5
-hexnum = $00d6
-bcdnum = $00d7
-zpd8 = $00d8
-zpd9 = $00d9
-zpda = $00da
-zpdb = $00db
-damage = $00dc
-lt_track = $00e0
-lt_sector = $00e1
-lt_rwflag = $00e2
-lt_addr_hi = $00e3
-foe_type_combat = $00e6
-turn_counter = $00e9
-zpea = $00ea
-moongate_tile = $00ed
-moongate_xpos = $00ee
-moongate_ypos = $00ef
-zpf0 = $00f0
-tilerow = $00f2
-movement_mode = $00f4
-direction = $00f5
-temp2_x = $00f6
-temp2_y = $00f7
-delta_x = $00f8
-delta_y = $00f9
-temp_x = $00fa
-draw_stack = $0200
-room_start_foe_type = $0210
-room_start_foe_x = $0220
-room_start_foe_y = $0230
-map_start_foe_x = $0240
-room_start_player_y = $0248
-map_start_foe_y = $0250
-map_start_player_x = $0260
-map_start_player_y = $0268
-tempmap = $0280
-inbuffer = $0300
-dng_trigger_new_tile = $0310
-dng_trigger_pos = $0311
-dng_trigger_new_pos1 = $0312
-dng_trigger_new_pos2 = $0313
-music_ctl = $0320
-spin_drive_motor = $0323
-screen = $0400
-j_waitkey = $0800
-j_player_teleport = $0803
-j_move_east = $0806
-j_move_west = $0809
-j_move_south = $080c
-j_move_north = $080f
-j_drawinterface = $0812
-j_drawview = $0815
-j_update_britannia = $0818
-j_primm_cout = $081b
-j_primm_xy = $081e
-j_primm = $0821
-j_console_out = $0824
-j_clearbitmap = $0827
-j_mulax = $082a
-j_get_stats_ptr = $082d
-j_printname = $0830
-j_printbcd = $0833
-j_drawcursor = $0836
-j_drawcursor_xy = $0839
-j_drawvert = $083c
-j_drawhoriz = $083f
-j_request_disk = $0842
-j_update_status = $0845
-j_blocked_tile = $0848
-j_update_view = $084b
-j_rand = $084e
-j_loadsector = $0851
-j_playsfx = $0854
-j_update_view_combat = $0857
-j_getnumber = $085a
-j_getplayernum = $085d
-j_update_wind = $0860
-j_animate_view = $0863
-j_printdigit = $0866
-j_clearstatwindow = $0869
-j_animate_tiles = $086c
-j_centername = $086f
-j_print_direction = $0872
-j_clearview = $0875
-j_invertview = $0878
-j_centerstring = $087b
-j_printstring = $087e
-j_gettile_bounds = $0881
-j_gettile_britannia = $0884
-j_gettile_opposite = $0887
-j_gettile_currmap = $088a
-j_gettile_tempmap = $088d
-j_get_player_tile = $0890
-j_gettile_towne = $0893
-j_gettile_dungeon = $0896
-bitmap = $2000
+	.include "apple.i"
+	.include "cards.i"
+	.include "char.i"
+	.include "disks.i"
+	.include "jump_subs.i"
+	.include "jump_system.i"
+	.include "music.i"
+	.include "super_packer.i"
+	.include "tables.i"
+	.include "zp_main.i"
+	
+	.include "PRTY.i"
+	.include "ROST.i"
+
+
 save_portal_backgnd = $6000
-j_readblock = $b7b5
-rwts_volume = $b7eb
-rwts_track = $b7ec
-rwts_sector = $b7ed
-rwts_buf_lo = $b7f0
-rwts_buf_hi = $b7f1
-rwts_command = $b7f4
-hw_keyboard = $c000
-hw_strobe = $c010
-hw_speaker = $c030
-hw_lcbank1 = $c08b
-bmplineaddr_lo = $e000
-;bmplineaddr_lo + 7 = $e007
-;bmplineaddr_lo + 8 = $e008
-;bmplineaddr_lo + 9 = $e009
-;bmplineaddr_lo + 10 = $e00a
-;bmplineaddr_lo + $68 = $e068
-bmplineaddr_hi = $e0c0
-;bmplineaddr_hi + 7 = $e0c7
-;bmplineaddr_hi + 8 = $e0c8
-;bmplineaddr_hi + 9 = $e0c9
-;bmplineaddr_hi + 10 = $e0ca
-;bmplineaddr_hi + $68 = $e128
-music_init = $ec00
-party_stats = $ed00
-;party_stats + 1 = $ed01
-torches = $ed08
-gems = $ed09
-keys = $ed0a
-sextant = $ed0b
-stones = $ed0c
-runes = $ed0d
-bell_book_candle = $ed0e
-threepartkey = $ed0f
-food_hi = $ed10
-food_lo = $ed11
-food_frac = $ed12
-gold_hi = $ed13
-gold_lo = $ed14
-horn = $ed15
-wheel = $ed16
-skull = $ed17
-armour = $ed18
-weapons = $ed20
-reagents = $ed38
-mixtures = $ed40
-object_tile_sprite = $ee00
-;object_tile_sprite + object_max = $ee1f
-object_xpos = $ee20
-;object_xpos + object_max = $ee3f
-object_ypos = $ee40
-;object_ypos + object_max = $ee5f
-object_tile_type = $ee60
-;object_tile_type + object_max = $ee7f
-object_xpos_prev = $ee80
-object_ypos_prev = $eea0
-object_dng_level = $eec0
-npc_dialogue = $eee0
-combat_foe_cur_x = $ef00
-combat_foe_cur_y = $ef10
-combat_foe_prev_x = $ef20
-combat_foe_prev_y = $ef30
-combat_foe_hp = $ef40
-combat_foe_tile = $ef50
-combat_foe_drawn_tile = $ef60
-combat_foe_slept = $ef70
-;combat_player_xpos-1 = $ef7f
-combat_player_xpos = $ef80
-;combat_player_ypos-1 = $ef8f
-combat_player_ypos = $ef90
-;combat_player_tile-1 = $ef9f
-combat_player_tile = $efa0
-attack_sprite = $effd
-target_x = $effe
-target_y = $efff
 
-key_buf_len = $b8
-hgr_page2 = $4000
+max_spk_column = $27
+max_spk_row = $8f
+
+portal_col_min = $04
+portal_col_max = $08
+portal_row_min = $2b
+portal_row_max = $46
+
+string_cards_first = $35
+string_cards_more = $36
+string_cards_last = $37
+string_cards_of = $38
+string_virtue_first = $39
+string_farewell = $42
+string_transport = $43
+
+
+; Placeholder operands that get altered
+; by self-modifying code.
+
+TMP_ADDR = $ffff
 
 
 	.segment "MAIN"
 
-	bit hw_lcbank1
-	bit hw_lcbank1
+	bit hw_LCBANK1
+	bit hw_LCBANK1
 	jmp init_scene
 
 start_game:
 	lda #$00
 	sta key_buf_len
-	lda #$00
+	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x04BRUN ULT4,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BRUN ULT4,A$4000",$8d, 0
 
 wait_key:
@@ -314,10 +67,10 @@ init_scene:
 	sta question_number
 	lda #$10
 	sta console_ypos
-	jsr j_primm_cout ;b'\x04BLOAD TREE.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TREE.SPK,A$4000",$8d, 0
 	jsr clear_text_area
-@s1d_show_tree:
+@s1D_show_tree:
 	jsr spk_unpack
 	lda #$1d
 	sta scene
@@ -331,16 +84,18 @@ start_scene:
 	jsr print_string
 	inc scene
 	lda scene
+
+@s21_portal_appear:
 	cmp #$21
-	bne @s32_portal
+	bne @s23_portal_vanish
 	jsr portal_appear
 	jmp next_scene
 
-@s32_portal:
+@s23_portal_vanish:
 	cmp #$23
 	bne @s24_show_clearing
 	jsr portal_vanish
-	jsr j_primm_cout ;b'\x04BLOAD PRTL.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD PRTL.SPK,A$4000",$8d, 0
 	jmp next_scene
 
@@ -348,38 +103,38 @@ start_scene:
 	cmp #$24
 	bne @s29_show_tree
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD TREE.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TREE.SPK,A$4000",$8d, 0
 	jmp next_scene
 
 @s29_show_tree:
 	cmp #$29
-	bne @s2c_music_towne
+	bne @s2C_music_towne
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD LOOK.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD LOOK.SPK,A$4000",$8d, 0
 	jmp next_scene
 
-@s2c_music_towne:
+@s2C_music_towne:
 	cmp #$2c
-	bne @s2d_show_book
-	lda #char_T
+	bne @s2D_show_book
+	lda #music_Towne
 	jsr music_ctl
 	jmp next_scene
 
-@s2d_show_book:
+@s2D_show_book:
 	cmp #$2d
-	bne @s2f_show_fair
+	bne @s2F_show_fair
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD FAIR.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD FAIR.SPK,A$4000",$8d, 0
 	jmp next_scene
 
-@s2f_show_fair:
+@s2F_show_fair:
 	cmp #$2f
 	bne @s32_show_wagon
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD WAGN.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD WAGN.SPK,A$4000",$8d, 0
 	jmp next_scene
 
@@ -387,7 +142,7 @@ start_scene:
 	cmp #$32
 	bne @s33_show_gypsy
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD GYPS.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD GYPS.SPK,A$4000",$8d, 0
 	jmp next_scene
 
@@ -395,7 +150,7 @@ start_scene:
 	cmp #$33
 	bne @s35_show_table
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD TABL.SPK,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD TABL.SPK,A$4000",$8d, 0
 @next_scene:
 	jmp next_scene
@@ -404,7 +159,7 @@ start_scene:
 	cmp #$35
 	bne @next_scene
 	jsr spk_unpack
-	jsr j_primm_cout ;b'\x04BLOAD CRDS,A$4000\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD CRDS,A$4000",$8d, 0
 	jsr wait_key
 
@@ -487,18 +242,18 @@ fill_green:
 	lda card_left
 	ldx #$00
 	jsr draw_card
-	jsr j_primm  ;b' and \x00'
+	jsr j_primm
 	.byte " and ", 0
 	lda card_right
 	clc
 	adc #string_virtue_first
 	jsr print_string
-	jsr j_primm  ;b'. She says,\x00'
+	jsr j_primm
 	.byte ". She says,", 0
 	lda #$00
 	sta console_xpos
 	inc console_ypos
-	jsr j_primm  ;b"'Consider this:'\x00"
+	jsr j_primm
 	.byte "'Consider this:'", 0
 	lda card_right
 	ldx #$01
@@ -510,12 +265,12 @@ fill_green:
 	clc
 	adc card_right
 	jsr print_string
-@input_ab:
+@input_AB:
 	jsr wait_key
 	cmp #char_A
 	beq @chosen_on_left
 	cmp #char_B
-	bne @input_ab
+	bne @input_AB
 	ldx card_right
 	ldy card_left
 	stx card_left
@@ -561,21 +316,21 @@ conclusion:
 	jsr print_string
 	jsr wait_key
 	jsr clear_text_area
-	lda #$00
+	lda #music_off
 	jsr music_ctl
 	lda #string_transport
 	jsr print_string
 	jsr wait_key
-	lda #$00
+	lda #music_off
 	jsr music_ctl
-	jsr j_primm_cout ;b'\x04BLOAD NPRT,A$0\n\x04BLOAD NLST,A$EE00\n\x04BLOAD NRST,A$EC00\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD NPRT,A$0",$8d
 	.byte $84,"BLOAD NLST,A$EE00",$8d
 	.byte $84,"BLOAD NRST,A$EC00",$8d
 	.byte 0
 	lda game_mode
 	sta game_mode_pre_combat
-	lda #$00
+	lda #mode_suspended
 	sta game_mode
 	lda card_chosen
 	sta curr_player
@@ -588,7 +343,7 @@ conclusion:
 	lda #$01
 	sta curr_player
 	jsr j_get_stats_ptr
-	ldy #$1f
+	ldy #player_stat_max
 @set_player_class:
 	lda (ptr1),y
 	pha
@@ -604,7 +359,7 @@ conclusion:
 	sta (ptr1),y
 	dey
 	bpl @set_player_name
-	ldy #$10     ;player_gender
+	ldy #player_gender
 	lda gender_chosen
 	sta (ptr1),y
 	clc
@@ -617,7 +372,7 @@ conclusion:
 	ldy #player_intelligence
 	lda cur_int
 	sta (ptr1),y
-	ldx #$07
+	ldx #virtue_last - 1
 @set_virtues:
 	lda virtue_level,x
 	sta party_stats,x
@@ -673,13 +428,13 @@ choose_fresh_card:
 
 sound_portal_line:
 	ldy #$28
-	bit hw_speaker
+	bit hw_SPEAKER
 @dur:
 	ldx temp_y
 @freq:
 	dex
 	bne @freq
-	bit hw_speaker
+	bit hw_SPEAKER
 	dey
 	bne @dur
 set_ptr1_line:
@@ -835,19 +590,19 @@ insert_disk:
 @d1_prompt:
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'PLEASE PLACE THE\x00'
+	jsr j_primm_xy
 	.byte "PLEASE PLACE THE", 0
 	inc console_ypos
 	jsr print_disk_name
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'INTO DRIVE 1\x00'
+	jsr j_primm_xy
 	.byte "INTO DRIVE 1", 0
 @wait_key:
 	inc console_ypos
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'AND PRESS [ESC]\x00'
+	jsr j_primm_xy
 	.byte "AND PRESS [ESC]", 0
 :	jsr j_waitkey
 	cmp #char_ESC
@@ -875,13 +630,13 @@ insert_disk:
 @d2_prompt:
 	ldy console_ypos
 	ldx #$0b
-	jsr j_primm_xy ;b'PLEASE PLACE THE\x00'
+	jsr j_primm_xy
 	.byte "PLEASE PLACE THE", 0
 	inc console_ypos
 	jsr print_disk_name
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'INTO DRIVE 2\x00'
+	jsr j_primm_xy
 	.byte "INTO DRIVE 2", 0
 	jmp @wait_key
 
@@ -890,13 +645,13 @@ insert_disk:
 	clc
 	adc #$b0
 	sta @drive_number
-	jsr j_primm_cout ;b'\x04BLOAD DISK,D1\n\x00'
+	jsr j_primm_cout
 	.byte $84,"BLOAD DISK,D"
 @drive_number:
 	.byte "1", $8d
 	.byte 0
 	ldx currdrive
-	lda diskid
+	lda disk_id
 	sta numdrives,x
 	cmp reqdisk
 	beq @ok
@@ -914,7 +669,7 @@ print_disk_name:
 	bne @britannia
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'ULTIMA DISK\x00'
+	jsr j_primm_xy
 	.byte "ULTIMA DISK", 0
 	inc console_ypos
 	rts
@@ -924,7 +679,7 @@ print_disk_name:
 	bne @towne
 	ldy console_ypos
 	ldx #$0c
-	jsr j_primm_xy ;b'BRITANNIA DISK\x00'
+	jsr j_primm_xy
 	.byte "BRITANNIA DISK", 0
 	inc console_ypos
 	rts
@@ -934,7 +689,7 @@ print_disk_name:
 	bne @dungeon
 	ldy console_ypos
 	ldx #$0e
-	jsr j_primm_xy ;b'TOWN DISK\x00'
+	jsr j_primm_xy
 	.byte "TOWN DISK", 0
 	inc console_ypos
 	rts
@@ -944,7 +699,7 @@ print_disk_name:
 	bne @done
 	ldy console_ypos
 	ldx #$0d
-	jsr j_primm_xy ;b'DUNGEON DISK\x00'
+	jsr j_primm_xy
 	.byte "DUNGEON DISK", 0
 	inc console_ypos
 @done:
@@ -1019,7 +774,7 @@ draw_bead:
 	sta draw_ptr + 1
 	ldy draw_col
 @src_ptr = * + $01
-	lda $ffff,x
+	lda TMP_ADDR,x
 	sta (draw_ptr),y
 	inc draw_row
 	inx
@@ -1032,10 +787,10 @@ bead_row:
 bead_col:
 	.byte $10,$11,$12,$13,$14,$15,$16,$17
 bead_addr:
-	.word bead_white_even
-	.word bead_white_odd
-	.word bead_black_even
-	.word bead_black_odd
+	.addr bead_white_even
+	.addr bead_white_odd
+	.addr bead_black_even
+	.addr bead_black_odd
 bead_white_even:
 	.byte $3a,$7e,$7e,$7e,$7e,$7e,$7f,$7f
 	.byte $7e,$7e,$7e,$7e,$7e,$3a
@@ -1075,7 +830,7 @@ draw_card:
 	ldy draw_col
 @src_ptr = * + $01
 @next_col:
-	lda $ffff,x
+	lda TMP_ADDR,x
 	sta (draw_ptr),y
 	inx
 	bne :+
@@ -1092,18 +847,18 @@ draw_card:
 card_col_table:
 	.byte $02,$1c
 card_addr:
-	.word card_honesty
-	.word card_compassion
-	.word card_valor
-	.word card_justice
-	.word card_sacrifice
-	.word card_honor
-	.word card_spirituality
-	.word card_humility
+	.addr card_honesty
+	.addr card_compassion
+	.addr card_valor
+	.addr card_justice
+	.addr card_sacrifice
+	.addr card_honor
+	.addr card_spirituality
+	.addr card_humility
 
 	.byte "SUPER-PACKER COPYRIGHT 1983 BY STEVEN MEUSE"
 spk_unpack:
-	lda #>hgr_page2
+	lda #>screen_HGR2
 	sta ptr2 + 1
 	ldx #$00
 	stx spk_repeat_flag

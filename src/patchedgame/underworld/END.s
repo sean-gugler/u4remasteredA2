@@ -128,7 +128,7 @@ min_spk_row = $07
 	jmp @denied
 
 @check_virtues:
-	ldy #$07
+	ldy #virtue_last - 1
 :	lda party_stats,y
 	bne @not_avatar
 	dey

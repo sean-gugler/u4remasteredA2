@@ -1113,6 +1113,7 @@ last_ship_x:
 	.byte 0
 last_ship_y:
 	.byte 0
+
 board_horse:
 	lda #tile_horse_west
 	jsr do_board
@@ -2550,10 +2551,12 @@ try_get_chest:
 	jmp done_not_here
 
 :	lda current_location
-	beq get_in_world
+	beq get_dropped_chest
 	jsr j_get_player_tile
 	cmp #tile_chest
-	bne get_in_world
+	bne get_dropped_chest
+
+get_towne_chest:
 	lda #tile_floor_brick
 	sta (ptr2),y
 	ldy #virtue_honesty
@@ -2567,7 +2570,7 @@ try_get_chest:
 	jsr dec_virtue
 	jmp get_chest
 
-get_in_world:
+get_dropped_chest:
 	ldx #object_max
 @next:
 	lda object_tile_type,x

@@ -233,30 +233,6 @@ use_wheel:
 	.byte 0
 	rts
 
-use_skull_at_abyss:
-	jsr j_primm
-	.byte $8d
-	.byte "YOU CAST THE", $8d
-	.byte "SKULL OF MONDAIN", $8d
-	.byte "INTO THE ABYSS!", $8d
-	.byte 0
-	lda #$ff
-	sta skull
-	lda #virtue_last - 1
-	sta zp_index
-@next_virtue:
-	ldy zp_index     ;BUGFIX: was #$ea (wrong opcode)
-	lda #$10
-	jsr inc_virtue
-	dec zp_index
-	bpl @next_virtue
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
-	jsr j_invertview
-	jsr shake_screen
-	rts
-
 use_skull:
 	lda skull
 	cmp #$01
@@ -286,7 +262,7 @@ use_skull:
 	jsr shake_screen
 	
 	lda game_mode   ; ENHANCED: skull in combat
-	bmi @combat     ; ENHANCED: skull in combat
+	bmi use_skull_in_combat     ; ENHANCED: skull in combat
 
 	ldx #object_mobs_max
 	lda #$00
@@ -296,7 +272,7 @@ use_skull:
 	dex
 	bpl @clear
 	jsr j_update_view
-@penalty:
+skull_penalty:
 	lda #virtue_last - 1
 	sta zp_index
 @next_virtue:
@@ -308,8 +284,32 @@ use_skull:
 	jsr j_update_status
 	rts
 
+use_skull_at_abyss:
+	jsr j_primm
+	.byte $8d
+	.byte "YOU CAST THE", $8d
+	.byte "SKULL OF MONDAIN", $8d
+	.byte "INTO THE ABYSS!", $8d
+	.byte 0
+	lda #$ff
+	sta skull
+	lda #virtue_last - 1
+	sta zp_index
+@next_virtue:
+	ldy zp_index     ;BUGFIX: was #$ea (wrong opcode)
+	lda #$10
+	jsr inc_virtue
+	dec zp_index
+	bpl @next_virtue
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	jsr j_invertview
+	jsr shake_screen
+	rts
+
 ; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
-@combat:
+use_skull_in_combat:
 	ldx #foes_max
 @next:
 	lda combat_foe_tile_type,x
@@ -335,7 +335,7 @@ use_skull:
 @skip:
 	dex
 	bpl @next
-	bmi @penalty
+	jmp skull_penalty
 
 get_input:
 	lda #char_question

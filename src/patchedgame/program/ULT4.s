@@ -1215,23 +1215,25 @@ board_balloon:
 
 do_board:
 	sta zp_transport
-	ldx #object_max
+	ldx #object_last	;BUGFIX dismount horse (was #object_last - 1)
 @next:
+	dex			;BUGFIX dismount horse
+	bmi @done	;BUGFIX dismount horse in towne, can use any slot
 	lda object_tile_type,x
 	and #animation_mask
 	cmp zp_transport
-	bne @skip
+	bne @next	;BUGFIX dismount horse (was @skip)
 	lda object_xpos,x
 	cmp player_xpos
-	bne @skip
+	bne @next	;BUGFIX dismount horse (was @skip)
 	lda object_ypos,x
 	cmp player_ypos
-	beq @remove_from_map
-@skip:
-	dex
-	cpx #object_inanimate_first
-	bcs @next
-	bcc @done
+	bne @next	;BUGFIX dismount horse (was beq @remove_from_map)
+;@skip:
+;	dex
+;	cpx #object_inanimate_first
+;	bcs @next
+;	bcc @done
 @remove_from_map:
 	lda #$00
 	sta object_tile_type,x
@@ -3723,13 +3725,27 @@ cmd_x_it:
 	jmp done_not_here
 
 @find_empty_slot:
-	ldx #object_max
+; BUGFIX begin: dismount horse causes vanishing NPC in towne
+	ldx #$00
+	lda current_location
+	bne @next
+	ldx #object_inanimate_first
 @next:
 	lda object_tile_type,x
 	beq @exit_transport
-	dex
-	cpx #object_inanimate_first
-	bcs @next
+	inx
+	cpx #object_last
+	bcc @next
+; BUGFIX end
+
+;	ldx #object_max
+;@next:
+;	lda object_tile_type,x
+;	beq @exit_transport
+;	dex
+;	cpx #object_inanimate_first
+;	bcs @next
+	
 	jsr j_rand
 	and #$0f
 	ora #$10     ;overwrite random slot 10-1F
@@ -7085,7 +7101,7 @@ foes_vanquished:
 	cmp #tile_class_last
 	bcc @check_type
 	cmp #tile_npc_first
-	bcs @check_type ;redundant
+;	bcs @check_type ;redundant
 	bcc @done
 @check_type:
 	cmp #tile_bat
@@ -7111,6 +7127,8 @@ foes_vanquished:
 	lda #tile_chest
 	sta object_tile_type,x
 	sta object_tile_sprite,x
+	lda #$00              ; BUGFIX: chests can't talk
+	sta npc_dialogue,x    ; BUGFIX
 	jmp combat_over
 
 @pirate:
@@ -8807,7 +8825,7 @@ special_type:
 	.byte 0
 	.byte tile_water_coast
 	.byte tile_horse_west
-	.byte tile_anhk
+	.byte tile_ankh
 	.byte tile_camp_fire
 special_string:
 	.byte string_phantom

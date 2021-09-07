@@ -619,7 +619,7 @@ idle_combat:
 	tay
 	lda combat_foe_tile_type,x
 	beq @next
-	cmp #tile_anhk          ; BUGFIX
+	cmp #tile_ankh          ; BUGFIX
 	beq @dontanim           ; BUGFIX
 	cmp #tile_camp_fire     ; BUGFIX
 	beq @dontanim           ; BUGFIX

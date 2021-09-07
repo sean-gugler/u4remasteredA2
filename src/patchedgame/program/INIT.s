@@ -1,6 +1,7 @@
 	.include "uscii.i"
 	
 	.include "apple.i"
+	.include "apple_detect.i"
 	.include "disks.i"
 	.include "dos.i"
 	.include "trainers.i"
@@ -21,6 +22,13 @@ cout_stub = $1fff
 
 
 	.segment "MAIN"
+
+;ENHANCEMENT: IIgs text and border color
+	jsr detect_hw_model
+	bpl @title
+	jsr set_iigs_color
+@title:
+;ENHANCEMENT end
 
 	jsr rom_HOME ;$FC58 HOME & CLEAR SCREEN (Destroys ACCUMULATOR & Y-REG)
 	jsr print_cout
@@ -150,3 +158,39 @@ print_cout:
 	pha
 	rts
 
+
+;ENHANCEMENT: IIgs support
+
+detect_hw_model:
+	lda #$00
+	bit hw_ROMIN
+
+	ldx rom_signature
+	cpx #$06     ;Apple //e or above
+	bne @support_mb
+
+	ldx rom_ZIDBYTE
+	beq @done    ;Apple //c
+
+	sec
+	jsr rom_IIgs_ID
+	bcs @support_mb
+	lda #$80     ;Apple IIgs
+
+@support_mb:
+	ora #$01
+@done:
+	sta zp_hw_model
+	rts
+
+
+set_iigs_color:
+	lda #$f0	; white on black
+	sta hw_TBCOLOR
+
+	lda hw_CLOCKCTL
+	and #CLOCKCTL_border_color_mask
+	ora #$00	; black
+	sta hw_CLOCKCTL
+
+	rts

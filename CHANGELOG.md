@@ -7,7 +7,7 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
-## [1.2.1] - 2021-09-06
+## [1.2.1] - 2021-09-08
 
 ### Fixed
 - Dismounting horse in certain townes causes a random NPC to vanish.
@@ -15,6 +15,7 @@ https://github.com/sean-gugler/u4remasteredA2
 
 ### Added
 - Support IIgs with Mockingboard cards.
+- Support slotted Mockingboard model 4C on Apple //c
 
 
 ## [1.2.0] - 2021-08-19

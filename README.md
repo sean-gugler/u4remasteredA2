@@ -78,6 +78,7 @@ KEY:
 - (G) Proper descriptions for non-human NPCs instead of "phantom".
 - (G) Campfire NPC remains stationary in combat and spits fire.
 - (G) Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
+- (G) Support IIgs and //c with slotted Mockingboard cards.
 
 
 Source Code

@@ -1,10 +1,12 @@
 	.include "uscii.i"
 
 	.include "apple.i"
+	.include "apple_detect.i"
 	.include "char.i"
 	.include "disks.i"
 	.include "map_objects.i"
 	.include "music.i"
+	.include "music_state.i"
 	.include "jump_overlay.i"
 	.include "jump_subs.i"
 	.include "jump_system.i"
@@ -855,15 +857,28 @@ num_drives:
 @activate_mockingboard:
 	lda #music_off
 	jsr load_music
-	lda hw_ROMIN
-	lda rom_signature
-	ldx rom_ZIDBYTE
-	bit hw_LCBANK1
-	bit hw_LCBANK1
-	cmp #$06     ;Apple //e
-	bne :+
-	cpx #$00
-	beq @get_input
+;ENHANCEMENT: IIgs support
+	;MOVED to detect_hw_model in INIT.s
+;	lda hw_ROMIN
+;	lda rom_signature
+;	ldx rom_ZIDBYTE
+;	bit hw_LCBANK1
+;	bit hw_LCBANK1
+;	cmp #$06     ;Apple //e or above
+;	bne :+
+;	cpx #$00     ;Apple //c -- not supported
+;	beq @get_input
+
+;NOTE: stock Apple //c could never have a slotted Mockingboard,
+;but hobbyist models such as Ian Kim's Mockingboard 4C and 4C+
+;make that possible. Support them by eliminating the //c check here.
+
+	lda zp_hw_model
+;	beq @get_input   ;Apple //c
+	bmi :+
+	lda #opcode_RTS  ;if not a IIgs, disable init subroutine
+	sta init_mb_iigs
+;ENHANCEMENT end
 :	lda #$00
 	sta mb_1_slot
 	sta mb_1_type
@@ -981,6 +996,7 @@ load_sound_drivers:
 	.byte 0
 	jsr j_mbsi
 	bcc @skip
+	jsr init_mb_iigs
 	lda #opcode_JMP ;reactivate SEL driver
 	sta music_ctl
 	lda #music_off
@@ -1087,6 +1103,64 @@ update_music:
 	lda music_bank_tunes,x
 	sta tune_queue_next
 	rts
+
+init_mb_iigs:
+	; Logic from U4MBonGSv22.shk by rubywand
+	; which was adapted from Ultima V patch by Origin
+
+	lda #<mb_irq_handler
+	sta irq_IIgs
+	lda #>mb_irq_handler
+	sta irq_IIgs + 1
+
+	;--- 16-bit 65C816 ASSEMBLY for IIGS only
+
+	; Set native mode
+	.byte $18                ; clc
+	.byte $fb                ; xce
+
+	; Set 16-bit accumulator + index registers
+	.byte $c2,$30            ; rep #$30
+
+	; Disable interrupts from ADB (Apple Desktop Bus)
+	.byte $f4,$0b,$00        ; pea $000b    adbDisable
+	.byte $a2,$03,$23        ; ldx ##$2303  IntSource
+	.byte $22,$00,$00,$e1    ; jsl $e10000  Toolbox Dispatcher
+
+	; Set IIGS Interrupt Manager Vector to U4 mb_irq_handler
+	.byte $f4,$04,$00        ; pea $0004    Interrupt Manager
+	.byte $f4,$00,$00        ; pea $0000
+	.byte $f4,$00,$05        ; pea $0500    ##mb_irq_handler
+	.byte $a2,$03,$10        ; ldx ##$1003  SetVector
+	.byte $22,$00,$00,$e1    ; jsl $e10000  Toolbox Dispatcher
+
+	; Set emulator mode
+	.byte $38                ; sec
+	.byte $fb                ; xce
+
+	; Set 8-bit accumulator + index registers
+	.byte $e2,$30            ; sep #$30
+
+	;--- 8-bit 6502 ASSEMBLY
+
+	ldx mb_1_slot
+	jsr enable_iigs_slot
+	ldx mb_2_slot
+	jsr enable_iigs_slot
+
+	rts
+
+enable_iigs_slot:
+	lda #$01	; convert integer to bitflag (2 ^ N)
+:	dex
+	beq @set_slot_flag
+	asl
+	bne :-
+@set_slot_flag:
+	ora hw_SLTROMSEL
+	sta hw_SLTROMSEL
+	rts
+
 
 input_char:
 	ldx cursor_x

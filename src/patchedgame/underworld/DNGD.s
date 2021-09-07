@@ -1743,5 +1743,5 @@ last_drawn_forward_2:
 last_drawn_forward_3:
 	.byte 0
 
-;junk
+; junk
 ;	.byte $00,$00,$ff,$ff,$00,$00

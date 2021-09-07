@@ -291,5 +291,5 @@ add_xp100:
 	cld
 	rts
 
-;junk
+; junk
 ;	.byte 0

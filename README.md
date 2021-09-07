@@ -58,6 +58,8 @@ KEY:
 - (G) Skull use in battlefield should affect combatants, not clear outer world of wandering monsters.
 - (G) Skull cannot be used in *any* dungeon rooms; fixed to behave normally except in abyss, where it is disallowed entirely.
 - (G) Shrine image corrupted if compressed data happens to align on page boundary (did not occur with retail alignment).
+- (G) Dismounting horse in certain townes causes a random NPC to vanish.
+- (G) Chests dropped by townespeople can be talked to.
 
 ### Cosmetic Mistakes
 - (M) Combat animations are erratic for certain types of foe.
@@ -70,8 +72,8 @@ KEY:
 - (M) Allow quit-&-save in dungeon.
 - (M) Select an active character in combat for faster exploration in dungeon rooms.
 - (M) Trainer menu to optionally enable cheat codes.
-- (G) Buy-back weapon at half price doesn't carry the hundreds place (optional fix with trainer).
-- (G) Library shelf lettering makes one puzzle somewhat awkward.
+- (G) Buy-back weapon at half price didn't carry the hundreds place (optional fix with trainer).
+- (G) Library shelf lettering made one puzzle somewhat awkward.
 - (G) Gender question did not support non-binary; add a neutral symbol.
 - (G) Proper descriptions for non-human NPCs instead of "phantom".
 - (G) Campfire NPC remains stationary in combat and spits fire.

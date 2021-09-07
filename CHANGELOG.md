@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
+
+## [1.2.1] - 2021-09-06
+
+### Fixed
+- Dismounting horse in certain townes causes a random NPC to vanish.
+- Chests dropped by townespeople can be talked to.
+
+### Added
+- Support IIgs with Mockingboard cards.
+
+
 ## [1.2.0] - 2021-08-19
 
 ### Fixed

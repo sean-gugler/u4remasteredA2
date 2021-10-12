@@ -18,14 +18,14 @@ If you are running the pre-built disk images, or have built your own from the `f
 ### Trainers
 * When "Control Balloon" is active, [K]limb a second time to drift normally. [D]escend back to steering height, then again to land.
 * When using "Teleport" with "Ingame Keys", specify a Towne, Dungeon, or Shrine with a letter A-P (just like the observatory).
-* The "Fair Resell Price" makes buy-pack prices for all weapons and armor exactly half the purchase price.
+* The "Fair Resell Price" makes buy-back prices for all weapons and armor exactly half the purchase price.
 
 FIXES MADE
 ----------
-KEY:
-  (M) ported from MagerValp's fixes for C64
-  (G) fixed by Gugler, his own discovery
-  (E) fixed by Gugler, from external bug report
+**KEY:**
+- (M) = ported from MagerValp's fixes for C64
+- (G) = fixed by Gugler, his own discovery
+- (E) = fixed by Gugler, from external bug report
 
 ### Critical Bugs
 - (M) Stack overflow if attacked by wandering monsters.
@@ -40,26 +40,31 @@ KEY:
 - (E) Stack overflow if kicked out of Codex.
 
 ### Other Errors
-- (M) Some dungeon rooms lack proper entry placements and/or triggers.
+- (M) Some dungeon rooms lack proper entry placements.
+- (M) Hythloth level 6 impassable if entered from below.
 - (M) Boarding a ladder-up spawns a frigate on the surface.
 - (M) Entering towne while in a balloon should not be allowed.
 - (M) Lord British "HELP" repeats early-game text every 10,000 moves.
 - (M) Thevel behaves as a regular "Joe", his valuable hints are inaccessible.
 - (M) Shrines never give the 2- and 3-cycle hints.
 - (M) Gate guards at Serpent's Hold behave as if they were Baron Sentri.
+- (M) Chests dropped by townespeople can be attacked.
+- (G) Chests dropped by townespeople can be talked to.
 - (G) Cannot talk to the healer in Serpent's Hold castle.
 - (G) Enemy strength for non-monsters was calculated wrong.
-- (G) NPC questions worded as humility tests were not flagged to affect virtue: Browning, Aristotle, Santayana, Slysam.
-- (G) Following advice from cycle 1 at shrine of sacrifice mistakenly awards honor points.
+- (G) NPC questions worded as humility tests were not flagged to affect virtue.
+- (G) Wrong virtue rewarded for donating gold.
 - (G) Balloon can land on illegal terrain by quitting game and rebooting.
 - (G) Player can be attacked by bridge trolls while drifting across in the balloon.
 - (G) Completion of skull quest grants awards to wrong area of memory.
 - (G) Using skull in dungeon only immobilizes wandering monsters, doesn't kill them.
 - (G) Skull use in battlefield should affect combatants, not clear outer world of wandering monsters.
 - (G) Skull cannot be used in *any* dungeon rooms; fixed to behave normally except in abyss, where it is disallowed entirely.
-- (G) Shrine image corrupted if compressed data happens to align on page boundary (did not occur with retail alignment).
+- (G) Packed image corrupted if header happens to end on page boundary (did not occur with retail alignment).
+- (G) Mockingboard activation menu disables second card if first one is invalid.
+- (G) New music doesn't fully initialize every channel.
+- (G) Demo music silently overruns table until Mockingboard is activated.
 - (G) Dismounting horse in certain townes causes a random NPC to vanish.
-- (G) Chests dropped by townespeople can be talked to.
 
 ### Cosmetic Mistakes
 - (M) Combat animations are erratic for certain types of foe.
@@ -72,12 +77,20 @@ KEY:
 - (M) Allow quit-&-save in dungeon.
 - (M) Select an active character in combat for faster exploration in dungeon rooms.
 - (M) Trainer menu to optionally enable cheat codes.
+- (M) Trainers for free items.
+- (M) Trainer to steer the balloon.
+- (M) Trainer to avoid combat.
+- (M) Trainer to enable rapid movement around the world.
+- (M) Trainer to disable the idle "pass" timer.
+- (M) Trainer to ask confirmation before exiting a towne.
 - (G) Buy-back weapon at half price didn't carry the hundreds place (optional fix with trainer).
 - (G) Library shelf lettering made one puzzle somewhat awkward.
 - (G) Gender question did not support non-binary; add a neutral symbol.
 - (G) Proper descriptions for non-human NPCs instead of "phantom".
 - (G) Campfire NPC remains stationary in combat and spits fire.
 - (G) Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
+- (E) Support IIgs with Mockingboard cards.
+- (G) Support slotted Mockingboard model 4C on Apple //c
 
 
 Source Code
@@ -172,7 +185,10 @@ Other personal goals include:
 Credits and License
 -------------------
 [MagerValp/u4remastered](https://github.com/MagerValp/u4remastered) for Commodore 64 was the starting point for much of the symbolication and the project layout.
+
 Additional work by Sean Gugler, including portions taken from his C64 fork of [u4remastered](https://github.com/sean-gugler/u4remastered), is &copy; 2021 and licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
-![](https://mirrors.creativecommons.org/presskit/icons/cc.svg)![](https://mirrors.creativecommons.org/presskit/icons/by.svg)![](https://mirrors.creativecommons.org/presskit/icons/sa.svg)
+<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20px"><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" width="20px">
+
 The original Ultima IV game is &copy; 1985 Origin Systems, Inc.
+
 This project is made in the interest of preservation and education with the generous consent of Richard Garriott, original author and creator of the Ultima series of games including Ultima IV.

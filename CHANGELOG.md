@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.2] - 2021-10-11
+
+### Fixed
+- Restored missing header file apple_detect.i
+
+
 ## [1.2.1] - 2021-09-08
 
 ### Fixed
@@ -14,14 +20,14 @@ https://github.com/sean-gugler/u4remasteredA2
 - Chests dropped by townespeople can be talked to.
 
 ### Added
-- Support IIgs with Mockingboard cards.
+- [Issue #6] Support IIgs with Mockingboard cards.
 - Support slotted Mockingboard model 4C on Apple //c
 
 
 ## [1.2.0] - 2021-08-19
 
 ### Fixed
-- [Issue 5] Trainer for fair price buy-back was broken since 1.1.0
+- [Issue #5] Trainer for fair price buy-back was broken since 1.1.0
 - Trainer for teleport could spawn unwanted phantom monsters.
 - Trainer menu was missing item for towne exit.
 - Trainer menu allows up and down arrow keys for machines that have them.

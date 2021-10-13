@@ -7,10 +7,11 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
-## [1.2.2] - 2021-10-11
+## [1.2.2] - 2021-10-12
 
 ### Fixed
 - Restored missing header file apple_detect.i
+- Fix Makefile for compatibility with both Gnu Make 4.2 and 4.3
 
 
 ## [1.2.1] - 2021-09-08

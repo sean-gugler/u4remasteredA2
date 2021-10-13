@@ -228,15 +228,25 @@ BIN_$(disk) := $(BIN_FOLDER)/$(BIN_FILE)
 
 # Trainer.
 
-src/trainer/TRAINERS.cfg: tools/cfg_symbols.py src/trainer/TRAINERS.cfg_segments src/patchedgame/program/ULT4.prg
+trainer = src/trainer
+
+$(trainer)/TRAINERS.cfg: tools/cfg_symbols.py $(trainer)/TRAINERS.cfg_segments src/patchedgame/program/ULT4.prg
 	$(subst .prg,.lab,$^) $@
 
-PRG_FILES_program := $(PRG_FILES_program) src/trainer/TRAINERS.prg src/trainer/MENU.prg
+$(trainer)/%.prg: $(trainer)/%.o src/loadaddr.o $(trainer)/%.cfg
+	$(LD65) -m $*.map -C $(filter %.cfg,$^) -Ln $*.lab \
+		-o $@ $(LD65FLAGS) $(filter %.o,$^) || (rm -f $@ && exit 1)
+
+PRG_FILES_program := $(PRG_FILES_program) $(trainer)/TRAINERS.prg $(trainer)/MENU.prg
+
+CLEAN += clean_trainer
+clean_trainer:
+	rm -f src/trainer/TRAINERS.cfg
 
 
 # Create disk images.
 
-$(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%)
+$(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%) | $(output_dir)
 	@echo "Creating $@"
 	tools/dos33.py --format $@  || (rm -f $@ && exit 1)
 	tools/dos33.py --sector-write --track 0 --sector 0 $@ $(BIN_$*)  || (rm -f $@ && exit 1)
@@ -245,6 +255,7 @@ $(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%)
 CLEAN += clean_diskimages
 clean_diskimages:
 	rm -f $(DISKS)
+	rm -rf $(output_dir)
 
 
 # Slideshow disks

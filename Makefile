@@ -157,9 +157,16 @@ $(patched_dir)/%: tools/binpatch.py $(extract_dir)/% patches/%.patch | $$(@D)
 # Patched game files.
 
 # prefer %.cfg if it exists, else use common overlay8800.cfg
-%.prg: %.o src/loadaddr.o $$(or $$(wildcard $$(@D)/$$*.cfg),src/patchedgame/overlay8800.cfg)
+%.prg: %.o src/loadaddr.o $$(or $$(wildcard $$(@D)/$$(*F).cfg),src/patchedgame/overlay8800.cfg)
 	$(LD65) -m $*.map -C $(filter %.cfg,$^) -Ln $*.lab \
 		-o $@ $(LD65FLAGS) $(filter %.o,$^) || (rm -f $@ && exit 1)
+
+#   NOTE on Make compatibility above
+#   Ideally we'd use this:      $$(wildcard $$*.cfg)
+#   Gnu Make 4.3 expands $* within prerequisites as "path/file" which WORKS
+#   Gnu Make 4.2 expands $* within prerequisites as "file" which FAILS
+#   Both versions expand $* within recipe as "path/file" (so, fixed in 4.3)
+#   Both versions work if we reconstruct full pathname with Directory from $@ plus File from $*
 
 game_dirs = $(patsubst %,src/patchedgame/%,$(DISK_NAMES))
 game_files = $(foreach dir,$(game_dirs),$(dir)/*.o $(dir)/*.prg $(dir)/*.map $(dir)/*.lab)

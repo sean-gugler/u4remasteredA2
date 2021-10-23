@@ -43,5 +43,5 @@ dng_tile_room_mask = $0f
 dng_tile_trap_mask = $0f
 
 trap_winds = $00
-trap_pit   = $01
-trap_rocks = $0e
+trap_rocks = $01
+trap_pit   = $0e

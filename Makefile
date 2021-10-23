@@ -54,9 +54,10 @@ DISKS = $(patsubst %,$(output_dir)/u4%.do,$(DISK_NAMES))
 
 # EXOMIZER=~/bin/exomizer
 
-DISTCLEAN += clean_tools
+DISTCLEAN += clean_tools clean_tempfiles
+
 clean_tools:
-	rm -f tools/*.pyc
+	rm -rf tools/*.pyc tools/__pycache__
 
 clean_tempfiles:
 	find . -name '*.bak' -delete
@@ -147,6 +148,10 @@ clean_extracted:
 $(patched_dir)/towne/TLK.bin: tools/gen_talk.py src/talk/talk.json | $(patched_dir)/towne
 	$^ $@
 
+CLEAN += clean_talk
+clean_talk:
+	rm -f $(patched_dir)/towne/TLK.bin
+
 
 # Patched data files.
 
@@ -173,7 +178,7 @@ game_files = $(foreach dir,$(game_dirs),$(dir)/*.o $(dir)/*.prg $(dir)/*.map $(d
 
 CLEAN += clean_patchedgame
 clean_patchedgame:
-	rm -f $(game_files)
+	rm -f $(game_files) src/loadaddr.o
 
 
 # Dependencies
@@ -184,6 +189,10 @@ include $(DEPS)
 
 %.d: tools/make_dep.py %.s
 	$^ $@
+
+DISTCLEAN += clean_dependencies
+clean_dependencies:
+	find . -name '*.d' -delete
 
 
 # Final game files.
@@ -228,7 +237,7 @@ BIN_$(disk) := $(BIN_FOLDER)/$(BIN_FILE)
 
 # Create disk images.
 
-$(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%)
+$(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%) | $(output_dir)
 	@echo "Creating $@"
 	tools/dos33.py --format $@  || (rm -f $@ && exit 1)
 	tools/dos33.py --sector-write --track 0 --sector 0 $@ $(BIN_$*)  || (rm -f $@ && exit 1)
@@ -237,6 +246,7 @@ $(output_dir)/u4%.do: $$(PRG_FILES_%) $$(BIN_%)
 CLEAN += clean_diskimages
 clean_diskimages:
 	rm -f $(DISKS)
+	rm -rf $(output_dir)
 
 
 # Slideshow disks
@@ -295,7 +305,7 @@ $(output_dir)/slideshow_end.do: $(slideshow_dir_2)/END_WIN.prg
 
 CLEAN += clean_slideshow
 clean_slideshow:
-	rm -f $(slideshow_dir_1)/*.prg $(slideshow_dir_2)/.prg $(output_dir)/slideshow_start.do $(output_dir)/slideshow_end.do
+	rm -f $(slideshow_dir_1)/*.prg $(slideshow_dir_2)/*.prg $(output_dir)/slideshow_start.do $(output_dir)/slideshow_end.do
 
 
 # Mockingboard driver, split for analysis with Regenerator

@@ -10,7 +10,7 @@ Hidden Features
 
 If you are running the pre-built disk images, or have built your own from the `fixed` branch of the source repository, the following options are available to you.
 
-* During the initial loading screen, press 'T' to see the "Trainer" menu and enable cheat codes.
+* During the initial loading screen, before the animated intro, press 'T' to see the "Trainer" menu and enable cheat codes.
 * When asked "Art thou Male or Female?" you can answer 'N' (for "no" or "non-binary"). Your character's gender symbol will be a neutral circle in the "Ztats" screen.
 * In dungeon rooms (and any combat), press digit keys 1 through 8 to make that player active. The others will auto-pass their turns. Press 0 to return to all-party mode.
 * Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
@@ -65,6 +65,10 @@ FIXES MADE
 - (G) New music doesn't fully initialize every channel.
 - (G) Demo music silently overruns table until Mockingboard is activated.
 - (G) Dismounting horse in certain townes causes a random NPC to vanish.
+- (E) Two ladders in dungeon "Wrong" are mis-matched.
+- (G) Dungeon "Covetous" has a room whose east exit is obstructed.
+- (G) Cooldown timer for Hawkwind's virtue reward should match timer for shrine.
+- (E) Cooldown timer for reagent searches should not reset when search finds non-reagents.
 
 ### Cosmetic Mistakes
 - (M) Combat animations are erratic for certain types of foe.

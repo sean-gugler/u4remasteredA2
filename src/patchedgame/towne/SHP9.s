@@ -114,7 +114,7 @@ input_word:
 	.byte "QUEST OF", $8d
 	.byte "THE AVATAR!", $8d
 	.byte 0
-	lda move_counter + 3
+	lda move_counter + 2    ; BUGFIX: was + 3
 	cmp last_meditated
 	beq @done
 	sta last_meditated

@@ -48,9 +48,9 @@ print_you_find:
 	jsr j_primm
 	.byte "YOU FIND...", $8d
 	.byte 0
-	lda move_counter + 3
-	and #$f0
-	sta last_found_reagent
+;	lda move_counter + 3      ;BUGFIX
+;	and #$f0                  ;BUGFIX
+;	sta last_found_reagent    ;BUGFIX: only update when reagent is found
 	sed
 	clc
 	lda party_stats + virtue_honor
@@ -77,6 +77,7 @@ find_mandrake:
 	jmp print_nothing_here
 
 @found:
+	sta last_found_reagent    ;BUGFIX: only update when reagent is found
 	jsr print_you_find
 	jsr j_primm
 	.byte "MANDRAKE ROOT!", $8d
@@ -111,6 +112,7 @@ find_nightshade:
 	jmp print_nothing_here
 
 @found:
+	sta last_found_reagent    ;BUGFIX: only update when reagent is found
 	jsr print_you_find
 	jsr j_primm
 	.byte "NIGHTSHADE!", $8d

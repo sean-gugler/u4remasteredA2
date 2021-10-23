@@ -166,7 +166,7 @@ draw_menu:
 	ldx #0
 	ldy #0
 	jsr j_primm_xy
-	.byte "     Ultima IV Remastered v1.2.1", $8d
+	.byte "     Ultima IV Remastered v1.2.4", $8d
 	.byte "         S.Gugler, MagerValp", $8d
 	.byte $8d
 	.byte "Arrow Keys, Y-N-Space, A=All, Return", $8d

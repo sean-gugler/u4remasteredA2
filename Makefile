@@ -243,14 +243,17 @@ $(trainer)/TRAINERS.cfg: tools/cfg_symbols.py $(trainer)/TRAINERS.cfg_segments s
 	$(subst .prg,.lab,$^) $@
 
 $(trainer)/%.prg: $(trainer)/%.o src/loadaddr.o $(trainer)/%.cfg
-	$(LD65) -m $*.map -C $(filter %.cfg,$^) -Ln $*.lab \
+	$(LD65) -m $(trainer)/$*.map -C $(filter %.cfg,$^) -Ln $(trainer)/$*.lab \
 		-o $@ $(LD65FLAGS) $(filter %.o,$^) || (rm -f $@ && exit 1)
 
 PRG_FILES_program := $(PRG_FILES_program) $(trainer)/TRAINERS.prg $(trainer)/MENU.prg
 
+
+trainer_files = $(trainer)/*.o $(trainer)/*.prg $(trainer)/*.map $(trainer)/*.lab
+
 CLEAN += clean_trainer
 clean_trainer:
-	rm -f src/trainer/TRAINERS.cfg
+	rm -f src/trainer/TRAINERS.cfg $(trainer_files)
 
 
 # Create disk images.

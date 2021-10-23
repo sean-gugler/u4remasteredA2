@@ -20,6 +20,12 @@ offset(2e70) match(00 00 00 00 00 00 00 00) replace(02 02 02 01 01 01 00 00)
 offset(2e78) match(00 00 00 00 00 00 00 00) replace(05 06 04 05 06 04 06 04)
 
 
+# Patch dungeon room 11 in Covetous.
+
+# Remove wall barring eastern exit; not present in later C64 or DOS editions.
+offset(4bb7) match(7F 16 16 16 16 16 16 7F 16 16 7F) replace(7F 16 16 16 16 16 16 16 16 16 7F)
+
+
 # Patch dungeon room 7 in Hythloth.
 
 # East entry.

@@ -7,6 +7,14 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.4] - 2021-10-23
+
+- Two ladders in dungeon "Wrong" are mis-matched.
+- Dungeon "Covetous" has a room whose east exit is obstructed.
+- Cooldown timer for Hawkwind's virtue reward should match timer for shrine.
+- Cooldown timer for reagent searches should not reset when search finds non-reagents.
+
+
 ## [1.2.2] - 2021-10-12
 
 ### Fixed

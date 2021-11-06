@@ -30,10 +30,10 @@ offset(4bb7) match(7F 16 16 16 16 16 16 7F 16 16 7F) replace(7F 16 16 16 16 16 1
 
 # East entry.
 offset(6750) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
-offset(6758) match(00 00 00 00 00 00 00 00) replace(02 03 01 02 03 01 03 01)
+offset(6758) match(00 00 00 00 00 00 00 00) replace(03 02 01 03 02 01 03 01)
 
 # South entry.
-offset(6760) match(00 00 00 00 00 00 00 00) replace(02 01 03 02 01 03 01 03)
+offset(6760) match(00 00 00 00 00 00 00 00) replace(03 02 01 03 02 01 03 01)
 offset(6768) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
 
 

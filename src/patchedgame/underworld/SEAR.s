@@ -391,4 +391,4 @@ dungeon_number:
 	.byte 0
 
 ; junk
-	lda #$4e
+;	lda #$4e

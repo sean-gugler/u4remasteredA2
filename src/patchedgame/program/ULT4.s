@@ -313,7 +313,8 @@ done_only_on_foot:
 	.byte 0
 	jmp done_sound_deny
 
-; ENHANCEMENT back-ported from C64
+; ENHANCEMENT restored from earlier buggy
+; edition of Apple II (also present in C64)
 done_nothing_there:
 	jsr j_primm
 	.byte "NOTHING THERE!", $8d

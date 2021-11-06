@@ -410,7 +410,7 @@ answer_honesty:
 	jsr j_primm
 	.byte "THE FAIR TOWNE", $8d
 	.byte "OF MOONGLOW, ON", $8d
-	.byte "DAGGER ISLE, IS", $8d
+	.byte "VERITY ISLE, IS", $8d
 	.byte "WHERE THE VIRTUE", $8d
 	.byte "OF HONESTY", $8d
 	.byte "THRIVES!", $8d

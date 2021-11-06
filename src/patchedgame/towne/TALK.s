@@ -151,7 +151,7 @@ talk_prompt:
 	cmp #keyword_look
 	bne @join
 	jsr j_primm
-	.byte "YOU SEE A", $8d
+	.byte "YOU SEE", $8d   ;TEXTFIX: was "YOU SEE A"
 	.byte 0
 	lda #$03
 	jmp print_response_newline

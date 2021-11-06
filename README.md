@@ -20,6 +20,13 @@ If you are running the pre-built disk images, or have built your own from the `f
 * When using "Teleport" with "Ingame Keys", specify a Towne, Dungeon, or Shrine with a letter A-P (just like the observatory).
 * The "Fair Resell Price" makes buy-back prices for all weapons and armor exactly half the purchase price.
 
+### Slide shows
+
+Two extra disk images have been included for fun. They are both bootable and contain ready-to-view artwork from within the game.
+* slideshow_start.do has the title screen, "start new game" images, tile sets and font glyphs.
+* slideshow_end.do has the end game image sequence.
+
+
 FIXES MADE
 ----------
 **KEY:**
@@ -76,6 +83,8 @@ FIXES MADE
 - (G) Katrina prints both excuses if virtue is too low ("Thou art not humbleexperienced enough").
 - (G) Ztats display of 3-part key is truncated if you have bell or book but not candle.
 - (G) Ankh doesn't immediately update after attacking townsfolk and losing virtues.
+- (E) Lord British says Moonglow is on the wrong island.
+- (E) The conversational response to "LOOK" has a redundant word.
 
 ### Enhancements
 - (M) Allow quit-&-save in dungeon.
@@ -104,7 +113,7 @@ https://github.com/sean-gugler/u4remasteredA2
 
 This source code has been reconstructed by disassembling and symbolicating the 1985 binary code released for Apple II series computers. It likely bears little resemblance to the original source, but it can be used by modern tools to build the same playable binaries.
 
-This is a work in progress. The current state is functional, but some of the source is not yet fully documented or symbolicated.
+All code has been symbolicated. Data layouts and values may be inferred from the header definitions, but the data itself is not included in this repository. It must be obtained from existing disk images.
 
 
 Branches

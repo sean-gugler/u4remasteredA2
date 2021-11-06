@@ -7,6 +7,18 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.5] - 2021-11-06
+
+Restore apparently publisher-authentic fixes discovered in "Ultima4_original.zip" contributed 2005 by "Marvin".
+
+### Fixed
+- Lord British says Moonglow is on the wrong island.
+- The conversational response to "LOOK" has a redundant word.
+
+### Changed
+- Player starting positions in Hythloth room 7 revised to match official edition.
+
+
 ## [1.2.4] - 2021-10-23
 
 - Two ladders in dungeon "Wrong" are mis-matched.

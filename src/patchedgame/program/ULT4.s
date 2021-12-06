@@ -2819,7 +2819,7 @@ collect_gold:
 	jsr rand_modulo
 	jsr encode_bcd_value
 	jsr inc_party_gold
-	lda zp_amount
+	lda zp_number1    ;SIZE_OPT: was zp_amount in retail
 	jsr j_printbcd
 	jsr j_primm
 	.byte " GOLD!", $8d
@@ -9108,15 +9108,16 @@ inc_player_hp:
 	rts
 
 inc_party_gold:
-	sta zp_amount
+;SIZE_OPT: code was mostly same as inc_4_digit, hard-coded for 'party_stats,y' instead of '(ptr1),y'
+	sta zp_number1    ; was zp_amount in retail
 	ldy #party_stat_gold_lo
-;SIZE_OPT: duplicate code was inline here, hard-coded for 'party_stats,y' instead of '(ptr1),y'
 	lda #<party_stats
 	sta ptr1
 	lda #>party_stats
 	sta ptr1 + 1
 	bne inc_4_digit   ; always
 ;SIZE_OPT end
+
 inc_player_exp:
 	sta zp_number1
 	jsr j_get_stats_ptr

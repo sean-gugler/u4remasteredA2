@@ -7,7 +7,7 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
-## Unreleased
+## [1.2.6] - 2021-12-06
 
 ### Fixed
 - [Issue #8] Gold amount actually awarded matches printed amount. (Regression)

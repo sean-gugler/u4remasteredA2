@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.6] - 2021-12-06
+
+### Fixed
+- [Issue #8] Gold amount actually awarded matches printed amount. (Regression)
+
+
 ## [1.2.5] - 2021-11-06
 
 Restore apparently publisher-authentic fixes discovered in "Ultima4_original.zip" contributed 2005 by "Marvin".

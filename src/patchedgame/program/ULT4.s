@@ -8195,8 +8195,8 @@ collide_terrain:
 	lda zp_tile_type
 	cmp #tile_field_lightning
 	beq @return    ; Z=1 implies C=1
-	lda #tile_water_last
-	cmp zp_tile_type   ; invert operands, invert C
+	lda #tile_water_shallow
+	cmp zp_tile_type   ; inverted C, shallow >= tile
 	rts
 @water:
 	cmp #tile_pirate    ; always set C, all water foes are >= pirate
@@ -8248,10 +8248,10 @@ legal_move_dungeon:
 	bne @allow
 	lda dest_y
 	cmp object_ypos_prev,x
-@deny:
-	rts    ; Z=1 implies C=1
+	beq @deny
 @allow:
 	clc
+@deny:    ; Z=1 implies C=1
 	rts
 
 dng_can_advance:
@@ -8614,10 +8614,13 @@ next_arena_tile:
 ;	rts
 
 math_abs:
+	bpl math_done   ;SIZE_OPT: streamlined
+
+;SIZE_OPT: original "math_abs" code follows, with comments.
 ;	cmp #$00    ;SIZE_OPT: A is always set right before calling
-	bmi math_negate
-	rts
-;@negate:        ;SIZE_OPT: redundant.
+;	bmi math_negate
+;	rts
+;@negate:        ;SIZE_OPT: redundant with math_negate which follows.
 ;	eor #$ff
 ;	clc
 ;	adc #$01
@@ -8627,6 +8630,7 @@ math_negate:
 	eor #$ff
 	clc
 	adc #$01
+math_done:      ;SIZE_OPT: label introduced for math_abs to use
 	rts
 
 input_target_xy:

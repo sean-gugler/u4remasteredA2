@@ -7,6 +7,13 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.7] - 2022-08-01
+
+### Fixed
+- Ghost and Zorn would not move onto swamp (regression since 1.2.0).
+- Dungeon monster AI mistakenly rejects moving south as if trying to return north (regression since 1.2.0). Not always noticeable since it has 1/8 chance of allowing return to previous position anyway, and makes 8 movement attempts per turn.
+
+
 ## [1.2.6] - 2021-12-06
 
 ### Fixed
@@ -27,6 +34,7 @@ Restore apparently publisher-authentic fixes discovered in "Ultima4_original.zip
 
 ## [1.2.4] - 2021-10-23
 
+### Fixed
 - Two ladders in dungeon "Wrong" are mis-matched.
 - Dungeon "Covetous" has a room whose east exit is obstructed.
 - Cooldown timer for Hawkwind's virtue reward should match timer for shrine.

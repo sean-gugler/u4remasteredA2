@@ -13,6 +13,10 @@
 
 ; --- Custom use of Zero Page
 
+;BUGFIX: Would have preferred to re-use symbol 'zp_count'
+; instead of introducing new symbol 'zp_delay', but
+; $f0 is altered by 'j_update_view' whereas $d8 is not.
+zp_delay = $d8
 zp_price = $d8
 zp_index = $ea
 zp_count = $f0
@@ -315,9 +319,9 @@ yes_donate:
 	cld
 	sta (ptr1),y
 	lda #$0a     ;delay 10 update cycles
-	sta zp_index
+	sta zp_delay   ;BUGFIX: was 'zp_index' which clobbered NPC name for 'bye'
 :	jsr j_update_view
-	dec zp_index
+	dec zp_delay
 	bne :-
 	jmp bye
 

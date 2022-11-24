@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.8] - 2022-11-25
+
+### Fixed
+- [Issue #15] After donating blood, healer's name always became "Pendragon".
+
+
 ## [1.2.7] - 2022-08-01
 
 ### Fixed

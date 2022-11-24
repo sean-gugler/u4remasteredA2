@@ -1,8 +1,15 @@
 Ultima IV for Apple II, Remastered
 ==================================
 
+Greetings, traveler! Here you will find the most bug-free edition of Ultima IV for the Apple II ever known. May you enjoy the experience such as it was always meant to be.
+
+This is meant as a "transparent" mod, meaning that any deviations beyond bug fixes are *optional*. You will not see any "enhancements" unless you deliberately invoke them; you can play the game exactly as originally designed.
+
 Download from:
 https://github.com/sean-gugler/u4remasteredA2/releases
+
+For more information:
+https://github.com/sean-gugler/u4remasteredA2/wiki
 
 
 Hidden Features
@@ -85,6 +92,7 @@ FIXES MADE
 - (G) Ankh doesn't immediately update after attacking townsfolk and losing virtues.
 - (E) Lord British says Moonglow is on the wrong island.
 - (E) The conversational response to "LOOK" has a redundant word.
+- (E) After donating blood, healer's name always becomes "Pendragon".
 
 ### Enhancements
 - (M) Allow quit-&-save in dungeon.

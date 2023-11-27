@@ -1,3 +1,37 @@
+:CODE START
+9000
+:CODE END
+91EA
+:DATA BYTES
+9184-9194
+91B4-91E7
+91E7-91EA
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+9035
+:REMOVED BYTES
+:FULL COMMENTS
+900D initialize variables
+9194 Set ptr1 into 0-based visited_buffer from 1-based console_xpos,ypos
+91B4 Look-up table for row offsets in the 22x22 'visited' buffer at $9200
+:SIDE COMMENTS
+9028 #xy_center_cell
+902E #glyph_diamond
+9089 #xy_center_cell
+908F #glyph_diamond
+90A7 #line_min
+90B3 #cell_max_x - 1
+90BD #line_max
+9109 #>view_buf
+913B #cell_max_x
+9143 #cell_max_y
+9157 #dng_tile_wall
+91AD #>visited_buffer
+:USER LABELS
 0000 player_xpos
 0001 player_ypos
 0002 tile_xpos
@@ -92,7 +126,7 @@
 00FD ptr2 + 1
 00FE ptr1
 00FF ptr1 + 1
-0200 drawn_tiles
+0200 explore_stack
 0210 room_start_foe_type
 0220 room_start_foe_x
 0230 room_start_foe_y
@@ -163,6 +197,39 @@
 0896 j_gettile_dungeon
 2000 screen_HGR1
 8800 j_overlay_entry
+9010 @clear_buffer
+9035 @draw_all_neighbors
+903D @draw_neighbor
+9047 @print
+9065 @next_neighbor
+9089 @done
+909E @waitkey
+90A7 clear_view
+90A9 @next_row
+90B7 @next_col
+90C2 push_explore
+90E3 pop_explore
+9104 get_dng_tile
+9124 explore_cell
+915E @dont_push
+9165 @done
+9176 plot_tile
+9184 tile_chars
+9194 get_visited_ptr
+91B4 row_offset_hi
+91CA row_offset_lo
+91E0 stack_pos
+91E1 dng_tile
+91E2 current_x
+91E3 current_y
+91E4 neighbor_x
+91E5 neighbor_y
+91E6 dungeon_x
+91E7 dungeon_y
+91E8 saved_console_xpos
+91E9 saved_console_ypos
+9200 visited_buffer
+9300 visited_buffer + $100
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -236,3 +303,11 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+5000
+:SYSTEM
+Apple II

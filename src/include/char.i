@@ -1,5 +1,12 @@
 char_none = $00
 
+glyph_box = $0e
+glyph_corners = $0f
+glyph_up_arrow = $18
+glyph_down_arrow = $19
+glyph_up_down_arrow = $1a
+glyph_dot = $1b
+
 ; Colored glyphs are duplicated for
 ; Apple II odd/even column cadence.
 glyph_less_even = $1c
@@ -7,8 +14,14 @@ glyph_less_odd = $1d
 glyph_greater_even = $1e
 glyph_greater_odd = $1f
 
+glyph_space = $20
+glyph_dollar_sign = $24
 glyph_virtues = $25
+glyph_diamond = $2a
 glyph_ankh = $2f
+
+glyph_block = $40
+glyph_altar = $60
 
 glyph_male = $5c
 glyph_female = $7b
@@ -58,5 +71,7 @@ char_S = $d3
 char_T = $d4
 char_Y = $d9
 char_alpha_last = $db
+
+char_carat = $de
 
 char_DEL = $ff

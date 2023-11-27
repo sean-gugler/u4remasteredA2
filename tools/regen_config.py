@@ -75,9 +75,12 @@ def main(argv):
     with open(outfile, 'wt') as out:
         print(f':CODE START\n{addr_start:04X}', file=out)
         print(f':CODE END\n{addr_end:04X}', file=out)
-        print(':DATA BYTES\n' + '\n'.join(spans), file=out)
-        print(':SIDE COMMENTS\n' + '\n'.join(strings), file=out)
-        print(':USER LABELS\n' + ''.join(labels), file=out)
+        if spans:
+            print(':DATA BYTES\n' + '\n'.join(spans), file=out)
+        if strings:
+            print(':SIDE COMMENTS\n' + '\n'.join(strings), file=out)
+        if labels:
+            print(':USER LABELS\n' + ''.join(labels), file=out)
         print(f':LOAD OFFSET\n{offset:04X}', file=out)
         print(':SYSTEM\nApple II', file=out)
 

@@ -93,6 +93,7 @@ FIXES MADE
 - (E) Lord British says Moonglow is on the wrong island.
 - (E) The conversational response to "LOOK" has a redundant word.
 - (E) After donating blood, healer's name always becomes "Pendragon".
+- (G) View spell or peering gem does not fully draw Level 5 in Wrong.
 
 ### Enhancements
 - (M) Allow quit-&-save in dungeon.

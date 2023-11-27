@@ -19,6 +19,8 @@ line_min = $08
 line_max = $b8
 
 xy_center_cell = $0b
+;xy_base_offset = (-xy_center_cell) .MOD 8   ;results in negative value
+xy_base_offset = ($100 - xy_center_cell) .MOD 8   ;$100 = 0 mod 8
 
 
 	.segment "VIEWMAP"
@@ -38,15 +40,25 @@ xy_center_cell = $0b
 	sta visited_buffer + $100,x
 	inx
 	bne @clear_buffer
+
 	lda #$00
-	sta stack_pos
+	sta explore_head     ;BUGFIX - breadth-first search
+	sta explore_tail
+
+	clc                  ;BUGFIX - greater search depth
 	lda player_xpos
-	sta current_x
+	adc #xy_base_offset  ;BUGFIX - greater search depth
+	sta view_offset_x
+;	sta current_x
 	lda player_ypos
-	sta current_y
+	adc #xy_base_offset  ;BUGFIX - greater search depth
+	sta view_offset_y
+;	sta current_y
+
 	lda #xy_center_cell
 	sta console_xpos
 	sta console_ypos
+
 	lda #glyph_diamond
 	jsr j_console_out
 	dec console_xpos
@@ -62,16 +74,21 @@ xy_center_cell = $0b
 	beq @next_neighbor
 @print:
 	clc
-	lda current_x
+	lda console_xpos   ;BUGFIX - greater search depth
+	adc view_offset_x  ;BUGFIX - greater search depth
+;	lda current_x      ;BUGFIX - greater search depth
 	adc neighbor_x
 	and #$07
 	sta dungeon_x
 	clc
-	lda current_y
+	lda console_ypos   ;BUGFIX - greater search depth
+	adc view_offset_y  ;BUGFIX - greater search depth
+;	lda current_y
 	adc neighbor_y
 	and #$07
 	sta dungeon_y
-	jsr get_dng_tile
+;ENHANCEMENT: defer fetching tile, to exclude visited cells
+;	jsr get_dng_tile
 	jsr explore_cell
 @next_neighbor:
 	inc neighbor_x
@@ -84,9 +101,14 @@ xy_center_cell = $0b
 	lda neighbor_y
 	cmp #$02
 	bcc @draw_neighbor
-	lda stack_pos
-	beq @done
+;BUGFIX - breadth-first search
 	jsr pop_explore
+	beq @done
+; (original code)
+;	lda stack_pos
+;	beq @done
+;	jsr pop_explore
+;BUGFIX END
 	jmp @draw_all_neighbors
 
 @done:
@@ -123,39 +145,61 @@ clear_view:
 	bcc @next_row
 	rts
 
+;BUGFIX: double the search depth
+; by removing dungeon_x,y from storage,
+; instead calulating them directly from
+; console_xpos,ypos and constant view_offset_x,y
+
 push_explore:
-	ldx stack_pos
-	lda dungeon_x
-	sta explore_stack,x
-	inx
-	lda dungeon_y
-	sta explore_stack,x
-	inx
+	ldx explore_tail
+;	lda dungeon_x
+;	sta explore_buffer,x
+;	inx
+;	lda dungeon_y
+;	sta explore_buffer,x
+;	inx
 	lda console_xpos
-	sta explore_stack,x
+	sta explore_buffer,x
 	inx
 	lda console_ypos
-	sta explore_stack,x
+	sta explore_buffer,x
 	inx
-	stx stack_pos
+	stx explore_tail
 	rts
 
+;BUGFIX BFS: breadth-first search
 pop_explore:
-	ldx stack_pos
-	dex
-	lda explore_stack,x
-	sta console_ypos
-	dex
-	lda explore_stack,x
+	ldx explore_head
+	cpx explore_tail
+	beq @done
+	lda explore_buffer,x
 	sta console_xpos
-	dex
-	lda explore_stack,x
-	sta current_y
-	dex
-	lda explore_stack,x
-	sta current_x
-	stx stack_pos
+	inx
+	lda explore_buffer,x
+	sta console_ypos
+	inx
+	stx explore_head
+	lda #$ff   ;return NE
+@done:
 	rts
+
+;(original code)
+;pop_explore:
+;	ldx stack_pos
+;	dex
+;	lda explore_buffer,x
+;	sta console_ypos
+;	dex
+;	lda explore_buffer,x
+;	sta console_xpos
+;	dex
+;	lda explore_buffer,x
+;	sta current_y
+;	dex
+;	lda explore_buffer,x
+;	sta current_x
+;	stx stack_pos
+;	rts
 
 get_dng_tile:
 	lda dungeon_level
@@ -180,7 +224,7 @@ get_dng_tile:
 	rts
 
 explore_cell:
-	sta dng_tile
+;	sta dng_tile
 	clc
 	lda console_xpos
 	adc neighbor_x
@@ -200,16 +244,32 @@ explore_cell:
 	jsr get_visited_ptr
 	lda (ptr1),y
 	bne @done
-	lda dng_tile
-	jsr plot_char
-	lda dng_tile
-	cmp #dng_tile_wall
-	beq @dont_push
-	jsr push_explore
-@dont_push:
-	jsr get_visited_ptr
+;ENHANCEMENT BEGIN
+; mark visited now, eliminate repeat jsr get_visited_ptr
 	lda #$ff
 	sta (ptr1),y
+; only fetch tile type for unvisited cells
+	jsr get_dng_tile
+; eliminate need for 'dng_tile' variable
+	pha
+	jsr plot_char
+	pla
+	cmp #dng_tile_wall
+	beq @done
+	jsr push_explore
+
+; (original code)
+;	lda dng_tile
+;	jsr plot_char
+;	lda dng_tile
+;	cmp #dng_tile_wall
+;	beq @dont_push
+;	jsr push_explore
+;@dont_push:
+;	jsr get_visited_ptr
+;	lda #$ff
+;	sta (ptr1),y
+;ENHANCEMENT END
 @done:
 	sec
 	lda console_xpos
@@ -254,40 +314,41 @@ tile_chars:
 ; for the cell specified by console_xpos,ypos (range 1..22 each)
 get_visited_ptr:
 	ldx console_ypos
-	dex
+;ENHANCEMENT:
+; Since 2 pages (512 bytes) are reserved for visited_buffer
+; we can reduce code by NOT decrementing xpos,ypos to range 0..21
+; thus occupying region 23..506 of the buffer instead of 0..483
 	lda row_offset_hi,x
 	sta ptr1 + 1
 	lda row_offset_lo,x
 	sta ptr1
-	sec
-	lda console_xpos
-	sbc #$01
-	clc
-	adc ptr1
-	sta ptr1
-	lda ptr1 + 1
-	adc #>visited_buffer
-	sta ptr1 + 1
-	ldy #$00
+;ENHANCEMENT: set up "(ptr),Y" as "(row),col" instead of "(cell),0"
+	ldy console_xpos
 	rts
 
 ; Look-up table for row offsets in the 22x22 'visited' buffer at $9200
 row_offset_hi:
-	.repeat 22, line
-		.byte >(line * 22)
+	.repeat 23, line
+;ENHANCEMENT: pre-calculate absolute buffer addresses instead of relative
+		.byte >visited_buffer + >(line * 22)
 	.endrepeat
 row_offset_lo:
-	.repeat 22, line
-		.byte <(line * 22)
+	.repeat 23, line
+		.byte <visited_buffer + <(line * 22)
 	.endrepeat
 
-stack_pos:
+
+;ENHANCEMENT: put the following in a BSS segment to exclude them from prg file
+
+	.segment "VIEWVARS"
+
+explore_head:   ;was stack_pos
 	.byte 0
-dng_tile:
+explore_tail:   ;was dng_tile
 	.byte 0
-current_x:
+view_offset_x:  ;was current_x
 	.byte 0
-current_y:
+view_offset_y:  ;was current_y
 	.byte 0
 neighbor_x:
 	.byte 0
@@ -301,3 +362,5 @@ saved_console_xpos:
 	.byte 0
 saved_console_ypos:
 	.byte 0
+
+.assert * <= visited_buffer, error, "View segment is too large"

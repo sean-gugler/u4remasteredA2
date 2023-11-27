@@ -1,3 +1,39 @@
+:CODE START
+9000
+:CODE END
+9400
+:DATA BYTES
+9316-9396
+9396-9397
+9397-93F7
+93F7-93F8
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+:REMOVED BYTES
+:FULL COMMENTS
+90E8 X,Y range 0..31. Their 5 bits are used as buffer offsets as follows: ptr2 = view_buf + [0000 00yy yyyx xxxx]
+9107 X,Y range 0..31. Their 5 bits are used as buffer offsets as follows: ptr2 = view_buf + [0000 00yx yyyy xxxx]
+912C NOTE: These draw routines assume cells of 4x4 individual pixels. But that ignores how Apple II uses the high bit and odd/even cadence to store HGR data; color artifacts result.
+9259 With A = [00xx 00yy], set a bit within the 4x4 display cell for the current terrain coordinate (temp_x,y)
+92E1 With A = [00xx 00yy], toggle a bit within the 4x4 display cell for the current terrain coordinate (temp_x,y)
+9396 junk - leftover partial table after code was condensed, presumably
+93F7 junk
+:SIDE COMMENTS
+9084 leave cell black
+9090 #view_max_y
+909F #view_max_x
+90A8 loc_world
+90C9 line_min
+90D5 col_max
+90DF line_max
+90E6 loc_world
+90FE #>view_buf
+9123 #>view_buf
+:USER LABELS
 0000 player_xpos
 0001 player_ypos
 0002 tile_xpos
@@ -163,6 +199,50 @@
 0896 j_gettile_dungeon
 2000 screen_HGR1
 8800 j_overlay_entry
+9000 j_viewmap
+9009 next_tile
+9014 +
+9020 +
+9029 +
+9032 +
+903B +
+9044 +
+904D +
+9056 +
+905F +
+9068 +
+9071 +
+907A +
+9083 +
+908C next_row
+9097 @column_done
+90A6 @done
+90B5 @britannia
+90BD @waitkey
+90C9 clear_view
+90CB @next_row
+90D9 @next_col
+90E4 get_at_xy
+9107 @britannia
+912C pattern_00
+912D pattern_01
+9142 pattern_02
+915A pattern_03
+9183 pattern_04
+91AC pattern_05
+91C1 pattern_06
+91D9 pattern_07
+91E0 pattern_08
+9209 pattern_09
+9228 pattern_0a
+923D pattern_0b
+9248 pattern_0c
+9253 @alternate
+9259 set_bit
+9290 flash_location
+92E1 @invert_bit
+9316 tile_pattern_table
+93FE +
 B7B5 j_readblock
 B7EB RWTS_volume
 B7EC RWTS_track
@@ -179,11 +259,15 @@ E007 bmplineaddr_lo + 7
 E008 bmplineaddr_lo + 8
 E009 bmplineaddr_lo + 9
 E00A bmplineaddr_lo + 10
+E01E bmplineaddr_lo + 30
 E0C0 bmplineaddr_hi
 E0C7 bmplineaddr_hi + 7
 E0C8 bmplineaddr_hi + 8
 E0C9 bmplineaddr_hi + 9
 E0CA bmplineaddr_hi + 10
+E0DE bmplineaddr_hi + 30
+E194 bmpcol_byte + 20
+E2B3 bmpcol_bit + 20
 EC00 player_stats
 ED00 party_stats
 ED01 party_stats + 1
@@ -236,3 +320,11 @@ EFA0 combat_player_tile
 EFFD attack_sprite
 EFFE target_x
 EFFF target_y
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+5000
+:SYSTEM
+Apple II

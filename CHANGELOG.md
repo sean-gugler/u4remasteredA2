@@ -7,6 +7,15 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.9] - 2023-11-27
+
+### Fixed
+- View spell or peering gem does not fully draw Level 5 in Wrong. (Doubled size of search tree and changed from depth-first to breadth-first.)
+
+### Added
+- [Issue #16] Disassembly of TMAP file.
+
+
 ## [1.2.8] - 2022-11-25
 
 ### Fixed

@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.10] - 2024-01-13
+
+### Fixed
+- [Issue #17] Calabrini's dialogue keyword changed from "HEALING" to "INJURED" because it was masking "HEALTH".
+
+
 ## [1.2.9] - 2023-11-27
 
 ### Fixed

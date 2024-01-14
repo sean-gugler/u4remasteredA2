@@ -83,6 +83,7 @@ FIXES MADE
 - (G) Dungeon "Covetous" has a room whose east exit is obstructed.
 - (G) Cooldown timer for Hawkwind's virtue reward should match timer for shrine.
 - (E) Cooldown timer for reagent searches should not reset when search finds non-reagents.
+- (E) Calabrini's dialogue keywords should not alias each other, they must all be unique.
 
 ### Cosmetic Mistakes
 - (M) Combat animations are erratic for certain types of foe.

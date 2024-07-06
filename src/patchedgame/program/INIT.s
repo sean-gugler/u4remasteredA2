@@ -127,7 +127,8 @@ cout_stub = $1fff
 	.byte 0
 
 	lda hw_KEYBOARD
-	cmp #$54  ; T
+	ora #$80
+	cmp #'T'
 	beq trainer_menu
 	jsr j_primm_cout
 	.byte $84,"BRUN BOOT,A$6000", $8d, 0

@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.11] - 2024-07-06
+
+### Fixed
+- [Issue #18] Pressing T during startup was timing-sensitive, didn't work when spamming the keypress.
+
+
 ## [1.2.10] - 2024-01-13
 
 ### Fixed

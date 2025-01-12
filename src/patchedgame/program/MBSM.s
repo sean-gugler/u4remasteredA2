@@ -120,6 +120,8 @@ music_start:
 
 cur_psg:
 	.byte 0
+cur_echo_psg:
+	.byte 0	
 chan_current:
 	.byte 0
 tune_channels_inuse:
@@ -255,6 +257,13 @@ set_psg_registers:
 	lda cur_psg
 	asl
 	tax
+	bne @echo_psg2 		; if ECHO+, then OR with 0x08 for CHN1 or 0x10 for CHN2
+	lda #$08
+	bne @echo_setpsg
+@echo_psg2:
+	lda #$10
+@echo_setpsg:
+	sta cur_echo_psg
 	lda chan_next_addr,x
 	sta next_values
 	lda chan_next_addr + 1,x
@@ -280,17 +289,21 @@ set_psg_registers:
 	txa          ;select register X in cur_psg
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda #psg_cmd_latch
+	lda cur_echo_psg
+	ora #psg_cmd_latch
 	sta (psg_io),y
-	lda #psg_cmd_inactive
+	lda cur_echo_psg
+	ora #psg_cmd_inactive
 	sta (psg_io),y
 	ldy #mb_reg_ORA
 	pla          ;set register X to value A
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda #psg_cmd_write
+	lda cur_echo_psg
+	ora #psg_cmd_write
 	sta (psg_io),y
-	lda #psg_cmd_inactive
+	lda cur_echo_psg
+	ora #psg_cmd_inactive
 	sta (psg_io),y
 @skip:
 	dex

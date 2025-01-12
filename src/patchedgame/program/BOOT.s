@@ -809,10 +809,10 @@ num_drives:
 	.byte "Initiate new game", 0
 	bit mockingboard_active
 	bmi @get_input
-	ldx #$09
+	ldx #$0d
 	ldy #$15
 	jsr j_primm_xy
-	.byte "Activate Mockingboard", 0
+	.byte "Activate Echo+", 0
 @get_input:
 	jsr input_char
 	cmp #char_0
@@ -885,75 +885,16 @@ num_drives:
 	sta mb_2_slot
 	sta mb_2_type
 	inc cursor_x
-	jsr clear_window
-	ldx #$0f
-	ldy #$10
-how_many:
-	jsr j_primm_xy
-	.byte "How many?", 0
-	ldx #$0c
-	ldy #$12
-	jsr j_primm_xy
-	.byte "One Mockingboard", 0
-	ldx #$0c
-	ldy #$13
-	jsr j_primm_xy
-	.byte "Two Mockingboards", 0
-@get_input:
-	jsr input_char
-	cmp #char_O
-	beq one_mockingboard
-	cmp #char_T
-	beq two_mockingboards
-	cmp #char_ESC
-	bne @get_input
-	jmp menu_main
 
 one_mockingboard:
-	lda #$00
-	beq :+
-two_mockingboards:
-	lda #$80
-:	sta mb_count
-menu_kind_mocking:
-	jsr clear_window
-	jsr print_mockboard_1_2
-	ldy #$10
-	ldx #$0d
-	jsr j_primm_xy
-	.byte "Which kind?", 0
-	ldy #$12
-	ldx #$0a
-	jsr j_primm_xy
-	.byte "1- Sound 1", 0
-	ldy #$13
-	ldx #$0a
-	jsr j_primm_xy
-	.byte "2- Sound-Speech", 0
-	ldy #$14
-	ldx #$0a
-	jsr j_primm_xy
-	.byte "3- Mockingboard A or C", 0
-@get_input:
-	jsr input_char
-	cmp #char_ESC
-	bne :+
-	jmp menu_main
-:	cmp #char_1
-	bcc @get_input
-	cmp #char_3 + 1
-	bcs @get_input
-@set_type:
-	sec
-	sbc #char_num_first
+	lda #$03
 	tay
-	lda mb_count
-	and #$02
+	lda #$00
+	sta mb_count
 	tax
 	sty mb_1_type,x
 menu_which_slot:
 	jsr clear_window
-	jsr print_mockboard_1_2
 	ldy #$10
 	ldx #$0d
 	jsr j_primm_xy
@@ -980,14 +921,6 @@ menu_which_slot:
 	tax
 	sty mb_1_slot,x
 	bit mb_count
-	bpl load_sound_drivers
-@do_second_card:
-	inc mb_count
-	inc mb_count
-	lda mb_count
-	cmp #$84
-	bcs load_sound_drivers
-	jmp menu_kind_mocking
 
 load_sound_drivers:
 	jsr j_primm_cout
@@ -1008,23 +941,6 @@ load_sound_drivers:
 	dec mockingboard_active
 @skip:
 	jmp menu_main
-
-print_mockboard_1_2:
-	ldy #$0e
-	ldx #$08
-	lda mb_count
-	bpl @no_key
-	and #$02
-	bne @odd
-	jsr j_primm_xy
-	.byte "First Mockingboard:", 0
-@no_key:
-	rts
-
-@odd:
-	jsr j_primm_xy
-	.byte "Second Mockingboard:", 0
-	rts
 
 load_music:
 	tax

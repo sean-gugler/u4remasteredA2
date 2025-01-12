@@ -19,3 +19,5 @@ tmp/
 /regenerator/Config/Systems
 !/images/*.prg
 !/files/savegame/*/*.prg
+cfg/___empty.cfg
+cfg/default.cfg

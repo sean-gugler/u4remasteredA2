@@ -997,15 +997,15 @@ print_mockboard_1_2:
 	ldy #$0e
 	ldx #$08
 	lda mb_count
-	bpl @no_key
+	bpl @only_one
 	and #$02
-	bne @odd
+	bne @second
 	jsr j_primm_xy
 	.byte "First Mockingboard:", 0
-@no_key:
+@only_one:
 	rts
 
-@odd:
+@second:
 	jsr j_primm_xy
 	.byte "Second Mockingboard:", 0
 	rts

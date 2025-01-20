@@ -58,10 +58,10 @@ VIA_INT_CA2     = %00000001   ; [3]
 ; General VIA
 ; [1] Read TxCL or Write TxCH will reset Tx Interrupt Flag.
 ;
-; The way VIA is wired on Mockingboard
+; The way VIA is wired to a PSG on Mockingboard
 ; [2] DDR must be OUT. PSG does not send anything useful to INA/INB.
 ; [3] PB7,PB6,CA1,CA2,CB1,CB2 are unused. These pins are connected to nothing.
-
+; (Some of these are used when wired to a speech chip)
 
 ;-------
 ; Set these values on mb_reg_ORB
@@ -92,10 +92,11 @@ psg_reg_env_shape    = $0d
 
 psg_reg_last         = $0a
 
-; psg_reg_voice_enable
-
 ;-------
 ; Set these values on mb_reg_ORA, for use with psg_cmd_write
+; after latching to specified psg register
+
+; psg_reg_voice_enable:
 
 voice_disable_noise_A = %00100000
 voice_disable_noise_B = %00010000

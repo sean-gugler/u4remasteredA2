@@ -386,7 +386,7 @@ set_psg_registers:
 	sta psg_io
 	lda chan_io_base + 1,x
 	sta psg_io + 1
-	ldx #$0a
+	ldx #psg_reg_last
 @next_register:
 	txa
 	tay

@@ -2,7 +2,6 @@
 
 	.include "apple.i"
 	.include "mockingboard.i"
-;	.include "music.i"
 	.include "music_state.i"
 	.include "zp_music.i"
 
@@ -19,7 +18,7 @@ vectors_save:
 vectors_save_size = * - vectors_save
 cur_psg:
 	.byte 0
-cur_echo_psg:
+cur_echo_psg:  ; ENHANCEMENT
 	.byte 0
 chan:
 	.res 12
@@ -128,6 +127,10 @@ restore_vectors:
 ; Card type 2: B has the music PSG
 ; Card type 3: A + B both have music PSGs
 ;   You can also think of Type as a bitfield "BA" for presence of PSG music chip.
+;
+; ENHANCEMENT
+; Card type 4: Echo+ has two music PSGs
+;   but only one 6522 VIA. Sockets are addressed with bits 3,4 in Port B command register.
 
 set_psg_addresses:
 	ldx #$02
@@ -159,7 +162,7 @@ set_psg_addresses:
 ; Dormant block. Menu input validation guarantees mb_1 is valid.
 @only_use_mb_2:
 	sta mb_1_slot
-	tay  ;BUGFIX in case type=3, see below.
+	tay  ;BUGFIX in case type >= 3, see below.
 	lda mb_2_type
 	sta mb_1_type
 	lda #$00
@@ -181,6 +184,9 @@ check_mb_types:
 	cmp #$03
 	bcc @use_two_mb_slots
 @both_psg_same_slot:
+	and #$04      ;ENHANCEMENT  Type 4 is Echo+ card
+	asl           ;ENHANCEMENT  PSG 1 bit is $08. Store 0 for other cards.
+	sta echo_psg  ;ENHANCEMENT
 	sty mb_1_slot ;see BUGFIX above
 	sty mb_2_slot
 	lda #$01
@@ -293,7 +299,10 @@ set_psg_lines_output:
 	sta (psg_io),y
 
 	ldy #mb_reg_DDRB
-	lda #$1F     ;port B (cmd) 5 bits output. ECHO+ uses PB3 and PB4 as CS for PSG 1 and 2
+	lda echo_psg ;ENHANCEMENT
+	beq :+       ;ENHANCEMENT
+	ora #$18     ;ENHANCEMENT  Echo+ uses PB3 and PB4 as CS (Channel Select) for PSG 1 and 2
+:	ora #$07     ;port B (cmd) 3 bits output (valid cmds 0-7)
 	sta (psg_io),y
 
 	dec cur_psg
@@ -301,9 +310,13 @@ set_psg_lines_output:
 	rts
 
 init_psg_registers:
+	lda echo_psg        ; ENHANCEMENT  if Echo+, this will be 0x08 for CHN1
 	ldx num_psgs
 	dex
 	stx cur_psg
+	beq :+              ; ENHANCEMENT
+	asl                 ; ENHANCEMENT  if Echo+, adjust to 0x10 for CHN2
+:	sta cur_echo_psg    ; ENHANCEMENT
 @next_psg:
 	lda cur_psg
 	asl
@@ -322,8 +335,10 @@ init_psg_registers:
 	sta psg_io + 1
 	ldy #mb_reg_ORB
 	lda #psg_cmd_reset
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 	lda #psg_cmd_inactive
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 	ldy #psg_reg_last
 @next_register:
@@ -336,6 +351,7 @@ init_psg_registers:
 	sta (cur_values),y
 	dey
 	bpl @next_register
+	lsr cur_echo_psg  ; ENHANCEMENT
 	dec cur_psg
 	bpl @next_psg
 	jsr set_psg_registers
@@ -369,20 +385,17 @@ activate_irq:
 	rts
 
 set_psg_registers:
+	lda echo_psg        ; ENHANCEMENT  if Echo+, this will be 0x08 for CHN1
 	ldx num_psgs
 	dex
 	stx cur_psg
+	beq :+              ; ENHANCEMENT
+	asl                 ; ENHANCEMENT  if Echo+, adjust to 0x10 for CHN2
+:	sta cur_echo_psg    ; ENHANCEMENT
 @next_psg:
 	lda cur_psg
 	asl
 	tax
-	bne @echo_psg2		; if ECHO+, then OR cmd with 0x08 for CHN1 or 0x10 for CHN2
-	lda #$08
-	bne @echo_setpsg
-@echo_psg2:
-	lda #$10
-@echo_setpsg:
-	sta cur_echo_psg
 	lda chan_next_addr,x
 	sta next_values
 	lda chan_next_addr + 1,x
@@ -408,25 +421,26 @@ set_psg_registers:
 	txa          ;select register X in cur_psg
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda cur_echo_psg
-	ora #psg_cmd_latch
+	lda #psg_cmd_latch
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
-	lda cur_echo_psg
-	ora #psg_cmd_inactive
+	lda #psg_cmd_inactive
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 	ldy #mb_reg_ORA
 	pla          ;set register X to value A
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda cur_echo_psg
-	ora #psg_cmd_write
+	lda #psg_cmd_write
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
-	lda cur_echo_psg
-	ora #psg_cmd_inactive
+	lda #psg_cmd_inactive
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 @skip:
 	dex
 	bpl @next_register
+	lsr cur_echo_psg  ; ENHANCEMENT
 	dec cur_psg
 	bpl @next_psg
 	rts

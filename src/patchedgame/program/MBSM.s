@@ -120,7 +120,7 @@ music_start:
 
 cur_psg:
 	.byte 0
-cur_echo_psg:
+cur_echo_psg:  ; ENHANCEMENT
 	.byte 0	
 chan_current:
 	.byte 0
@@ -171,6 +171,8 @@ mb_num_channels:
 	.byte 0
 music_mute:   ;ENHANCEMENT
 	.byte $ff
+echo_psg:     ;ENHANCEMENT - bit value to address first psg on Echo+ card
+	.byte 0
 
 ;-------------------
 	.segment "PRG_3"
@@ -250,20 +252,17 @@ music_stop:
 	.segment "PRG_4"
 
 set_psg_registers:
+	lda echo_psg        ; ENHANCEMENT  if Echo+, this will be 0x08 for CHN1
 	ldx num_psgs
 	dex
 	stx cur_psg
+	beq :+              ; ENHANCEMENT
+	asl                 ; ENHANCEMENT  if Echo+, adjust to 0x10 for CHN2
+:	sta cur_echo_psg    ; ENHANCEMENT
 @next_psg:
 	lda cur_psg
 	asl
 	tax
-	bne @echo_psg2 		; if ECHO+, then OR with 0x08 for CHN1 or 0x10 for CHN2
-	lda #$08
-	bne @echo_setpsg
-@echo_psg2:
-	lda #$10
-@echo_setpsg:
-	sta cur_echo_psg
 	lda chan_next_addr,x
 	sta next_values
 	lda chan_next_addr + 1,x
@@ -289,25 +288,26 @@ set_psg_registers:
 	txa          ;select register X in cur_psg
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda cur_echo_psg
-	ora #psg_cmd_latch
+	lda #psg_cmd_latch
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
-	lda cur_echo_psg
-	ora #psg_cmd_inactive
+	lda #psg_cmd_inactive
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 	ldy #mb_reg_ORA
 	pla          ;set register X to value A
 	sta (psg_io),y
 	ldy #mb_reg_ORB
-	lda cur_echo_psg
-	ora #psg_cmd_write
+	lda #psg_cmd_write
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
-	lda cur_echo_psg
-	ora #psg_cmd_inactive
+	lda #psg_cmd_inactive
+	ora cur_echo_psg  ; ENHANCEMENT
 	sta (psg_io),y
 @skip:
 	dex
 	bpl @next_register
+	lsr cur_echo_psg  ; ENHANCEMENT
 	dec cur_psg
 	bpl @next_psg
 	rts

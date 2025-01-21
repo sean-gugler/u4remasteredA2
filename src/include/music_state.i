@@ -16,6 +16,7 @@ chan_level_reg = $04e5
 num_psgs = $04f0
 mb_num_channels = $04f1
 music_mute = $04f2
+echo_psg = $04f3
 
 ; --- ROUTINES
 
@@ -26,6 +27,6 @@ music_data = $f000
 
 ; --- VALUES
 
-max_mb_type = $04
+max_mb_type = $05
 max_slot = $08
 max_channels = $06

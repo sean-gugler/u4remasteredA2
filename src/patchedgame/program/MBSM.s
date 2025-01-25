@@ -229,7 +229,7 @@ music_stop:
 	sta next_values
 	lda chan_next_addr + 1,x
 	sta next_values + 1
-	ldy #psg_reg_level_C
+	ldy #psg_reg_last
 @next_register:
 	lda #$00
 	cpy #psg_reg_voice_enable
@@ -275,7 +275,7 @@ set_psg_registers:
 	sta psg_io
 	lda chan_io_base + 1,x
 	sta psg_io + 1
-	ldx #psg_reg_level_C
+	ldx #psg_reg_last
 @next_register:
 	txa
 	tay

@@ -7,6 +7,12 @@ Source code may be found at
 https://github.com/sean-gugler/u4remasteredA2
 
 
+## [1.2.12] - 2025-01-25
+
+### Added
+- Support Echo+ sound cards, with thanks to Mario Patiño (@cybernesto)
+
+
 ## [1.2.11] - 2024-07-06
 
 ### Fixed

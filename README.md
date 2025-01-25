@@ -3,7 +3,7 @@ Ultima IV for Apple II, Remastered
 
 Greetings, traveler! Here you will find the most bug-free edition of Ultima IV for the Apple II ever known. May you enjoy the experience such as it was always meant to be.
 
-This is meant as a "transparent" mod, meaning that any deviations beyond bug fixes are *optional*. You will not see any "enhancements" unless you deliberately invoke them; you can play the game exactly as originally designed.
+This is meant as a "transparent" mod, meaning that any deviations beyond bug fixes are *optional*. You will not see any "enhancements" unless you deliberately invoke them; you can play the game exactly as originally designed. (One exception is the sound card selection menu. Echo+ was not originally supported, but it didn't feel right to make it a "secret" option so the menu has been adjusted accordingly.)
 
 Download from:
 https://github.com/sean-gugler/u4remasteredA2/releases
@@ -114,6 +114,7 @@ FIXES MADE
 - (G) Ctrl+V turns music on and off during play, if Mockingboard was activated in pre-game Options menu.
 - (E) Support IIgs with Mockingboard cards.
 - (G) Support slotted Mockingboard model 4C on Apple //c
+- (E) Support Echo+ sound cards.
 
 
 Source Code

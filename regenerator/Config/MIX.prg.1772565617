@@ -1,0 +1,119 @@
+:CODE START
+8800
+:CODE END
+8A30
+:DATA BYTES
+8809-8817
+881A-8825
+8832-8839
+885F-8868
+8881-888E
+88A8-88C5
+88D3-88E0
+88E9-88F3
+890B-8914
+8937-8942
+899A-89A5
+8A07-8A0A
+8A0B-8A25
+8A25-8A30
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8914
+8A0A
+:REMOVED BYTES
+:FULL COMMENTS
+8A25 junk
+:SIDE COMMENTS
+8806 b'Mix reagents\r\x00'
+8817 b'For spell:\x00'
+882F b'NONE!\r\x00'
+885C b'REAGENT:\x00'
+887E b'NONE OWNED!\r\x00'
+88A5 b'YOU MIX THE\rREAGENTS AND...\r\x00'
+88D0 b'IT FIZZLES!\r\x00'
+88E6 b'SUCCESS!\r\x00'
+8934 b'\x1eREAGENTS\x1d\x00'
+8997 b'\x1eMIXTURES\x1d\x00'
+8829 #char_alpha_first
+882B #spells_max
+884C #string_spell_first
+886D #char_enter
+8872 #char_alpha_first
+8874 #reagent_max
+8922 #char_enter
+8945 #party_stat_reagents
+8955 #char_alpha_first
+8960 #char_hyphen
+8970 #char_hyphen
+89AA column width
+89B0 left margin
+89BA wrap after 8 rows
+89CA #char_alpha_first
+89CF #char_hyphen
+89E2 #spells_max
+:USER LABELS
+0002 tile_xpos
+0006 dest_x
+00CE console_xpos
+00CF console_ypos
+00D8 zp_index
+00D9 zp_display_line
+00EA zp_reagent_count
+00F0 zp_reagent_index
+0800 j_waitkey
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+082A j_mulax
+0833 j_printbcd
+0845 j_update_status
+0866 j_printdigit
+0869 j_clearstatwindow
+087E j_printstring
+8803 prompt_mix
+8817 prompt_spell
+8842 @set_spell
+8859 prompt_reagents
+8868 -
+887E @none_owned
+8891 @use_reagent
+88A5 @do_mix
+88D0 @failure
+88E6 @success
+8901 +
+890B mixture
+890C bit_msb
+8914 input_char
+8922 print_newline
+8928 display_reagents
+8942 @next
+896D @two_digit
+8970 +
+897D @skip
+8989 display_spells
+89A5 @next
+89DE @skip
+89EA save_console_xy
+89F5 restore_console_xy
+8A00 next_line
+8A07 prev_console_x
+8A08 prev_console_y
+8A09 spell
+8A0A exit
+8A0B mixture_table
+ED00 party_stats
+ED38 party_stats + party_stat_reagents
+ED40 party_stats + party_stat_spells
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

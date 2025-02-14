@@ -1,0 +1,4 @@
+# Patch file MAPF, Britain.
+
+# Fix Thevel's talk file.
+offset(04f0) match(07) replace(06)

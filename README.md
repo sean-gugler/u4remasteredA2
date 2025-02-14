@@ -160,15 +160,24 @@ You also need disk images of Ultima IV for Apple II to import the graphics, maps
 
 * [Ultima IV at Archive.org](https://archive.org/details/UltimaIV4amCrack)
 
-Rename those disk images and place them in the following locations:
+Those disk images were downloaded, renamed and moved in the following locations:
 ```
 files/original/u4britannia.do
 files/original/u4program.do
 files/original/u4towne.do
 files/original/u4underworld.do
 ```
-Type `make all` to produce rebuilt versions of those disk images in the root folder.
+Type `make all` to produce rebuilt versions of those disk images in the output folder.
+```
+output/slideshow_end.do
+output/slideshow_start.do
+output/u4britannia.do
+output/u4program.do
+output/u4towne.do
+output/u4underworld.do
+```
 
+Thanks to user [Wyatt Wong](https://github.com/wyatt-wong) to upload the source codes into this GitHub repository and revised the README.md file
 
 Reconstruction
 --------------

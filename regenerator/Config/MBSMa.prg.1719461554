@@ -1,0 +1,195 @@
+:CODE START
+0400
+:CODE END
+0800
+:DATA BYTES
+044D-0456
+0478-0490
+0490-04A0
+04A0-04C0
+04E4-04F2
+04F8-0500
+0578-0580
+05F8-0600
+0600-0660
+0678-0680
+0680-06E0
+06F8-0700
+0700-0702
+070C-070D
+070D-070E
+0718-0719
+0719-071A
+0778-0780
+07F8-0800
+:WORDS
+0456-0458
+04C0-04E4
+0702-070C
+070E-0718
+071A-0724
+0724-0730
+0730-073C
+073C-0748
+0748-0754
+0754-0760
+0760-076C
+076C-0778
+0780-0788
+0788-0790
+0790-07F8
+:POINTERS
+0458-045A-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+0420
+0432
+0438
+043F
+0446
+044C
+0480
+0500
+0506
+050C
+0513
+0519
+051D
+055A
+0580
+0680
+0700
+0778
+077F
+07F8
+:REMOVED BYTES
+045A-0478
+04F2-04F8
+0561-0578
+05DE-05F8
+0660-0678
+06E0-06F8
+:FULL COMMENTS
+0600 8 octaves, G# 0 through G 8
+:SIDE COMMENTS
+0420 BUG: should be 2x
+0432 #mb_reg_ACR ; Auxiliary Control Register
+0434 #ACR_T1_reload_counters ;Timer 1 => auto repeat
+0438 #mb_reg_T1CL
+043F #mb_reg_T1CH
+0444 writing to HI starts the timer
+0446 #mb_reg_IER ; Interrupt Enable Register
+0448 #VIA_IER_set + VIA_INT_timer_1
+050C #mb_reg_T1LL  ;timer 1 latch LO
+0513 mb_reg_T1LH  ;timer 1 latch HI
+0519 #mb_reg_T1CL  ;reading clock LO starts the timer
+0547 #psg_reg_level_C
+054B #psg_reg_voice_enable
+054F #voice_disable_noise_ABC
+055A #mb_reg_IER
+055C #VIA_IER_clr + VIA_INT_timer_1
+05AA #psg_reg_level_C
+05B7 #mb_reg_ORA
+05B9 select register X in cur_psg
+05BC #mb_reg_ORB
+05BE #psg_cmd_latch
+05C2 #psg_cmd_inactive
+05C6 #mb_reg_ORA
+05C8 set register X to value A
+05CB #mb_reg_ORB
+05CD #psg_cmd_write
+05D1 #psg_cmd_inactive
+:USER LABELS
+0478 DOS_1
+04F8 DOS_2
+0578 DOS_3
+05F8 DOS_4
+0678 DOS_5
+06F8 DOS_6
+0778 DOS_7
+07F8 DOS_8
+0082 tune_playing
+0084 mus_ptr
+0085 mus_ptr + 1
+0086 mb_io_base
+0088 psg_io
+0089 psg_io + 1
+008A chan_cursor
+008B chan_cursor + 1
+0096 next_values
+0097 next_values + 1
+0098 cur_values
+0099 cur_values + 1
+0400 music_start
+040C @next_tune
+0426 @next_channel
+044D cur_psg
+044E chan_current
+044F tune_channels_inuse
+0450 tune_channels_exist
+0451 num_patterns
+0452 pattern_table_size
+0453 unused
+0454 num_tunes
+0455 any_channel_active
+0456 frequency
+0457 frequency + 1
+0458 mb_irq_clock
+0459 mb_irq_clock + 1
+0480 psg1_next_values
+0490 psg2_next_values
+04A0 psg1_cur_values
+04B0 psg2_cur_values
+04C0 chan_next_addr
+04C1 chan_next_addr + 1
+04CC chan_cur_addr
+04CD chan_cur_addr + 1
+04D8 chan_io_base
+04D9 chan_io_base + 1
+04E4 chan_freq_reg
+04E5 chan_level_reg
+04F0 num_psgs
+04F1 mb_num_channels
+0500 mb_irq_handler
+0523 read_channel_byte
+052B +
+052E music_stop
+053D @next_psg
+0549 @next_register
+0551 +
+0560 @done
+0580 set_psg_registers
+0587 @next_psg
+05AC @next_register
+05D5 @skip
+0600 freq_table_lo
+0680 freq_table_hi
+0700 chan_env_stage
+0701 chan_active
+070C chan_env_duration
+070D chan_note_duration
+0718 chan_env_rel_dur
+0719 chan_transpose
+0724 chan_pitch_bend
+0730 chan_env_atk_rate
+073C chan_env_decay
+0748 chan_env_sus_lev
+0754 chan_env_rel_rate
+0760 chan_env_atk_lev
+076C chan_level
+076D chan_level + 1
+077F tune_addr - 1
+0780 tune_addr
+0790 pattern_addr
+429A clock_default
+FD00 music_update
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

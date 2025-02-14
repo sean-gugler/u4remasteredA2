@@ -1,0 +1,509 @@
+:CODE START
+8800
+:CODE END
+99D0
+:DATA BYTES
+8829-8841
+885E-887A
+888E-889B
+88A1-88B1
+88B9-88BC
+88C2-88E0
+8938-894D
+896F-898C
+8997-89A4
+89B2-89D1
+8A1E-8A34
+8A38-8A43
+8A47-8A52
+8A69-8A76
+8A86-8A9F
+8AA8-8AAB
+8AB1-8AB5
+8ABE-8AF4
+8AFA-8B25
+8B2E-8B68
+8B71-8B87
+8B8D-8B9D
+8BA8-8BB7
+8BC0-8BD9
+8BFC-8C5A
+8C63-8CC9
+8CD2-8D1A
+8D23-8D77
+8D80-8DD0
+8DD9-8E19
+8E22-8E5E
+8E67-8EB5
+8EBE-8F17
+8F20-8F71
+8F7A-8FEA
+8FF0-9051
+905A-90CF
+90D5-9143
+914C-918B
+9191-91FE
+9207-926A
+9270-92F6
+92FF-9351
+9357-93C8
+93CE-9440
+9449-94C1
+94CC-94DF
+94E5-9534
+953A-958E
+9594-95F7
+9600-9612
+961B-962B
+9634-9645
+964E-9674
+967A-96CE
+96D4-96FF
+9709-9744
+974A-97DE
+97E4-9864
+986A-9881
+9884-98F8
+99CF-99D0
+:WORDS
+:POINTERS
+89E3-8A1B-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+88E0
+8A1B
+94DF
+98F8
+:REMOVED BYTES
+:FULL COMMENTS
+8807 Entry point from ULT4, which uses BLOAD not BRUN
+996C unused
+99CF junk
+:SIDE COMMENTS
+8826 b'THOU SHALT\nLIVE AGAIN!\n\x00'
+885B b'LORD BRITISH\nSAYS: WELCOME\n\x00'
+888B b'\nMY FRIEND!\n\x00'
+889E b'\nAND THEE ALSO\n\x00'
+88B6 b'!\n\x00'
+88BF b'\nAND THY WORTHY\nADVENTURERS!\n\x00'
+8935 b'\nTHOU ART NOW\nLEVEL \x00'
+896C b'\nWHAT WOULD THOU\nASK OF ME?\n\x00'
+8994 b'\nWHAT ELSE?\n\x00'
+89AF b'I CANNOT HELP\nTHEE WITH THAT.\n\x00'
+8A1B b'\nLORD BRITISH\nSAYS: \n\x00'
+8A35 b'\nHE SAYS:\n\x00'
+8A44 b'\nHE ASKS:\n\x00'
+8A66 b'\nYES OR NO:\n\x00'
+8A83 b'FARE THEE\nWELL MY FRIEND\x00'
+8AA5 b'!\n\x00'
+8AAE b'S!\n\x00'
+8ABB b'MY NAME IS\nLORD BRITISH,\nSOVEREIGN OF\nALL BRITANNIA!\n\x00'
+8AF7 b'THOU SEE THE\nKING WITH THE\nROYAL SCEPTRE.\n\x00'
+8B2B b'I RULE ALL\nBRITANNIA, AND\nSHALL DO MY BEST\nTO HELP THEE!\n\x00'
+8B6E b'I AM WELL,\nTHANK YE.\n\x00'
+8B8A b'ART THOU WELL?\n\x00'
+8BA5 b'THAT IS GOOD.\n\x00'
+8BBD b'LET ME HEAL\nTHY WOUNDS!\n\x00'
+8BF9 b'MANY TRUTHS CAN\nBE LEARNED AT\nTHE LYCAEUM. IT\nLIES ON THE\nNORTHWESTERN\nSHORE OF VERITY\nISLE!\n\x00'
+8C60 b'LOOK FOR THE\nMEANING OF LOVE\nAT EMPATH ABBEY.\nTHE ABBEY SITS\nON THE WESTERN\nEDGE OF THE DEEP\nFOREST!\n\x00'
+8CCF b'SERPENT CASTLE\nON THE ISLE OF\nDEEDS IS WHERE\nCOURAGE SHOULD\nBE SOUGHT!\n\x00'
+8D20 b'THE FAIR TOWNE\nOF MOONGLOW ON\nDAGGER ISLE, IS\nWHERE THE VIRTUE\nOF HONESTY\nTHRIVES!\n\x00'
+8D7D b'THE BARDS IN THE\nTOWNE OF BRITAIN\nARE WELL VERSED\nIN THE VIRTUE OF\nCOMPASSION!\n\x00'
+8DD6 b'MANY VALIANT\nFIGHTERS COME\nFROM JHELOM,\nIN THE VALARIAN\nISLES!\n\x00'
+8E1F b'IN THE CITY OF\nYEW, IN THE DEEP\nFOREST, JUSTICE\nIS SERVED!\n\x00'
+8E64 b'MINOC, TOWNE OF\nSELF-SACRIFICE,\nLIES ON THE\nEASTERN SHORES\nOF LOST HOPE\nBAY!\n\x00'
+8EBB b'THE PALADINS WHO\nSTRIVE FOR HONOR\nARE OFT SEEN IN\nTRINSIC, NORTH\nOF THE CAPE OF\nHEROES!\n\x00'
+8F1D b'IN SKARA BRAE\nTHE SPIRITUAL\nPATH IS TAUGHT,\nFIND IT ON AN\nISLE NEAR\nSPIRITWOOD!\n\x00'
+8F77 b'HUMILITY IS THE\nFOUNDATION OF\nVIRTUE! THE\nRUINS OF PROUD\nMAGINCIA ARE A\nTESTIMONY UNTO\nTHE VIRTUE OF\nHUMILITY!\n\x00'
+8FED b'\nFIND THE RUINS\nOF MAGINCIA FAR\nOFF THE SHORES\nOF BRITANNIA,\nON A SMALL ISLE\nIN THE VAST\nOCEAN!\n\x00'
+9057 b'OF THE EIGHT\nCOMBINATIONS OF\nTRUTH, LOVE AND\nCOURAGE, THAT\nWHICH CONTAINS\nNEITHER TRUTH,\nLOVE NOR COURAGE\nIS PRIDE.\n\x00'
+90D2 b'\nPRIDE BEING NOT\nA VIRTUE MUST BE\nSHUNNED IN FAVOR\nOF HUMILITY, THE\nVIRTUE WHICH IS\nTHE ANTITHESIS\nOF PRIDE!\n\x00'
+9149 b'TO BE AN AVATAR\nIS TO BE THE\nEMBODIMENT OF\nTHE EIGHT\nVIRTUES.\n\x00'
+918E b'\nIT IS TO LIVE A\nLIFE CONSTANTLY\nAND FOREVER IN\nTHE QUEST TO\nBETTER THYSELF\nAND THE WORLD IN\nWHICH WE LIVE.\n\x00'
+9204 b'THE QUEST OF\nTHE AVATAR IS\nIS TO KNOW AND\nBECOME THE\nEMBODIMENT OF\nTHE EIGHT\nVIRTUES OF\nGOODNESS!\n\x00'
+926D b'\nIT IS KNOWN THAT\nALL WHO TAKE ON\nTHIS QUEST MUST\nPROVE THEMSELVES\nBY CONQUERING\nTHE ABYSS AND\nVIEWING THE\nCODEX OF\nULTIMATE WISDOM!\n\x00'
+92FC b'EVEN THOUGH THE\nGREAT EVIL LORDS\nHAVE BEEN ROUTED\nEVIL YET REMAINS\nIN BRITANNIA.\n\x00'
+9354 b'\nIF BUT ONE SOUL\nCOULD COMPLETE\nTHE QUEST OF THE\nAVATAR, OUR\nPEOPLE WOULD\nHAVE A NEW HOPE,\nA NEW GOAL FOR\nLIFE.\n\x00'
+93CB b'\nTHERE WOULD BE A\nSHINING EXAMPLE\nTHAT THERE IS\nMORE TO LIFE\nTHAN THE ENDLESS\nSTRUGGLE FOR\nPOSSESSIONS\nAND GOLD!\n\x00'
+9446 b'THE ANKH IS THE\nSYMBOL OF ONE\nWHO STRIVES FOR\nVIRTUE, KEEP IT\nWITH THEE AT\nTIMES FOR BY\nTHIS MARK THOU\nSHALT BE KNOWN!\n\x00'
+94C9 b'\x04BRUN HELP,A$8800\n\x00'
+94E2 b'THE GREAT\nSTYGIAN ABYSS\nIS THE DARKEST\nPOCKET OF EVIL\nREMAINING IN\nBRITANNIA!\n\x00'
+9537 b'\nIT IS SAID THAT\nIN THE DEEPEST\nRECESSES OF THE\nABYSS IS THE\nCHAMBER OF THE\nCODEX!\n\x00'
+9591 b'\nIT IS ALSO SAID\nTHAT ONLY ONE OF\nHIGHEST VIRTUE\nMAY ENTER THIS\nCHAMBER, ONE\nSUCH AS AN\nAVATAR!!!\n\x00'
+95FD b'MONDAIN IS DEAD!\n\x00'
+9618 b'MINAX IS DEAD!\n\x00'
+9631 b'EXODUS IS DEAD!\n\x00'
+964B b'THE EIGHT\nVIRTUES OF THE\nAVATAR ARE:\n\x00'
+9677 b'HONESTY,\nCOMPASSION,\nVALOR,\nJUSTICE,\nSACRIFICE,\nHONOR,\nSPIRITUALITY,\nAND HUMILITY!\n\x00'
+96D1 b'LORD BRITISH\nRISES AND SAYS\nAT LONG LAST!\n\x00'
+9706 b'\nTHOU HAST COME!\nWE HAVE WAITED\nSUCH A LONG,\nLONG TIME...\n\x00'
+9747 b'\nLORD BRITISH\nSITS AND SAYS:\nA NEW AGE IS\nUPON BRITANNIA.\nTHE GREAT EVIL\nLORDS ARE GONE\nBUT OUR PEOPLE\nLACK DIRECTION\nAND PURPOSE IN\nTHEIR LIVES...\x00'
+97E1 b'\n\nA CHAMPION OF\nVIRTUE IS CALLED\nFOR. THOU MAY BE\nTHIS CHAMPION,\nBUT ONLY TIME\nSHALL TELL. I\nWILL AID THEE\nANY WAY THAT I\nCAN!\n\x00'
+9867 b'\nHOW MAY I\nHELP THEE?\n\x00'
+8800 pop 2 frames left from entering by BRUN from HELP
+8817 BUG: should be #$12 - no idea where #$45 came from.
+881B #status_Dead
+881F #status_Good
+8843 #sound_cast
+884B #sound_spell_effect
+88E7 #player_experience_hi
+88FA #player_max_hp_hi
+8902 $zp_level
+8904 #player_cur_hp_hi
+8910 #player_status
+8912 #status_Good
+8916 #player_intelligence
+8922 #stat_max + 1
+8926 #stat_max
+892B #player_strength
+894D $zp_level
+8958 #sound_spell_effect
+898F #music_hail_britannia
+8A52 #char_enter
+8A5E #char_Y
+8A62 #char_N
+8BDB #sound_cast
+8BE3 #sound_spell_effect
+94C4 #music_off
+98FA $zp_index
+98FC $zp_index
+9913 $zp_index
+9916 $zp_index
+991E #char_question
+992A #char_enter
+992E #char_left_arrow
+9932 #char_space
+9950 #char_space
+995C #char_space
+9966 #char_enter
+999D #player_status
+99A1 #status_Dead
+99A5 #status_Good
+99A9 #player_max_hp_hi
+99AD #player_cur_hp_hi
+99B1 #player_max_hp_lo
+99B5 #player_cur_hp_lo
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D terrain_occlusion
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD char_glyph
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 disk_id
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zpD8
+00D9 zpD9
+00DA zpDA
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zp_input_index
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zp_mismatches
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 drawn_tiles
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 world_tiles
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen_TEXT
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 screen_HGR1
+8800 j_overlay_entry
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_tile_sprite
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+8810 @check_alive
+885B @alive
+888B @alone
+889E @one_companion
+88BF @three_or_more
+88E0 check_xp
+88E4 @next
+88F0 @log_2
+88F9 @check_level
+8918 @inc_stat
+8928 @set_stat
+8965 @already_at_level
+896C @ask_me
+898F next_question
+89A4 input_word
+89D4 @keyword_matched
+89E3 keyword_handlers
+89E4 keyword_handlers+1
+8A1B print_lb_says
+8A35 print_he_says
+8A44 print_he_asks
+8A52 print_newline
+8A58 ask_y_or_n
+8A7A @yes
+8A7D @no
+8A80 answer_bye
+8AAE @plural
+8AB8 answer_name
+8AF7 answer_look
+8B28 answer_job
+8B6B answer_heal
+8BBA @notwell
+8BF6 answer_truth
+8C5D answer_love
+8CCC answer_courage
+8D1D answer_honesty
+8D7A answer_compassion
+8DD3 answer_valor
+8E1C answer_justice
+8E61 answer_sacrifice
+8EB8 answer_honor
+8F1A answer_spirituality
+8F74 answer_humility
+9054 answer_pride
+9146 answer_avatar
+9201 answer_quest
+92F9 answer_britannia
+9443 answer_ankh
+94C4 answer_help
+94DF answer_abyss
+95FA answer_mondain
+9615 answer_minax
+962E answer_exodus
+9648 answer_virtue
+96D1 lb_intro
+9884 keywords
+98F8 check_keywords
+98FC @start_keyword
+9903 @next_char
+9916 @next_keyword
+991B @not_found
+991E get_input
+9927 @get_char
+9948 @backspace
+995A @got_input
+995E @pad_spaces
+996C match_input_inline
+9978 @next_char
+997F +
+998D @end
+9996 restore_party_hp
+999A @next
+99B9 @skip
+99BE decode_bcd_value
+99C5 @inc
+99CD @done
+99CE exit_conversation
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

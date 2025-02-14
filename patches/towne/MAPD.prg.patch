@@ -1,0 +1,4 @@
+# Patch file MAPD, Serpent's Hold.
+
+# Fix gate guards' dialogue.
+offset(04fe) match(01 01) replace(02 02)

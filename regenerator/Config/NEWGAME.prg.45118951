@@ -1,0 +1,547 @@
+:CODE START
+6400
+:CODE END
+973C
+:DATA BYTES
+6415-6429
+642F-6430
+643C-6455
+6489-64A2
+64AF-64C8
+64D5-64EE
+6507-6520
+652D-6546
+6553-656C
+6579-6592
+659F-65B4
+6654-665A
+6666-6672
+667B-668C
+6737-6771
+67E6-682C
+6941-6952
+695E-696B
+6974-6984
+69B5-69C6
+69D2-69DF
+69ED-69FD
+6A1B-6A27
+6A34-6A43
+6A50-6A5A
+6A67-6A74
+6AEF-6AFE
+6B06-6B3E
+6B84-6B86
+6B96-6BC1
+6CB3-973C
+:WORDS
+:POINTERS
+6AFE-6B06-0
+6B86-6B96-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+6429
+6430
+6475
+682C
+:REMOVED BYTES
+:FULL COMMENTS
+65B7 Begin fortune telling
+6914 unused
+6AB6 INPUT: A = color, X = column, Y = row
+6B3E INPUT: A = card#, X = 0 left | 1 right
+6B96 "SUPER-PACKER COPYRIGHT 1983 BY STEVEN MEUSE"
+:SIDE COMMENTS
+6412 b'\x04BRUN U\x81LT4,A$4000\n\x00'
+6439 b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
+6486 b'\x04BLOAD P\x81RTL.SPK,A$4000\n\x00'
+64AC b'\x04BLOAD T\x81REE.SPK,A$4000\n\x00'
+64D2 b'\x04BLOAD L\x81OOK.SPK,A$4000\n\x00'
+6504 b'\x04BLOAD F\x81AIR.SPK,A$4000\n\x00'
+652A b'\x04BLOAD W\x81AGN.SPK,A$4000\n\x00'
+6550 b'\x04BLOAD G\x81YPS.SPK,A$4000\n\x00'
+6576 b'\x04BLOAD T\x81ABL.SPK,A$4000\n\x00'
+659C b'\x04BLOAD C\x81RDS,A$4000\n\x00'
+6651 b' and \x00'
+6663 b'. She says,\x00'
+6678 b"'Consider this:'\x00"
+6734 b'\x04BLOAD N\x81PRT,A$0\n\x04BLOAD N\x81LST,A$EE00\n\x04BLOAD N\x81RST,A$EC00\n\x00'
+693E b'PLEASE PLACE THE\x00'
+695B b'INTO DRIVE 1\x00'
+6971 b'AND PRESS [ESC]\x00'
+69B2 b'PLEASE PLACE THE\x00'
+69CF b'INTO DRIVE 2\x00'
+69EA b'\x04BLOAD DISK,D1\n\x00'
+6A18 b'ULTIMA DISK\x00'
+6A31 b'BRITANNIA DISK\x00'
+6A4D b'TOWN DISK\x00'
+6A64 b'DUNGEON DISK\x00'
+640B $key_buf_len
+640D #music_off
+64F5 #music_Towne
+65D2 #card1_col_min
+65D4 #gfx_green_even
+65D9 #gfx_green_odd
+65DE #card1_col_max
+65E2 #card2_col_min
+6622 #string_cards_first
+662E #string_cards_more
+6636 #string_cards_last
+663B #string_cards_of
+6644 #string_virtue_first
+665E #string_virtue_first
+66AA #char_A
+66AE #char_B
+66C4 set aside for runoff
+66FA discard
+6717 #string_farewell
+6722 #music_off
+6727 #string_transport
+672F #music_off
+6775 #mode_suspended
+6792 #player_stat_max
+67AB #player_gender
+67B2 #player_strength
+67B9 #player_dexterity
+67C0 #player_intelligence
+67C7 #virtue_last - 1
+685D #portal_row_min
+6864 #portal_col_min
+6873 #portal_col_max
+687B #portal_row_max
+6884 #portal_col_min
+6886 #gfx_blue_even
+688B #gfx_blue_odd
+6890 #gfx_blue_even
+6898 #portal_row_min
+68A5 #portal_row_min
+68AC #portal_col_min
+68BB #portal_col_max
+68C3 #portal_row_max
+6918 #disk_britannia
+691C #disk_dungeon
+6987 #char_ESC
+6B3F #card_row_top
+6B65 #card_col_count
+6B7F #card_row_bottom
+6BC1 #>screen_HGR2
+6BDB #max_spk_column
+6BDD #max_spk_row
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D terrain_occlusion
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 spk_pattern_ptr
+00B1 spk_pattern_ptr+1
+00B2 spk_byte
+00B3 spk_pattern_length
+00B4 spk_repeat_code
+00B5 spk_pattern_code
+00B6 spk_row
+00B7 spk_repeat_count
+00B8 spk_repeat_flag
+00B9 spk_pattern_count
+00BA spk_pattern_flag
+00BB spk_pattern_len_cur
+00BD char_glyph
+00C0 draw_col
+00C1 draw_row
+00C2 draw_ptr
+00C3 draw_ptr + 1
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 disk_id
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zpD8
+00D9 zpD9
+00DA zpDA
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zpEA
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zpF0
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 drawn_tiles
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 world_tiles
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen_TEXT
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 screen_HGR1
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_tile_sprite
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+00BC gender_chosen
+00C4 col_count
+4000 card_honesty
+4460 card_compassion
+48C0 card_valor
+4D20 card_justice
+5180 card_sacrifice
+55E0 card_honor
+5A40 card_spirituality
+5EA0 card_humility
+6000 save_portal_backgnd
+6409 start_game
+6429 wait_key
+642F scene
+6430 init_scene
+6458 @s1D_show_tree
+6463 next_scene
+646C start_scene
+6475 @s21_portal_appear
+647F @s23_portal_vanish
+64A5 @s24_show_clearing
+64CB @s29_show_tree
+64F1 @s2C_music_towne
+64FD @s2D_show_book
+6523 @s2F_show_fair
+6549 @s32_show_wagon
+656F @s33_show_gypsy
+6592 @next_scene
+6595 @s35_show_table
+65C0 @clear_virtues
+65C6 fill_green
+65C8 @next_row
+65D4 @next_col
+65E6 +
+65F8 @runoff
+65FB @pick_cards
+6604 -
+661D @in_order
+662A @not_first
+6636 @cards_last
+663B @cards_of
+66A7 @input_AB
+66BE @chosen_on_left
+6714 conclusion
+6794 @set_player_class
+67A3 @set_player_name
+67C9 @set_virtues
+67E6 card_eligible
+67EE question_table
+67F5 card_chosen
+67F6 card_left
+67F7 card_right
+67F8 question_number
+67F9 start_world_x
+6801 start_world_y
+6809 cur_str
+680A cur_dex
+680B cur_int
+680C virtue_str
+6814 virtue_dex
+681C virtue_int
+6824 virtue_level
+682C choose_fresh_card
+6838 sound_portal_line
+683D @dur
+683F @freq
+6848 set_ptr1_line
+6855 portal_appear
+6861 @next_row
+6868 @next_col
+6872 +
+6881 @rise
+689D portal_vanish
+68A9 @fall
+68B0 @next_col
+68BA +
+68C8 clear_window
+68CA @next_row
+68D8 @next_col
+68E1 mark_runoff_cards
+68E3 @next
+68ED @skip
+68F1 clear_text_area
+68F3 @next_row
+6901 @next_col
+6914 insert_disk
+6916 @display_prompt
+6920 @drive1
+6937 @d1_clear
+693A @d1_prompt
+696B @wait_key
+6984 -
+698B @have_disk
+698E @drive2
+69AB @d2_clear
+69AE @d2_prompt
+69E2 @load_disk_id
+69FA @drive_number
+6A0E @ok
+6A0F print_disk_name
+6A11 @program
+6A2A @britannia
+6A46 @towne
+6A5D @dungeon
+6A76 @done
+6A77 print_string
+6A82 @next_char
+6A86 @next_string
+6A8C @end_string
+6A92 @print_char
+6AA8 @no_newline
+6AAE @done
+6AAF inc_ptr
+6AB5 +
+6AB6 draw_bead
+6AD4 @next_row
+6AE3 @src_ptr
+6AE4 @src_ptr + 1
+6AEF bead_row
+6AF6 bead_col
+6AFE bead_addr
+6AFF bead_addr + 1
+6B06 bead_white_even
+6B14 bead_white_odd
+6B22 bead_black_even
+6B30 bead_black_odd
+6B3E draw_card
+6B59 @next_row
+6B6B @next_col
+6B6C @src_ptr
+6B6D @src_ptr + 1
+6B76 +
+6B84 card_col_table
+6B86 card_addr
+6B87 card_addr + 1
+6BC1 spk_unpack
+6BDD @next_col
+6BE1 @next_row
+6BFC spk_write_byte
+6C06 @read_byte
+6C0E @set_repeat
+6C14 +
+6C1E +
+6C28 +
+6C2E @check_pattern
+6C32 @set_pattern
+6C38 +
+6C44 +
+6C4E +
+6C5C @do_literal
+6C66 @continue
+6C67 @do_repeat
+6C7D @do_pattern
+6C85 -
+6C87 @dead_code
+6C91 @pattern_literal
+6C99 @next_pattern
+6CAE @pattern_done
+6CB3 string_table
+E068 bmplineaddr_lo + $68
+E128 bmplineaddr_hi + $68
+FFFF TMP_ADDR
+:DISABLED HILO LABELS
+690B
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+5C00
+:SYSTEM
+Apple II

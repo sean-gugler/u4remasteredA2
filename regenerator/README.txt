@@ -1,0 +1,1 @@
+Extract or install the Regenerator app into this folder.

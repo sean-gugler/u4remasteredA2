@@ -1,0 +1,10 @@
+MEMORY {
+    MUSICDATA:      start = $F000,  size = $0B00;
+    LOADADDR:       start = $FB00,  size =     2,   file = %O;
+    TRAINERS:       start = $FB00,  size = $0200,   file = %O;
+    MBSM:           start = $FD00,  size = $0300;
+}
+SEGMENTS {
+    LOADADDR:       load = LOADADDR,        type = ro;
+    TRAINERS:       load = TRAINERS,        type = rw;
+}

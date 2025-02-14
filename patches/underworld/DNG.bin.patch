@@ -1,0 +1,47 @@
+# Patch dungeon room 12 in Destard.
+
+# East entry.
+offset(2c50) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
+offset(2c58) match(00 00 00 00 00 00 00 00) replace(05 06 04 05 06 04 06 04)
+
+# West entry.
+offset(2c70) match(00 00 00 00 00 00 00 00) replace(02 02 02 01 01 01 00 00)
+offset(2c78) match(00 00 00 00 00 00 00 00) replace(05 06 04 05 06 04 06 04)
+
+
+# Patch dungeon room 14 in Destard.
+
+# East entry.
+offset(2e50) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
+offset(2e58) match(00 00 00 00 00 00 00 00) replace(05 06 04 05 06 04 06 04)
+
+# West entry.
+offset(2e70) match(00 00 00 00 00 00 00 00) replace(02 02 02 01 01 01 00 00)
+offset(2e78) match(00 00 00 00 00 00 00 00) replace(05 06 04 05 06 04 06 04)
+
+
+# Patch dungeon room 11 in Covetous.
+
+# Remove wall barring eastern exit; not present in later C64 or DOS editions.
+offset(4bb7) match(7F 16 16 16 16 16 16 7F 16 16 7F) replace(7F 16 16 16 16 16 16 16 16 16 7F)
+
+
+# Patch dungeon room 7 in Hythloth.
+
+# East entry.
+offset(6750) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
+offset(6758) match(00 00 00 00 00 00 00 00) replace(03 02 01 03 02 01 03 01)
+
+# South entry.
+offset(6760) match(00 00 00 00 00 00 00 00) replace(03 02 01 03 02 01 03 01)
+offset(6768) match(00 00 00 00 00 00 00 00) replace(08 08 08 09 09 09 0a 0a)
+
+
+# Patch dungeon room 9 in Hythloth.
+
+# Trigger.
+offset(6900) match(00 00 00 00) replace(16 98 05 04)
+
+# West entry.
+offset(6970) match(00 00 00 00 00 00 00 00) replace(01 01 02 03 03 03 04 01)
+offset(6978) match(00 00 00 00 00 00 00 00) replace(05 04 05 05 04 06 05 03)

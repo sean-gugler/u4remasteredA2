@@ -1,0 +1,399 @@
+:CODE START
+8800
+:CODE END
+8F70
+:DATA BYTES
+8809-883C
+8840-8861
+8871-8879
+8884-88A1
+88BC-88F5
+890A-891B
+8940-894B
+8955-8983
+8991-89BE
+89C5-89E9
+89F3-8A2C
+8AA9-8AE0
+8AF6-8B14
+8B3B-8B46
+8B47-8B79
+8BC1-8E45
+8EEC-8EED
+8F62-8F70
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8B79
+8E45
+:REMOVED BYTES
+:FULL COMMENTS
+8F62 junk
+:SIDE COMMENTS
+8806 b'THE INNKEEPER\nSAYS: GET THAT\nHORSE OUT OF\nHERE!!!\n\x00'
+883D b'\nTHE INNKEEPER\nSAYS: WELCOME TO\n\x00'
+886E b'\n\nI AM \x00'
+8881 b'\nARE YOU IN NEED\nOF LODGING?\x00'
+88B9 b' SAYS:\nTHEN YOU HAVE\nCOME TO THE\nWRONG PLACE!\nGOOD DAY.\n\x00'
+8907 b'\n1, 2 OR 3 BEDS?\x00'
+893D b'\n\nTAKE IT?\x00'
+8952 b"\nYOU WON'T FIND\nA BETTER DEAL IN\nTHIS TOWNE!\n\x00"
+898E b"\nIF YOU CAN'T PAY\nYOU CAN'T STAY!\nGOOD BYE.\n\x00"
+89C2 b'\nVERY GOOD, HAVE\nA PLEASANT\nNIGHT.\n\x00'
+89F0 b"\nOH, AND DON'T\nMIND THE STRANGE\nNOISES, IT'S\nONLY RATS!\n\x00"
+8AA6 b'\nIN THE MIDDLE\nOF THE NIGHT\nWHILE OUT FOR A\nSTROLL...\n\x00'
+8AF3 b'\nYOU WAKE TO AN\nEERIE NOISE!\n\x00'
+8B38 b'\nMORNING!\n\x00'
+8802 #tile_walk
+88A4 #char_Y
+8903 #towne_minoc
+891F #char_1
+894E #char_Y
+8A4E #tile_human_prone
+8A5D #tile_walk
+8A6A #player_status
+8A6E #status_Sleep
+8A72 #char_A     ;BUG: should be G
+8A76 50-99
+8AE8 #towne_skara_brae
+8B16 #tile_ghost
+8B2B #ai_random
+8B82 #char_enter
+8B89 #char_enter
+8E45 $zp_amount
+8E48 #party_stat_gold_hi
+8E4E $zp_amount
+8E61 $zp_amount
+8E7B #player_cur_hp_lo
+8E8D #player_cur_hp_hi
+8E91 #player_max_hp_hi
+8E97 #player_cur_hp_lo
+8E9B #player_max_hp_lo
+8EA1 #player_max_hp_hi
+8EA5 #player_cur_hp_hi
+8EA9 #player_max_hp_lo
+8EAD #player_cur_hp_lo
+8EB5 #player_status
+8EB9 #status_Good
+8EBD #status_Poison
+8EC1 #status_Sleep
+8EF1 99
+8F1E #player_class_index
+8F22 $zp_class
+8F24 #player_intelligence
+8F2C $zp_class
+8F51 $zp_amount
+8F54 $zp_amount
+8F59 #player_magic_points
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D terrain_occlusion
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD char_glyph
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 disk_id
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zp_delay
+00D9 zpD9
+00DA zp_amount_hp
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zp_shop_num
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zpF0
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 drawn_tiles
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 world_tiles
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen_TEXT
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 screen_HGR1
+4003 j_inn_combat
+8800 j_overlay_entry
+883D ask_lodging
+88F6 print_price
+893D ask_pay
+8952 cancel
+8984 try_pay
+89BF @paid
+8A2C fall_asleep
+8A30 -
+8A47 -
+8A56 -
+8A65 @next_player
+8A76 @recover_hp
+8A81 @dec
+8A8F @skip
+8AE6 @not_attacked
+8B35 @morning
+8B47 location_table
+8B57 table_bed_x
+8B5E table_bed_y
+8B65 unused
+8B69 hotel_bed_x
+8B6C hotel_bed_y
+8B6F price
+8B76 hotel_price
+8B79 input_char
+8B89 print_newline
+8B8F print_string
+8B9A @next_char
+8B9E @next_string
+8BA4 @end_string
+8BAA @print_char
+8BB9 @done
+8BBA inc_ptr
+8BC0 +
+8BC1 string_table
+8E45 dec_gold
+8E72 @ok
+8E76 inc_hp
+8EB1 @done
+8EB2 is_alive
+8EC5 @is_not
+8EC8 @in_party
+8ED0 @is
+8ED3 rand_modulo
+8EDD @subtract
+8EE9 @clear_flags
+8EEB @done
+8EEC modulus
+8EED encode_bcd_value
+8EF9 @dec
+8F01 @max
+8F03 @done
+8F05 decode_bcd_value
+8F0C @inc
+8F14 @done
+8F15 restore_mp
+8F19 @next_player
+8F42 @none
+8F47 @one_quarter
+8F4C @half
+8F50 @three_quarter
+8F56 @add_mp
+8F5D @skip
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 npc_movement_ai
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile_type
+EF60 combat_foe_tile_sprite
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

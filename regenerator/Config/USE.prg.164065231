@@ -1,0 +1,352 @@
+:CODE START
+8800
+:CODE END
+8AC0
+:DATA BYTES
+8803-8810
+881B-882E
+8832-8840
+8844-8857
+8882-889A
+88F0-892A
+89E2-8A02
+8A9B-8AB7
+8ABE-8AC0
+:WORDS
+:POINTERS
+8867-8877-0
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+8877
+894C
+895E
+8A02
+:REMOVED BYTES
+:FULL COMMENTS
+8ABE junk
+:SIDE COMMENTS
+8800 b'WHICH ITEM:\r\x00'
+8818 b'\rNOT USABLE ITEM!\r\x00'
+882F b'\rNONE OWNED!\r\x00'
+8841 b'\rHMM...NO EFFECT!\r\x00'
+887F b'\rNO PLACE TO\rUSE THEM!\r\x00'
+88ED b'\rYOU HOLD THE\rEVIL SKULL OF\rMONDAIN THE\rWIZARD ALOFT....\r\x00'
+8A98 b'\rTHOU HAST LOST\rAN EIGHTH!\r\x00'
+889E #item_have_bell
+88AB #item_have_book
+88B8 #item_have_candle
+892A #object_max
+8931 #tile_lord_british
+895E #virtue_last - 1
+8971 #char_question
+8978 $zp_input_index
+897D #char_enter
+8981 #char_left_arrow
+8985 #char_space
+8989 $zp_input_index
+8991 $zp_input_index
+8993 $zp_input_index
+899B $zp_input_index
+899F $zp_input_index
+89A3 #char_space
+89AD $zp_input_index
+89AF #char_space
+89B9 #char_enter
+89BF #keyword_last - 1
+8A02 #sound_damage
+:USER LABELS
+0000 player_xpos
+0001 player_ypos
+0002 tile_xpos
+0003 tile_ypos
+0004 map_x
+0005 map_y
+0006 dest_x
+0007 dest_y
+0008 britannia_x
+0009 britannia_y
+000A current_location
+000B game_mode
+000C dungeon_level
+000D terrain_occlusion
+000E player_transport
+000F party_size
+0010 dng_direction
+0011 light_duration
+0012 moon_phase_trammel
+0013 moon_phase_felucca
+0014 horse_mode
+0015 player_has_spoken_to_lb
+0016 last_sleep
+0017 last_humility_check
+0018 altar_room_principle
+0019 last_meditated
+001A last_found_reagent
+001B ship_hull
+001C move_counter
+001D move_counter + 1
+001E move_counter + 2
+001F move_counter + 3
+0046 kbd_buf_count
+00B0 key_buf
+00B1 key_buf+1
+00B8 key_buf_len
+00BD char_glyph
+00C0 foe_type_encountered
+00C1 pre_combat_x
+00C2 pre_combat_y
+00C3 pre_combat_tile
+00C5 curr_player_turn
+00C6 magic_aura
+00C7 aura_duration
+00C8 tile_under_player
+00C9 tile_north
+00CA tile_south
+00CB tile_east
+00CC tile_west
+00CD music_volume
+00CE console_xpos
+00CF console_ypos
+00D0 disk_id
+00D1 numdrives
+00D2 currdisk_drive1
+00D3 currdisk_drive2
+00D4 curr_player
+00D5 target_player
+00D6 hexnum
+00D7 bcdnum
+00D8 zpD8
+00D9 zp_save_reg
+00DA zp_dec_amount
+00DB zpDB
+00DC damage
+00DE reqdisk
+00DF currdrive
+00E0 diskio_track
+00E1 diskio_sector
+00E2 diskio_command
+00E3 diskio_addr_hi
+00E6 foe_type_combat
+00E8 game_mode_pre_combat
+00E9 turn_counter
+00EA zp_index
+00ED moongate_tile
+00EE moongate_xpos
+00EF moongate_ypos
+00F0 zpF0
+00F2 current_draw_line
+00F4 balloon_movement
+00F5 wind_direction
+00F6 temp2_x
+00F7 temp2_y
+00F8 delta_x
+00F9 delta_y
+00FA temp_x
+00FB temp_y
+00FC ptr2
+00FD ptr2 + 1
+00FE ptr1
+00FF ptr1 + 1
+0200 drawn_tiles
+0210 room_start_foe_type
+0220 room_start_foe_x
+0230 room_start_foe_y
+0240 map_start_foe_x
+0248 room_start_player_y
+0250 map_start_foe_y
+0260 map_start_player_x
+0268 map_start_player_y
+0280 world_tiles
+0300 inbuffer
+0310 dng_trigger_new_tile
+0311 dng_trigger_pos
+0312 dng_trigger_new_pos1
+0313 dng_trigger_new_pos2
+0320 music_ctl
+0323 spin_drive_motor
+0400 screen_TEXT
+0800 j_waitkey
+0803 j_player_teleport
+0806 j_move_east
+0809 j_move_west
+080C j_move_south
+080F j_move_north
+0812 j_drawinterface
+0815 j_drawview
+0818 j_update_britannia
+081B j_primm_cout
+081E j_primm_xy
+0821 j_primm
+0824 j_console_out
+0827 j_clearbitmap
+082A j_mulax
+082D j_get_stats_ptr
+0830 j_printname
+0833 j_printbcd
+0836 j_drawcursor
+0839 j_drawcursor_xy
+083C j_drawvert
+083F j_drawhoriz
+0842 j_request_disk
+0845 j_update_status
+0848 j_blocked_tile
+084B j_update_view
+084E j_rand
+0851 j_loadsector
+0854 j_playsfx
+0857 j_update_view_combat
+085A j_getnumber
+085D j_getplayernum
+0860 j_update_wind
+0863 j_animate_view
+0866 j_printdigit
+0869 j_clearstatwindow
+086C j_animate_tiles
+086F j_centername
+0872 j_print_direction
+0875 j_clearview
+0878 j_invertview
+087B j_centerstring
+087E j_printstring
+0881 j_gettile_bounds
+0884 j_gettile_britannia
+0887 j_gettile_opposite
+088A j_gettile_currmap
+088D j_gettile_tempmap
+0890 j_get_player_tile
+0893 j_gettile_towne
+0896 j_gettile_dungeon
+2000 screen_HGR1
+8800 j_overlay_entry
+882F print_none_owned
+8841 print_no_effect
+8858 keyword_matched
+8867 keyword_handlers
+8868 keyword_handlers+1
+8877 use_stone
+887F @have_stone
+889B use_bell
+88A5 @have_bell
+88A8 use_book
+88B2 @have_book
+88B5 use_candle
+88BF @have_candle
+88C2 use_key
+88CA @no_effect
+88CD use_horn
+88D5 @have_horn
+88D8 use_wheel
+88E0 @have_wheel
+88E3 use_skull
+88ED @have_skull
+892C @clear
+8944 @lord_british
+8949 @next_object
+8962 @next_virtue
+8971 get_input
+897A @get_char
+899B @backspace
+89AD @got_input
+89B1 @pad_spaces
+89BF compare_keywords
+89C3 @start_keyword
+89CA @next_char
+89DB @next_keyword
+89E2 keywords
+8A02 shake_screen
+8A20 shake_down
+8A22 @next
+8A38 @copy
+8A4B @skip
+8A4F shake_up
+8A51 @next
+8A67 @copy
+8A7A @skip
+8A80 dec_virtue
+8A89 @continue
+8A91 @underflow
+8A93 @set_value
+8A98 @lost_an_eighth
+B7B5 j_readblock
+B7EB RWTS_volume
+B7EC RWTS_track
+B7ED RWTS_sector
+B7F0 RWTS_buf_LO
+B7F1 RWTS_buf_HI
+B7F4 RWTS_command
+C000 hw_KEYBOARD
+C010 hw_STROBE
+C030 hw_SPEAKER
+C08B hw_LCBANK1
+E000 bmplineaddr_lo
+E007 bmplineaddr_lo + 7
+E008 bmplineaddr_lo + 8
+E009 bmplineaddr_lo + 9
+E00A bmplineaddr_lo + 10
+E0C0 bmplineaddr_hi
+E0C7 bmplineaddr_hi + 7
+E0C8 bmplineaddr_hi + 8
+E0C9 bmplineaddr_hi + 9
+E0CA bmplineaddr_hi + 10
+EC00 player_stats
+ED00 party_stats
+ED01 party_stats + 1
+ED08 torches
+ED09 gems
+ED0A keys
+ED0B sextant
+ED0C stones
+ED0D runes
+ED0E bell_book_candle
+ED0F threepartkey
+ED10 food_hi
+ED11 food_lo
+ED12 food_frac
+ED13 gold_hi
+ED14 gold_lo
+ED15 horn
+ED16 wheel
+ED17 skull
+ED18 armour
+ED20 weapons
+ED38 reagents
+ED40 mixtures
+EE00 object_tile_sprite
+EE1F object_tile_sprite + object_max
+EE20 object_xpos
+EE3F object_xpos + object_max
+EE40 object_ypos
+EE5F object_ypos + object_max
+EE60 object_tile_type
+EE7F object_tile_type + object_max
+EE80 object_xpos_prev
+EEA0 object_ypos_prev
+EEC0 object_dng_level
+EEE0 npc_dialogue
+EF00 combat_foe_cur_x
+EF10 combat_foe_cur_y
+EF20 combat_foe_prev_x
+EF30 combat_foe_prev_y
+EF40 combat_foe_hp
+EF50 combat_foe_tile
+EF60 combat_foe_tile_sprite
+EF70 combat_foe_slept
+EF7F combat_player_xpos-1
+EF80 combat_player_xpos
+EF8F combat_player_ypos-1
+EF90 combat_player_ypos
+EF9F combat_player_tile-1
+EFA0 combat_player_tile
+EFFD attack_sprite
+EFFE target_x
+EFFF target_y
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+2800
+:SYSTEM
+Apple II

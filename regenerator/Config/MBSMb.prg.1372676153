@@ -1,0 +1,158 @@
+:CODE START
+FD00
+:CODE END
+FFF8
+:DATA BYTES
+FFF7-FFF8
+:WORDS
+:POINTERS
+:HILOLOOKUP
+:LOHILOOKUP
+:DATA TEXT
+:BLANK LINES
+FD9A
+FDF4
+FE02
+FE0D
+:REMOVED BYTES
+:FULL COMMENTS
+FD00 Called from IRQ handler
+FF8A Store this channel's cursor in its entry in the pattern's return_address table, then start that pattern.
+FFB2 Restore this channel's cursor from its entry in the pattern return address table, then continue from there.
+FFF7 junk
+:SIDE COMMENTS
+FDB8 inactive
+FDD5 #env_release
+FE02 #env_attack
+FE15 #env_attack
+FE4D #env_decay
+FE85 #env_release
+FEB4 #env_release
+FEEC #mus_cmd_env_rel_dur
+FEF0 #mus_cmd_transpose
+FEF4 #mus_cmd_env_pitch_bend
+FEF8 #mus_cmd_env_atk_rate
+FEFC #mus_cmd_env_decay
+FF00 #mus_cmd_env_sus_lev
+FF04 #mus_cmd_env_rel_rate
+FF08 #mus_cmd_env_atk_lev
+FF7B #mus_cmd_jsr_pattern
+FFB2 #mus_cmd_rts_pattern
+FFD3 #mus_cmd_end_pattern
+FFDC #env_release
+FFE4 #mus_cmd_poll_interval
+:USER LABELS
+0080 tune_req_now
+0081 tune_queue_next
+0082 tune_playing
+0084 mus_ptr
+0085 mus_ptr + 1
+0089 chan_cursor - 1
+008A chan_cursor
+008B chan_cursor + 1
+0096 next_values
+0097 next_values + 1
+044E chan_current
+044F tune_channels_inuse
+0450 tune_channels_exist
+0451 num_patterns
+0452 pattern_table_size
+0454 num_tunes
+0455 any_channel_active
+0456 frequency
+0457 frequency + 1
+0458 mb_irq_clock
+0459 mb_irq_clock + 1
+04C0 chan_next_addr
+04C1 chan_next_addr + 1
+04E4 chan_freq_reg
+04E5 chan_level_reg
+04F1 mb_num_channels
+0523 read_channel_byte
+052E music_stop
+0600 freq_table_lo
+0680 freq_table_hi
+0700 chan_env_stage
+0701 chan_active
+070C chan_env_duration
+070D chan_note_duration
+0718 chan_env_rel_dur
+0719 chan_transpose
+0724 chan_pitch_bend
+0725 chan_pitch_bend+1
+0730 chan_env_atk_rate
+0731 chan_env_atk_rate+1
+073C chan_env_decay
+073D chan_env_decay + 1
+0748 chan_env_sus_lev
+0749 chan_env_sus_lev+1
+0754 chan_env_rel_rate
+0755 chan_env_rel_rate+1
+0760 chan_env_atk_lev
+0761 chan_env_atk_lev+1
+076C chan_level
+076D chan_level + 1
+0780 tune_addr
+0781 tune_addr + 1
+0790 pattern_addr
+0791 pattern_addr + 1
+429A clock_default
+FD00 music_update
+FD07 @req_play
+FD10 @tune_exists
+FD17 change_tune
+FD36 +
+FD39 @next_cursor
+FD5B @next_pattern
+FD73 @initialize_channels
+FD78 @next_channel
+FD9A update_tune
+FDA6 update_next_channel
+FDC2 next_channel_data
+FDCA @note_length
+FDD5 @note_stop
+FDDC @note_pitch
+FE07 @start_env_duration
+FE0D update_envelope
+FE15 @attack
+FE39 +
+FE3B @attack_end
+FE4A +
+FE4D @decay
+FE71 +
+FE73 @decay_end
+FE82 +
+FE85 @release
+FEA9 +
+FEAC @sustain
+FEB9 @set_level
+FEC1 env_done
+FEC9 @check_tune_done
+FECE next_tune
+FED5 @validate
+FEDC @valid
+FEE1 update_done
+FEE2 next_channel_cmd
+FEEC @set_parameter
+FF0F @set_env_rel_dur
+FF18 @set_transpose
+FF21 @set_pitch_bend
+FF30 @set_env_atk_rate
+FF3F @set_env_decay
+FF4E @set_env_sus_lev
+FF5D @set_env_rel_rate
+FF6C @set_env_atk_lev
+FF7B @do_cmd
+FF8A @jsr_pattern
+FFB2 @rts_pattern
+FFD3 @end_pattern
+FFE4 @set_irq_rate
+FFF4 @done
+:DISABLED HILO LABELS
+:USER HILO
+:TAB SIZE
+0008
+:LOAD OFFSET
+0000
+:SYSTEM
+Apple II

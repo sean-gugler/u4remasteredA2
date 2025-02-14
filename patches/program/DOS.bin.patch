@@ -1,0 +1,4 @@
+# Patch file DOS.bin
+
+# Remove unprintable character ^A from boot file "INIT"
+offset(196d) match(c9 81 ce c9 d4 a0 a0) replace(c9 ce c9 d4 a0 a0 a0)

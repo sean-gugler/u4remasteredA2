@@ -160,7 +160,7 @@ You also need disk images of Ultima IV for Apple II to import the graphics, maps
 
 * [Ultima IV at Archive.org](https://archive.org/details/UltimaIV4amCrack)
 
-Rename those disk images and place them in the following locations:
+Those disk images were downloaded, renamed and moved in the following locations:
 ```
 files/original/u4britannia.do
 files/original/u4program.do

@@ -167,7 +167,15 @@ files/original/u4program.do
 files/original/u4towne.do
 files/original/u4underworld.do
 ```
-Type `make all` to produce rebuilt versions of those disk images in the root folder.
+Type `make all` to produce rebuilt versions of those disk images in the output folder.
+```
+output/slideshow_end.do
+output/slideshow_start.do
+output/u4britannia.do
+output/u4program.do
+output/u4towne.do
+output/u4underworld.do
+```
 
 
 Reconstruction
